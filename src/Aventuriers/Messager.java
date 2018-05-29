@@ -87,5 +87,3 @@ public class Messager extends Aventurier {
         return tuilesPossible;
     }
 }
-
-}
