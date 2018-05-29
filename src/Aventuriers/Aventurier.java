@@ -14,7 +14,7 @@ public abstract class Aventurier {
     private Couleur couleur;
     private CarteAventurier carteAventurier;
     private Tuile tuile;
-
+    
     // getteurs
     public Tuile getTuile() {
         return tuile;

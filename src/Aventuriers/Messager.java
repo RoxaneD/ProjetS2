@@ -7,6 +7,9 @@ import java.util.ArrayList;
 
 public class Messager extends Aventurier {
 
+    // constructeurs
+    
+    // autres
     @Override
     public ArrayList<Tuile> calculDeplacementPos() {
 
