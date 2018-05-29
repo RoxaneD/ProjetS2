@@ -31,4 +31,11 @@ public class NiveauEau {
     }
 
     // autres
+    public void monterNiveau() {
+        setNiveau(niveau + 1);
+    }
+
+    public void baisserNiveau() {
+        setNiveau(niveau - 1);
+    }
 }
