@@ -16,14 +16,22 @@ public class Explorateur extends Aventurier {
     }
     
     // autres
+
+    
     @Override
     public ArrayList<Tuile> calculDeplacementPos() {
-
+        int posX = this.getTuile().getPosX();
+        int posY = this.getTuile().getPosY();
+        if(posX ==1){
+      
+        }
+        
+        
     }
 
     @Override
     public ArrayList<Tuile> calculAssechementPos() {
-
+        
     }
 
 }
