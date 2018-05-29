@@ -25,7 +25,7 @@ public class DefausseTresors {
 
     // autres
     public void addCarte(CarteTresors carte) {
-        // la carte est rajoutée au dessus !
+        // pour rajouter une carte au DESSUS du paquet
         cartesTresors.add(carte);
     }
 

@@ -25,7 +25,7 @@ public class DefausseInondations {
 
     // autres
     public void addCarte(CarteInondation carte) {
-        // la carte est rajoutée au dessus !
+        // pour rajouter une carte au DESSUS du paquet
         cartesInondation.add(carte);
     }
 

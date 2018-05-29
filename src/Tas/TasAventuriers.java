@@ -25,11 +25,13 @@ public class TasAventuriers {
 
     // autres
     public void addCarte(CarteAventurier carte) {
+        // pour rajouter une carte au DESSUS du paquet
         cartesAventuriers.add(carte);
     }
 
     public CarteAventurier getPremiereCarte() {
-        int i = cartesAventuriers.size()-1;
+        // pour récupérer la première carte du paquet (donc celle tout au dessus)
+        int i = cartesAventuriers.size() - 1;
         CarteAventurier carte = cartesAventuriers.get(i);
         cartesAventuriers.remove(i);
         return carte;
