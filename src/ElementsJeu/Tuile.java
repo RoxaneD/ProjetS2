@@ -87,8 +87,8 @@ public class Tuile {
     public void setGrille(Grille grille) {
         this.grille = grille;
     }
-    
-    public void setAventuriers(){
+
+    public void setAventuriers() {
         aventuriers = new ArrayList<>();
     }
 
@@ -120,16 +120,16 @@ public class Tuile {
     public Grille getGrille() {
         return grille;
     }
-    
-    public ArrayList<Aventurier> getAventuriers(){
+
+    public ArrayList<Aventurier> getAventuriers() {
         return aventuriers;
     }
 
     // autres
     public void removeAventurier(Aventurier aventurier) {
         int i = 0;
-        while (aventuriers.get(i)!=aventurier){
-            i+=1;
+        while (aventuriers.get(i) != aventurier) {
+            i += 1;
         }
         aventuriers.remove(i);
     }
