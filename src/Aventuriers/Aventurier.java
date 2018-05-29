@@ -1,5 +1,6 @@
 package Aventuriers;
 
+import Cartes.CarteAventurier;
 import ElementsJeu.Tuile;
 import Enumerations.Couleur;
 import Enumerations.EtatAventurier;
@@ -7,33 +8,30 @@ import java.util.ArrayList;
 
 public abstract class Aventurier {
 
-	private String nomJoueur;
-	private EtatAventurier etat;
-	private Couleur couleur;
+    // attributs
+    private String nomJoueur;
+    private EtatAventurier etat;
+    private Couleur couleur;
+    private CarteAventurier carteAventurier;
+    private Tuile tuile;
 
-	public void getTuile() {
-		// TODO - implement Aventurier.getTuile
+    // getteurs
+    public Tuile getTuile() {
+        return tuile;
+    }
 
-	}
+    // setteurs
+    public void addTuile(Tuile tuile) {
+        this.tuile = tuile;
+    }
 
-	public abstract ArrayList<Tuile> calculDeplacementPos();
+    // autres 
+    public abstract ArrayList<Tuile> calculDeplacementPos();
 
-	public void removeTuile() {
-	}
+    public void removeTuile() {
+        this.tuile = null;
+    }
 
-	/**
-	 * 
-	 * @param tuile
-	 */
-	public void addTuile(Tuile tuile) {
-		// TODO - implement Aventurier.addTuile
-
-	}
-
-
-
-
-
-	public abstract ArrayList<Tuile> calculAssechementPos();
+    public abstract ArrayList<Tuile> calculAssechementPos();
 
 }
