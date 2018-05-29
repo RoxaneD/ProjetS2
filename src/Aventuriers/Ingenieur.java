@@ -20,40 +20,40 @@ public class Ingenieur extends Aventurier {
     @Override
     public ArrayList<Tuile> calculDeplacementPos() {
         
-     ArrayList<Tuile> TuilePossible = new ArrayList<>();
+     ArrayList<Tuile> tuilePossible = new ArrayList<>();
      
         int posX = this.getTuile().getPosX();
         int posY = this.getTuile().getPosY();
         
         if(posX != 1){
            Tuile T = getTuile().getGrille().getTuile(posX -1, posY);
-           if ( T.getEtat() == EtatTuile.normal ){
-              TuilePossible.add(T);
+           if ( T.getEtat() != EtatTuile.submergee ){
+              tuilePossible.add(T);
            }
         }
         
         if(posX != 6){
             Tuile T = getTuile().getGrille().getTuile(posX +1, posY);
-           if ( T.getEtat() == EtatTuile.normal ){
-              TuilePossible.add(T);
+           if ( T.getEtat() != EtatTuile.submergee ){
+              tuilePossible.add(T);
            }
         }
         
         if(posY != 1){
-            Tuile T = getTuile().getGrille().getTuile(posX, posY +1);
-           if ( T.getEtat() == EtatTuile.normal ){
-              TuilePossible.add(T);
+            Tuile T = getTuile().getGrille().getTuile(posX, posY -1);
+           if ( T.getEtat() != EtatTuile.submergee ){
+              tuilePossible.add(T);
            }
         }
         
         if(posY != 6){
-            Tuile T = getTuile().getGrille().getTuile(posX, posY -1 );
-           if ( T.getEtat() == EtatTuile.normal ){
-              TuilePossible.add(T);
+            Tuile T = getTuile().getGrille().getTuile(posX, posY +1 );
+           if ( T.getEtat() != EtatTuile.submergee ){
+              tuilePossible.add(T);
            }
         }
         
-        return TuilePossible;
+        return tuilePossible;
                     
     }
 
