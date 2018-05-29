@@ -2,11 +2,17 @@ package Aventuriers;
 
 import ElementsJeu.Tuile;
 import Aventuriers.Aventurier;
+import Cartes.CarteAventurier;
 import java.util.ArrayList;
 
 public class Explorateur extends Aventurier {
 
     // constructeurs
+    Explorateur(String nomJoueur, CarteAventurier carteaventurier){
+        setNomJoueur(nomJoueur);
+        setCarteAventurier(carteaventurier);
+    }
+    
     // autres
     @Override
     public ArrayList<Tuile> calculDeplacementPos() {
