@@ -13,14 +13,12 @@ public abstract class Aventurier {
 
 	public void getTuile() {
 		// TODO - implement Aventurier.getTuile
-		throw new UnsupportedOperationException();
+
 	}
 
 	public abstract ArrayList<Tuile> calculDeplacementPos();
 
 	public void removeTuile() {
-		// TODO - implement Aventurier.removeTuile
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -29,8 +27,12 @@ public abstract class Aventurier {
 	 */
 	public void addTuile(Tuile tuile) {
 		// TODO - implement Aventurier.addTuile
-		throw new UnsupportedOperationException();
+
 	}
+
+
+
+
 
 	public abstract ArrayList<Tuile> calculAssechementPos();
 
