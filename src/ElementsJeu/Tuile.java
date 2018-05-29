@@ -131,7 +131,9 @@ public class Tuile {
         while (aventuriers.get(i) != aventurier) {
             i += 1;
         }
-        aventuriers.remove(i);
+        if (i < aventuriers.size()) {
+            aventuriers.remove(i);
+        }
     }
 
     public void addAventurier(Aventurier aventurier) {
