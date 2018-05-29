@@ -26,11 +26,11 @@ public abstract class Aventurier {
     }
 
     // autres 
-    public abstract ArrayList<Tuile> calculDeplacementPos();
-
     public void removeTuile() {
         this.tuile = null;
     }
+    
+    public abstract ArrayList<Tuile> calculDeplacementPos();
 
     public abstract ArrayList<Tuile> calculAssechementPos();
 
