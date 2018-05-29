@@ -20,7 +20,7 @@ public class IleInterdite {
         System.out.println("Marie");
         
         System.out.println("Roxane");
-        System.out.println("Corentin vghfghfghf");
+        System.out.println("Corentin Paradis");
       
         System.out.println("Pierre Fournier");
 
