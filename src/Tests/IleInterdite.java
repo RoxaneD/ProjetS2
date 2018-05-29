@@ -23,7 +23,7 @@ public class IleInterdite {
         System.out.println("Roxane-2");
         System.out.println("Corentin");
       
-        System.out.println("iPierre");
+        System.out.println("Pierre Fournier");
 
     }
     
