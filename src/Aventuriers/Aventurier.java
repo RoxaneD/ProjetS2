@@ -33,5 +33,4 @@ public abstract class Aventurier {
     public abstract ArrayList<Tuile> calculDeplacementPos();
 
     public abstract ArrayList<Tuile> calculAssechementPos();
-
 }

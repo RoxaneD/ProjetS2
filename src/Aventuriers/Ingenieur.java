@@ -1,6 +1,5 @@
 package Aventuriers;
 
-
 import ElementsJeu.Tuile;
 import Aventuriers.Aventurier;
 import java.util.ArrayList;
@@ -8,7 +7,6 @@ import java.util.ArrayList;
 public class Ingenieur extends Aventurier {
 
     // constructeurs
-    
     // autres
     @Override
     public ArrayList<Tuile> calculDeplacementPos() {
