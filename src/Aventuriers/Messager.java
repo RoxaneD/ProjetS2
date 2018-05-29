@@ -18,7 +18,16 @@ public class Messager extends Aventurier {
     // autres
     @Override
     public ArrayList<Tuile> calculDeplacementPos() {
-
+        Tuile tuileActuelle = getTuile();
+        int posXactuelle = tuileActuelle.getPosX();
+        int posYactuelle = tuileActuelle.getPosY();
+        ArrayList<Tuile> tuilesPossible = new ArrayList<>();
+        
+        if (posXactuelle != 1){
+            Tuile tuilleGauche =
+        }
+        
+        return tuilesPossible;
     }
 
     @Override

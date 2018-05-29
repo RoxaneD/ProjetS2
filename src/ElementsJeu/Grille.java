@@ -21,6 +21,16 @@ public class Grille {
     public ArrayList<Tuile> getTuiles() {
         return tuiles;
     }
+    
+    public Tuile getTuile(int x, int y){
+        Tuile tuileRecherchee = null;
+        for (Tuile t : tuiles){
+            if (t.getPosX()==x && t.getPosY()==y){
+                tuileRecherchee = t;
+            }
+        }
+        return tuileRecherchee;
+    }
 
     // autres
     public void addTuile(Tuile tuile) {
