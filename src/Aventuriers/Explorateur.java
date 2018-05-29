@@ -3,6 +3,7 @@ package Aventuriers;
 import ElementsJeu.Tuile;
 import Aventuriers.Aventurier;
 import Cartes.CarteAventurier;
+import Enumerations.EtatAventurier;
 import java.util.ArrayList;
 
 public class Explorateur extends Aventurier {
@@ -10,6 +11,7 @@ public class Explorateur extends Aventurier {
     // constructeurs
     Explorateur(String nomJoueur, CarteAventurier carteaventurier){
         setNomJoueur(nomJoueur);
+        setEtat(EtatAventurier.vivant);
         setCarteAventurier(carteaventurier);
     }
     
