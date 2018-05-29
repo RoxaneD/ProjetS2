@@ -91,7 +91,7 @@ public class Tuile {
     public void setAventuriers() {
         aventuriers = new ArrayList<>();
     }
-
+    
     // getteurs
     public EtatTuile getEtat() {
         return etat;

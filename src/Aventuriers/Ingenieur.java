@@ -18,7 +18,16 @@ public class Ingenieur extends Aventurier {
     // autres
     @Override
     public ArrayList<Tuile> calculDeplacementPos() {
-
+        
+     ArrayList<Tuile> TuilePossible = new ArrayList<>();
+     
+        int posX = this.getTuile().getPosX();
+        int posY = this.getTuile().getPosY();
+        if(posX != 1){
+            
+        }
+        TuilePossible.add(getTuileDeplacement(posX , posY +1 ));
+            
     }
 
     @Override
