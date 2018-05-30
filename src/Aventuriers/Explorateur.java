@@ -18,7 +18,6 @@ public class Explorateur extends Aventurier {
     
     // autres
 
-    
     @Override
     public ArrayList<Tuile> calculDeplacementPos() {
              ArrayList<Tuile> tuilePossible = new ArrayList<>();
