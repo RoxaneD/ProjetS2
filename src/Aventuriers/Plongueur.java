@@ -22,6 +22,7 @@ public class Plongueur extends Aventurier {
         Tuile tuileActuelle = getTuile();
         int posXactuelle = tuileActuelle.getPosX();
         int posYactuelle = tuileActuelle.getPosY();
+        ArrayList<Tuile> tuilesNormal = new ArrayList<>();
         ArrayList<Tuile> tuilesPossible = new ArrayList<>();
         
         for (Tuile t : tuileActuelle.getGrille().getTuiles()){
