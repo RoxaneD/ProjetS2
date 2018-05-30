@@ -25,8 +25,37 @@ public class Plongueur extends Aventurier {
         ArrayList<Tuile> tuilesNormal = new ArrayList<>();
         ArrayList<Tuile> tuilesPossible = new ArrayList<>();
         
+        // pour récupérer les tuiles normales qui sont joignable via un chemin inondé et/ou submergé
         for (Tuile t : tuileActuelle.getGrille().getTuiles()){
-            // à faire - Roxaneee
+            if (t.getEtat()==EtatTuile.normal){
+                tuilesNormal.add(t);
+            }
+        }
+        
+        // pour les tuiles adjacentes
+        if (posXactuelle != 1) {
+            Tuile tuileGauche = tuileActuelle.getGrille().getTuile(posXactuelle - 1, posYactuelle);
+            if (tuileGauche.getEtat() == EtatTuile.inondee) {
+                tuilesPossible.add(tuileGauche);
+            }
+        }
+        if (posXactuelle != 6) {
+            Tuile tuileDroite = tuileActuelle.getGrille().getTuile(posXactuelle + 1, posYactuelle);
+            if (tuileDroite.getEtat() == EtatTuile.inondee) {
+                tuilesPossible.add(tuileDroite);
+            }
+        }
+        if (posYactuelle != 1) {
+            Tuile tuileHaut = tuileActuelle.getGrille().getTuile(posXactuelle, posYactuelle - 1);
+            if (tuileHaut.getEtat() == EtatTuile.inondee) {
+                tuilesPossible.add(tuileHaut);
+            }
+        }
+        if (posYactuelle != 6) {
+            Tuile tuileBas = tuileActuelle.getGrille().getTuile(posXactuelle, posYactuelle + 1);
+            if (tuileBas.getEtat() == EtatTuile.inondee) {
+                tuilesPossible.add(tuileBas);
+            }
         }
         
         return tuilesPossible;
