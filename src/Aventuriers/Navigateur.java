@@ -1,3 +1,4 @@
+// A COMPLETER (SEMAINE BLOQUEE)
 package Aventuriers;
 
 import ElementsJeu.Tuile;
@@ -10,59 +11,44 @@ import java.util.ArrayList;
 public class Navigateur extends Aventurier {
 
     // constructeurs
-    Navigateur(String nomJoueur, CarteAventurier carteaventurier){
+    Navigateur(String nomJoueur, CarteAventurier carteaventurier) {
         setNomJoueur(nomJoueur);
         setEtat(EtatAventurier.vivant);
         setCarteAventurier(carteaventurier);
     }
-    
+
     // autres
     @Override
-    public ArrayList<Tuile> calculAssechementPos() {
-        
-        ArrayList<Tuile> tuilePossible = new ArrayList<>();
+    // A MODIFIER PENDANT LA SEMAINE BLOQUEE
+    public ArrayList<Tuile> calculDeplacementPos() {
+        Tuile tuileActuelle = getTuile();
+        int posXactuelle = tuileActuelle.getPosX();
+        int posYactuelle = tuileActuelle.getPosY();
+        ArrayList<Tuile> tuilesPossible = new ArrayList<>();
 
-        int posX = this.getTuile().getPosX();
-        int posY = this.getTuile().getPosY();
-
-        if (posX != 1) {
-            Tuile T = getTuile().getGrille().getTuile(posX - 1, posY);
-            if (T.getEtat() == EtatTuile.inondee) {
-                tuilePossible.add(T);
+        for (Tuile t : tuileActuelle.getGrille().getTuilesAdjacentes(posXactuelle, posYactuelle)) {
+            if (t.getEtat() != EtatTuile.submergee && t.getEtat() != EtatTuile.inexistante) {
+                tuilesPossible.add(t);
             }
         }
 
-        if (posX != 6) {
-            Tuile T = getTuile().getGrille().getTuile(posX + 1, posY);
-            if (T.getEtat() == EtatTuile.inondee) {
-                tuilePossible.add(T);
-            }
-        }
-
-        if (posY != 1) {
-            Tuile T = getTuile().getGrille().getTuile(posX, posY - 1);
-            if (T.getEtat() == EtatTuile.inondee) {
-                tuilePossible.add(T);
-            }
-        }
-
-        if (posY != 6) {
-            Tuile T = getTuile().getGrille().getTuile(posX, posY + 1);
-            if (T.getEtat() == EtatTuile.inondee) {
-                tuilePossible.add(T);
-            }
-        }
-
-        return tuilePossible;
-                    
+        return tuilesPossible;
     }
 
-    
-
     @Override
-    public ArrayList<Tuile> calculDeplacementPos() {
-        
+    public ArrayList<Tuile> calculAssechementPos() {
+        Tuile tuileActuelle = getTuile();
+        int posXactuelle = tuileActuelle.getPosX();
+        int posYactuelle = tuileActuelle.getPosY();
+        ArrayList<Tuile> tuilesPossible = new ArrayList<>();
 
+        for (Tuile t : tuileActuelle.getGrille().getTuilesAdjacentes(posXactuelle, posYactuelle)) {
+            if (t.getEtat() == EtatTuile.inondee) {
+                tuilesPossible.add(t);
+            }
+        }
+
+        return tuilesPossible;
     }
 
 }

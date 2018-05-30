@@ -1,3 +1,5 @@
+// A COMPLETER (DEPLACEMENT) (PREMIERE DEMO)
+
 package Aventuriers;
 
 import ElementsJeu.Tuile;
@@ -22,46 +24,41 @@ public class Plongueur extends Aventurier {
         Tuile tuileActuelle = getTuile();
         int posXactuelle = tuileActuelle.getPosX();
         int posYactuelle = tuileActuelle.getPosY();
-        ArrayList<Tuile> tuilesNormal = new ArrayList<>();
-        ArrayList<Tuile> tuilesPossible = new ArrayList<>();
+        ArrayList<Tuile> tuilesTraitees = new ArrayList<>();
+        ArrayList<Tuile> tuilesPossibles = new ArrayList<>();
         
         // pour récupérer les tuiles normales qui sont joignable via un chemin inondé et/ou submergé
         for (Tuile t1 : tuileActuelle.getGrille().getTuiles()){
-            if (t1.getEtat()==EtatTuile.normal){
-                tuilesNormal.add(t1);
-            }
-            for (Tuile t2 : tuilesNormal){
-                
-            }
+            
         }
         
         // pour les tuiles adjacentes
         if (posXactuelle != 1) {
             Tuile tuileGauche = tuileActuelle.getGrille().getTuile(posXactuelle - 1, posYactuelle);
             if (tuileGauche.getEtat() != EtatTuile.submergee) {
-                tuilesPossible.add(tuileGauche);
+                tuilesPossibles.add(tuileGauche);
             }
         }
         if (posXactuelle != 6) {
             Tuile tuileDroite = tuileActuelle.getGrille().getTuile(posXactuelle + 1, posYactuelle);
             if (tuileDroite.getEtat() != EtatTuile.submergee) {
-                tuilesPossible.add(tuileDroite);
+                tuilesPossibles.add(tuileDroite);
             }
         }
         if (posYactuelle != 1) {
             Tuile tuileHaut = tuileActuelle.getGrille().getTuile(posXactuelle, posYactuelle - 1);
             if (tuileHaut.getEtat() != EtatTuile.submergee) {
-                tuilesPossible.add(tuileHaut);
+                tuilesPossibles.add(tuileHaut);
             }
         }
         if (posYactuelle != 6) {
             Tuile tuileBas = tuileActuelle.getGrille().getTuile(posXactuelle, posYactuelle + 1);
             if (tuileBas.getEtat() != EtatTuile.submergee) {
-                tuilesPossible.add(tuileBas);
+                tuilesPossibles.add(tuileBas);
             }
         }
         
-        return tuilesPossible;
+        return tuilesPossibles;
     }
 
     @Override
@@ -71,28 +68,9 @@ public class Plongueur extends Aventurier {
         int posYactuelle = tuileActuelle.getPosY();
         ArrayList<Tuile> tuilesPossible = new ArrayList<>();
 
-        if (posXactuelle != 1) {
-            Tuile tuileGauche = tuileActuelle.getGrille().getTuile(posXactuelle - 1, posYactuelle);
-            if (tuileGauche.getEtat() == EtatTuile.inondee) {
-                tuilesPossible.add(tuileGauche);
-            }
-        }
-        if (posXactuelle != 6) {
-            Tuile tuileDroite = tuileActuelle.getGrille().getTuile(posXactuelle + 1, posYactuelle);
-            if (tuileDroite.getEtat() == EtatTuile.inondee) {
-                tuilesPossible.add(tuileDroite);
-            }
-        }
-        if (posYactuelle != 1) {
-            Tuile tuileHaut = tuileActuelle.getGrille().getTuile(posXactuelle, posYactuelle - 1);
-            if (tuileHaut.getEtat() == EtatTuile.inondee) {
-                tuilesPossible.add(tuileHaut);
-            }
-        }
-        if (posYactuelle != 6) {
-            Tuile tuileBas = tuileActuelle.getGrille().getTuile(posXactuelle, posYactuelle + 1);
-            if (tuileBas.getEtat() == EtatTuile.inondee) {
-                tuilesPossible.add(tuileBas);
+        for (Tuile t : tuileActuelle.getGrille().getTuilesAdjacentes(posXactuelle,posYactuelle)){
+            if (t.getEtat()==EtatTuile.inondee){
+                tuilesPossible.add(t);
             }
         }
 

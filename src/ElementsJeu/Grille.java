@@ -31,6 +31,28 @@ public class Grille {
         }
         return tuileRecherchee;
     }
+    
+    public ArrayList<Tuile> getTuilesAdjacentes(int x, int y){
+        ArrayList<Tuile> tuiles = new ArrayList<>();
+        Tuile t;
+        if (x != 1){
+            t = getTuile(x-1,y);
+            tuiles.add(t);
+        }
+        if (x != 6){
+            t = getTuile(x+1,y);
+            tuiles.add(t);
+        }
+        if (y != 1){
+            t = getTuile(x,y-1);
+            tuiles.add(t);
+        }
+        if (y != 6){
+            t = getTuile(x,y+1);
+            tuiles.add(t);
+        }
+        return tuiles;
+    }
 
     // autres
     public void addTuile(Tuile tuile) {

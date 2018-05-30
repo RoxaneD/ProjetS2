@@ -1,3 +1,4 @@
+// OK
 package Aventuriers;
 
 import ElementsJeu.Tuile;
@@ -24,28 +25,9 @@ public class Messager extends Aventurier {
         int posYactuelle = tuileActuelle.getPosY();
         ArrayList<Tuile> tuilesPossible = new ArrayList<>();
 
-        if (posXactuelle != 1) {
-            Tuile tuileGauche = tuileActuelle.getGrille().getTuile(posXactuelle - 1, posYactuelle);
-            if (tuileGauche.getEtat() != EtatTuile.submergee) {
-                tuilesPossible.add(tuileGauche);
-            }
-        }
-        if (posXactuelle != 6) {
-            Tuile tuileDroite = tuileActuelle.getGrille().getTuile(posXactuelle + 1, posYactuelle);
-            if (tuileDroite.getEtat() != EtatTuile.submergee) {
-                tuilesPossible.add(tuileDroite);
-            }
-        }
-        if (posYactuelle != 1) {
-            Tuile tuileHaut = tuileActuelle.getGrille().getTuile(posXactuelle, posYactuelle - 1);
-            if (tuileHaut.getEtat() != EtatTuile.submergee) {
-                tuilesPossible.add(tuileHaut);
-            }
-        }
-        if (posYactuelle != 6) {
-            Tuile tuileBas = tuileActuelle.getGrille().getTuile(posXactuelle, posYactuelle + 1);
-            if (tuileBas.getEtat() != EtatTuile.submergee) {
-                tuilesPossible.add(tuileBas);
+        for (Tuile t : tuileActuelle.getGrille().getTuilesAdjacentes(posXactuelle, posYactuelle)) {
+            if (t.getEtat() != EtatTuile.submergee && t.getEtat() != EtatTuile.inexistante) {
+                tuilesPossible.add(t);
             }
         }
 
@@ -59,28 +41,9 @@ public class Messager extends Aventurier {
         int posYactuelle = tuileActuelle.getPosY();
         ArrayList<Tuile> tuilesPossible = new ArrayList<>();
 
-        if (posXactuelle != 1) {
-            Tuile tuileGauche = tuileActuelle.getGrille().getTuile(posXactuelle - 1, posYactuelle);
-            if (tuileGauche.getEtat() == EtatTuile.inondee) {
-                tuilesPossible.add(tuileGauche);
-            }
-        }
-        if (posXactuelle != 6) {
-            Tuile tuileDroite = tuileActuelle.getGrille().getTuile(posXactuelle + 1, posYactuelle);
-            if (tuileDroite.getEtat() == EtatTuile.inondee) {
-                tuilesPossible.add(tuileDroite);
-            }
-        }
-        if (posYactuelle != 1) {
-            Tuile tuileHaut = tuileActuelle.getGrille().getTuile(posXactuelle, posYactuelle - 1);
-            if (tuileHaut.getEtat() == EtatTuile.inondee) {
-                tuilesPossible.add(tuileHaut);
-            }
-        }
-        if (posYactuelle != 6) {
-            Tuile tuileBas = tuileActuelle.getGrille().getTuile(posXactuelle, posYactuelle + 1);
-            if (tuileBas.getEtat() == EtatTuile.inondee) {
-                tuilesPossible.add(tuileBas);
+        for (Tuile t : tuileActuelle.getGrille().getTuilesAdjacentes(posXactuelle, posYactuelle)) {
+            if (t.getEtat() == EtatTuile.inondee) {
+                tuilesPossible.add(t);
             }
         }
 
