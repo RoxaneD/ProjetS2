@@ -26,9 +26,12 @@ public class Plongueur extends Aventurier {
         ArrayList<Tuile> tuilesPossible = new ArrayList<>();
         
         // pour récupérer les tuiles normales qui sont joignable via un chemin inondé et/ou submergé
-        for (Tuile t : tuileActuelle.getGrille().getTuiles()){
-            if (t.getEtat()==EtatTuile.normal){
-                tuilesNormal.add(t);
+        for (Tuile t1 : tuileActuelle.getGrille().getTuiles()){
+            if (t1.getEtat()==EtatTuile.normal){
+                tuilesNormal.add(t1);
+            }
+            for (Tuile t2 : tuilesNormal){
+                
             }
         }
         

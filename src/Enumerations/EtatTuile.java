@@ -3,5 +3,6 @@ package Enumerations;
 public enum EtatTuile {
 	normal,
 	inondee,
-	submergee
+	submergee,
+        inexistante
 }
