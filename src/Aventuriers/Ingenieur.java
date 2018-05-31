@@ -42,6 +42,9 @@ public class Ingenieur extends Aventurier {
                 tuilesPossible.add(t);
             }
         }
+        if (tuileActuelle.getEtat() == EtatTuile.inondee) {
+                tuilesPossible.add(tuileActuelle);
+            }
 
         return tuilesPossible;
     }

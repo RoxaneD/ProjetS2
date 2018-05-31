@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Explorateur extends Aventurier {
 
     // constructeurs
-    Explorateur(String nomJoueur, CarteAventurier carteaventurier) {
+    public Explorateur(String nomJoueur, CarteAventurier carteaventurier) {
         setNomJoueur(nomJoueur);
         setEtat(EtatAventurier.vivant);
         setCarteAventurier(carteaventurier);
@@ -45,22 +45,26 @@ public class Explorateur extends Aventurier {
     public ArrayList<Tuile> calculAssechementPos() {
         // pour récuperer les tuiles adjacentes
         Tuile tuileActuelle = getTuile();
-        ArrayList<Tuile> tuilesPossibles = new ArrayList<>();
+        ArrayList<Tuile> tuilesPossible = new ArrayList<>();
 
         for (Tuile t : tuileActuelle.getGrille().getTuilesAdjacentes(tuileActuelle)) {
             if (t.getEtat() == EtatTuile.inondee) {
-                tuilesPossibles.add(t);
+                tuilesPossible.add(t);
             }
         }
 
         // pour récupérer les tuiles diagonales
         for (Tuile t : tuileActuelle.getGrille().getTuilesDiagonales(tuileActuelle)) {
             if (t.getEtat() == EtatTuile.inondee) {
-                tuilesPossibles.add(t);
+                tuilesPossible.add(t);
             }
         }
+        
+        if (tuileActuelle.getEtat() == EtatTuile.inondee) {
+                tuilesPossible.add(tuileActuelle);
+            }
 
-        return tuilesPossibles;
+        return tuilesPossible;
     }
 
 }

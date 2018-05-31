@@ -9,7 +9,7 @@ public class Grille {
     private ArrayList<Tuile> tuiles;
 
     // constructeurs
-    Grille() {
+    public Grille() {
         setTuiles();
     }
 

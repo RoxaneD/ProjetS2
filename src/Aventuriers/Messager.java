@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Messager extends Aventurier {
 
     // constructeurs
-    Messager(String nomJoueur, CarteAventurier carteaventurier) {
+    public Messager(String nomJoueur, CarteAventurier carteaventurier) {
         setNomJoueur(nomJoueur);
         setEtat(EtatAventurier.vivant);
         setCarteAventurier(carteaventurier);
@@ -42,6 +42,9 @@ public class Messager extends Aventurier {
                 tuilesPossible.add(t);
             }
         }
+        if (tuileActuelle.getEtat() == EtatTuile.inondee) {
+                tuilesPossible.add(tuileActuelle);
+            }
 
         return tuilesPossible;
     }

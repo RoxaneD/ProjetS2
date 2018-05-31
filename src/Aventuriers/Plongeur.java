@@ -8,10 +8,10 @@ import Enumerations.EtatAventurier;
 import Enumerations.EtatTuile;
 import java.util.ArrayList;
 
-public class Plongueur extends Aventurier {
+public class Plongeur extends Aventurier {
 
     // constructeurs
-    Plongueur(String nomJoueur, CarteAventurier carteaventurier) {
+    public Plongeur(String nomJoueur, CarteAventurier carteaventurier) {
         setNomJoueur(nomJoueur);
         setEtat(EtatAventurier.vivant);
         setCarteAventurier(carteaventurier);
@@ -70,6 +70,9 @@ public class Plongueur extends Aventurier {
                 tuilesPossible.add(t);
             }
         }
+        if (tuileActuelle.getEtat() == EtatTuile.inondee) {
+                tuilesPossible.add(tuileActuelle);
+            }
 
         return tuilesPossible;
     }

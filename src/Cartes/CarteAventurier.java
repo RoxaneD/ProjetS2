@@ -10,11 +10,12 @@ public class CarteAventurier extends Carte {
     private Couleur couleur;
 
     // constructeurs
-    CarteAventurier(String description, NomAventurier nom, Couleur couleur){
+    public CarteAventurier(String description, NomAventurier nom, Couleur couleur) {
         setDescription(description);
         setNom(nom);
         setCouleur(couleur);
     }
+
     // setteurs
     public void setNom(NomAventurier nom) {
         this.nom = nom;

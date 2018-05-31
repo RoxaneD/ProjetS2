@@ -13,7 +13,7 @@ public class Pilote extends Aventurier {
     private Boolean pouvoir = false;
 
     // constructeurs
-    Pilote(String nomJoueur, CarteAventurier carteaventurier) {
+    public Pilote(String nomJoueur, CarteAventurier carteaventurier) {
         setNomJoueur(nomJoueur);
         setEtat(EtatAventurier.vivant);
         setCarteAventurier(carteaventurier);
@@ -66,6 +66,9 @@ public class Pilote extends Aventurier {
                 tuilesPossible.add(t);
             }
         }
+        if (tuileActuelle.getEtat() == EtatTuile.inondee) {
+                tuilesPossible.add(tuileActuelle);
+            }
 
         return tuilesPossible;
     }

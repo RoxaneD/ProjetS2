@@ -19,7 +19,7 @@ public class Tuile {
     private ArrayList<Aventurier> aventuriers;
 
     // constructeurs
-    Tuile(Grille grille, int posX, int posY, NomTuile nom) {
+    public Tuile(Grille grille, int posX, int posY, NomTuile nom) {
         setEtat(EtatTuile.normal);
         setGrille(grille);
         setPosX(posX);
@@ -28,7 +28,7 @@ public class Tuile {
         setAventuriers();
     }
 
-    Tuile(Grille grille, int posX, int posY, NomTuile nom, CarteAventurier emplacementAventurier) {
+    public Tuile(Grille grille, int posX, int posY, NomTuile nom, CarteAventurier emplacementAventurier) {
         setEtat(EtatTuile.normal);
         setGrille(grille);
         setPosX(posX);
@@ -38,7 +38,7 @@ public class Tuile {
         setAventuriers();
     }
 
-    Tuile(Grille grille, int posX, int posY, NomTuile nom, Tresor emplacementTresor) {
+    public Tuile(Grille grille, int posX, int posY, NomTuile nom, Tresor emplacementTresor) {
         setEtat(EtatTuile.normal);
         setGrille(grille);
         setPosX(posX);
@@ -48,7 +48,7 @@ public class Tuile {
         setAventuriers();
     }
 
-    Tuile(Grille grille, int posX, int posY, NomTuile nom, CarteAventurier emplacementAventurier, Tresor emplacementTresor) {
+    public Tuile(Grille grille, int posX, int posY, NomTuile nom, CarteAventurier emplacementAventurier, Tresor emplacementTresor) {
         setEtat(EtatTuile.normal);
         setGrille(grille);
         setPosX(posX);
@@ -91,7 +91,7 @@ public class Tuile {
     public void setAventuriers() {
         aventuriers = new ArrayList<>();
     }
-    
+
     // getteurs
     public EtatTuile getEtat() {
         return etat;
