@@ -47,7 +47,7 @@ public class TourDeJeu {
         t5.setEtat(EtatTuile.submergee);
         t7.setEtat(EtatTuile.inondee);
         t6.setEtat(EtatTuile.inondee);
-        t9.setEtat(EtatTuile.inexistantes);
+        t9.setEtat(EtatTuile.inexistante);
         grilleDeJeu.getTuiles().add(t);
         grilleDeJeu.getTuiles().add(t2);
         grilleDeJeu.getTuiles().add(t3);

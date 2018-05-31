@@ -45,7 +45,7 @@ public class Grille {
                     tuiles.add(t);
                 }
             }
-            if (x != 6) { // tuile à droite
+            if (x != 3) { // tuile à droite
                 t = getTuile(x + 1, y);
                 if (t.getEtat() != EtatTuile.inexistante) {
                     tuiles.add(t);
