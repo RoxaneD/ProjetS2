@@ -1,5 +1,5 @@
 // OK :D
-// ba en faite non 
+// ba en faite non c'est la boucle for (tuilesenTraitement) car on ajoute un objet dans l'arrayList alors qu'il est en cour de parcours
 package Aventuriers;
 
 import ElementsJeu.Tuile;

@@ -45,6 +45,7 @@ public class Grille {
                     tuiles.add(t);
                 }
             }
+            // c'est un 6 !!!!!!!
             if (x != 3) { // tuile à droite
                 t = getTuile(x + 1, y);
                 if (t.getEtat() != EtatTuile.inexistante) {
