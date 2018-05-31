@@ -1,5 +1,7 @@
 package Vues;
 
+import ElementsJeu.Observateur;
+import Enumerations.Actions;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -15,7 +17,7 @@ import javax.swing.border.MatteBorder;
 import Util.Utils.Pion;
 
  
-public class VueAventurier  {
+public class VueAventurier implements Observe {
      
     private final JPanel panelBoutons ;
     private final JPanel panelCentre ;
@@ -113,6 +115,16 @@ public class VueAventurier  {
         VueAventurier vueAventurier1 = new VueAventurier("Julie", "Pilote",Pion.BLEU.getCouleur() );
         VueAventurier vueAventurier2 = new VueAventurier("Marine", "Navigateur",Pion.JAUNE.getCouleur() );
         VueAventurier vueAventurier3 = new VueAventurier("Romane", "Messager",Pion.VIOLET.getCouleur() );
+    }
+
+    @Override
+    public void addObservateur(Observateur o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void notifierObservateur(Actions a) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
 
