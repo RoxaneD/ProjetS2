@@ -36,6 +36,9 @@ public class Controleur implements Observateur {
     private DefausseInondations defausseInondation;
     private TasInondations tasInondation;
 
+    // constructeur
+    public Controleur(){}
+    
     // setteurs
     public void setVueAventurier(VueAventurier vueAventurier) {
         this.vueAventurier = vueAventurier;
@@ -184,6 +187,7 @@ public class Controleur implements Observateur {
     }
 
     // autres méthodes
+    @Override
     public void traiterAction(Action action) {
         if (action.getType() == TypesActions.deplacer) {
             System.out.println("deplacer");

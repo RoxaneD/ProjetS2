@@ -2,6 +2,7 @@
 package Vues;
 
 import Controle.Action;
+import Controle.Controleur;
 import Controle.Observateur;
 import Controle.TypesActions;
 import java.awt.BorderLayout;
@@ -143,6 +144,8 @@ public class VueAventurier extends Observe {
     public static void main(String[] args) {
         // Instanciation de la fenêtre 
         VueAventurier vueAventurier1 = new VueAventurier("Julie", "Pilote", Pion.BLEU.getCouleur());
+        Controleur controle = new Controleur();
+        vueAventurier1.addObservateur(controle);
     }
 
 }
