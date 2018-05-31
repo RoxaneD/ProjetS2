@@ -23,31 +23,36 @@ public class Plongeur extends Aventurier {
     public ArrayList<Tuile> calculDeplacementPos() {
         Tuile tuileActuelle = getTuile();
         ArrayList<Tuile> tuilesTraitees = new ArrayList<>();
+        ArrayList<Tuile> tuilesATraiter = new ArrayList<>();
         ArrayList<Tuile> tuilesEnTraitement = new ArrayList<>();
         ArrayList<Tuile> tuilesPossibles = new ArrayList<>();
         boolean traitee = false;
 
         // pour récupérer les tuiles normales qui sont joignable via un chemin inondé et/ou submergé
-        tuilesEnTraitement.add(tuileActuelle);
+        tuilesATraiter.add(tuileActuelle);
         tuilesTraitees.add(tuileActuelle);
         // pour chacune des tuiles non traités (inondées ou submergées)
-        for (Tuile t1 : tuilesEnTraitement) {
-            for (Tuile t2 : tuileActuelle.getGrille().getTuilesAdjacentes(tuileActuelle)) {
-                // pour vérifier si la tuille selectionée est traitée ou pas
-                traitee = false;
-                for (Tuile t3 : tuilesTraitees) {
-                    if (t3 == t2) {
-                        traitee = true;
+        while (tuilesATraiter.size() != 0) {
+            tuilesEnTraitement = tuilesATraiter;
+            tuilesATraiter = new ArrayList<>();
+            for (Tuile t1 : tuilesEnTraitement) {
+                for (Tuile t2 : tuileActuelle.getGrille().getTuilesAdjacentes(t1)) {
+                    // pour vérifier si la tuille selectionée est traitée ou pas
+                    traitee = false;
+                    for (Tuile t3 : tuilesTraitees) {
+                        if (t3 == t2) {
+                            traitee = true;
+                        }
                     }
+                    // si elle est normale, on l'ajoute aux tuiles possibles
+                    if (t2.getEtat() == EtatTuile.normal && !traitee) {
+                        tuilesPossibles.add(t2);
+                        // sinon on se rajoute dans tuilesATraiter
+                    } else if ((t2.getEtat() == EtatTuile.inondee || t2.getEtat() == EtatTuile.submergee) && !traitee) {
+                        tuilesATraiter.add(t2);
+                    }
+                    tuilesTraitees.add(t2);
                 }
-                // si elle est normale, on l'ajoute aux tuiles possibles
-                if (t2.getEtat() == EtatTuile.normal && !traitee) {
-                    tuilesPossibles.add(t2);
-                    // sinon on se rajoute dans tuilesEnTraitement
-                } else if ((t2.getEtat() == EtatTuile.inondee || t2.getEtat() == EtatTuile.submergee) && !traitee) {
-                    tuilesEnTraitement.add(t2);
-                }
-                tuilesTraitees.add(t2);
             }
         }
 
@@ -72,8 +77,8 @@ public class Plongeur extends Aventurier {
             }
         }
         if (tuileActuelle.getEtat() == EtatTuile.inondee) {
-                tuilesPossible.add(tuileActuelle);
-            }
+            tuilesPossible.add(tuileActuelle);
+        }
 
         return tuilesPossible;
     }

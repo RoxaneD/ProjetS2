@@ -43,8 +43,8 @@ public class Messager extends Aventurier {
             }
         }
         if (tuileActuelle.getEtat() == EtatTuile.inondee) {
-                tuilesPossible.add(tuileActuelle);
-            }
+            tuilesPossible.add(tuileActuelle);
+        }
 
         return tuilesPossible;
     }

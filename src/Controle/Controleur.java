@@ -5,6 +5,7 @@ import Aventuriers.Aventurier;
 import Cartes.CarteTresor;
 import Cartes.CarteInondation;
 import Cartes.CarteAventurier;
+import Cartes.CarteTresors;
 import ElementsJeu.Grille;
 import ElementsJeu.NiveauEau;
 import ElementsJeu.Tresor;
@@ -155,24 +156,24 @@ public class Controleur implements Observateur {
     }
 
     // getteurs autres
-    public CarteTresor getCarteTresor() {
-        throw new UnsupportedOperationException();
+    public CarteTresors getCarteTresor() {
+        return getTasTresor().getPremiereCarte();
     }
 
     public int getNiveau() {
-        throw new UnsupportedOperationException();
+        return getNiveauEau().getNiveau();
     }
 
     public CarteInondation getCarteInondation() {
-        throw new UnsupportedOperationException();
+        return getTasInondation().getPremiereCarte();
     }
 
     public String getNomJoueur() {
-        throw new UnsupportedOperationException();
+        return getVueAventurier().getNomJoueur();
     }
 
     public void getAventurier(String nomJoueur) {
-        throw new UnsupportedOperationException();
+        ;
     }
 
     public Tuile getChoixDeplacement() {

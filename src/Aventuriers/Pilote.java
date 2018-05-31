@@ -40,7 +40,7 @@ public class Pilote extends Aventurier {
         if (!pouvoir) {
 
             for (Tuile t : tuileActuelle.getGrille().getTuiles()) {
-                if (t.getEtat() != EtatTuile.submergee && t.getEtat() != EtatTuile.inexistante) {
+                if (t.getEtat() != EtatTuile.submergee && t.getEtat() != EtatTuile.inexistante && t!=tuileActuelle) {
                     tuilesPossibles.add(t);
                 }
             }

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Ingenieur extends Aventurier {
 
     // constructeurs
-    Ingenieur(String nomJoueur, CarteAventurier carteaventurier) {
+    public Ingenieur(String nomJoueur, CarteAventurier carteaventurier) {
         setNomJoueur(nomJoueur);
         setEtat(EtatAventurier.vivant);
         setCarteAventurier(carteaventurier);

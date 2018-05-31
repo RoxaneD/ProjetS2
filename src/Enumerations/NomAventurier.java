@@ -4,7 +4,7 @@ public enum NomAventurier {
 	explorateur,
 	pilote,
 	navigateur,
-	plongueur,
+	plongeur,
 	ingenieur,
 	messager
 }

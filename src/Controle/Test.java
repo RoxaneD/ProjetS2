@@ -20,8 +20,7 @@ public class Test {
         // ajout du controleur en tant qu'observateur de ces élements
         vueAventurier1.addObservateur(controleur1);
         
-        // ajouts des éléments au controleur
-        controleur1.setVueAventurier(vueAventurier1);
+        
         
         // test Utils.poserQuestion("...") et Utils.afficherInformation("..")
         //if (poserQuestion("Ceci est une question")) {

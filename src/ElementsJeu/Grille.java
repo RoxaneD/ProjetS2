@@ -45,19 +45,21 @@ public class Grille {
                     tuiles.add(t);
                 }
             }
-            // c'est un 6 !!!!!!!
-            if (x != 3) { // tuile à droite
+
+            if (x != 6) { // tuile à droite
                 t = getTuile(x + 1, y);
                 if (t.getEtat() != EtatTuile.inexistante) {
                     tuiles.add(t);
                 }
             }
+
             if (y != 1) { // tuile en haut
                 t = getTuile(x, y - 1);
                 if (t.getEtat() != EtatTuile.inexistante) {
                     tuiles.add(t);
                 }
             }
+
             if (y != 6) { // tuile en bas
                 t = getTuile(x, y + 1);
                 if (t.getEtat() != EtatTuile.inexistante) {

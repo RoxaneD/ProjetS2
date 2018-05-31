@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Navigateur extends Aventurier {
 
     // constructeurs
-    Navigateur(String nomJoueur, CarteAventurier carteaventurier) {
+    public Navigateur(String nomJoueur, CarteAventurier carteaventurier) {
         setNomJoueur(nomJoueur);
         setEtat(EtatAventurier.vivant);
         setCarteAventurier(carteaventurier);

@@ -19,6 +19,14 @@ public class Tuile {
     private ArrayList<Aventurier> aventuriers;
 
     // constructeurs
+    public Tuile(Grille grille, int posX, int posY){
+        setEtat(EtatTuile.inexistante);
+        setGrille(grille);
+        setPosX(posX);
+        setPosY(posY);
+        setAventuriers();
+    }
+    
     public Tuile(Grille grille, int posX, int posY, NomTuile nom) {
         setEtat(EtatTuile.normal);
         setGrille(grille);
