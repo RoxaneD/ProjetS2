@@ -34,10 +34,16 @@ public class VueAventurier extends Observe {
     private final JButton btnAutreAction;
     private final JButton btnTerminerTour;
     private JTextField position;
+    private String nomJoueur;
+    private String nomAventurier;
+    private Color couleur;
 
     // constructeur
     public VueAventurier(String nomJoueur, String nomAventurier, Color couleur) {
 
+        setNomJoueur(nomJoueur);
+        setNomAventurier(nomAventurier);
+        setCouleur(couleur);
         this.window = new JFrame();
         window.setSize(350, 200);
         //le titre = nom du joueur 
@@ -77,7 +83,7 @@ public class VueAventurier extends Observe {
         btnBouger.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Action a = new Action(TypesActions.deplacer);
+                Action a = new Action(TypesActions.deplacer,getNomJoueur());
                 notifierObservateur(a);
             }
         });
@@ -85,7 +91,7 @@ public class VueAventurier extends Observe {
         btnAssecher.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Action a = new Action(TypesActions.assecher);
+                Action a = new Action(TypesActions.assecher,getNomJoueur());
                 notifierObservateur(a);
             }
         });
@@ -93,7 +99,7 @@ public class VueAventurier extends Observe {
         btnAutreAction.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Action a = new Action(TypesActions.autres);
+                Action a = new Action(TypesActions.autres,getNomJoueur());
                 notifierObservateur(a);
             }
         });
@@ -101,7 +107,7 @@ public class VueAventurier extends Observe {
         btnTerminerTour.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Action a = new Action(TypesActions.terminer);
+                Action a = new Action(TypesActions.terminer,getNomJoueur());
                 notifierObservateur(a);
             }
         });
@@ -117,6 +123,18 @@ public class VueAventurier extends Observe {
     // setteurs
     public void setPosition(String pos) {
         this.position.setText(pos);
+    }
+
+    public void setNomJoueur(String nomJoueur) {
+        this.nomJoueur = nomJoueur;
+    }
+
+    public void setNomAventurier(String nomAventurier) {
+        this.nomAventurier = nomAventurier;
+    }
+
+    public void setCouleur(Color couleur) {
+        this.couleur = couleur;
     }
 
     // getteurs
@@ -138,6 +156,18 @@ public class VueAventurier extends Observe {
 
     public JButton getBtnTerminerTour() {
         return btnTerminerTour;
+    }
+
+    public String getNomJoueur() {
+        return nomJoueur;
+    }
+
+    public String getNomAventurier() {
+        return nomAventurier;
+    }
+
+    public Color getCouleur() {
+        return couleur;
     }
 
     // main

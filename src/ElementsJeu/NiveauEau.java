@@ -7,7 +7,7 @@ public class NiveauEau {
     private int niveau;
 
     // constructeurs
-    NiveauEau(int maximum, int niveau) {
+    public NiveauEau(int maximum, int niveau) {
         setMaximum(maximum);
         setNiveau(niveau);
     }

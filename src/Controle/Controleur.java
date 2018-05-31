@@ -1,4 +1,4 @@
-// A COMPLETER : TRAITER ACTION
+// A COMPLETER : Faire les getteurs autres
 package Controle;
 
 import Aventuriers.Aventurier;
@@ -21,14 +21,14 @@ import java.util.HashMap;
 public class Controleur implements Observateur {
 
     // attributs
-    private VueAventurier vueAventurier;
-    private NiveauEau niveauEau;
+    private HashMap<String, Aventurier> joueurs; // tous les joueurs
+    private VueAventurier vueAventurier;         // une pour chaque joueur (il n'y en a qu'une seule à la fois à l'écran)
+    private NiveauEau niveauEau;                 
     private Tresor tresor1;
     private Tresor tresor2;
     private Tresor tresor3;
     private Tresor tresor4;
     private Grille grille;
-    private HashMap<String, Aventurier> joueurs;
     private TasPoubelle poubelle;
     private TasAventuriers tasAventuriers;
     private DefausseTresors defausseTresor;
@@ -191,13 +191,13 @@ public class Controleur implements Observateur {
     @Override
     public void traiterAction(Action action) {
         if (action.getType() == TypesActions.deplacer) {
-            System.out.println("deplacer");
+            System.out.println(action.getNomJoueur()+" : deplacer");
         } else if (action.getType() == TypesActions.assecher) {
-            System.out.println("assecher");
+            System.out.println(action.getNomJoueur()+" : assecher");
         } else if (action.getType() == TypesActions.autres) {
-            System.out.println("autres");
+            System.out.println(action.getNomJoueur()+" : autres");
         } else if (action.getType() == TypesActions.terminer) {
-            System.out.println("terminer");
+            System.out.println(action.getNomJoueur()+" : terminer");
         }
     }
 
