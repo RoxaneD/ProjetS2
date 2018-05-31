@@ -1,6 +1,7 @@
+// A COMPLETER : RAJOUTER DES LISTENERS + NOTIFIER_OBSERVATEUR
 package Vues;
 
-import ElementsJeu.Observateur;
+import Controle.Observateur;
 import Enumerations.Actions;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,25 +16,26 @@ import javax.swing.SwingConstants;
 import static javax.swing.SwingConstants.CENTER;
 import javax.swing.border.MatteBorder;
 import Util.Utils.Pion;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
- 
 public class VueAventurier implements Observe {
-     
-    private final JPanel panelBoutons ;
-    private final JPanel panelCentre ;
+
+    // attributs
+    private final JPanel panelBoutons;
+    private final JPanel panelCentre;
     private final JFrame window;
     private final JPanel panelAventurier;
     private final JPanel mainPanel;
-    private final JButton btnBouger  ;
+    private final JButton btnBouger;
     private final JButton btnAssecher;
     private final JButton btnAutreAction;
     private final JButton btnTerminerTour;
     private JTextField position;
-   
-   
-   
-    
-    public VueAventurier(String nomJoueur, String nomAventurier, Color couleur){
+    private Observateur observateur;
+
+    // constructeur
+    public VueAventurier(String nomJoueur, String nomAventurier, Color couleur) {
 
         this.window = new JFrame();
         window.setSize(350, 200);
@@ -43,56 +45,88 @@ public class VueAventurier implements Observe {
         this.window.add(mainPanel);
 
         mainPanel.setBackground(new Color(230, 230, 230));
-        mainPanel.setBorder(BorderFactory.createLineBorder(couleur, 2)) ;
+        mainPanel.setBorder(BorderFactory.createLineBorder(couleur, 2));
 
         // =================================================================================
         // NORD : le titre = nom de l'aventurier sur la couleurActive du pion
-
         this.panelAventurier = new JPanel();
         panelAventurier.setBackground(couleur);
-        panelAventurier.add(new JLabel(nomAventurier,SwingConstants.CENTER ));
+        panelAventurier.add(new JLabel(nomAventurier, SwingConstants.CENTER));
         mainPanel.add(panelAventurier, BorderLayout.NORTH);
-   
+
         // =================================================================================
         // CENTRE : 1 ligne pour position courante
         this.panelCentre = new JPanel(new GridLayout(2, 1));
         this.panelCentre.setOpaque(false);
         this.panelCentre.setBorder(new MatteBorder(0, 0, 2, 0, couleur));
         mainPanel.add(this.panelCentre, BorderLayout.CENTER);
-        
-        panelCentre.add(new JLabel ("Position", SwingConstants.CENTER));
-        position = new  JTextField(30); 
+
+        panelCentre.add(new JLabel("Position", SwingConstants.CENTER));
+        position = new JTextField(30);
         position.setHorizontalAlignment(CENTER);
         panelCentre.add(position);
 
-
         // =================================================================================
         // SUD : les boutons
-        this.panelBoutons = new JPanel(new GridLayout(2,2));
+        this.panelBoutons = new JPanel(new GridLayout(2, 2));
         this.panelBoutons.setOpaque(false);
         mainPanel.add(this.panelBoutons, BorderLayout.SOUTH);
 
-        this.btnBouger = new JButton("Bouger") ;
-        this.btnAssecher = new JButton( "Assecher");
-        this.btnAutreAction = new JButton("AutreAction") ;
-        this.btnTerminerTour = new JButton("Terminer Tour") ;
-        
+        this.btnBouger = new JButton("Bouger");
+        btnBouger.addActionListener(
+                new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Actions a = Actions.deplacer;
+                notifierObservateur(a);
+            }
+        });
+        this.btnAssecher = new JButton("Assecher");
+        btnAssecher.addActionListener(
+                new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Actions a = Actions.assecher;
+                notifierObservateur(a);
+            }
+        });
+        this.btnAutreAction = new JButton("AutreAction");
+        btnAutreAction.addActionListener(
+                new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Actions a = Actions.autres;
+                notifierObservateur(a);
+            }
+        });
+        this.btnTerminerTour = new JButton("Terminer Tour");
+        btnTerminerTour.addActionListener(
+                new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Actions a = Actions.terminer;
+                notifierObservateur(a);
+            }
+        });
+
         this.panelBoutons.add(btnBouger);
         this.panelBoutons.add(btnAssecher);
         this.panelBoutons.add(btnAutreAction);
         this.panelBoutons.add(btnTerminerTour);
 
         this.window.setVisible(true);
-    } 
-    
+    }
+
+    // setteurs
     public void setPosition(String pos) {
         this.position.setText(pos);
     }
-    
-     public JButton getBtnAutreAction() {
+
+    // getteurs
+    public JButton getBtnAutreAction() {
         return btnAutreAction;
     }
-    
+
     public String getPosition() {
         return position.getText();
     }
@@ -100,7 +134,7 @@ public class VueAventurier implements Observe {
     public JButton getBtnBouger() {
         return btnBouger;
     }
-    
+
     public JButton getBtnAssecher() {
         return btnAssecher;
     }
@@ -108,25 +142,24 @@ public class VueAventurier implements Observe {
     public JButton getBtnTerminerTour() {
         return btnTerminerTour;
     }
- 
-     public static void main(String [] args) {
-        // Instanciation de la fenêtre 
-        VueAventurier vueAventurier = new VueAventurier("Manon", "Explorateur",Pion.ORANGE.getCouleur() );
-        VueAventurier vueAventurier1 = new VueAventurier("Julie", "Pilote",Pion.BLEU.getCouleur() );
-        VueAventurier vueAventurier2 = new VueAventurier("Marine", "Navigateur",Pion.JAUNE.getCouleur() );
-        VueAventurier vueAventurier3 = new VueAventurier("Romane", "Messager",Pion.VIOLET.getCouleur() );
-    }
 
+    // autres méthodes
     @Override
     public void addObservateur(Observateur o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.observateur = o;
     }
 
     @Override
     public void notifierObservateur(Actions a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (observateur != null) {
+            observateur.traiterAction(a);
+        }
     }
+
+    // main
+    public static void main(String[] args) {
+        // Instanciation de la fenêtre 
+        VueAventurier vueAventurier1 = new VueAventurier("Julie", "Pilote", Pion.BLEU.getCouleur());
+    }
+
 }
-
- 
-
