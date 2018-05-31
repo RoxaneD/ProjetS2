@@ -24,7 +24,7 @@ public class Messager extends Aventurier {
         ArrayList<Tuile> tuilesPossible = new ArrayList<>();
 
         for (Tuile t : tuileActuelle.getGrille().getTuilesAdjacentes(tuileActuelle)) {
-            if (t.getEtat() != EtatTuile.submergee && t.getEtat() != EtatTuile.inexistante) {
+            if (t.getEtat() != EtatTuile.submergee) {
                 tuilesPossible.add(t);
             }
         }

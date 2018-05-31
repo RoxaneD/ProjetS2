@@ -25,7 +25,7 @@ public class Explorateur extends Aventurier {
         ArrayList<Tuile> tuilesPossibles = new ArrayList<>();
 
         for (Tuile t : tuileActuelle.getGrille().getTuilesAdjacentes(tuileActuelle)) {
-            if (t.getEtat() != EtatTuile.submergee && t.getEtat() != EtatTuile.inexistante) {
+            if (t.getEtat() != EtatTuile.submergee) {
                 tuilesPossibles.add(t);
             }
         }

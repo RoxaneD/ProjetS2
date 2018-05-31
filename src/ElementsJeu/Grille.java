@@ -1,5 +1,6 @@
 package ElementsJeu;
 
+import Enumerations.EtatTuile;
 import java.util.ArrayList;
 
 public class Grille {
@@ -39,19 +40,27 @@ public class Grille {
         Tuile t;
         if (x != 1){
             t = getTuile(x-1,y);
-            tuiles.add(t);
+             if (t.getEtat()!=EtatTuile.inexistante){
+                 tuiles.add(t);
+             }
         }
         if (x != 6){
             t = getTuile(x+1,y);
-            tuiles.add(t);
+            if (t.getEtat()!=EtatTuile.inexistante){
+                 tuiles.add(t);
+             }
         }
         if (y != 1){
             t = getTuile(x,y-1);
-            tuiles.add(t);
+            if (t.getEtat()!=EtatTuile.inexistante){
+                 tuiles.add(t);
+             }
         }
         if (y != 6){
             t = getTuile(x,y+1);
-            tuiles.add(t);
+            if (t.getEtat()!=EtatTuile.inexistante){
+                 tuiles.add(t);
+             }
         }
         return tuiles;
     }
