@@ -5,7 +5,7 @@
  */
 package Vues;
 
-import ElementsJeu.Observateur;
+import Controle.Observateur;
 import Enumerations.Actions;
 
 /**
