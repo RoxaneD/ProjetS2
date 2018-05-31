@@ -3,17 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tests;
+package Jeu;
 
 /**
  *
  * @author deflandr
  */
-public class IleInterdite {
+public class TourDeJeu {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         
     }

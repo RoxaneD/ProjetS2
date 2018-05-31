@@ -109,7 +109,10 @@ public class VueAventurier  {
  
      public static void main(String [] args) {
         // Instanciation de la fenêtre 
-        VueAventurier vueAventurier = new VueAventurier("Manon", "Explorateur",Pion.ROUGE.getCouleur() );
+        VueAventurier vueAventurier = new VueAventurier("Manon", "Explorateur",Pion.ORANGE.getCouleur() );
+        VueAventurier vueAventurier1 = new VueAventurier("Julie", "Pilote",Pion.BLEU.getCouleur() );
+        VueAventurier vueAventurier2 = new VueAventurier("Marine", "Navigateur",Pion.JAUNE.getCouleur() );
+        VueAventurier vueAventurier3 = new VueAventurier("Romane", "Messager",Pion.VIOLET.getCouleur() );
     }
 }
 
