@@ -11,11 +11,22 @@ import Cartes.CarteAventurier;
 import Cartes.CarteInondation;
 import Cartes.CarteSpeciale;
 import Cartes.CarteTresor;
+import ElementsJeu.Grille;
+import ElementsJeu.NiveauEau;
+import ElementsJeu.Tresor;
+import ElementsJeu.Tuile;
 import Enumerations.Couleur;
+import Enumerations.EtatTuile;
 import Enumerations.NomAventurier;
 import Enumerations.NomCarteSpeciale;
 import Enumerations.NomTresor;
 import Enumerations.NomTuile;
+import Tas.DefausseInondations;
+import Tas.DefausseTresors;
+import Tas.TasAventuriers;
+import Tas.TasInondations;
+import Tas.TasPoubelle;
+import Tas.TasTresors;
 import Vues.VueAventurier;
 import java.awt.Color;
 
@@ -26,39 +37,39 @@ public class Test {
         Controleur controleur = new Controleur();
 
         // création des éléments
-        //      CARTES
+        //      CARTES -----------------------------------------------------------------------------------------------------------------
         //          cartes aventuriers 
         CarteAventurier carteAventurier1 = new CarteAventurier(NomAventurier.explorateur, Couleur.vert);
         CarteAventurier carteAventurier2 = new CarteAventurier(NomAventurier.messager, Couleur.blanc);
         CarteAventurier carteAventurier3 = new CarteAventurier(NomAventurier.pilote, Couleur.bleu);
-        CarteAventurier carteAventurier4 = new CarteAventurier( NomAventurier.plongeur, Couleur.noir);
+        CarteAventurier carteAventurier4 = new CarteAventurier(NomAventurier.plongeur, Couleur.noir);
         CarteAventurier carteAventurier5 = new CarteAventurier(NomAventurier.ingenieur, Couleur.rouge);
         CarteAventurier carteAventurier6 = new CarteAventurier(NomAventurier.navigateur, Couleur.jaune);
         //          cartes inondations
-        CarteInondation carteInondation1= new CarteInondation(NomTuile.Le_Pont_Des_Abimes);
-        CarteInondation carteInondation2= new CarteInondation(NomTuile.La_Porte_De_Bronze);
-        CarteInondation carteInondation3= new CarteInondation(NomTuile.La_Caverne_Des_Ombres);
-        CarteInondation carteInondation4= new CarteInondation(NomTuile.La_Porte_De_Fer);
-        CarteInondation carteInondation5= new CarteInondation(NomTuile.La_Porte_d_Or);
-        CarteInondation carteInondation6= new CarteInondation(NomTuile.Les_Falaises_De_L_Oubli);
-        CarteInondation carteInondation7= new CarteInondation(NomTuile.Le_Palais_De_Corail);
-        CarteInondation carteInondation8= new CarteInondation(NomTuile.La_Porte_d_Argent);
-        CarteInondation carteInondation9= new CarteInondation(NomTuile.Les_Dunes_De_L_illusion);
-        CarteInondation carteInondation10= new CarteInondation(NomTuile.Heliport);
-        CarteInondation carteInondation11= new CarteInondation(NomTuile.La_Porte_De_Cuivre);
-        CarteInondation carteInondation12= new CarteInondation(NomTuile.Le_Jardin_Des_Hurlements);
-        CarteInondation carteInondation13= new CarteInondation(NomTuile.La_Foret_Pourpre);
-        CarteInondation carteInondation14= new CarteInondation(NomTuile.Le_Lagon_Perdu);
-        CarteInondation carteInondation15= new CarteInondation(NomTuile.Le_Marais_Brumeux);
-        CarteInondation carteInondation16= new CarteInondation(NomTuile.Observatoire);
-        CarteInondation carteInondation17= new CarteInondation(NomTuile.Le_Rocher_Fantome);
-        CarteInondation carteInondation18= new CarteInondation(NomTuile.La_Caverne_Du_Braisier);
-        CarteInondation carteInondation19= new CarteInondation(NomTuile.Le_Temple_Du_Soleil);
-        CarteInondation carteInondation20= new CarteInondation(NomTuile.Le_Temple_De_La_Lune);
-        CarteInondation carteInondation21= new CarteInondation(NomTuile.Le_Palais_Des_Marees);
-        CarteInondation carteInondation22= new CarteInondation(NomTuile.Le_Val_Du_Crepuscule);
-        CarteInondation carteInondatio23= new CarteInondation(NomTuile.La_Tour_Du_Guet);
-        CarteInondation carteInondation24= new CarteInondation(NomTuile.Le_Jardin_Des_Murmures);
+        CarteInondation carteInondation1 = new CarteInondation(NomTuile.Le_Pont_Des_Abimes);
+        CarteInondation carteInondation2 = new CarteInondation(NomTuile.La_Porte_De_Bronze);
+        CarteInondation carteInondation3 = new CarteInondation(NomTuile.La_Caverne_Des_Ombres);
+        CarteInondation carteInondation4 = new CarteInondation(NomTuile.La_Porte_De_Fer);
+        CarteInondation carteInondation5 = new CarteInondation(NomTuile.La_Porte_d_Or);
+        CarteInondation carteInondation6 = new CarteInondation(NomTuile.Les_Falaises_De_L_Oubli);
+        CarteInondation carteInondation7 = new CarteInondation(NomTuile.Le_Palais_De_Corail);
+        CarteInondation carteInondation8 = new CarteInondation(NomTuile.La_Porte_d_Argent);
+        CarteInondation carteInondation9 = new CarteInondation(NomTuile.Les_Dunes_De_L_illusion);
+        CarteInondation carteInondation10 = new CarteInondation(NomTuile.Heliport);
+        CarteInondation carteInondation11 = new CarteInondation(NomTuile.La_Porte_De_Cuivre);
+        CarteInondation carteInondation12 = new CarteInondation(NomTuile.Le_Jardin_Des_Hurlements);
+        CarteInondation carteInondation13 = new CarteInondation(NomTuile.La_Foret_Pourpre);
+        CarteInondation carteInondation14 = new CarteInondation(NomTuile.Le_Lagon_Perdu);
+        CarteInondation carteInondation15 = new CarteInondation(NomTuile.Le_Marais_Brumeux);
+        CarteInondation carteInondation16 = new CarteInondation(NomTuile.Observatoire);
+        CarteInondation carteInondation17 = new CarteInondation(NomTuile.Le_Rocher_Fantome);
+        CarteInondation carteInondation18 = new CarteInondation(NomTuile.La_Caverne_Du_Braisier);
+        CarteInondation carteInondation19 = new CarteInondation(NomTuile.Le_Temple_Du_Soleil);
+        CarteInondation carteInondation20 = new CarteInondation(NomTuile.Le_Temple_De_La_Lune);
+        CarteInondation carteInondation21 = new CarteInondation(NomTuile.Le_Palais_Des_Marees);
+        CarteInondation carteInondation22 = new CarteInondation(NomTuile.Le_Val_Du_Crepuscule);
+        CarteInondation carteInondation23 = new CarteInondation(NomTuile.La_Tour_Du_Guet);
+        CarteInondation carteInondation24 = new CarteInondation(NomTuile.Le_Jardin_Des_Murmures);
         //          cartes trésors
         CarteTresor carteTresor1 = new CarteTresor(NomTresor.La_Pierre_sacree);
         CarteTresor carteTresor2 = new CarteTresor(NomTresor.La_Pierre_sacree);
@@ -89,8 +100,162 @@ public class Test {
         CarteSpeciale carteSpeciale6 = new CarteSpeciale(NomCarteSpeciale.monteeEau);
         CarteSpeciale carteSpeciale7 = new CarteSpeciale(NomCarteSpeciale.sacSable);
         CarteSpeciale carteSpeciale8 = new CarteSpeciale(NomCarteSpeciale.sacSable);
+
+        //      TAS ---------------------------------------------------------------------------------------------------------------------
+        //              poubelle
+        TasPoubelle poubelle = new TasPoubelle();
+        //              tas aventuriers
+        TasAventuriers tasAventurier = new TasAventuriers();
+        //              defausse tresors
+        DefausseTresors defausseTresor = new DefausseTresors();
+        //              tas tresors
+        TasTresors tasTresor = new TasTresors();
+        tasTresor.addCarte(carteTresor1);
+        tasTresor.addCarte(carteTresor2);
+        tasTresor.addCarte(carteTresor3);
+        tasTresor.addCarte(carteTresor4);
+        tasTresor.addCarte(carteTresor5);
+        tasTresor.addCarte(carteTresor6);
+        tasTresor.addCarte(carteTresor7);
+        tasTresor.addCarte(carteTresor8);
+        tasTresor.addCarte(carteTresor9);
+        tasTresor.addCarte(carteTresor10);
+        tasTresor.addCarte(carteTresor11);
+        tasTresor.addCarte(carteTresor12);
+        tasTresor.addCarte(carteTresor13);
+        tasTresor.addCarte(carteTresor14);
+        tasTresor.addCarte(carteTresor15);
+        tasTresor.addCarte(carteTresor16);
+        tasTresor.addCarte(carteTresor17);
+        tasTresor.addCarte(carteTresor18);
+        tasTresor.addCarte(carteTresor19);
+        tasTresor.addCarte(carteTresor20);
+        //              defausse inondations
+        DefausseInondations defausseInondation = new DefausseInondations();
+        //              tas inondations
+        TasInondations tasInondation = new TasInondations();
+        tasInondation.addCarte(carteInondation1);
+        tasInondation.addCarte(carteInondation2);
+        tasInondation.addCarte(carteInondation3);
+        tasInondation.addCarte(carteInondation4);
+        tasInondation.addCarte(carteInondation5);
+        tasInondation.addCarte(carteInondation6);
+        tasInondation.addCarte(carteInondation7);
+        tasInondation.addCarte(carteInondation8);
+        tasInondation.addCarte(carteInondation9);
+        tasInondation.addCarte(carteInondation10);
+        tasInondation.addCarte(carteInondation11);
+        tasInondation.addCarte(carteInondation12);
+        tasInondation.addCarte(carteInondation13);
+        tasInondation.addCarte(carteInondation14);
+        tasInondation.addCarte(carteInondation15);
+        tasInondation.addCarte(carteInondation16);
+        tasInondation.addCarte(carteInondation17);
+        tasInondation.addCarte(carteInondation18);
+        tasInondation.addCarte(carteInondation19);
+        tasInondation.addCarte(carteInondation20);
+        tasInondation.addCarte(carteInondation21);
+        tasInondation.addCarte(carteInondation22);
+        tasInondation.addCarte(carteInondation23);
+        tasInondation.addCarte(carteInondation24);
+
+        // TRESORS
+        Tresor tresor1 = new Tresor(NomTresor.La_Pierre_sacree);
+        Tresor tresor2 = new Tresor(NomTresor.La_Statue_du_zephyr);
+        Tresor tresor3 = new Tresor(NomTresor.Le_Cristal_ardent);
+        Tresor tresor4 = new Tresor(NomTresor.Le_Calice_de_l_onde);
+
+        //      GRILLE + TUILES -------------------------------------------------------------------------------------------------------
+        Grille grilleDeJeu = new Grille();
+
+        Tuile t1 = new Tuile(grilleDeJeu, 1, 1);
+        Tuile t2 = new Tuile(grilleDeJeu, 2, 1);
+        Tuile t3 = new Tuile(grilleDeJeu, 3, 1, NomTuile.Le_Pont_Des_Abimes);
+        Tuile t4 = new Tuile(grilleDeJeu, 4, 1, NomTuile.La_Porte_De_Bronze, carteAventurier5);
+        Tuile t5 = new Tuile(grilleDeJeu, 5, 1);
+        Tuile t6 = new Tuile(grilleDeJeu, 6, 1);
+        Tuile t7 = new Tuile(grilleDeJeu, 1, 2);
+        Tuile t8 = new Tuile(grilleDeJeu, 2, 2, NomTuile.La_Caverne_Des_Ombres, tresor3);
+        Tuile t9 = new Tuile(grilleDeJeu, 3, 2, NomTuile.La_Porte_De_Fer, carteAventurier4);
+        Tuile t10 = new Tuile(grilleDeJeu, 4, 2, NomTuile.La_Porte_d_Or, carteAventurier6);
+        Tuile t11 = new Tuile(grilleDeJeu, 5, 2, NomTuile.Les_Falaises_De_L_Oubli);
+        Tuile t12 = new Tuile(grilleDeJeu, 6, 2);
+        Tuile t13 = new Tuile(grilleDeJeu, 1, 3, NomTuile.Le_Palais_De_Corail, tresor4);
+        Tuile t14 = new Tuile(grilleDeJeu, 2, 3, NomTuile.La_Porte_d_Argent, carteAventurier2);
+        Tuile t15 = new Tuile(grilleDeJeu, 3, 3, NomTuile.Les_Dunes_De_L_illusion);
+        Tuile t16 = new Tuile(grilleDeJeu, 4, 3, NomTuile.Heliport, carteAventurier3);
+        Tuile t17 = new Tuile(grilleDeJeu, 5, 3, NomTuile.La_Porte_De_Cuivre, carteAventurier1);
+        Tuile t18 = new Tuile(grilleDeJeu, 6, 3, NomTuile.Le_Jardin_Des_Hurlements, tresor2);
+        Tuile t19 = new Tuile(grilleDeJeu, 1, 4, NomTuile.La_Foret_Pourpre);
+        Tuile t20 = new Tuile(grilleDeJeu, 2, 4, NomTuile.Le_Lagon_Perdu);
+        Tuile t21 = new Tuile(grilleDeJeu, 3, 4, NomTuile.Le_Marais_Brumeux);
+        Tuile t22 = new Tuile(grilleDeJeu, 4, 4, NomTuile.Observatoire);
+        Tuile t23 = new Tuile(grilleDeJeu, 5, 4, NomTuile.Le_Rocher_Fantome);
+        Tuile t24 = new Tuile(grilleDeJeu, 6, 4, NomTuile.La_Caverne_Du_Braisier, tresor3);
+        Tuile t25 = new Tuile(grilleDeJeu, 1, 5);
+        Tuile t26 = new Tuile(grilleDeJeu, 2, 5, NomTuile.Le_Temple_Du_Soleil, tresor1);
+        Tuile t27 = new Tuile(grilleDeJeu, 3, 5, NomTuile.Le_Temple_De_La_Lune, tresor1);
+        Tuile t28 = new Tuile(grilleDeJeu, 4, 5, NomTuile.Le_Palais_Des_Marees, tresor4);
+        Tuile t29 = new Tuile(grilleDeJeu, 5, 5, NomTuile.Le_Val_Du_Crepuscule);
+        Tuile t30 = new Tuile(grilleDeJeu, 6, 5);
+        Tuile t31 = new Tuile(grilleDeJeu, 1, 6);
+        Tuile t32 = new Tuile(grilleDeJeu, 2, 6);
+        Tuile t33 = new Tuile(grilleDeJeu, 3, 6, NomTuile.La_Tour_Du_Guet);
+        Tuile t34 = new Tuile(grilleDeJeu, 4, 6, NomTuile.Le_Jardin_Des_Murmures, tresor2);
+        Tuile t35 = new Tuile(grilleDeJeu, 5, 6);
+        Tuile t36 = new Tuile(grilleDeJeu, 6, 6);
+
+        t4.setEtat(EtatTuile.inondee);
+        t15.setEtat(EtatTuile.submergee);
+        t20.setEtat(EtatTuile.inondee);
+        t21.setEtat(EtatTuile.submergee);
+        t22.setEtat(EtatTuile.inondee);
+        t23.setEtat(EtatTuile.submergee);
+        t24.setEtat(EtatTuile.inondee);
+        t27.setEtat(EtatTuile.submergee);
+        t34.setEtat(EtatTuile.inondee);
+
+        grilleDeJeu.getTuiles().add(t1);
+        grilleDeJeu.getTuiles().add(t2);
+        grilleDeJeu.getTuiles().add(t3);
+        grilleDeJeu.getTuiles().add(t4);
+        grilleDeJeu.getTuiles().add(t5);
+        grilleDeJeu.getTuiles().add(t6);
+        grilleDeJeu.getTuiles().add(t7);
+        grilleDeJeu.getTuiles().add(t8);
+        grilleDeJeu.getTuiles().add(t9);
+        grilleDeJeu.getTuiles().add(t10);
+        grilleDeJeu.getTuiles().add(t11);
+        grilleDeJeu.getTuiles().add(t12);
+        grilleDeJeu.getTuiles().add(t13);
+        grilleDeJeu.getTuiles().add(t14);
+        grilleDeJeu.getTuiles().add(t15);
+        grilleDeJeu.getTuiles().add(t16);
+        grilleDeJeu.getTuiles().add(t17);
+        grilleDeJeu.getTuiles().add(t18);
+        grilleDeJeu.getTuiles().add(t19);
+        grilleDeJeu.getTuiles().add(t20);
+        grilleDeJeu.getTuiles().add(t21);
+        grilleDeJeu.getTuiles().add(t22);
+        grilleDeJeu.getTuiles().add(t23);
+        grilleDeJeu.getTuiles().add(t24);
+        grilleDeJeu.getTuiles().add(t25);
+        grilleDeJeu.getTuiles().add(t26);
+        grilleDeJeu.getTuiles().add(t27);
+        grilleDeJeu.getTuiles().add(t28);
+        grilleDeJeu.getTuiles().add(t29);
+        grilleDeJeu.getTuiles().add(t30);
+        grilleDeJeu.getTuiles().add(t31);
+        grilleDeJeu.getTuiles().add(t32);
+        grilleDeJeu.getTuiles().add(t33);
+        grilleDeJeu.getTuiles().add(t34);
+        grilleDeJeu.getTuiles().add(t35);
+        grilleDeJeu.getTuiles().add(t36);
+
+        //   NIVEAU D'EAU
+        NiveauEau niveauEau = new NiveauEau();
         
-        // joueurs
+        //  JOUEURS
         Explorateur explorateur = new Explorateur("Explorateur", carteAventurier1);
         Messager messager = new Messager("Messager", carteAventurier2);
         Pilote pilote = new Pilote("Pilote", carteAventurier3);
@@ -98,13 +263,13 @@ public class Test {
         Ingenieur ingenieur = new Ingenieur("Ingenieur", carteAventurier5);
         Navigateur navigateur = new Navigateur("Navigateur", carteAventurier6);
 
-        // vueAventurier (une par joueur)
-        VueAventurier joueur1 = new VueAventurier("Roxane", "Messager", Color.BLACK);
-        VueAventurier joueur2 = new VueAventurier("Roxane", "Messager", Color.BLACK);
-        VueAventurier joueur3 = new VueAventurier("Roxane", "Messager", Color.BLACK);
-        VueAventurier joueur4 = new VueAventurier("Roxane", "Messager", Color.BLACK);
-        VueAventurier joueur5 = new VueAventurier("Roxane", "Messager", Color.BLACK);
-        VueAventurier joueur6 = new VueAventurier("Roxane", "Messager", Color.BLACK);
+        //  VUEAVENTURIER (une par joueur)
+        VueAventurier joueur1 = new VueAventurier("joueur1", "Explorateur", Color.BLACK);
+        VueAventurier joueur2 = new VueAventurier("joueur2", "Messager", Color.BLACK);
+        VueAventurier joueur3 = new VueAventurier("joueur3", "Pilote", Color.BLACK);
+        VueAventurier joueur4 = new VueAventurier("joueur4", "Plongeur", Color.BLACK);
+        VueAventurier joueur5 = new VueAventurier("joueur5", "Ingenieur", Color.BLACK);
+        VueAventurier joueur6 = new VueAventurier("joueur6", "Navigateur", Color.BLACK);
 
         // ajout du controleur en tant qu'observateur de ces élements
         joueur1.addObservateur(controleur);

@@ -9,7 +9,7 @@ public class TasAventuriers {
     private ArrayList<CarteAventurier> cartesAventuriers;
 
     // constructeurs
-    TasAventuriers() {
+    public TasAventuriers() {
         setCartesAventuriers();
     }
 

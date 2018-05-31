@@ -9,7 +9,7 @@ public class TasInondations {
     private ArrayList<CarteInondation> cartesInondations;
 
     // constructeurs
-    TasInondations() {
+    public TasInondations() {
         setCartesInondations();
     }
 

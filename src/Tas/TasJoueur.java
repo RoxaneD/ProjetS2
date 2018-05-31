@@ -9,6 +9,10 @@ public class TasJoueur {
     private ArrayList<Carte> cartes;
 
     // constructeurs
+    public TasJoueur(){
+        setCartes();
+    }
+    
     // setteurs
     public void setCartes() {
         cartes = new ArrayList<>();

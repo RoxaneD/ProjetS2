@@ -9,7 +9,7 @@ public class TasPoubelle {
     private ArrayList<Carte> cartes;
 
     // constructeurs
-    TasPoubelle() {
+    public TasPoubelle() {
         setCartes();
     }
 

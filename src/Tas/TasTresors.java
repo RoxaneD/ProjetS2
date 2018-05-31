@@ -9,7 +9,7 @@ public class TasTresors {
     private ArrayList<CarteTresors> cartesTresors;
 
     // constructeurs
-    TasTresors() {
+    public TasTresors() {
         setCartesTresors();
     }
 

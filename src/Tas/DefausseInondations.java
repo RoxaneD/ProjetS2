@@ -9,7 +9,7 @@ public class DefausseInondations {
     private ArrayList<CarteInondation> cartesInondation;
 
     // constructeurs
-    DefausseInondations() {
+    public DefausseInondations() {
         setCartesInondation();
     }
 

@@ -10,7 +10,7 @@ public class Tresor {
     private EtatTresor etat;
 
     // constructeurs
-    Tresor(NomTresor nom){
+    public Tresor(NomTresor nom){
         setNom(nom);
         setEtat(EtatTresor.pasRecupere);
     }

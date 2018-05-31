@@ -9,7 +9,7 @@ public class DefausseTresors {
     private ArrayList<CarteTresors> cartesTresors;
 
     // constructeurs
-    DefausseTresors() {
+    public DefausseTresors() {
         setCartesTresors();
     }
 
