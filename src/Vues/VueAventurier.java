@@ -142,10 +142,8 @@ public class VueAventurier extends Observe {
 
     // main
     public static void main(String[] args) {
-        // Instanciation de la fenêtre 
-        VueAventurier vueAventurier1 = new VueAventurier("Julie", "Pilote", Pion.BLEU.getCouleur());
-        Controleur controle = new Controleur();
-        vueAventurier1.addObservateur(controle);
+        // Instanciation de la fenêtre - exemple
+        VueAventurier vueAventurier1 = new VueAventurier("Test1", "Test2", Pion.BLEU.getCouleur());
     }
 
 }
