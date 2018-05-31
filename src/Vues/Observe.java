@@ -6,7 +6,7 @@
 package Vues;
 
 import Controle.Observateur;
-import Enumerations.Actions;
+import Controle.TypesActions;
 
 /**
  *
@@ -16,5 +16,5 @@ public interface Observe {
 
     public void addObservateur(Observateur o);
 
-    public void notifierObservateur(Actions a);
+    public void notifierObservateur(TypesActions a);
 }

@@ -2,7 +2,7 @@
 package Vues;
 
 import Controle.Observateur;
-import Enumerations.Actions;
+import Controle.TypesActions;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -73,38 +73,34 @@ public class VueAventurier implements Observe {
         mainPanel.add(this.panelBoutons, BorderLayout.SOUTH);
 
         this.btnBouger = new JButton("Bouger");
-        btnBouger.addActionListener(
-                new ActionListener() {
+        btnBouger.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Actions a = Actions.deplacer;
+                TypesActions a = TypesActions.deplacer;
                 notifierObservateur(a);
             }
         });
         this.btnAssecher = new JButton("Assecher");
-        btnAssecher.addActionListener(
-                new ActionListener() {
+        btnAssecher.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Actions a = Actions.assecher;
+                TypesActions a = TypesActions.assecher;
                 notifierObservateur(a);
             }
         });
         this.btnAutreAction = new JButton("AutreAction");
-        btnAutreAction.addActionListener(
-                new ActionListener() {
+        btnAutreAction.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Actions a = Actions.autres;
+                TypesActions a = TypesActions.autres;
                 notifierObservateur(a);
             }
         });
         this.btnTerminerTour = new JButton("Terminer Tour");
-        btnTerminerTour.addActionListener(
-                new ActionListener() {
+        btnTerminerTour.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Actions a = Actions.terminer;
+                TypesActions a = TypesActions.terminer;
                 notifierObservateur(a);
             }
         });
@@ -150,7 +146,7 @@ public class VueAventurier implements Observe {
     }
 
     @Override
-    public void notifierObservateur(Actions a) {
+    public void notifierObservateur(TypesActions a) {
         if (observateur != null) {
             observateur.traiterAction(a);
         }

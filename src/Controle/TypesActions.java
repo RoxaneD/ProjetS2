@@ -1,6 +1,6 @@
-package Enumerations;
+package Controle;
 
-public enum Actions {
+public enum TypesActions {
 	deplacer,
 	assecher,
 	autres,

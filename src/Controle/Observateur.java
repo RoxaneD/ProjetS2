@@ -4,12 +4,11 @@
  * and open the template in the editor.
  */
 package Controle;
-import Enumerations.Actions;
 
 /**
  *
  * @author deflandr
  */
 public interface Observateur {
-    public void traiterAction(Actions a);
+    public void traiterAction(TypesActions a);
 }

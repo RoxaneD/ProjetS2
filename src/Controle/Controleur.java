@@ -9,7 +9,6 @@ import ElementsJeu.Grille;
 import ElementsJeu.NiveauEau;
 import ElementsJeu.Tresor;
 import ElementsJeu.Tuile;
-import Enumerations.Actions;
 import Tas.DefausseInondations;
 import Tas.DefausseTresors;
 import Tas.TasAventuriers;
@@ -185,14 +184,14 @@ public class Controleur implements Observateur {
     }
 
     // autres méthodes
-    public void traiterAction(Actions action) {
-        if (action == Actions.deplacer) {
+    public void traiterAction(TypesActions action) {
+        if (action == TypesActions.deplacer) {
 
-        } else if (action == Actions.assecher) {
+        } else if (action == TypesActions.assecher) {
 
-        } else if (action == Actions.autres) {
+        } else if (action == TypesActions.autres) {
 
-        } else if (action == Actions.terminer) {
+        } else if (action == TypesActions.terminer) {
 
         }
     }
