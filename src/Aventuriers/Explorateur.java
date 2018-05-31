@@ -31,8 +31,12 @@ public class Explorateur extends Aventurier {
         }
 
         // pour récupérer les tuiles diagonales
-        
-        
+        for (Tuile t : tuileActuelle.getGrille().getTuilesDiagonales(tuileActuelle)) {
+            if (t.getEtat() != EtatTuile.submergee) {
+                tuilesPossibles.add(t);
+            }
+        }
+
         return tuilesPossibles;
 
     }
@@ -50,7 +54,12 @@ public class Explorateur extends Aventurier {
         }
 
         // pour récupérer les tuiles diagonales
-        // A COMPLETER
+        for (Tuile t : tuileActuelle.getGrille().getTuilesDiagonales(tuileActuelle)) {
+            if (t.getEtat() == EtatTuile.inondee) {
+                tuilesPossibles.add(t);
+            }
+        }
+
         return tuilesPossibles;
     }
 
