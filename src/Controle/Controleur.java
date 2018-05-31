@@ -37,8 +37,9 @@ public class Controleur implements Observateur {
     private TasInondations tasInondation;
 
     // constructeur
-    public Controleur(){}
-    
+    public Controleur() {
+    }
+
     // setteurs
     public void setVueAventurier(VueAventurier vueAventurier) {
         this.vueAventurier = vueAventurier;
