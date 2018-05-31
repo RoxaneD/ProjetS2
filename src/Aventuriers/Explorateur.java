@@ -1,4 +1,4 @@
-// A COMPLETER (ASSECHEMENT) (POUR PREMIERE DEMO)
+//OK
 package Aventuriers;
 
 import ElementsJeu.Tuile;

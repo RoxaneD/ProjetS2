@@ -1,5 +1,4 @@
 // OK
-
 package Aventuriers;
 
 import ElementsJeu.Tuile;
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 
 public class Pilote extends Aventurier {
 
-    private Boolean pouvoir = true;
+    private Boolean pouvoir = false;
 
     // constructeurs
     Pilote(String nomJoueur, CarteAventurier carteaventurier) {
@@ -20,14 +19,26 @@ public class Pilote extends Aventurier {
         setCarteAventurier(carteaventurier);
     }
 
+    // setteurs
+    public void setPouvoir(Boolean pouvoir) {
+        this.pouvoir = pouvoir;
+    }
+
+    // getteurs
+    public Boolean getPouvoir() {
+
+        return pouvoir;
+
+    }
+
     // autres
     @Override
     public ArrayList<Tuile> calculDeplacementPos() {
-
         ArrayList<Tuile> tuilesPossibles = new ArrayList<>();
         Tuile tuileActuelle = getTuile();
 
-        if (pouvoir) {
+        if (!pouvoir) {
+
             for (Tuile t : tuileActuelle.getGrille().getTuiles()) {
                 if (t.getEtat() != EtatTuile.submergee && t.getEtat() != EtatTuile.inexistante) {
                     tuilesPossibles.add(t);
@@ -43,7 +54,6 @@ public class Pilote extends Aventurier {
         }
 
         return tuilesPossibles;
-
     }
 
     @Override
