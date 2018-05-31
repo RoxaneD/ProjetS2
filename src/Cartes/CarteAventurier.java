@@ -10,6 +10,12 @@ public class CarteAventurier extends Carte {
     private Couleur couleur;
 
     // constructeurs
+    public CarteAventurier(NomAventurier nom, Couleur couleur) {
+        setDescription("");
+        setNom(nom);
+        setCouleur(couleur);
+    }
+    
     public CarteAventurier(String description, NomAventurier nom, Couleur couleur) {
         setDescription(description);
         setNom(nom);

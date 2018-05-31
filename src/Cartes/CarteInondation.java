@@ -8,6 +8,11 @@ public class CarteInondation extends Carte {
     private NomTuile nom;
 
     // constructeurs
+    public CarteInondation(NomTuile nom){
+        setDescription("");
+        setNom(nom);
+    }
+    
     CarteInondation(String description, NomTuile nom){
         setDescription(description);
         setNom(nom);

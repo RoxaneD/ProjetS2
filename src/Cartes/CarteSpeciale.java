@@ -1,10 +1,31 @@
 package Cartes;
 
-import Enumerations.NomCarteTresor;
+import Enumerations.NomCarteSpeciale;
 
 public class CarteSpeciale extends CarteTresors {
+
+    // attributs
+    private NomCarteSpeciale nom;
+
     // constructeurs
-    CarteSpeciale(String description, NomCarteTresor nom){
-        super(description,nom);
+    public CarteSpeciale(NomCarteSpeciale nom) {
+        super();
+        setNom(nom);
     }
+
+    public CarteSpeciale(String description, NomCarteSpeciale nom) {
+        super(description);
+        setNom(nom);
+    }
+
+    // setteurs
+    public void setNom(NomCarteSpeciale nom) {
+        this.nom = nom;
+    }
+    // getteurs
+
+    public NomCarteSpeciale getNom() {
+        return nom;
+    }
+
 }
