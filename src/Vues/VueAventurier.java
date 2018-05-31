@@ -1,6 +1,7 @@
 // A COMPLETER : RAJOUTER DES LISTENERS + NOTIFIER_OBSERVATEUR
 package Vues;
 
+import Controle.Action;
 import Controle.Observateur;
 import Controle.TypesActions;
 import java.awt.BorderLayout;
@@ -19,7 +20,7 @@ import Util.Utils.Pion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class VueAventurier implements Observe {
+public class VueAventurier extends Observe {
 
     // attributs
     private final JPanel panelBoutons;
@@ -32,7 +33,6 @@ public class VueAventurier implements Observe {
     private final JButton btnAutreAction;
     private final JButton btnTerminerTour;
     private JTextField position;
-    private Observateur observateur;
 
     // constructeur
     public VueAventurier(String nomJoueur, String nomAventurier, Color couleur) {
@@ -76,7 +76,7 @@ public class VueAventurier implements Observe {
         btnBouger.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TypesActions a = TypesActions.deplacer;
+                Action a = new Action(TypesActions.deplacer);
                 notifierObservateur(a);
             }
         });
@@ -84,7 +84,7 @@ public class VueAventurier implements Observe {
         btnAssecher.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TypesActions a = TypesActions.assecher;
+                Action a = new Action(TypesActions.assecher);
                 notifierObservateur(a);
             }
         });
@@ -92,7 +92,7 @@ public class VueAventurier implements Observe {
         btnAutreAction.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TypesActions a = TypesActions.autres;
+                Action a = new Action(TypesActions.autres);
                 notifierObservateur(a);
             }
         });
@@ -100,7 +100,7 @@ public class VueAventurier implements Observe {
         btnTerminerTour.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TypesActions a = TypesActions.terminer;
+                Action a = new Action(TypesActions.terminer);
                 notifierObservateur(a);
             }
         });
@@ -137,19 +137,6 @@ public class VueAventurier implements Observe {
 
     public JButton getBtnTerminerTour() {
         return btnTerminerTour;
-    }
-
-    // autres méthodes
-    @Override
-    public void addObservateur(Observateur o) {
-        this.observateur = o;
-    }
-
-    @Override
-    public void notifierObservateur(TypesActions a) {
-        if (observateur != null) {
-            observateur.traiterAction(a);
-        }
     }
 
     // main

@@ -7,7 +7,7 @@ public class Action {
     private TypesActions type;
 
     // constructeurs
-    Action(TypesActions type) {
+    public Action(TypesActions type) {
         this.type = type;
     }
 

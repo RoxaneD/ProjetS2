@@ -5,16 +5,26 @@
  */
 package Vues;
 
+import Controle.Action;
 import Controle.Observateur;
-import Controle.TypesActions;
 
 /**
  *
  * @author deflandr
  */
-public interface Observe {
+public class Observe {
 
-    public void addObservateur(Observateur o);
+    //attributs
+    private Observateur observateur;
 
-    public void notifierObservateur(TypesActions a);
+    // autres methodes
+    public void addObservateur(Observateur o) {
+        this.observateur = o;
+    }
+
+    public void notifierObservateur(Action action) {
+        if (observateur != null) {
+            observateur.traiterAction(action);
+        }
+    }
 }

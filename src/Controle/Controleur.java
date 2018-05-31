@@ -184,15 +184,16 @@ public class Controleur implements Observateur {
     }
 
     // autres méthodes
-    public void traiterAction(TypesActions action) {
-        if (action == TypesActions.deplacer) {
-
-        } else if (action == TypesActions.assecher) {
-
-        } else if (action == TypesActions.autres) {
-
-        } else if (action == TypesActions.terminer) {
-
+    public void traiterAction(Action action) {
+        if (action.getType() == TypesActions.deplacer) {
+            System.out.println("deplacer");
+        } else if (action.getType() == TypesActions.assecher) {
+            System.out.println("assecher");
+        } else if (action.getType() == TypesActions.autres) {
+            System.out.println("autres");
+        } else if (action.getType() == TypesActions.terminer) {
+            System.out.println("terminer");
         }
     }
+
 }
