@@ -1,4 +1,4 @@
-// OK
+// OK + validation aux tests
 package Aventuriers;
 
 import ElementsJeu.Tuile;

@@ -1,4 +1,5 @@
 // A COMPLETER (SEMAINE BLOQUEE)
+// Pour la première démo : OK + validation aux tests
 package Aventuriers;
 
 import ElementsJeu.Tuile;
