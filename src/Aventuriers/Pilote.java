@@ -35,11 +35,7 @@ public class Pilote extends Aventurier {
             }
 
         } else {
-
-            int posXactuelle = tuileActuelle.getPosX();
-            int posYactuelle = tuileActuelle.getPosY();
-
-            for (Tuile t : tuileActuelle.getGrille().getTuilesAdjacentes(posXactuelle, posYactuelle)) {
+            for (Tuile t : tuileActuelle.getGrille().getTuilesAdjacentes(tuileActuelle)) {
                 if (t.getEtat() != EtatTuile.submergee && t.getEtat() != EtatTuile.inexistante) {
                     tuilesPossibles.add(t);
                 }
@@ -53,11 +49,9 @@ public class Pilote extends Aventurier {
     @Override
     public ArrayList<Tuile> calculAssechementPos() {
         Tuile tuileActuelle = getTuile();
-        int posXactuelle = tuileActuelle.getPosX();
-        int posYactuelle = tuileActuelle.getPosY();
         ArrayList<Tuile> tuilesPossible = new ArrayList<>();
 
-        for (Tuile t : tuileActuelle.getGrille().getTuilesAdjacentes(posXactuelle, posYactuelle)) {
+        for (Tuile t : tuileActuelle.getGrille().getTuilesAdjacentes(tuileActuelle)) {
             if (t.getEtat() == EtatTuile.inondee) {
                 tuilesPossible.add(t);
             }

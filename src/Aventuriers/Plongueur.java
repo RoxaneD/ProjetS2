@@ -21,8 +21,6 @@ public class Plongueur extends Aventurier {
     @Override
     public ArrayList<Tuile> calculDeplacementPos() {
         Tuile tuileActuelle = getTuile();
-        int posXactuelle = tuileActuelle.getPosX();
-        int posYactuelle = tuileActuelle.getPosY();
         ArrayList<Tuile> tuilesTraitees = new ArrayList<>();
         ArrayList<Tuile> tuilesEnTraitement = new ArrayList<>();
         ArrayList<Tuile> tuilesPossibles = new ArrayList<>();
@@ -33,7 +31,7 @@ public class Plongueur extends Aventurier {
         tuilesTraitees.add(tuileActuelle);
         // pour chacune des tuiles non traités (inondées ou submergées)
         for (Tuile t1 : tuilesEnTraitement) {
-            for (Tuile t2 : tuileActuelle.getGrille().getTuilesAdjacentes(t1.getPosX(), t1.getPosY())) {
+            for (Tuile t2 : tuileActuelle.getGrille().getTuilesAdjacentes(tuileActuelle)) {
                 // pour vérifier si la tuille selectionée est traitée ou pas
                 traitee = false;
                 for (Tuile t3 : tuilesTraitees) {
@@ -53,7 +51,7 @@ public class Plongueur extends Aventurier {
         }
 
         // pour les tuiles adjacentes
-        for (Tuile t : tuileActuelle.getGrille().getTuilesAdjacentes(posXactuelle, posYactuelle)) {
+        for (Tuile t : tuileActuelle.getGrille().getTuilesAdjacentes(tuileActuelle)) {
             if (t.getEtat() == EtatTuile.inondee) {
                 tuilesPossibles.add(t);
             }
@@ -65,11 +63,9 @@ public class Plongueur extends Aventurier {
     @Override
     public ArrayList<Tuile> calculAssechementPos() {
         Tuile tuileActuelle = getTuile();
-        int posXactuelle = tuileActuelle.getPosX();
-        int posYactuelle = tuileActuelle.getPosY();
         ArrayList<Tuile> tuilesPossible = new ArrayList<>();
 
-        for (Tuile t : tuileActuelle.getGrille().getTuilesAdjacentes(posXactuelle, posYactuelle)) {
+        for (Tuile t : tuileActuelle.getGrille().getTuilesAdjacentes(tuileActuelle)) {
             if (t.getEtat() == EtatTuile.inondee) {
                 tuilesPossible.add(t);
             }

@@ -20,23 +20,20 @@ public class Explorateur extends Aventurier {
     // autres
     @Override
     public ArrayList<Tuile> calculDeplacementPos() {
-        ArrayList<Tuile> tuilePossible = new ArrayList<>();
-
         // pour récuperer les tuiles adjacentes
         Tuile tuileActuelle = getTuile();
-        int posXactuelle = tuileActuelle.getPosX();
-        int posYactuelle = tuileActuelle.getPosY();
-        ArrayList<Tuile> tuilesPossible = new ArrayList<>();
+        ArrayList<Tuile> tuilesPossibles = new ArrayList<>();
 
-        for (Tuile t : tuileActuelle.getGrille().getTuilesAdjacentes(posXactuelle, posYactuelle)) {
+        for (Tuile t : tuileActuelle.getGrille().getTuilesAdjacentes(tuileActuelle)) {
             if (t.getEtat() != EtatTuile.submergee && t.getEtat() != EtatTuile.inexistante) {
-                tuilesPossible.add(t);
+                tuilesPossibles.add(t);
             }
         }
 
         // pour récupérer les tuiles diagonales
-        // A COMPLETER
-        return tuilesPossible;
+        
+        
+        return tuilesPossibles;
 
     }
 
@@ -44,19 +41,17 @@ public class Explorateur extends Aventurier {
     public ArrayList<Tuile> calculAssechementPos() {
         // pour récuperer les tuiles adjacentes
         Tuile tuileActuelle = getTuile();
-        int posXactuelle = tuileActuelle.getPosX();
-        int posYactuelle = tuileActuelle.getPosY();
-        ArrayList<Tuile> tuilesPossible = new ArrayList<>();
+        ArrayList<Tuile> tuilesPossibles = new ArrayList<>();
 
-        for (Tuile t : tuileActuelle.getGrille().getTuilesAdjacentes(posXactuelle, posYactuelle)) {
+        for (Tuile t : tuileActuelle.getGrille().getTuilesAdjacentes(tuileActuelle)) {
             if (t.getEtat() == EtatTuile.inondee) {
-                tuilesPossible.add(t);
+                tuilesPossibles.add(t);
             }
         }
 
         // pour récupérer les tuiles diagonales
         // A COMPLETER
-        return tuilesPossible;
+        return tuilesPossibles;
     }
 
 }
