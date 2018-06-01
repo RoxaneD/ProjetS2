@@ -24,6 +24,7 @@ public class Controleur implements Observateur {
 
     // attributs
     private HashMap<String, Aventurier> joueurs = new HashMap<String, Aventurier>(); // tous les joueurs
+    private HashMap<String, VueAventurier> vuesAventurier = new HashMap<String, VueAventurier>(); // toutes les vues
     private VueAventurier vueAventurier;         // une pour chaque joueur (il n'y en a qu'une seule à la fois à l'écran)
     private NiveauEau niveauEau;
     private Tresor tresor1;
@@ -38,13 +39,18 @@ public class Controleur implements Observateur {
     private DefausseInondations defausseInondation;
     private TasInondations tasInondation;
 
+    private boolean termine;
+    private int nombreActions;
+
     // constructeur
     public Controleur() {
+        setTermine(false);
     }
 
     // setteurs
     public void setVueAventurier(VueAventurier vueAventurier) {
         this.vueAventurier = vueAventurier;
+        this.vueAventurier.getWindow().setVisible(true);
     }
 
     public void setNiveauEau(NiveauEau niveauEau) {
@@ -99,6 +105,14 @@ public class Controleur implements Observateur {
         this.tasInondation = tasInondation;
     }
 
+    public void setTermine(boolean termine) {
+        this.termine = termine;
+    }
+
+    public void setNombreActions(int nombreActions) {
+        this.nombreActions = nombreActions;
+    }
+
     // getteurs attributs
     public VueAventurier getVueAventurier() {
         return vueAventurier;
@@ -130,6 +144,10 @@ public class Controleur implements Observateur {
 
     public HashMap<String, Aventurier> getJoueurs() {
         return joueurs;
+    }
+    
+    public HashMap<String, VueAventurier> getVuesAventurier(){
+        return vuesAventurier;
     }
 
     public TasPoubelle getPoubelle() {
@@ -169,15 +187,23 @@ public class Controleur implements Observateur {
         return getNiveauEau().getNiveau();
     }
 
-    public String getNomJoueur() { // OK
+    public boolean isTermine() {
+        return termine;
+    }
+
+    public int getNombreActions() {
+        return nombreActions;
+    }
+
+    public String getNomJoueur() {
         return getVueAventurier().getNomJoueur();
     }
 
-    public CarteAventurier getCarteAventurier() { // OK
+    public CarteAventurier getCarteAventurier() {
         return getVueAventurier().getCarteAventurier();
     }
 
-    public NomAventurier getNomAventurier() { // OK
+    public NomAventurier getNomAventurier() {
         return getCarteAventurier().getNom();
     }
 
@@ -200,18 +226,23 @@ public class Controleur implements Observateur {
         if (action.getType() == TypesActions.deplacer) {
             Aventurier aventurier = getAventurier();
             ArrayList<Tuile> tuilesPossibles = new ArrayList<>();
-            System.out.println(aventurier.getNomJoueur());
-            System.out.println(aventurier.getTuile().getNom());
             tuilesPossibles = aventurier.calculDeplacementPos();
             // Sans ihm - juste un test
-            System.out.println("Voici où vous pouvez aller :");
+            System.out.println("Choissisez une tuile sur laquelle vous voulez vous déplacer :");
             for (Tuile t : tuilesPossibles) {
                 System.out.println(t.getNom());
             }
 
             // pour assécher une tuile
         } else if (action.getType() == TypesActions.assecher) {
-            System.out.println(action.getNomJoueur() + " : assecher");
+            Aventurier aventurier = getAventurier();
+            ArrayList<Tuile> tuilesPossibles = new ArrayList<>();
+            tuilesPossibles = aventurier.calculAssechementPos();
+            // Sans ihm - juste un test
+            System.out.println("Choissisez une tuile que vous souhaitez assecher :");
+            for (Tuile t : tuilesPossibles) {
+                System.out.println(t.getNom());
+            }
 
             // autres
         } else if (action.getType() == TypesActions.autres) {
@@ -219,8 +250,7 @@ public class Controleur implements Observateur {
 
             // pour terminer son tour
         } else if (action.getType() == TypesActions.terminer) {
-            System.out.println(action.getNomJoueur() + " : terminer");
-
+            setNombreActions(3);
         }
     }
 

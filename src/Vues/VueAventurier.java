@@ -118,7 +118,7 @@ public class VueAventurier extends Observe {
         this.panelBoutons.add(btnAutreAction);
         this.panelBoutons.add(btnTerminerTour);
 
-        this.window.setVisible(true);
+        this.window.setVisible(false);
     }
 
     // setteurs
@@ -169,6 +169,10 @@ public class VueAventurier extends Observe {
 
     public Color getCouleur() {
         return couleur;
+    }
+    
+    public JFrame getWindow(){
+        return window;
     }
 
     // main

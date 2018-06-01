@@ -262,7 +262,7 @@ public class Test {
 
         //   NIVEAU D'EAU
         NiveauEau niveauEau = new NiveauEau();
-        
+
         //  JOUEURS
         Explorateur explorateur = new Explorateur("NomJoueur1", carteAventurier1);
         Messager messager = new Messager("NomJoueur2", carteAventurier2);
@@ -270,46 +270,60 @@ public class Test {
         Plongeur plongeur = new Plongeur("NomJoueur4", carteAventurier4);
         Ingenieur ingenieur = new Ingenieur("NomJoueur5", carteAventurier5);
         Navigateur navigateur = new Navigateur("NomJoueur6", carteAventurier6);
-        
+
         // HASHMAP JOUEURS
         HashMap<String, Aventurier> joueurs = new HashMap<>();
         controleur.setJoueurs(joueurs);
-        
+
         controleur.getJoueurs().put(explorateur.getNomJoueur(), explorateur);
         controleur.getJoueurs().put(messager.getNomJoueur(), messager);
         controleur.getJoueurs().put(pilote.getNomJoueur(), pilote);
         controleur.getJoueurs().put(plongeur.getNomJoueur(), plongeur);
         controleur.getJoueurs().put(ingenieur.getNomJoueur(), ingenieur);
         controleur.getJoueurs().put(navigateur.getNomJoueur(), navigateur);
-        
+
         // emplacement des joueurs
         t17.addAventurier(explorateur);
 
         // ----------------------------------JEU ----------------------------------
-        
         //  VUEAVENTURIER (une par joueur)
         VueAventurier joueur1 = new VueAventurier(explorateur.getNomJoueur(), carteAventurier1, Color.BLACK);
-        //VueAventurier joueur2 = new VueAventurier("joueur2", "Messager", Color.BLACK);
-        //VueAventurier joueur3 = new VueAventurier("joueur3", "Pilote", Color.BLACK);
-        //VueAventurier joueur4 = new VueAventurier("joueur4", "Plongeur", Color.BLACK);
-        //VueAventurier joueur5 = new VueAventurier("joueur5", "Ingenieur", Color.BLACK);
-        //VueAventurier joueur6 = new VueAventurier("joueur6", "Navigateur", Color.BLACK);
+        VueAventurier joueur2 = new VueAventurier(messager.getNomJoueur(), carteAventurier2, Color.BLACK);
+        VueAventurier joueur3 = new VueAventurier(pilote.getNomJoueur(), carteAventurier3, Color.BLACK);
+        VueAventurier joueur4 = new VueAventurier(plongeur.getNomJoueur(), carteAventurier4, Color.BLACK);
+        VueAventurier joueur5 = new VueAventurier(ingenieur.getNomJoueur(), carteAventurier5, Color.BLACK);
+        VueAventurier joueur6 = new VueAventurier(navigateur.getNomJoueur(), carteAventurier6, Color.BLACK);
+
+        controleur.getVuesAventurier().put(joueur1.getNomJoueur(), joueur1);
+        controleur.getVuesAventurier().put(joueur2.getNomJoueur(), joueur2);
+        controleur.getVuesAventurier().put(joueur3.getNomJoueur(), joueur3);
+        controleur.getVuesAventurier().put(joueur4.getNomJoueur(), joueur4);
+        controleur.getVuesAventurier().put(joueur5.getNomJoueur(), joueur5);
+        controleur.getVuesAventurier().put(joueur6.getNomJoueur(), joueur6);
 
         // ajout du controleur en tant qu'observateur de ces élements
         joueur1.addObservateur(controleur);
-        controleur.setVueAventurier(joueur1);
-        //joueur2.addObservateur(controleur);
-        //joueur3.addObservateur(controleur);
-        //joueur4.addObservateur(controleur);
-        //joueur5.addObservateur(controleur);
-        //joueur6.addObservateur(controleur);
+        joueur2.addObservateur(controleur);
+        joueur3.addObservateur(controleur);
+        joueur4.addObservateur(controleur);
+        joueur5.addObservateur(controleur);
+        joueur6.addObservateur(controleur);
 
+        // tests
+        controleur.setVueAventurier(joueur1);
+        
+        
         // TOUR DE JEU
-        
-        
-        
-        
-        
+        //while (!controleur.isTermine()) {
+        //    for (String nomJoueur : controleur.getJoueurs().keySet()) {
+        //       controleur.setNombreActions(0);
+        //        while (controleur.getNombreActions() != 3) {
+        //            controleur.setVueAventurier(controleur.getVuesAventurier().get(nomJoueur));
+        //        }
+        //        controleur.getVuesAventurier().get(nomJoueur).getWindow().setVisible(false);
+        //    }
+        //}
+
         // test Utils.poserQuestion("...") et Utils.afficherInformation("..")
         //if (poserQuestion("Ceci est une question")) {
         //    afficherInformation("Ceci est une information");
