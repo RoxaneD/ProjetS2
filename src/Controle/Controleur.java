@@ -2,7 +2,6 @@
 package Controle;
 
 import Aventuriers.Aventurier;
-import Cartes.CarteTresor;
 import Cartes.CarteInondation;
 import Cartes.CarteAventurier;
 import Cartes.CarteTresors;
@@ -10,6 +9,7 @@ import ElementsJeu.Grille;
 import ElementsJeu.NiveauEau;
 import ElementsJeu.Tresor;
 import ElementsJeu.Tuile;
+import Enumerations.NomAventurier;
 import Tas.DefausseInondations;
 import Tas.DefausseTresors;
 import Tas.TasAventuriers;
@@ -17,6 +17,7 @@ import Tas.TasInondations;
 import Tas.TasPoubelle;
 import Tas.TasTresors;
 import Vues.VueAventurier;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Controleur implements Observateur {
@@ -24,7 +25,7 @@ public class Controleur implements Observateur {
     // attributs
     private HashMap<String, Aventurier> joueurs; // tous les joueurs
     private VueAventurier vueAventurier;         // une pour chaque joueur (il n'y en a qu'une seule à la fois à l'écran)
-    private NiveauEau niveauEau;                 
+    private NiveauEau niveauEau;
     private Tresor tresor1;
     private Tresor tresor2;
     private Tresor tresor3;
@@ -71,7 +72,7 @@ public class Controleur implements Observateur {
     }
 
     public void setJoueurs(HashMap<String, Aventurier> joueurs) {
-        this.joueurs = new HashMap<>();
+        this.joueurs = joueurs;
     }
 
     public void setPoubelle(TasPoubelle poubelle) {
@@ -160,45 +161,72 @@ public class Controleur implements Observateur {
         return getTasTresor().getPremiereCarte();
     }
 
-    public int getNiveau() {
-        return getNiveauEau().getNiveau();
-    }
-
     public CarteInondation getCarteInondation() {
         return getTasInondation().getPremiereCarte();
+    }
+
+    public int getNiveau() {
+        return getNiveauEau().getNiveau();
     }
 
     public String getNomJoueur() {
         return getVueAventurier().getNomJoueur();
     }
 
-    public void getAventurier(String nomJoueur) {
-        ;
+    public Aventurier getAventurier() {
+        return getJoueurs().get(getNomJoueur());
+        
+    }
+    
+
+    public CarteAventurier getCarteAventurier() {
+        return getAventurier().getCarteAventurier();
     }
 
-    public Tuile getChoixDeplacement() {
-        throw new UnsupportedOperationException();
+    public NomAventurier getNomAventurier() {
+        return getCarteAventurier().getNom();
     }
 
-    public CarteAventurier getCarteAventurier(String nomJoueur) {
-        throw new UnsupportedOperationException();
+    public Tuile getChoixDeplacement(Tuile tuile) {
+        return tuile;
     }
 
-    public Tuile getChoixAssechement() {
-        throw new UnsupportedOperationException();
+    public Tuile getChoixAssechement(Tuile tuile) {
+        return tuile;
     }
 
     // autres méthodes
     @Override
     public void traiterAction(Action action) {
+        // pour se déplacer
         if (action.getType() == TypesActions.deplacer) {
-            System.out.println(action.getNomJoueur()+" : deplacer");
+            System.out.println("1");
+            String nomJoueur = getNomJoueur();
+            System.out.println(nomJoueur);
+            Aventurier aventurierr = getAventurier();
+            System.out.println(aventurierr.getCarteAventurier().getNom());
+            CarteAventurier carteAventurier = getCarteAventurier();
+            System.out.println("3");
+            NomAventurier nomAventurier = getNomAventurier();
+            Aventurier aventurier = getAventurier();
+            ArrayList<Tuile> tuilesPossibles = new ArrayList<>();
+            tuilesPossibles = aventurier.calculDeplacementPos();
+            // Sans ihm
+            System.out.println("Voici où vous pouvez aller :");
+            for (Tuile t : tuilesPossibles) {
+                System.out.println(t.getNom());
+            }
+
+            // pour assécher une tuile
         } else if (action.getType() == TypesActions.assecher) {
-            System.out.println(action.getNomJoueur()+" : assecher");
+            System.out.println(action.getNomJoueur() + " : assecher");
+
         } else if (action.getType() == TypesActions.autres) {
-            System.out.println(action.getNomJoueur()+" : autres");
+            System.out.println(action.getNomJoueur() + " : autres");
+
         } else if (action.getType() == TypesActions.terminer) {
-            System.out.println(action.getNomJoueur()+" : terminer");
+            System.out.println(action.getNomJoueur() + " : terminer");
+
         }
     }
 

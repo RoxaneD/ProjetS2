@@ -1,6 +1,7 @@
 // petit test qui permet de voir à peu près comment fonctionne le controleur avec les vues
 package Controle;
 
+import Aventuriers.Aventurier;
 import Aventuriers.Explorateur;
 import Aventuriers.Ingenieur;
 import Aventuriers.Messager;
@@ -29,6 +30,7 @@ import Tas.TasPoubelle;
 import Tas.TasTresors;
 import Vues.VueAventurier;
 import java.awt.Color;
+import java.util.HashMap;
 
 public class Test {
 
@@ -262,23 +264,40 @@ public class Test {
         Plongeur plongeur = new Plongeur("Plongeur", carteAventurier4);
         Ingenieur ingenieur = new Ingenieur("Ingenieur", carteAventurier5);
         Navigateur navigateur = new Navigateur("Navigateur", carteAventurier6);
+        
+        // HASHMAP JOUEURS
+        HashMap<String, Aventurier> joueurs = new HashMap<>();
+        controleur.setJoueurs(joueurs);
+        
+        controleur.getJoueurs().put(explorateur.getNomJoueur(), explorateur);
+        
+        
+        // emplacement des joueurs
+        t17.addAventurier(explorateur);
 
         //  VUEAVENTURIER (une par joueur)
         VueAventurier joueur1 = new VueAventurier("joueur1", "Explorateur", Color.BLACK);
-        VueAventurier joueur2 = new VueAventurier("joueur2", "Messager", Color.BLACK);
-        VueAventurier joueur3 = new VueAventurier("joueur3", "Pilote", Color.BLACK);
-        VueAventurier joueur4 = new VueAventurier("joueur4", "Plongeur", Color.BLACK);
-        VueAventurier joueur5 = new VueAventurier("joueur5", "Ingenieur", Color.BLACK);
-        VueAventurier joueur6 = new VueAventurier("joueur6", "Navigateur", Color.BLACK);
+        //VueAventurier joueur2 = new VueAventurier("joueur2", "Messager", Color.BLACK);
+        //VueAventurier joueur3 = new VueAventurier("joueur3", "Pilote", Color.BLACK);
+        //VueAventurier joueur4 = new VueAventurier("joueur4", "Plongeur", Color.BLACK);
+        //VueAventurier joueur5 = new VueAventurier("joueur5", "Ingenieur", Color.BLACK);
+        //VueAventurier joueur6 = new VueAventurier("joueur6", "Navigateur", Color.BLACK);
 
         // ajout du controleur en tant qu'observateur de ces élements
         joueur1.addObservateur(controleur);
-        joueur2.addObservateur(controleur);
-        joueur3.addObservateur(controleur);
-        joueur4.addObservateur(controleur);
-        joueur5.addObservateur(controleur);
-        joueur6.addObservateur(controleur);
+        controleur.setVueAventurier(joueur1);
+        //joueur2.addObservateur(controleur);
+        //joueur3.addObservateur(controleur);
+        //joueur4.addObservateur(controleur);
+        //joueur5.addObservateur(controleur);
+        //joueur6.addObservateur(controleur);
 
+        // TOUR DE JEU
+        
+        
+        
+        
+        
         // test Utils.poserQuestion("...") et Utils.afficherInformation("..")
         //if (poserQuestion("Ceci est une question")) {
         //    afficherInformation("Ceci est une information");
