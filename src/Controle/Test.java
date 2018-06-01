@@ -108,6 +108,12 @@ public class Test {
         TasPoubelle poubelle = new TasPoubelle();
         //              tas aventuriers
         TasAventuriers tasAventurier = new TasAventuriers();
+        tasAventurier.addCarte(carteAventurier1);
+        tasAventurier.addCarte(carteAventurier2);
+        tasAventurier.addCarte(carteAventurier3);
+        tasAventurier.addCarte(carteAventurier4);
+        tasAventurier.addCarte(carteAventurier5);
+        tasAventurier.addCarte(carteAventurier6);
         //              defausse tresors
         DefausseTresors defausseTresor = new DefausseTresors();
         //              tas tresors
@@ -258,25 +264,31 @@ public class Test {
         NiveauEau niveauEau = new NiveauEau();
         
         //  JOUEURS
-        Explorateur explorateur = new Explorateur("Explorateur", carteAventurier1);
-        Messager messager = new Messager("Messager", carteAventurier2);
-        Pilote pilote = new Pilote("Pilote", carteAventurier3);
-        Plongeur plongeur = new Plongeur("Plongeur", carteAventurier4);
-        Ingenieur ingenieur = new Ingenieur("Ingenieur", carteAventurier5);
-        Navigateur navigateur = new Navigateur("Navigateur", carteAventurier6);
+        Explorateur explorateur = new Explorateur("NomJoueur1", carteAventurier1);
+        Messager messager = new Messager("NomJoueur2", carteAventurier2);
+        Pilote pilote = new Pilote("NomJoueur3", carteAventurier3);
+        Plongeur plongeur = new Plongeur("NomJoueur4", carteAventurier4);
+        Ingenieur ingenieur = new Ingenieur("NomJoueur5", carteAventurier5);
+        Navigateur navigateur = new Navigateur("NomJoueur6", carteAventurier6);
         
         // HASHMAP JOUEURS
         HashMap<String, Aventurier> joueurs = new HashMap<>();
         controleur.setJoueurs(joueurs);
         
         controleur.getJoueurs().put(explorateur.getNomJoueur(), explorateur);
-        
+        controleur.getJoueurs().put(messager.getNomJoueur(), messager);
+        controleur.getJoueurs().put(pilote.getNomJoueur(), pilote);
+        controleur.getJoueurs().put(plongeur.getNomJoueur(), plongeur);
+        controleur.getJoueurs().put(ingenieur.getNomJoueur(), ingenieur);
+        controleur.getJoueurs().put(navigateur.getNomJoueur(), navigateur);
         
         // emplacement des joueurs
         t17.addAventurier(explorateur);
 
+        // ----------------------------------JEU ----------------------------------
+        
         //  VUEAVENTURIER (une par joueur)
-        VueAventurier joueur1 = new VueAventurier("joueur1", "Explorateur", Color.BLACK);
+        VueAventurier joueur1 = new VueAventurier(explorateur.getNomJoueur(), carteAventurier1, Color.BLACK);
         //VueAventurier joueur2 = new VueAventurier("joueur2", "Messager", Color.BLACK);
         //VueAventurier joueur3 = new VueAventurier("joueur3", "Pilote", Color.BLACK);
         //VueAventurier joueur4 = new VueAventurier("joueur4", "Plongeur", Color.BLACK);

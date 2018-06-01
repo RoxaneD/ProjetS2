@@ -23,7 +23,7 @@ import java.util.HashMap;
 public class Controleur implements Observateur {
 
     // attributs
-    private HashMap<String, Aventurier> joueurs; // tous les joueurs
+    private HashMap<String, Aventurier> joueurs = new HashMap<String, Aventurier>(); // tous les joueurs
     private VueAventurier vueAventurier;         // une pour chaque joueur (il n'y en a qu'une seule à la fois à l'écran)
     private NiveauEau niveauEau;
     private Tresor tresor1;
@@ -169,22 +169,20 @@ public class Controleur implements Observateur {
         return getNiveauEau().getNiveau();
     }
 
-    public String getNomJoueur() {
+    public String getNomJoueur() { // OK
         return getVueAventurier().getNomJoueur();
+    }
+
+    public CarteAventurier getCarteAventurier() { // OK
+        return getVueAventurier().getCarteAventurier();
+    }
+
+    public NomAventurier getNomAventurier() { // OK
+        return getCarteAventurier().getNom();
     }
 
     public Aventurier getAventurier() {
         return getJoueurs().get(getNomJoueur());
-        
-    }
-    
-
-    public CarteAventurier getCarteAventurier() {
-        return getAventurier().getCarteAventurier();
-    }
-
-    public NomAventurier getNomAventurier() {
-        return getCarteAventurier().getNom();
     }
 
     public Tuile getChoixDeplacement(Tuile tuile) {
@@ -200,18 +198,12 @@ public class Controleur implements Observateur {
     public void traiterAction(Action action) {
         // pour se déplacer
         if (action.getType() == TypesActions.deplacer) {
-            System.out.println("1");
-            String nomJoueur = getNomJoueur();
-            System.out.println(nomJoueur);
-            Aventurier aventurierr = getAventurier();
-            System.out.println(aventurierr.getCarteAventurier().getNom());
-            CarteAventurier carteAventurier = getCarteAventurier();
-            System.out.println("3");
-            NomAventurier nomAventurier = getNomAventurier();
             Aventurier aventurier = getAventurier();
             ArrayList<Tuile> tuilesPossibles = new ArrayList<>();
+            System.out.println(aventurier.getNomJoueur());
+            System.out.println(aventurier.getTuile().getNom());
             tuilesPossibles = aventurier.calculDeplacementPos();
-            // Sans ihm
+            // Sans ihm - juste un test
             System.out.println("Voici où vous pouvez aller :");
             for (Tuile t : tuilesPossibles) {
                 System.out.println(t.getNom());
@@ -221,9 +213,11 @@ public class Controleur implements Observateur {
         } else if (action.getType() == TypesActions.assecher) {
             System.out.println(action.getNomJoueur() + " : assecher");
 
+            // autres
         } else if (action.getType() == TypesActions.autres) {
             System.out.println(action.getNomJoueur() + " : autres");
 
+            // pour terminer son tour
         } else if (action.getType() == TypesActions.terminer) {
             System.out.println(action.getNomJoueur() + " : terminer");
 

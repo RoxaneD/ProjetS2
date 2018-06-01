@@ -146,6 +146,8 @@ public class Tuile {
 
     public void addAventurier(Aventurier aventurier) {
         aventuriers.add(aventurier);
+        aventurier.removeTuile();
+        aventurier.addTuile(this);
     }
 
     public void assecher() {

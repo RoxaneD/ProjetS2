@@ -1,10 +1,11 @@
 // A COMPLETER : RAJOUTER DES LISTENERS + NOTIFIER_OBSERVATEUR
 package Vues;
 
+import Cartes.CarteAventurier;
 import Controle.Action;
-import Controle.Controleur;
-import Controle.Observateur;
 import Controle.TypesActions;
+import Enumerations.Couleur;
+import Enumerations.NomAventurier;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -35,14 +36,14 @@ public class VueAventurier extends Observe {
     private final JButton btnTerminerTour;
     private JTextField position;
     private String nomJoueur;
-    private String nomAventurier;
+    private CarteAventurier carteAventurier;
     private Color couleur;
 
     // constructeur
-    public VueAventurier(String nomJoueur, String nomAventurier, Color couleur) {
+    public VueAventurier(String nomJoueur, CarteAventurier carteAventurier, Color couleur) {
 
         setNomJoueur(nomJoueur);
-        setNomAventurier(nomAventurier);
+        setCarteAventurier(carteAventurier);
         setCouleur(couleur);
         this.window = new JFrame();
         window.setSize(350, 200);
@@ -58,7 +59,7 @@ public class VueAventurier extends Observe {
         // NORD : le titre = nom de l'aventurier sur la couleurActive du pion
         this.panelAventurier = new JPanel();
         panelAventurier.setBackground(couleur);
-        panelAventurier.add(new JLabel(nomAventurier, SwingConstants.CENTER));
+        panelAventurier.add(new JLabel(carteAventurier.getNom().toString(), SwingConstants.CENTER));
         mainPanel.add(panelAventurier, BorderLayout.NORTH);
 
         // =================================================================================
@@ -129,8 +130,8 @@ public class VueAventurier extends Observe {
         this.nomJoueur = nomJoueur;
     }
 
-    public void setNomAventurier(String nomAventurier) {
-        this.nomAventurier = nomAventurier;
+    public void setCarteAventurier(CarteAventurier carteAventurier) {
+        this.carteAventurier = carteAventurier;
     }
 
     public void setCouleur(Color couleur) {
@@ -162,8 +163,8 @@ public class VueAventurier extends Observe {
         return nomJoueur;
     }
 
-    public String getNomAventurier() {
-        return nomAventurier;
+    public CarteAventurier getCarteAventurier() {
+        return carteAventurier;
     }
 
     public Color getCouleur() {
@@ -173,7 +174,8 @@ public class VueAventurier extends Observe {
     // main
     public static void main(String[] args) {
         // Instanciation de la fenêtre - exemple
-        VueAventurier vueAventurier1 = new VueAventurier("Test1", "Test2", Pion.BLEU.getCouleur());
+        CarteAventurier carte = new CarteAventurier(NomAventurier.explorateur,Couleur.bleu);
+        VueAventurier vueAventurier1 = new VueAventurier("Test1", carte, Pion.BLEU.getCouleur());
     }
 
 }
