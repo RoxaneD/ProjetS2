@@ -56,8 +56,8 @@ public class Controleur implements Observateur {
         this.vueAventurier = vueAventurier;
         this.vueAventurier.getWindow().setVisible(true);
     }
-    
-    public void setVueGrille(VueGrilleDemo vueGrille){
+
+    public void setVueGrille(VueGrilleDemo vueGrille) {
         this.vueGrille = vueGrille;
     }
 
@@ -240,8 +240,7 @@ public class Controleur implements Observateur {
             for (Tuile t : tuilesPossibles) {
                 System.out.println(t.getNom());
             }
-            
-            
+
             // pour assécher une tuile
         } else if (action.getType() == TypesActions.demandeAssechement) {
             Aventurier aventurier = getAventurier();
@@ -255,17 +254,17 @@ public class Controleur implements Observateur {
 
             // autres
         } else if (action.getType() == TypesActions.demandeAutres) {
-            System.out.println( "autres");
+            System.out.println("autres");
 
             // pour terminer son tour
         } else if (action.getType() == TypesActions.terminer) {
             setNombreActions(3);
-        } else if (action.getType() == TypesActions.deplacement){
-            
-            setNombreActions(getNombreActions()+1);
-        } else if (action.getType() == TypesActions.assechement){
-            
-            setNombreActions(getNombreActions()+1);
+        } else if (action.getType() == TypesActions.deplacement) {
+
+            setNombreActions(getNombreActions() + 1);
+        } else if (action.getType() == TypesActions.assechement) {
+
+            setNombreActions(getNombreActions() + 1);
         }
     }
 
