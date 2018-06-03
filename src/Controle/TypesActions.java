@@ -1,8 +1,10 @@
 package Controle;
 
 public enum TypesActions {
-    deplacer,
-    assecher,
-    autres,
+    demandeDeplacement,
+    deplacement,
+    demandeAssechement,
+    assechement,
+    demandeAutres,
     terminer
 }

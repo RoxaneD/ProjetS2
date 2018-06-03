@@ -29,17 +29,18 @@ import Tas.TasAventuriers;
 import Tas.TasInondations;
 import Tas.TasPoubelle;
 import Tas.TasTresors;
-import Vues.VueAventurier;
+import Vues.VueAventurierDemo;
+import Vues.VueGrilleDemo;
 import java.awt.Color;
 import java.util.HashMap;
 
-public class Test {
+public class TestControle {
 
     public static void main(String[] args) {
         // création du controleur
         Controleur controleur = new Controleur();
 
-        // création des éléments
+        //  CREATION DES ELEMENTS
         //      CARTES -----------------------------------------------------------------------------------------------------------------
         //          cartes aventuriers 
         CarteAventurier carteAventurier1 = new CarteAventurier(NomAventurier.explorateur, Couleur.vert);
@@ -168,7 +169,7 @@ public class Test {
         tasInondation.addCarte(carteInondation23);
         tasInondation.addCarte(carteInondation24);
 
-        // TRESORS
+        //      TRESORS --------------------------------------------------------------------------------------------------------------
         Tresor tresor1 = new Tresor(NomTresor.La_Pierre_sacree);
         Tresor tresor2 = new Tresor(NomTresor.La_Statue_du_zephyr);
         Tresor tresor3 = new Tresor(NomTresor.Le_Cristal_ardent);
@@ -261,10 +262,11 @@ public class Test {
         grilleDeJeu.getTuiles().add(t35);
         grilleDeJeu.getTuiles().add(t36);
 
-        //   NIVEAU D'EAU
+        //      NIVEAU D'EAU -------------------------------------------------------------------------------------------------------
         NiveauEau niveauEau = new NiveauEau();
 
-        //  JOUEURS
+        //      JOUEURS --------------------------------------------------------------------------------------------------------------
+        //          création
         Explorateur explorateur = new Explorateur("NomJoueur1", carteAventurier1);
         Messager messager = new Messager("NomJoueur2", carteAventurier2);
         Pilote pilote = new Pilote("NomJoueur3", carteAventurier3);
@@ -272,43 +274,52 @@ public class Test {
         Ingenieur ingenieur = new Ingenieur("NomJoueur5", carteAventurier5);
         Navigateur navigateur = new Navigateur("NomJoueur6", carteAventurier6);
 
-        // HASHMAP JOUEURS
+        //         ajout dans le hashmap
         HashMap<String, Aventurier> joueurs = new HashMap<>();
-        controleur.setJoueurs(joueurs);
+        controleur.setAventuriers(joueurs);
 
-        controleur.getJoueurs().put(explorateur.getNomJoueur(), explorateur);
-        controleur.getJoueurs().put(messager.getNomJoueur(), messager);
-        controleur.getJoueurs().put(pilote.getNomJoueur(), pilote);
-        controleur.getJoueurs().put(plongeur.getNomJoueur(), plongeur);
-        controleur.getJoueurs().put(ingenieur.getNomJoueur(), ingenieur);
-        controleur.getJoueurs().put(navigateur.getNomJoueur(), navigateur);
+        controleur.getAventuriers().put(explorateur.getNomJoueur(), explorateur);
+        controleur.getAventuriers().put(messager.getNomJoueur(), messager);
+        controleur.getAventuriers().put(pilote.getNomJoueur(), pilote);
+        controleur.getAventuriers().put(plongeur.getNomJoueur(), plongeur);
+        controleur.getAventuriers().put(ingenieur.getNomJoueur(), ingenieur);
+        controleur.getAventuriers().put(navigateur.getNomJoueur(), navigateur);
 
-        // emplacement des joueurs
+        //          emplacement des joueurs
         t17.addAventurier(explorateur);
 
-        // ----------------------------------JEU ----------------------------------
-        //  VUEAVENTURIER (une par joueur)
-        VueAventurier joueur1 = new VueAventurier(explorateur.getNomJoueur(), carteAventurier1, Color.BLACK);
-        VueAventurier joueur2 = new VueAventurier(messager.getNomJoueur(), carteAventurier2, Color.BLACK);
-        VueAventurier joueur3 = new VueAventurier(pilote.getNomJoueur(), carteAventurier3, Color.BLACK);
-        VueAventurier joueur4 = new VueAventurier(plongeur.getNomJoueur(), carteAventurier4, Color.BLACK);
-        VueAventurier joueur5 = new VueAventurier(ingenieur.getNomJoueur(), carteAventurier5, Color.BLACK);
-        VueAventurier joueur6 = new VueAventurier(navigateur.getNomJoueur(), carteAventurier6, Color.BLACK);
-
+        //  VUES
+        //      VUEAVENTURIER (une par joueur) - création
+        VueAventurierDemo joueur1 = new VueAventurierDemo(explorateur.getNomJoueur(), carteAventurier1, Color.BLACK);
+        VueAventurierDemo joueur2 = new VueAventurierDemo(messager.getNomJoueur(), carteAventurier2, Color.BLACK);
+        VueAventurierDemo joueur3 = new VueAventurierDemo(pilote.getNomJoueur(), carteAventurier3, Color.BLACK);
+        VueAventurierDemo joueur4 = new VueAventurierDemo(plongeur.getNomJoueur(), carteAventurier4, Color.BLACK);
+        VueAventurierDemo joueur5 = new VueAventurierDemo(ingenieur.getNomJoueur(), carteAventurier5, Color.BLACK);
+        VueAventurierDemo joueur6 = new VueAventurierDemo(navigateur.getNomJoueur(), carteAventurier6, Color.BLACK);
+        
+        //      VUEAVENTURIER - ajout dans l'arrayList vuesAventurier du controleur
         controleur.getVuesAventurier().put(joueur1.getNomJoueur(), joueur1);
         controleur.getVuesAventurier().put(joueur2.getNomJoueur(), joueur2);
         controleur.getVuesAventurier().put(joueur3.getNomJoueur(), joueur3);
         controleur.getVuesAventurier().put(joueur4.getNomJoueur(), joueur4);
         controleur.getVuesAventurier().put(joueur5.getNomJoueur(), joueur5);
         controleur.getVuesAventurier().put(joueur6.getNomJoueur(), joueur6);
-
-        // ajout du controleur en tant qu'observateur de ces élements
+        
+        //      VUEAVENTURIER- ajout du controleur en tant qu'observateur
         joueur1.addObservateur(controleur);
         joueur2.addObservateur(controleur);
         joueur3.addObservateur(controleur);
         joueur4.addObservateur(controleur);
         joueur5.addObservateur(controleur);
         joueur6.addObservateur(controleur);
+        
+        //      VUEGRILLE - création
+        VueGrilleDemo vueGrille = new VueGrilleDemo(grilleDeJeu);
+        
+        //      VUEGRILLE - ajout du controleur en tant qu'observateur
+        vueGrille.addObservateur(controleur);
+        
+        
 
         // tests
         controleur.setVueAventurier(joueur1);

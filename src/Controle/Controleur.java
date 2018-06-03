@@ -16,29 +16,33 @@ import Tas.TasAventuriers;
 import Tas.TasInondations;
 import Tas.TasPoubelle;
 import Tas.TasTresors;
-import Vues.VueAventurier;
+import Vues.VueAventurierDemo;
+import Vues.VueGrilleDemo;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Controleur implements Observateur {
 
     // attributs
-    private HashMap<String, Aventurier> joueurs = new HashMap<String, Aventurier>(); // tous les joueurs
-    private HashMap<String, VueAventurier> vuesAventurier = new HashMap<String, VueAventurier>(); // toutes les vues
-    private VueAventurier vueAventurier;         // une pour chaque joueur (il n'y en a qu'une seule à la fois à l'écran)
+    //          vues 
+    private HashMap<String, VueAventurierDemo> vuesAventurier = new HashMap<String, VueAventurierDemo>(); // toutes les vues
+    private VueAventurierDemo vueAventurier;         // une pour chaque joueur (il n'y en a qu'une seule à la fois à l'écran)
+    private VueGrilleDemo vueGrille;
+    //          autres attributs
+    private HashMap<String, Aventurier> aventuriers = new HashMap<String, Aventurier>(); // tous les joueurs
+    private Grille grille;
     private NiveauEau niveauEau;
     private Tresor tresor1;
     private Tresor tresor2;
     private Tresor tresor3;
     private Tresor tresor4;
-    private Grille grille;
     private TasPoubelle poubelle;
     private TasAventuriers tasAventuriers;
     private DefausseTresors defausseTresor;
     private TasTresors tasTresor;
     private DefausseInondations defausseInondation;
     private TasInondations tasInondation;
-
+    //          compteurs - boolean
     private boolean termine;
     private int nombreActions;
 
@@ -48,9 +52,13 @@ public class Controleur implements Observateur {
     }
 
     // setteurs
-    public void setVueAventurier(VueAventurier vueAventurier) {
+    public void setVueAventurier(VueAventurierDemo vueAventurier) {
         this.vueAventurier = vueAventurier;
         this.vueAventurier.getWindow().setVisible(true);
+    }
+    
+    public void setVueGrille(VueGrilleDemo vueGrille){
+        this.vueGrille = vueGrille;
     }
 
     public void setNiveauEau(NiveauEau niveauEau) {
@@ -77,8 +85,8 @@ public class Controleur implements Observateur {
         this.grille = grille;
     }
 
-    public void setJoueurs(HashMap<String, Aventurier> joueurs) {
-        this.joueurs = joueurs;
+    public void setAventuriers(HashMap<String, Aventurier> aventuriers) {
+        this.aventuriers = aventuriers;
     }
 
     public void setPoubelle(TasPoubelle poubelle) {
@@ -114,7 +122,7 @@ public class Controleur implements Observateur {
     }
 
     // getteurs attributs
-    public VueAventurier getVueAventurier() {
+    public VueAventurierDemo getVueAventurier() {
         return vueAventurier;
     }
 
@@ -142,11 +150,11 @@ public class Controleur implements Observateur {
         return grille;
     }
 
-    public HashMap<String, Aventurier> getJoueurs() {
-        return joueurs;
+    public HashMap<String, Aventurier> getAventuriers() {
+        return aventuriers;
     }
-    
-    public HashMap<String, VueAventurier> getVuesAventurier(){
+
+    public HashMap<String, VueAventurierDemo> getVuesAventurier() {
         return vuesAventurier;
     }
 
@@ -208,7 +216,7 @@ public class Controleur implements Observateur {
     }
 
     public Aventurier getAventurier() {
-        return getJoueurs().get(getNomJoueur());
+        return getAventuriers().get(getNomJoueur());
     }
 
     public Tuile getChoixDeplacement(Tuile tuile) {
@@ -223,7 +231,7 @@ public class Controleur implements Observateur {
     @Override
     public void traiterAction(Action action) {
         // pour se déplacer
-        if (action.getType() == TypesActions.deplacer) {
+        if (action.getType() == TypesActions.demandeDeplacement) {
             Aventurier aventurier = getAventurier();
             ArrayList<Tuile> tuilesPossibles = new ArrayList<>();
             tuilesPossibles = aventurier.calculDeplacementPos();
@@ -232,9 +240,10 @@ public class Controleur implements Observateur {
             for (Tuile t : tuilesPossibles) {
                 System.out.println(t.getNom());
             }
-
+            
+            
             // pour assécher une tuile
-        } else if (action.getType() == TypesActions.assecher) {
+        } else if (action.getType() == TypesActions.demandeAssechement) {
             Aventurier aventurier = getAventurier();
             ArrayList<Tuile> tuilesPossibles = new ArrayList<>();
             tuilesPossibles = aventurier.calculAssechementPos();
@@ -245,12 +254,18 @@ public class Controleur implements Observateur {
             }
 
             // autres
-        } else if (action.getType() == TypesActions.autres) {
-            System.out.println(action.getNomJoueur() + " : autres");
+        } else if (action.getType() == TypesActions.demandeAutres) {
+            System.out.println( "autres");
 
             // pour terminer son tour
         } else if (action.getType() == TypesActions.terminer) {
             setNombreActions(3);
+        } else if (action.getType() == TypesActions.deplacement){
+            
+            setNombreActions(getNombreActions()+1);
+        } else if (action.getType() == TypesActions.assechement){
+            
+            setNombreActions(getNombreActions()+1);
         }
     }
 

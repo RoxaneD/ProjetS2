@@ -22,9 +22,14 @@ import Util.Utils.Pion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class VueAventurier extends Observe {
+public class VueAventurierDemo extends Observe {
 
-    // attributs
+    // attributs - internes
+    private String nomJoueur;
+    private CarteAventurier carteAventurier;
+    private Color couleur;
+
+    // attributs - mise en forme
     private final JPanel panelBoutons;
     private final JPanel panelCentre;
     private final JFrame window;
@@ -35,12 +40,9 @@ public class VueAventurier extends Observe {
     private final JButton btnAutreAction;
     private final JButton btnTerminerTour;
     private JTextField position;
-    private String nomJoueur;
-    private CarteAventurier carteAventurier;
-    private Color couleur;
 
     // constructeur
-    public VueAventurier(String nomJoueur, CarteAventurier carteAventurier, Color couleur) {
+    public VueAventurierDemo(String nomJoueur, CarteAventurier carteAventurier, Color couleur) {
 
         setNomJoueur(nomJoueur);
         setCarteAventurier(carteAventurier);
@@ -84,7 +86,7 @@ public class VueAventurier extends Observe {
         btnBouger.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Action a = new Action(TypesActions.deplacer,getNomJoueur());
+                Action a = new Action(TypesActions.demandeDeplacement);
                 notifierObservateur(a);
             }
         });
@@ -92,7 +94,7 @@ public class VueAventurier extends Observe {
         btnAssecher.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Action a = new Action(TypesActions.assecher,getNomJoueur());
+                Action a = new Action(TypesActions.demandeAssechement);
                 notifierObservateur(a);
             }
         });
@@ -100,7 +102,7 @@ public class VueAventurier extends Observe {
         btnAutreAction.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Action a = new Action(TypesActions.autres,getNomJoueur());
+                Action a = new Action(TypesActions.demandeAutres);
                 notifierObservateur(a);
             }
         });
@@ -108,7 +110,7 @@ public class VueAventurier extends Observe {
         btnTerminerTour.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Action a = new Action(TypesActions.terminer,getNomJoueur());
+                Action a = new Action(TypesActions.terminer);
                 notifierObservateur(a);
             }
         });
@@ -170,16 +172,17 @@ public class VueAventurier extends Observe {
     public Color getCouleur() {
         return couleur;
     }
-    
-    public JFrame getWindow(){
+
+    public JFrame getWindow() {
         return window;
     }
 
     // main
     public static void main(String[] args) {
         // Instanciation de la fenêtre - exemple
-        CarteAventurier carte = new CarteAventurier(NomAventurier.explorateur,Couleur.bleu);
-        VueAventurier vueAventurier1 = new VueAventurier("Test1", carte, Pion.BLEU.getCouleur());
+        CarteAventurier carte = new CarteAventurier(NomAventurier.explorateur, Couleur.bleu);
+        VueAventurierDemo vueAventurier1 = new VueAventurierDemo("Test1", carte, Pion.BLEU.getCouleur());
+        vueAventurier1.getWindow().setVisible(true);
     }
 
 }
