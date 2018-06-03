@@ -1,5 +1,5 @@
 // petit test qui permet de voir à peu près comment fonctionne le controleur avec les vues
-package Controle;
+package Jeu_Tests;
 
 import Aventuriers.Aventurier;
 import Aventuriers.Explorateur;
@@ -12,6 +12,7 @@ import Cartes.CarteAventurier;
 import Cartes.CarteInondation;
 import Cartes.CarteSpeciale;
 import Cartes.CarteTresor;
+import Controle.Controleur;
 import ElementsJeu.Grille;
 import ElementsJeu.NiveauEau;
 import ElementsJeu.Tresor;
