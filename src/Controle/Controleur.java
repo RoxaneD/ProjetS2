@@ -1,4 +1,6 @@
 // A COMPLETER : Faire les getteurs autres
+// A REGARDER
+
 package Controle;
 
 import Aventuriers.Aventurier;
@@ -273,7 +275,7 @@ public class Controleur implements Observateur {
 
             // pour récupérer et afficher la position d'un joueur sur sa vue aventurier
         } else if (action.getType() == TypesActions.demandePosition) {
-            Aventurier av = aventuriers.get(vueAventurier.getNomJoueur()); 
+            Aventurier av = aventuriers.get(vueAventurier.getNomJoueur()); // <- il ne trouve pas l'aventurier 
             vueAventurier.setPosition(av.getTuile().getNom().toString() + " | " + av.getTuile().getPosX() + " - " + av.getTuile().getPosY());
         }
     }
