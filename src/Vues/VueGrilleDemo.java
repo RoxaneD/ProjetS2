@@ -6,6 +6,7 @@ import Enumerations.EtatTuile;
 import java.awt.BorderLayout;
 import static java.awt.BorderLayout.CENTER;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -41,27 +42,26 @@ public class VueGrilleDemo extends Observe {
                 jp.setBorder(blackline);
                 JButton bouton1 = new JButton();
                 JLabel jl = new JLabel(t.getNom().toString());
-                Font font =new Font(Font.SANS_SERIF,Font.BOLD,9);                        
+                Font font = new Font(Font.SANS_SERIF, Font.BOLD, 9);
                 jl.setFont(font);
                 bouton1.setPreferredSize(new Dimension(140, 140));
                 bouton1.add(jl);
                 jp.add(bouton1);
 
-
                 if (t.getEtat() == EtatTuile.inondee) {
                     jp.setBackground(Color.yellow);
                     //bouton1.setBackground(Color.yellow);
- 
+
                 } else {
                     if (t.getEtat() == EtatTuile.submergee) {
-                         jp.setBackground(Color.blue);
+                        jp.setBackground(Color.blue);
                         //bouton1.setBackground(Color.blue);
-  
+
                     } else {
                         if (t.getEtat() == EtatTuile.normal) {
-                             jp.setBackground(Color.LIGHT_GRAY);
+                            jp.setBackground(Color.LIGHT_GRAY);
                             //bouton1.setBackground(Color.LIGHT_GRAY);
-          
+
                         }
                     }
                 }
@@ -84,6 +84,20 @@ public class VueGrilleDemo extends Observe {
 
     // autres méthodes
     public static void main(String[] args) {
+    }
+
+    public void afficherTuiles(ArrayList<Tuile> t) {
+        for (Tuile tuile : t) {
+            Component p = plateauTuiles.getComponentAt(tuile.getPosX(), tuile.getPosY());
+            Component b = p.getComponent();
+            b.setBackground(Color.red);
+
+        }
+
+    }
+
+    public void afficherGrille() {
+        
     }
 
 }
