@@ -6,5 +6,6 @@ public enum TypesActions {
     demandeAssechement,
     assechement,
     demandeAutres,
-    terminer
+    terminer,
+    demandePosition
 }

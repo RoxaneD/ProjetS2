@@ -28,6 +28,7 @@ public class VueAventurierDemo extends Observe {
     private String nomJoueur;
     private CarteAventurier carteAventurier;
     private Color couleur;
+    private String position = "";
 
     // attributs - mise en forme
     private final JPanel panelBoutons;
@@ -39,7 +40,6 @@ public class VueAventurierDemo extends Observe {
     private final JButton btnAssecher;
     private final JButton btnAutreAction;
     private final JButton btnTerminerTour;
-    private JTextField position;
 
     // constructeur
     public VueAventurierDemo(String nomJoueur, CarteAventurier carteAventurier, Color couleur) {
@@ -70,11 +70,9 @@ public class VueAventurierDemo extends Observe {
         this.panelCentre.setOpaque(false);
         this.panelCentre.setBorder(new MatteBorder(0, 0, 2, 0, couleur));
         mainPanel.add(this.panelCentre, BorderLayout.CENTER);
-
-        panelCentre.add(new JLabel("Position", SwingConstants.CENTER));
-        position = new JTextField(30);
-        position.setHorizontalAlignment(CENTER);
-        panelCentre.add(position);
+        Action a = new Action(TypesActions.demandePosition);
+        notifierObservateur(a);
+        panelCentre.add(new JLabel("Position actuelle : \n" + position, SwingConstants.CENTER));
 
         // =================================================================================
         // SUD : les boutons
@@ -124,10 +122,6 @@ public class VueAventurierDemo extends Observe {
     }
 
     // setteurs
-    public void setPosition(String pos) {
-        this.position.setText(pos);
-    }
-
     public void setNomJoueur(String nomJoueur) {
         this.nomJoueur = nomJoueur;
     }
@@ -140,13 +134,13 @@ public class VueAventurierDemo extends Observe {
         this.couleur = couleur;
     }
 
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
     // getteurs
     public JButton getBtnAutreAction() {
         return btnAutreAction;
-    }
-
-    public String getPosition() {
-        return position.getText();
     }
 
     public JButton getBtnBouger() {
@@ -175,6 +169,10 @@ public class VueAventurierDemo extends Observe {
 
     public JFrame getWindow() {
         return window;
+    }
+
+    public String getPosition() {
+        return position;
     }
 
     // main

@@ -53,7 +53,7 @@ public class Controleur implements Observateur {
 
     // setteurs
     public void afficherVueAventurier(VueAventurierDemo vueAventurier) {
-        for (String s : vuesAventurier.keySet()){
+        for (String s : vuesAventurier.keySet()) {
             vuesAventurier.get(s).getWindow().setVisible(false);
         }
         this.vueAventurier = vueAventurier;
@@ -254,22 +254,27 @@ public class Controleur implements Observateur {
             // pour terminer son tour
         } else if (action.getType() == TypesActions.terminer) {
             setNombreActions(3);
-            
-            // pour de déplacer sur une tuile
+
+            // pour se déplacer sur une tuile
         } else if (action.getType() == TypesActions.deplacement) {
             this.getAventurier().removeTuile();
             this.getAventurier().addTuile(action.getTuile());
             vueGrille.afficherGrille();
-            
+
             setNombreActions(getNombreActions() + 1);
-            
+
             // pour assécher une tuile
         } else if (action.getType() == TypesActions.assechement) {
             Tuile tuileAAssecher = this.getGrille().getTuile(action.getTuile().getPosX(), action.getTuile().getPosY());
             tuileAAssecher.assecher();
             vueGrille.afficherGrille();
-            
+
             setNombreActions(getNombreActions() + 1);
+
+            // pour récupérer et afficher la position d'un joueur sur sa vue aventurier
+        } else if (action.getType() == TypesActions.demandePosition) {
+            Aventurier av = aventuriers.get(vueAventurier.getNomJoueur()); 
+            vueAventurier.setPosition(av.getTuile().getNom().toString() + " | " + av.getTuile().getPosX() + " - " + av.getTuile().getPosY());
         }
     }
 
