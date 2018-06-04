@@ -52,7 +52,10 @@ public class Controleur implements Observateur {
     }
 
     // setteurs
-    public void setVueAventurier(VueAventurierDemo vueAventurier) {
+    public void afficherVueAventurier(VueAventurierDemo vueAventurier) {
+        for (String s : vuesAventurier.keySet()){
+            vuesAventurier.get(s).getWindow().setVisible(false);
+        }
         this.vueAventurier = vueAventurier;
         this.vueAventurier.getWindow().setVisible(true);
     }
@@ -230,39 +233,42 @@ public class Controleur implements Observateur {
     // autres méthodes
     @Override
     public void traiterAction(Action action) {
-        // pour se déplacer
+        // pour demander l'affiche des tuiles possibles (pour se déplacer)
         if (action.getType() == TypesActions.demandeDeplacement) {
             Aventurier aventurier = getAventurier();
             ArrayList<Tuile> tuilesPossibles = new ArrayList<>();
             tuilesPossibles = aventurier.calculDeplacementPos();
-            // Sans ihm - juste un test
-            System.out.println("Choissisez une tuile sur laquelle vous voulez vous déplacer :");
-            for (Tuile t : tuilesPossibles) {
-                System.out.println(t.getNom());
-            }
+            vueGrille.afficherTuiles(tuilesPossibles);
 
-            // pour assécher une tuile
+            // pour demander l'affiche des tuiles possibles (à assécher)
         } else if (action.getType() == TypesActions.demandeAssechement) {
             Aventurier aventurier = getAventurier();
             ArrayList<Tuile> tuilesPossibles = new ArrayList<>();
             tuilesPossibles = aventurier.calculAssechementPos();
-            // Sans ihm - juste un test
-            System.out.println("Choissisez une tuile que vous souhaitez assecher :");
-            for (Tuile t : tuilesPossibles) {
-                System.out.println(t.getNom());
-            }
+            vueGrille.afficherTuiles(tuilesPossibles);
 
             // autres
         } else if (action.getType() == TypesActions.demandeAutres) {
-            System.out.println("autres");
+            System.out.println("autres - pas traité pour le moment");
 
             // pour terminer son tour
         } else if (action.getType() == TypesActions.terminer) {
             setNombreActions(3);
+            
+            // pour de déplacer sur une tuile
         } else if (action.getType() == TypesActions.deplacement) {
-
+            this.getAventurier().removeTuile();
+            this.getAventurier().addTuile(action.getTuile());
+            vueGrille.afficherGrille();
+            
             setNombreActions(getNombreActions() + 1);
+            
+            // pour assécher une tuile
         } else if (action.getType() == TypesActions.assechement) {
+            Tuile tuileAAssecher = this.getGrille().getTuile(action.getTuile().getPosX(), action.getTuile().getPosY());
+            tuileAAssecher.assecher();
+            vueGrille.afficherGrille();
+            
             setNombreActions(getNombreActions() + 1);
         }
     }
