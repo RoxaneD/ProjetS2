@@ -329,7 +329,7 @@ public class TestControle {
         //while (!controleur.isTermine()) {
         //    for (String nomJoueur : controleur.getJoueurs().keySet()) {
         //       controleur.setNombreActions(0);
-        //        while (controleur.getNombreActions() != 3) {
+        //       while (controleur.getNombreActions() != 3) {
         //            controleur.setVueAventurier(controleur.getVuesAventurier().get(nomJoueur));
         //        }
         //        controleur.getVuesAventurier().get(nomJoueur).getWindow().setVisible(false);

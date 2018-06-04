@@ -263,7 +263,6 @@ public class Controleur implements Observateur {
 
             setNombreActions(getNombreActions() + 1);
         } else if (action.getType() == TypesActions.assechement) {
-
             setNombreActions(getNombreActions() + 1);
         }
     }
