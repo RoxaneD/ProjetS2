@@ -27,8 +27,9 @@ public class VueGrilleDemo extends Observe {
     // attributs - mise en forme
     private JFrame window;
     private JPanel plateauTuiles;
-    private HashMap<Tuile, JButton> fondTuiles = new HashMap<>();
+    private HashMap<Tuile, JPanel> fondTuiles = new HashMap<>();
     private HashMap<Tuile, JButton> devantTuiles = new HashMap<>();
+    private Dimension dimension;
 
     // constructeurs
     public VueGrilleDemo(Grille grille) {
@@ -37,45 +38,58 @@ public class VueGrilleDemo extends Observe {
         this.window = new JFrame();
         window.setSize(1000, 1000);
         window.setTitle("Grille du Jeu");
+        dimension = window.getSize();
         plateauTuiles = new JPanel(new GridLayout(6, 6));
         Border blackline = BorderFactory.createLineBorder(Color.black, 1);
         for (Tuile t : grille.getTuiles()) {
-            JPanel jp = new JPanel();
-            jp.setBackground(Color.white);
+            // création du 1er fond de la tuile (c'est un panel) - indique si la tuile est séléctionnée ou non - rajout dans fondTUiles
+            JPanel panelFondTuile = new JPanel();
+            panelFondTuile.setBackground(Color.white);
+            panelFondTuile.setSize(dimension.width / 6, dimension.height / 6);
+
             if (t.getEtat() != EtatTuile.inexistante) {
-                // création du 1er fond de la tuile - indique si la tuile est séléctionnée ou non - rajout dans fondTUiles
-                jp.setBorder(blackline);
-                JButton bouton = new JButton();
+                // on délimite la tuile
+                panelFondTuile.setBorder(blackline);
                 
-                bouton.setPreferredSize(new Dimension(((jp.getSize().getWidth())*(0.9)), (jp.getSize().getHeight())*(0.9)));
-                fondTuiles.put(t, bouton);
-
-                // création du 2ème fond de la tuile - indique son état + son nom + emplacement aventuriers/trésors - rajout dans devantTuiles
-                jp.setBorder(blackline);
-                JButton bouton1 = new JButton();
-                JLabel jl = new JLabel(t.getNom().toString());
+                // création du 2ème fond de la tuile (c'est un panel) 
+                // contient un bouton qui indique son état 
+                // + contient un ou plusieurs panels qui indiquent : son nom + emplacement aventuriers/trésors - rajout dans devantTuiles
+                
+                JPanel panelDevantTuile = new JPanel(new BorderLayout());
+                panelDevantTuile.setSize(new Dimension(((int) ((panelFondTuile.getSize().getWidth()) * (0.9))), ((int) (((panelFondTuile.getSize().getHeight()) * (0.9))))));
+                
+                // création du bouton qui contient l'état de la tuile
+                JButton boutonEtat = new JButton();
+                boutonEtat.setPreferredSize(new Dimension(((int) ((panelFondTuile.getSize().getWidth()) * (0.9))), ((int) (((panelFondTuile.getSize().getHeight()) * (0.7))))));
+                
+                //  création de panelInfo : contient les informations de la tuile
+                JPanel panelInfo = new JPanel(new BorderLayout());
+                JLabel labelNomTuile = new JLabel(t.getNom().toString());
                 Font font = new Font(Font.SANS_SERIF, Font.BOLD, 9);
-                jl.setFont(font);
-                bouton1.setPreferredSize(new Dimension(20, 20));
-                bouton1.add(jl);
-                devantTuiles.put(t, bouton1);
-
-                bouton.add(bouton1);
-                jp.add(bouton);
-
+                labelNomTuile.setFont(font);
+                panelInfo.setPreferredSize(new Dimension(((int) ((panelFondTuile.getSize().getWidth()) * (0.9))), ((int) (((panelFondTuile.getSize().getHeight()) * (0.3))))));
+                panelInfo.add(labelNomTuile);
+                
+                // ajouts des deux compartiements dans panelDevantTuile
+                panelDevantTuile.add(boutonEtat, BorderLayout.NORTH);
+                panelDevantTuile.add(panelInfo, BorderLayout.SOUTH);
+                
                 if (t.getEtat() == EtatTuile.inondee) {
-                    jp.getComponent(0).setBackground(Color.CYAN);
+                    panelDevantTuile.getComponent(0).setBackground(Color.CYAN);
                 } else {
                     if (t.getEtat() == EtatTuile.submergee) {
-                        jp.getComponent(0).setBackground(Color.blue);
+                        panelDevantTuile.getComponent(0).setBackground(Color.blue);
                     } else {
                         if (t.getEtat() == EtatTuile.normal) {
-                            jp.getComponent(0).setBackground(Color.yellow);
+                            panelDevantTuile.getComponent(0).setBackground(Color.yellow);
                         }
                     }
                 }
+                devantTuiles.put(t, boutonEtat);
+                panelFondTuile.add(panelDevantTuile);
             }
-            plateauTuiles.add(jp);
+            fondTuiles.put(t, panelFondTuile);
+            plateauTuiles.add(panelFondTuile);
         }
         window.add(plateauTuiles);
         window.setVisible(true);
@@ -101,15 +115,21 @@ public class VueGrilleDemo extends Observe {
     public static void main(String[] args) {
     }
 
-    public void afficherTuiles(ArrayList<Tuile> t2) {
+    public void afficherTuilesPossibles(ArrayList<Tuile> t2) {
         for (Tuile tuile : t2) {
-            fondTuiles.get(tuile).setBackground(Color.red);
+            fondTuiles.get(tuile).setBackground(Color.RED);
         }
 
     }
+    
+    public void afficherTuileActuelle(Tuile t){
+        fondTuiles.get(t).setBackground(Color.DARK_GRAY);
+    }
 
-    public void afficherGrille() {
-
+    public void revenirGrilleDepart() {
+        for (Tuile tuile : tuiles){
+            fondTuiles.get(tuile).setBackground(Color.white);
+        }
     }
 
 }

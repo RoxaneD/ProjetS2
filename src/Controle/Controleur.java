@@ -241,14 +241,14 @@ public class Controleur implements Observateur {
             for (Tuile t : aventurier.calculDeplacementPos()) {
                 tuilesPossibles.add(t);
             }
-            vueGrille.afficherTuiles(tuilesPossibles);
+            vueGrille.afficherTuilesPossibles(tuilesPossibles);
 
             // pour demander l'affiche des tuiles possibles (à assécher)
         } else if (action.getType() == TypesActions.demandeAssechement) {
             Aventurier aventurier = getAventurier();
             ArrayList<Tuile> tuilesPossibles = new ArrayList<>();
             tuilesPossibles = aventurier.calculAssechementPos();
-            vueGrille.afficherTuiles(tuilesPossibles);
+            vueGrille.afficherTuilesPossibles(tuilesPossibles);
 
             // autres
         } else if (action.getType() == TypesActions.demandeAutres) {
@@ -262,7 +262,7 @@ public class Controleur implements Observateur {
         } else if (action.getType() == TypesActions.deplacement) {
             this.getAventurier().removeTuile();
             this.getAventurier().addTuile(action.getTuile());
-            vueGrille.afficherGrille();
+            vueGrille.revenirGrilleDepart();
 
             setNombreActions(getNombreActions() + 1);
 
@@ -270,7 +270,7 @@ public class Controleur implements Observateur {
         } else if (action.getType() == TypesActions.assechement) {
             Tuile tuileAAssecher = this.getGrille().getTuile(action.getTuile().getPosX(), action.getTuile().getPosY());
             tuileAAssecher.assecher();
-            vueGrille.afficherGrille();
+            vueGrille.revenirGrilleDepart();
 
             setNombreActions(getNombreActions() + 1);
 

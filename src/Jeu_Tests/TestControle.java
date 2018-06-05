@@ -41,17 +41,18 @@ import java.util.Scanner;
 public class TestControle {
 
     public static void main(String[] args) {
+        // initialisation du jeu complet (cartes.aventuriers, tuiles, etc ...)
         Plateau plateau = new Plateau();
 
         // test : pour 1 TOUR DE JEU
+        /** Fait planter pour le moment :
         for (String s : plateau.getControleur().getVuesAventurier().keySet()) {
-            plateau.getControleur().afficherVueAventurier(plateau.getControleur().getVuesAventurier().get(s));
             plateau.getControleur().setNombreActions(0);
-            while (plateau.getControleur().getNombreActions() < 3) {
-
+            while (plateau.getControleur().getNombreActions() != 3) {
+                plateau.getControleur().afficherVueAventurier(plateau.getControleur().getVuesAventurier().get(s));
             }
-
         }
+        **/
 
         // test Utils.poserQuestion("...") et Utils.afficherInformation("..")
         //if (poserQuestion("Ceci est une question")) {

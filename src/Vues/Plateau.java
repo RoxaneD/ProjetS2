@@ -35,6 +35,8 @@ import Tas.TasPoubelle;
 import Tas.TasTresors;
 import java.awt.Color;
 import java.util.HashMap;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -335,6 +337,7 @@ public class Plateau {
         vueGrille.addObservateur(controleur);
         
         controleur.afficherVueGrille(vueGrille);
+        
 
 // ----------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------
