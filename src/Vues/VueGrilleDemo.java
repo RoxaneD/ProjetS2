@@ -27,7 +27,8 @@ public class VueGrilleDemo extends Observe {
     // attributs - mise en forme
     private JFrame window;
     private JPanel plateauTuiles;
-    private HashMap<Tuile, JButton> collectionBouton = new HashMap<>();
+    private HashMap<Tuile, JButton> fondTuiles = new HashMap<>();
+    private HashMap<Tuile, JButton> devantTuiles = new HashMap<>();
 
     // constructeurs
     public VueGrilleDemo(Grille grille) {
@@ -40,28 +41,36 @@ public class VueGrilleDemo extends Observe {
         Border blackline = BorderFactory.createLineBorder(Color.black, 1);
         for (Tuile t : grille.getTuiles()) {
             JPanel jp = new JPanel();
+            jp.setBackground(Color.white);
             if (t.getEtat() != EtatTuile.inexistante) {
+                // création du 1er fond de la tuile - indique si la tuile est séléctionnée ou non - rajout dans fondTUiles
                 jp.setBorder(blackline);
                 JButton bouton = new JButton();
+                
+                bouton.setPreferredSize(new Dimension(((jp.getSize().getWidth())*(0.9)), (jp.getSize().getHeight())*(0.9)));
+                fondTuiles.put(t, bouton);
+
+                // création du 2ème fond de la tuile - indique son état + son nom + emplacement aventuriers/trésors - rajout dans devantTuiles
+                jp.setBorder(blackline);
+                JButton bouton1 = new JButton();
                 JLabel jl = new JLabel(t.getNom().toString());
                 Font font = new Font(Font.SANS_SERIF, Font.BOLD, 9);
                 jl.setFont(font);
-                bouton.setPreferredSize(new Dimension(140, 140));
-                bouton.add(jl);
+                bouton1.setPreferredSize(new Dimension(20, 20));
+                bouton1.add(jl);
+                devantTuiles.put(t, bouton1);
+
+                bouton.add(bouton1);
                 jp.add(bouton);
-                collectionBouton.put(t, bouton);
 
                 if (t.getEtat() == EtatTuile.inondee) {
-                    jp.setBackground(Color.CYAN);
-
+                    jp.getComponent(0).setBackground(Color.CYAN);
                 } else {
                     if (t.getEtat() == EtatTuile.submergee) {
-                        jp.setBackground(Color.blue);
-
+                        jp.getComponent(0).setBackground(Color.blue);
                     } else {
                         if (t.getEtat() == EtatTuile.normal) {
-                            jp.setBackground(Color.yellow);
-
+                            jp.getComponent(0).setBackground(Color.yellow);
                         }
                     }
                 }
@@ -94,7 +103,7 @@ public class VueGrilleDemo extends Observe {
 
     public void afficherTuiles(ArrayList<Tuile> t2) {
         for (Tuile tuile : t2) {
-            collectionBouton.get(tuile).setBackground(Color.red);
+            fondTuiles.get(tuile).setBackground(Color.red);
         }
 
     }
