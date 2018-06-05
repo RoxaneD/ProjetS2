@@ -40,7 +40,7 @@ public class VueGrilleDemo extends Observe {
         setTuiles(grille);
 
         this.window = new JFrame();
-        window.setSize(1000, 1000);
+        window.setSize(900, 1000);
         window.setTitle("Grille du Jeu");
         dimension = window.getSize();
         plateauTuiles = new JPanel(new GridLayout(6, 6));
@@ -68,12 +68,13 @@ public class VueGrilleDemo extends Observe {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         Action a;
-                        if (panelDevantTuile.getBackground() == Color.green) {
+                        if (panelFondTuile.getBackground() == Color.RED) {
                             a = new Action(TypesActions.deplacement, t);
                         } else {
                             a = new Action(TypesActions.assechement, t);
                         }
                         notifierObservateur(a);
+                        System.out.println(a.getType());
                     }
                 });
                 boutonEtat.setEnabled(false);
@@ -89,7 +90,7 @@ public class VueGrilleDemo extends Observe {
 
                 // ajouts des deux compartiements dans panelDevantTuile
                 panelDevantTuile.add(boutonEtat, BorderLayout.NORTH);
-                panelDevantTuile.add(panelInfo, BorderLayout.SOUTH);
+                panelDevantTuile.add(panelInfo, BorderLayout.CENTER);
 
                 if (t.getEtat() == EtatTuile.inondee) {
                     panelDevantTuile.getComponent(0).setBackground(Color.CYAN);
@@ -150,7 +151,7 @@ public class VueGrilleDemo extends Observe {
     public void afficherTuilesPossiblesDeplacement(ArrayList<Tuile> t2) {
         revenirGrilleDepart();
         for (Tuile tuile : t2) {
-            fondTuiles.get(tuile).setBackground(Color.green);
+            fondTuiles.get(tuile).setBackground(Color.RED);
             devantTuiles.get(tuile).setEnabled(true);
         }
     }
@@ -158,13 +159,13 @@ public class VueGrilleDemo extends Observe {
     public void afficherTuilesPossiblesAssechement(ArrayList<Tuile> t2) {
         revenirGrilleDepart();
         for (Tuile tuile : t2) {
-            fondTuiles.get(tuile).setBackground(Color.orange);
+            fondTuiles.get(tuile).setBackground(Color.MAGENTA);
             devantTuiles.get(tuile).setEnabled(true);
         }
     }
 
     public void afficherTuileActuelle(Tuile t) {
-        fondTuiles.get(t).setBackground(Color.pink);
+        fondTuiles.get(t).setBackground(Color.black);
     }
 
     public void revenirGrilleDepart() {

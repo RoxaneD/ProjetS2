@@ -266,31 +266,42 @@ public class Controleur implements Observateur {
 
             // pour se déplacer sur une tuile
         } else if (action.getType() == TypesActions.deplacement) {
-            getGrille().getTuile(getAventurier().getTuile().getPosX(), getAventurier().getTuile().getPosY()).removeAventurier(getAventurier());
-            // on retire de la tuile initiale l'aventurier
-            getAventurier().getTuile().removeAventurier(getAventurier());
-            // on retire de l'aventurier sa tuile initiale
+            int i = 0;
+            while (getGrille().getTuiles().get(i) != getAventurier().getTuile()){
+                i += 1;
+            }
+            getGrille().getTuiles().get(i).removeAventurier(getAventurier());
+                    // on retire de la tuile initiale l'aventurier
+                    // on retire de l'aventurier sa tuile initiale
             this.getAventurier().removeTuile();
-            
-            // on rajoute à l'aventurier sa nouvelle tuile
             this.getAventurier().addTuile(action.getTuile());
-            // on rajoute à la nouvelle tuile l'aventurier
+                    // on rajoute à la nouvelle tuile l'aventurier
             action.getTuile().addAventurier(getAventurier());
             
-            // on met à jour la liste des tuiles de la Grille
+            System.out.println(getAventurier().getTuile().getNom());
+            
+            i = 0;
+            while (getGrille().getTuiles().get(i) != getAventurier().getTuile()){
+                i += 1;
+            }
+            getGrille().getTuiles().get(i).addAventurier(getAventurier());
+                    // on met à jour la liste des tuiles de la Grille
             getGrille().getTuile(getAventurier().getTuile().getPosX(), getAventurier().getTuile().getPosY()).addAventurier(getAventurier());
             
             // on met à jour la vueGrille, et on la réinitialise
+            vueGrille.setTuiles(getGrille());
             vueGrille.revenirGrilleDepart();
-
+            getVueGrille().afficherTuileActuelle(getAventurier().getTuile());
+            
             setNombreActions(getNombreActions() + 1);
 
             // pour assécher une tuile
         } else if (action.getType() == TypesActions.assechement) {
-            // on met à jour la grille
+                    // on met à jour la grille
             getGrille().getTuile(action.getTuile().getPosX(), action.getTuile().getPosY()).assecher();
-            // on met à jour la vueGrille, et on la réinitialise
+                    // on met à jour la vueGrille, et on la réinitialise
             vueGrille.revenirGrilleDepart();
+            getVueGrille().afficherTuileActuelle(getAventurier().getTuile());
             
             setNombreActions(getNombreActions() + 1);
 
