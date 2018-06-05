@@ -35,8 +35,6 @@ import Tas.TasPoubelle;
 import Tas.TasTresors;
 import java.awt.Color;
 import java.util.HashMap;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  *
@@ -273,6 +271,8 @@ public class Plateau {
         grilleDeJeu.getTuiles().add(t34);
         grilleDeJeu.getTuiles().add(t35);
         grilleDeJeu.getTuiles().add(t36);
+        
+        controleur.setGrille(grilleDeJeu);
 
         //      NIVEAU D'EAU -------------------------------------------------------------------------------------------------------
         NiveauEau niveauEau = new NiveauEau();
@@ -299,20 +299,20 @@ public class Plateau {
 
         //          emplacement des joueurs
         t17.addAventurier(explorateur);
-        t17.addAventurier(messager);
-        t17.addAventurier(pilote);
-        t17.addAventurier(ingenieur);
-        t17.addAventurier(plongeur);
-        t17.addAventurier(navigateur);
+        t14.addAventurier(messager);
+        t16.addAventurier(pilote);
+        t4.addAventurier(ingenieur);
+        t9.addAventurier(plongeur);
+        t10.addAventurier(navigateur);
 
         //  VUES
         //      VUEAVENTURIER (une par joueur) - création
-        VueAventurierDemo joueur1 = new VueAventurierDemo(explorateur.getNomJoueur(), carteAventurier1, Color.BLACK);
-        VueAventurierDemo joueur2 = new VueAventurierDemo(messager.getNomJoueur(), carteAventurier2, Color.BLACK);
-        VueAventurierDemo joueur3 = new VueAventurierDemo(pilote.getNomJoueur(), carteAventurier3, Color.BLACK);
-        VueAventurierDemo joueur4 = new VueAventurierDemo(plongeur.getNomJoueur(), carteAventurier4, Color.BLACK);
-        VueAventurierDemo joueur5 = new VueAventurierDemo(ingenieur.getNomJoueur(), carteAventurier5, Color.BLACK);
-        VueAventurierDemo joueur6 = new VueAventurierDemo(navigateur.getNomJoueur(), carteAventurier6, Color.BLACK);
+        VueAventurierDemo joueur1 = new VueAventurierDemo(explorateur.getNomJoueur(), carteAventurier1, Color.green);
+        VueAventurierDemo joueur2 = new VueAventurierDemo(messager.getNomJoueur(), carteAventurier2, Color.white);
+        VueAventurierDemo joueur3 = new VueAventurierDemo(pilote.getNomJoueur(), carteAventurier3, Color.blue);
+        VueAventurierDemo joueur4 = new VueAventurierDemo(plongeur.getNomJoueur(), carteAventurier4, Color.black);
+        VueAventurierDemo joueur5 = new VueAventurierDemo(ingenieur.getNomJoueur(), carteAventurier5, Color.red);
+        VueAventurierDemo joueur6 = new VueAventurierDemo(navigateur.getNomJoueur(), carteAventurier6, Color.yellow);
 
         //      VUEAVENTURIER - ajout dans l'arrayList vuesAventurier du controleur
         controleur.getVuesAventurier().put(joueur1.getNomJoueur(), joueur1);

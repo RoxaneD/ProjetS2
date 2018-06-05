@@ -1,5 +1,7 @@
 package Vues;
 
+import Controle.Action;
+import Controle.TypesActions;
 import ElementsJeu.Grille;
 import ElementsJeu.Tuile;
 import Enumerations.EtatTuile;
@@ -10,6 +12,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.BorderFactory;
@@ -50,30 +54,43 @@ public class VueGrilleDemo extends Observe {
             if (t.getEtat() != EtatTuile.inexistante) {
                 // on délimite la tuile
                 panelFondTuile.setBorder(blackline);
-                
+
                 // création du 2ème fond de la tuile (c'est un panel) 
                 // contient un bouton qui indique son état 
                 // + contient un ou plusieurs panels qui indiquent : son nom + emplacement aventuriers/trésors - rajout dans devantTuiles
-                
                 JPanel panelDevantTuile = new JPanel(new BorderLayout());
                 panelDevantTuile.setSize(new Dimension(((int) ((panelFondTuile.getSize().getWidth()) * (0.9))), ((int) (((panelFondTuile.getSize().getHeight()) * (0.9))))));
-                
+
                 // création du bouton qui contient l'état de la tuile
                 JButton boutonEtat = new JButton();
-                boutonEtat.setPreferredSize(new Dimension(((int) ((panelFondTuile.getSize().getWidth()) * (0.9))), ((int) (((panelFondTuile.getSize().getHeight()) * (0.7))))));
-                
+                boutonEtat.addActionListener(
+                        new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        Action a;
+                        if (panelDevantTuile.getBackground() == Color.green) {
+                            a = new Action(TypesActions.deplacement, t);
+                        } else {
+                            a = new Action(TypesActions.assechement, t);
+                        }
+                        notifierObservateur(a);
+                    }
+                });
+                boutonEtat.setEnabled(false);
+                boutonEtat.setPreferredSize(new Dimension(((int) ((panelFondTuile.getSize().getWidth()) * (0.9))), ((int) (((panelFondTuile.getSize().getHeight()) * (0.8))))));
+
                 //  création de panelInfo : contient les informations de la tuile
                 JPanel panelInfo = new JPanel(new BorderLayout());
                 JLabel labelNomTuile = new JLabel(t.getNom().toString());
                 Font font = new Font(Font.SANS_SERIF, Font.BOLD, 9);
                 labelNomTuile.setFont(font);
-                panelInfo.setPreferredSize(new Dimension(((int) ((panelFondTuile.getSize().getWidth()) * (0.9))), ((int) (((panelFondTuile.getSize().getHeight()) * (0.3))))));
+                panelInfo.setPreferredSize(new Dimension(((int) ((panelFondTuile.getSize().getWidth()) * (0.9))), ((int) (((panelFondTuile.getSize().getHeight()) * (0.2))))));
                 panelInfo.add(labelNomTuile);
-                
+
                 // ajouts des deux compartiements dans panelDevantTuile
                 panelDevantTuile.add(boutonEtat, BorderLayout.NORTH);
                 panelDevantTuile.add(panelInfo, BorderLayout.SOUTH);
-                
+
                 if (t.getEtat() == EtatTuile.inondee) {
                     panelDevantTuile.getComponent(0).setBackground(Color.CYAN);
                 } else {
@@ -81,7 +98,7 @@ public class VueGrilleDemo extends Observe {
                         panelDevantTuile.getComponent(0).setBackground(Color.blue);
                     } else {
                         if (t.getEtat() == EtatTuile.normal) {
-                            panelDevantTuile.getComponent(0).setBackground(Color.yellow);
+                            panelDevantTuile.getComponent(0).setBackground(Color.orange);
                         }
                     }
                 }
@@ -100,7 +117,14 @@ public class VueGrilleDemo extends Observe {
         for (Tuile t : grille.getTuiles()) {
             this.tuiles.add(t);
         }
+    }
 
+    public void setFondTuiles(HashMap<Tuile, JPanel> fondTuiles) {
+        this.fondTuiles = fondTuiles;
+    }
+
+    public void setDevantTuiles(HashMap<Tuile, JButton> devantTuiles) {
+        this.devantTuiles = devantTuiles;
     }
 
     // getteurs
@@ -111,24 +135,55 @@ public class VueGrilleDemo extends Observe {
         return tuiles;
     }
 
+    public HashMap<Tuile, JPanel> getFondTuiles() {
+        return fondTuiles;
+    }
+
+    public HashMap<Tuile, JButton> getDevantTuiles() {
+        return devantTuiles;
+    }
+
     // autres méthodes
     public static void main(String[] args) {
     }
 
-    public void afficherTuilesPossibles(ArrayList<Tuile> t2) {
+    public void afficherTuilesPossiblesDeplacement(ArrayList<Tuile> t2) {
+        revenirGrilleDepart();
         for (Tuile tuile : t2) {
-            fondTuiles.get(tuile).setBackground(Color.RED);
+            fondTuiles.get(tuile).setBackground(Color.green);
+            devantTuiles.get(tuile).setEnabled(true);
         }
-
     }
-    
-    public void afficherTuileActuelle(Tuile t){
-        fondTuiles.get(t).setBackground(Color.DARK_GRAY);
+
+    public void afficherTuilesPossiblesAssechement(ArrayList<Tuile> t2) {
+        revenirGrilleDepart();
+        for (Tuile tuile : t2) {
+            fondTuiles.get(tuile).setBackground(Color.orange);
+            devantTuiles.get(tuile).setEnabled(true);
+        }
+    }
+
+    public void afficherTuileActuelle(Tuile t) {
+        fondTuiles.get(t).setBackground(Color.pink);
     }
 
     public void revenirGrilleDepart() {
-        for (Tuile tuile : tuiles){
+        for (Tuile tuile : tuiles) {
             fondTuiles.get(tuile).setBackground(Color.white);
+            if (tuile.getEtat() != EtatTuile.inexistante) {
+                devantTuiles.get(tuile).setEnabled(false);
+            }
+            if (tuile.getEtat() == EtatTuile.inondee) {
+                getDevantTuiles().get(tuile).setBackground(Color.CYAN);
+            } else {
+                if (tuile.getEtat() == EtatTuile.submergee) {
+                    getDevantTuiles().get(tuile).setBackground(Color.blue);
+                } else {
+                    if (tuile.getEtat() == EtatTuile.normal) {
+                        getDevantTuiles().get(tuile).setBackground(Color.orange);
+                    }
+                }
+            }
         }
     }
 

@@ -26,11 +26,11 @@ public class Controleur implements Observateur {
 
     // attributs
     //          vues 
-    private HashMap<String, VueAventurierDemo> vuesAventurier = new HashMap<String, VueAventurierDemo>(); // toutes les vues
+    private HashMap<String, VueAventurierDemo> vuesAventurier = new HashMap<String, VueAventurierDemo>(); // String : un nom de joueur
     private VueAventurierDemo vueAventurier;         // une pour chaque joueur (il n'y en a qu'une seule à la fois à l'écran)
     private VueGrilleDemo vueGrille;
     //          autres attributs
-    private HashMap<String, Aventurier> aventuriers = new HashMap<String, Aventurier>(); // tous les joueurs
+    private HashMap<String, Aventurier> aventuriers = new HashMap<String, Aventurier>(); // String : un nom de joueur
     private Grille grille;
     private NiveauEau niveauEau;
     private Tresor tresor1;
@@ -230,6 +230,10 @@ public class Controleur implements Observateur {
     public Tuile getChoixAssechement(Tuile tuile) {
         return tuile;
     }
+    
+    public VueGrilleDemo getVueGrille(){
+        return vueGrille;
+    }
 
     // autres méthodes
     @Override
@@ -241,14 +245,16 @@ public class Controleur implements Observateur {
             for (Tuile t : aventurier.calculDeplacementPos()) {
                 tuilesPossibles.add(t);
             }
-            vueGrille.afficherTuilesPossibles(tuilesPossibles);
+            vueGrille.afficherTuilesPossiblesDeplacement(tuilesPossibles);
 
             // pour demander l'affiche des tuiles possibles (à assécher)
         } else if (action.getType() == TypesActions.demandeAssechement) {
             Aventurier aventurier = getAventurier();
             ArrayList<Tuile> tuilesPossibles = new ArrayList<>();
-            tuilesPossibles = aventurier.calculAssechementPos();
-            vueGrille.afficherTuilesPossibles(tuilesPossibles);
+            for (Tuile t : aventurier.calculAssechementPos()) {
+                tuilesPossibles.add(t);
+            }
+            vueGrille.afficherTuilesPossiblesAssechement(tuilesPossibles);
 
             // autres
         } else if (action.getType() == TypesActions.demandeAutres) {
@@ -256,22 +262,36 @@ public class Controleur implements Observateur {
 
             // pour terminer son tour
         } else if (action.getType() == TypesActions.terminer) {
-            setNombreActions(3);
+            this.setNombreActions(3);
 
             // pour se déplacer sur une tuile
         } else if (action.getType() == TypesActions.deplacement) {
+            getGrille().getTuile(getAventurier().getTuile().getPosX(), getAventurier().getTuile().getPosY()).removeAventurier(getAventurier());
+            // on retire de la tuile initiale l'aventurier
+            getAventurier().getTuile().removeAventurier(getAventurier());
+            // on retire de l'aventurier sa tuile initiale
             this.getAventurier().removeTuile();
+            
+            // on rajoute à l'aventurier sa nouvelle tuile
             this.getAventurier().addTuile(action.getTuile());
+            // on rajoute à la nouvelle tuile l'aventurier
+            action.getTuile().addAventurier(getAventurier());
+            
+            // on met à jour la liste des tuiles de la Grille
+            getGrille().getTuile(getAventurier().getTuile().getPosX(), getAventurier().getTuile().getPosY()).addAventurier(getAventurier());
+            
+            // on met à jour la vueGrille, et on la réinitialise
             vueGrille.revenirGrilleDepart();
 
             setNombreActions(getNombreActions() + 1);
 
             // pour assécher une tuile
         } else if (action.getType() == TypesActions.assechement) {
-            Tuile tuileAAssecher = this.getGrille().getTuile(action.getTuile().getPosX(), action.getTuile().getPosY());
-            tuileAAssecher.assecher();
+            // on met à jour la grille
+            getGrille().getTuile(action.getTuile().getPosX(), action.getTuile().getPosY()).assecher();
+            // on met à jour la vueGrille, et on la réinitialise
             vueGrille.revenirGrilleDepart();
-
+            
             setNombreActions(getNombreActions() + 1);
 
             // pour récupérer et afficher la position d'un joueur sur sa vue aventurier
