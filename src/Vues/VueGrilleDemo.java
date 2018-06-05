@@ -92,7 +92,7 @@ public class VueGrilleDemo extends Observe {
     public static void main(String[] args) {
     }
 
-    public void afficherTuiles(ArrayList<Tuile> t2) { 
+    public void afficherTuiles(ArrayList<Tuile> t2) {
         for (Tuile tuile : t2) {
             collectionBouton.get(tuile).setBackground(Color.red);
         }

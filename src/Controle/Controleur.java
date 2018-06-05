@@ -1,6 +1,5 @@
 // A COMPLETER : Faire les getteurs autres
 // A REGARDER
-
 package Controle;
 
 import Aventuriers.Aventurier;
@@ -62,7 +61,7 @@ public class Controleur implements Observateur {
         this.vueAventurier.getWindow().setVisible(true);
     }
 
-    public void setVueGrille(VueGrilleDemo vueGrille) {
+    public void afficherVueGrille(VueGrilleDemo vueGrille) {
         this.vueGrille = vueGrille;
     }
 
@@ -239,7 +238,9 @@ public class Controleur implements Observateur {
         if (action.getType() == TypesActions.demandeDeplacement) {
             Aventurier aventurier = getAventurier();
             ArrayList<Tuile> tuilesPossibles = new ArrayList<>();
-            tuilesPossibles = aventurier.calculDeplacementPos();
+            for (Tuile t : aventurier.calculDeplacementPos()) {
+                tuilesPossibles.add(t);
+            }
             vueGrille.afficherTuiles(tuilesPossibles);
 
             // pour demander l'affiche des tuiles possibles (à assécher)

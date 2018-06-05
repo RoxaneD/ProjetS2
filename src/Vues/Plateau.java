@@ -333,6 +333,8 @@ public class Plateau {
 
         //      VUEGRILLE - ajout du controleur en tant qu'observateur
         vueGrille.addObservateur(controleur);
+        
+        controleur.afficherVueGrille(vueGrille);
 
 // ----------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------
