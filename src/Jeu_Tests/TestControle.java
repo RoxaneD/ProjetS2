@@ -42,13 +42,13 @@ public class TestControle {
 
     public static void main(String[] args) {
         Plateau plateau = new Plateau();
-        
+
         // test : pour 1 TOUR DE JEU
         for (String s : plateau.getControleur().getVuesAventurier().keySet()) {
             plateau.getControleur().afficherVueAventurier(plateau.getControleur().getVuesAventurier().get(s));
             plateau.getControleur().setNombreActions(0);
             while (plateau.getControleur().getNombreActions() < 3) {
-                
+
             }
 
         }

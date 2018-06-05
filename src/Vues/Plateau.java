@@ -297,6 +297,11 @@ public class Plateau {
 
         //          emplacement des joueurs
         t17.addAventurier(explorateur);
+        t17.addAventurier(messager);
+        t17.addAventurier(pilote);
+        t17.addAventurier(ingenieur);
+        t17.addAventurier(plongeur);
+        t17.addAventurier(navigateur);
 
         //  VUES
         //      VUEAVENTURIER (une par joueur) - création
