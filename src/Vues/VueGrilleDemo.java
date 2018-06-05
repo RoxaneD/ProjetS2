@@ -74,7 +74,6 @@ public class VueGrilleDemo extends Observe {
                             a = new Action(TypesActions.assechement, t);
                         }
                         notifierObservateur(a);
-                        System.out.println(a.getType());
                     }
                 });
                 boutonEtat.setEnabled(false);

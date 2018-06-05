@@ -46,6 +46,7 @@ public class Controleur implements Observateur {
     //          compteurs - boolean
     private boolean termine;
     private int nombreActions;
+    private boolean actionEffectue = false;
 
     // constructeur
     public Controleur() {
@@ -123,6 +124,10 @@ public class Controleur implements Observateur {
 
     public void setNombreActions(int nombreActions) {
         this.nombreActions = nombreActions;
+    }
+
+    public void setActionEffectue(boolean actionEffectue) {
+        this.actionEffectue = actionEffectue;
     }
 
     // getteurs attributs
@@ -230,9 +235,13 @@ public class Controleur implements Observateur {
     public Tuile getChoixAssechement(Tuile tuile) {
         return tuile;
     }
-    
-    public VueGrilleDemo getVueGrille(){
+
+    public VueGrilleDemo getVueGrille() {
         return vueGrille;
+    }
+
+    public boolean isActionEffectue() {
+        return actionEffectue;
     }
 
     // autres méthodes
@@ -263,47 +272,46 @@ public class Controleur implements Observateur {
             // pour terminer son tour
         } else if (action.getType() == TypesActions.terminer) {
             this.setNombreActions(3);
-
+            this.setActionEffectue(true);
+            
             // pour se déplacer sur une tuile
         } else if (action.getType() == TypesActions.deplacement) {
             int i = 0;
-            while (getGrille().getTuiles().get(i) != getAventurier().getTuile()){
+            while (getGrille().getTuiles().get(i) != getAventurier().getTuile()) {
                 i += 1;
             }
             getGrille().getTuiles().get(i).removeAventurier(getAventurier());
-                    // on retire de la tuile initiale l'aventurier
-                    // on retire de l'aventurier sa tuile initiale
+            // on retire de la tuile initiale l'aventurier
+            // on retire de l'aventurier sa tuile initiale
             this.getAventurier().removeTuile();
             this.getAventurier().addTuile(action.getTuile());
-                    // on rajoute à la nouvelle tuile l'aventurier
+            // on rajoute à la nouvelle tuile l'aventurier
             action.getTuile().addAventurier(getAventurier());
-            
-            System.out.println(getAventurier().getTuile().getNom());
-            
+
             i = 0;
-            while (getGrille().getTuiles().get(i) != getAventurier().getTuile()){
+            while (getGrille().getTuiles().get(i) != getAventurier().getTuile()) {
                 i += 1;
             }
             getGrille().getTuiles().get(i).addAventurier(getAventurier());
-                    // on met à jour la liste des tuiles de la Grille
+            // on met à jour la liste des tuiles de la Grille
             getGrille().getTuile(getAventurier().getTuile().getPosX(), getAventurier().getTuile().getPosY()).addAventurier(getAventurier());
-            
+
             // on met à jour la vueGrille, et on la réinitialise
             vueGrille.setTuiles(getGrille());
             vueGrille.revenirGrilleDepart();
-            getVueGrille().afficherTuileActuelle(getAventurier().getTuile());
-            
+
             setNombreActions(getNombreActions() + 1);
+            this.setActionEffectue(true);
 
             // pour assécher une tuile
         } else if (action.getType() == TypesActions.assechement) {
-                    // on met à jour la grille
+            // on met à jour la grille
             getGrille().getTuile(action.getTuile().getPosX(), action.getTuile().getPosY()).assecher();
-                    // on met à jour la vueGrille, et on la réinitialise
+            // on met à jour la vueGrille, et on la réinitialise
             vueGrille.revenirGrilleDepart();
-            getVueGrille().afficherTuileActuelle(getAventurier().getTuile());
-            
+
             setNombreActions(getNombreActions() + 1);
+            this.setActionEffectue(true);
 
             // pour récupérer et afficher la position d'un joueur sur sa vue aventurier
         } else if (action.getType() == TypesActions.demandePosition) {
