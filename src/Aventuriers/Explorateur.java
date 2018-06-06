@@ -21,7 +21,7 @@ public class Explorateur extends Aventurier {
     @Override
     public ArrayList<Tuile> calculDeplacementPos() {
         // pour récuperer les tuiles adjacentes
-        Tuile tuileActuelle = getTuile(); //la Tuile tuileActuelle prend la valeur de getTuile
+        Tuile tuileActuelle = getTuile(); //la Tuile où se trouve l'Explorateur
         ArrayList<Tuile> tuilesPossibles = new ArrayList<>();  //tuilesPossibles est un ArrayList composé de Tuiles
 
         for (Tuile t : tuileActuelle.getGrille().getTuilesAdjacentes(tuileActuelle)) { //Boucle qui parcours les Tuiles adjacentes à celle du joueur
