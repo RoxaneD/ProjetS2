@@ -43,11 +43,13 @@ public class Plongeur extends Aventurier {
                             traitee = true;
                         }
                     }
-                    // si elle est normale, on l'ajoute aux tuiles possibles
-                    if (t2.getEtat() == EtatTuile.normal && !traitee) {
+                    // si elle est normale ou inondée, on l'ajoute aux tuiles possibles
+                    if ((t2.getEtat() == EtatTuile.normal || t2.getEtat() == EtatTuile.inondee )&& !traitee) {
                         tuilesPossibles.add(t2);
-                        // sinon on se rajoute dans tuilesATraiter
-                    } else if ((t2.getEtat() == EtatTuile.inondee || t2.getEtat() == EtatTuile.submergee) && !traitee) {
+                        // si elle est inondée ou submergée on se rajoute dans tuilesATraiter
+                    }
+                    
+                    if ((t2.getEtat() == EtatTuile.inondee || t2.getEtat() == EtatTuile.submergee) && !traitee) {
                         tuilesATraiter.add(t2);
                     }
                     tuilesTraitees.add(t2);
