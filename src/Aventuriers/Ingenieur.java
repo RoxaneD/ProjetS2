@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Ingenieur extends Aventurier {
 
     // constructeurs
-    // Crée un ingénieur avec les paramètre de nom d'état et sa carte
+    // Crée un ingénieur avec les paramètres : nom d'aventurier, son état et sa carte
     public Ingenieur(String nomJoueur, CarteAventurier carteaventurier) {
         setNomJoueur(nomJoueur); 
         setEtat(EtatAventurier.vivant);
