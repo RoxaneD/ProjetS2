@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public abstract class Aventurier {
 
     // attributs
-    private String nomJoueur;
+    private String nomJoueur; 
     private EtatAventurier etat;
     private CarteAventurier carteAventurier;
     private Tuile tuile;
