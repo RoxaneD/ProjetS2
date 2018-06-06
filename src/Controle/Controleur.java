@@ -3,6 +3,7 @@
 package Controle;
 
 import Aventuriers.Aventurier;
+import Aventuriers.Pilote;
 import Cartes.CarteInondation;
 import Cartes.CarteAventurier;
 import Cartes.CarteTresors;
@@ -44,9 +45,11 @@ public class Controleur implements Observateur {
     private DefausseInondations defausseInondation;
     private TasInondations tasInondation;
     //          compteurs - boolean
-    private boolean termine;
+    private boolean termine; // termine : la partie est finie | !termine : la partie n'est pas finie 
     private int nombreActions;
     private boolean actionEffectue = false;
+    private boolean pouvoirPilote = false;
+    private boolean pouvoirIngenieur = false;
 
     // constructeur
     public Controleur() {
@@ -128,6 +131,14 @@ public class Controleur implements Observateur {
 
     public void setActionEffectue(boolean actionEffectue) {
         this.actionEffectue = actionEffectue;
+    }
+
+    public void setPouvoirPilote(boolean pouvoirPilote) {
+        this.pouvoirPilote = pouvoirPilote;
+    }
+
+    public void setPouvoirIngenieur(boolean pouvoirIngenieur) {
+        this.pouvoirIngenieur = pouvoirIngenieur;
     }
 
     // getteurs attributs
@@ -244,17 +255,27 @@ public class Controleur implements Observateur {
         return actionEffectue;
     }
 
+    public boolean isPouvoirPilote() {
+        return pouvoirPilote;
+    }
+
+    public boolean isPouvoirIngenieur() {
+        return pouvoirIngenieur;
+    }
+
     // autres méthodes
     @Override
     public void traiterAction(Action action) {
         // pour demander l'affiche des tuiles possibles (pour se déplacer)
         if (action.getType() == TypesActions.demandeDeplacement) {
-            Aventurier aventurier = getAventurier();
-            ArrayList<Tuile> tuilesPossibles = new ArrayList<>();
-            for (Tuile t : aventurier.calculDeplacementPos()) {
-                tuilesPossibles.add(t);
-            }
-            vueGrille.afficherTuilesPossiblesDeplacement(tuilesPossibles);
+            if (!(getNombreActions() == 2 && getAventurier().getCarteAventurier().getNom() == NomAventurier.ingenieur && isPouvoirIngenieur())) {
+                Aventurier aventurier = getAventurier();
+                ArrayList<Tuile> tuilesPossibles = new ArrayList<>();
+                for (Tuile t : aventurier.calculDeplacementPos()) {
+                    tuilesPossibles.add(t);
+                }
+                vueGrille.afficherTuilesPossiblesDeplacement(tuilesPossibles);
+            } 
 
             // pour demander l'affiche des tuiles possibles (à assécher)
         } else if (action.getType() == TypesActions.demandeAssechement) {
@@ -273,35 +294,55 @@ public class Controleur implements Observateur {
         } else if (action.getType() == TypesActions.terminer) {
             this.setNombreActions(3);
             this.setActionEffectue(true);
-            
+
             // pour se déplacer sur une tuile
         } else if (action.getType() == TypesActions.deplacement) {
-            int i = 0;
-            while (getGrille().getTuiles().get(i) != getAventurier().getTuile()) {
-                i += 1;
+            if (!pouvoirPilote && getAventurier().getCarteAventurier().getNom() == NomAventurier.pilote) {
+                Pilote p = (Pilote) getAventurier();
+                p.setPouvoir(true);
+                for (Tuile t : getAventurier().getTuile().getGrille().getTuilesAdjacentes(getAventurier().getTuile())) {
+                    if (action.getTuile() == t) {
+                        p.setPouvoir(false);
+                    }
+                }
+                if (p.getPouvoir()) {
+                    pouvoirPilote = true;
+                }
             }
-            getGrille().getTuiles().get(i).removeAventurier(getAventurier());
-            // on retire de la tuile initiale l'aventurier
-            // on retire de l'aventurier sa tuile initiale
-            this.getAventurier().removeTuile();
-            this.getAventurier().addTuile(action.getTuile());
-            // on rajoute à la nouvelle tuile l'aventurier
-            action.getTuile().addAventurier(getAventurier());
 
-            i = 0;
-            while (getGrille().getTuiles().get(i) != getAventurier().getTuile()) {
-                i += 1;
+            if (pouvoirIngenieur && getAventurier().getCarteAventurier().getNom() == NomAventurier.ingenieur) {
+                setPouvoirIngenieur(false);
+                this.setNombreActions(getNombreActions() + 1);
             }
-            getGrille().getTuiles().get(i).addAventurier(getAventurier());
-            // on met à jour la liste des tuiles de la Grille
-            getGrille().getTuile(getAventurier().getTuile().getPosX(), getAventurier().getTuile().getPosY()).addAventurier(getAventurier());
 
-            // on met à jour la vueGrille, et on la réinitialise
-            vueGrille.setTuiles(getGrille());
-            vueGrille.revenirGrilleDepart();
+            if (getNombreActions() != 3) {
+                int i = 0;
+                while (getGrille().getTuiles().get(i) != getAventurier().getTuile()) {
+                    i += 1;
+                }
+                getGrille().getTuiles().get(i).removeAventurier(getAventurier());
+                // on retire de la tuile initiale l'aventurier
+                // on retire de l'aventurier sa tuile initiale
+                this.getAventurier().removeTuile();
+                this.getAventurier().addTuile(action.getTuile());
+                // on rajoute à la nouvelle tuile l'aventurier
+                action.getTuile().addAventurier(getAventurier());
 
-            setNombreActions(getNombreActions() + 1);
-            this.setActionEffectue(true);
+                i = 0;
+                while (getGrille().getTuiles().get(i) != getAventurier().getTuile()) {
+                    i += 1;
+                }
+                getGrille().getTuiles().get(i).addAventurier(getAventurier());
+                // on met à jour la liste des tuiles de la Grille
+                getGrille().getTuile(getAventurier().getTuile().getPosX(), getAventurier().getTuile().getPosY()).addAventurier(getAventurier());
+
+                // on met à jour la vueGrille, et on la réinitialise
+                vueGrille.setTuiles(getGrille());
+                vueGrille.revenirGrilleDepart();
+
+                setNombreActions(getNombreActions() + 1);
+                this.setActionEffectue(true);
+            }
 
             // pour assécher une tuile
         } else if (action.getType() == TypesActions.assechement) {
@@ -310,11 +351,17 @@ public class Controleur implements Observateur {
             // on met à jour la vueGrille, et on la réinitialise
             vueGrille.revenirGrilleDepart();
 
-            setNombreActions(getNombreActions() + 1);
+            if (getAventurier().getCarteAventurier().getNom() != NomAventurier.ingenieur || isPouvoirIngenieur()) {
+                setNombreActions(getNombreActions() + 1);
+                pouvoirIngenieur = false;
+            } else {
+                pouvoirIngenieur = true;
+            }
             this.setActionEffectue(true);
 
             // pour récupérer et afficher la position d'un joueur sur sa vue aventurier
-        } else if (action.getType() == TypesActions.demandePosition) {
+        } else if (action.getType()
+                == TypesActions.demandePosition) {
             Aventurier av = aventuriers.get(vueAventurier.getNomJoueur()); // <- il ne trouve pas l'aventurier 
             vueAventurier.setPosition(av.getTuile().getNom().toString() + " | " + av.getTuile().getPosX() + " - " + av.getTuile().getPosY());
         }

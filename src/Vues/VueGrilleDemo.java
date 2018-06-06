@@ -82,7 +82,7 @@ public class VueGrilleDemo extends Observe {
                 //  création de panelInfo : contient les informations de la tuile
                 JPanel panelInfo = new JPanel(new BorderLayout());
                 JLabel labelNomTuile = new JLabel(t.getNom().toString());
-                labelNomTuile.setSize(((int) ((panelFondTuile.getSize().getWidth()) * (0.9))), ( (int) ((panelFondTuile.getSize().getHeight()) * (0.15))));
+                labelNomTuile.setSize(((int) ((panelFondTuile.getSize().getWidth()) * (0.9))), ((int) ((panelFondTuile.getSize().getHeight()) * (0.15))));
                 Font font = new Font(Font.SANS_SERIF, Font.BOLD, 9);
                 labelNomTuile.setFont(font);
                 panelInfo.setPreferredSize(new Dimension(((int) ((panelFondTuile.getSize().getWidth()) * (0.9))), ((int) (((panelFondTuile.getSize().getHeight()) * (0.2))))));
@@ -128,11 +128,12 @@ public class VueGrilleDemo extends Observe {
         this.devantTuiles = devantTuiles;
     }
 
+    public void setWindow(JFrame window) {
+        this.window = window;
+    }
+
     // getteurs
     public ArrayList<Tuile> getTuiles() {
-        for (Tuile t : tuiles) {
-            System.out.println(t.getNom());
-        }
         return tuiles;
     }
 
@@ -142,6 +143,10 @@ public class VueGrilleDemo extends Observe {
 
     public HashMap<Tuile, JButton> getDevantTuiles() {
         return devantTuiles;
+    }
+
+    public JFrame getWindow() {
+        return window;
     }
 
     // autres méthodes

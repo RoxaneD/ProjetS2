@@ -28,26 +28,33 @@ public class TourDeJeu {
         vuesAventuriers.add(vueJoueur6);
 
         // test : pour 1 TOUR DE JEU - chaque joueur joue tour à tour
-        for (VueAventurierDemo v : vuesAventuriers) {
-            plateau.getControleur().afficherVueAventurier(v);
-            Tuile t = plateau.getControleur().getAventurier().getTuile();
-            // pour afficher en noir  la tuile sur lequel il est
-            plateau.getControleur().getVueGrille().afficherTuileActuelle(t);
-            while (plateau.getControleur().getNombreActions() < 3) {
-                for (Tuile t1 : plateau.getControleur().getVueGrille().getTuiles()){
-                    plateau.getControleur().getVueGrille().getFondTuiles().get(t1).setBackground(Color.WHITE);
-                }
-                
-                while (!plateau.getControleur().isActionEffectue()) {
-                    plateau.getControleur().getVueGrille().afficherTuileActuelle(t);
-                }
-                plateau.getControleur().setActionEffectue(false);
-                t = plateau.getControleur().getAventurier().getTuile();
+        while (plateau.getControleur().isTermine() == false) {
+            for (VueAventurierDemo v : vuesAventuriers) {
+                plateau.getControleur().afficherVueAventurier(v);
+                Tuile t = plateau.getControleur().getAventurier().getTuile();
                 // pour afficher en noir  la tuile sur lequel il est
-                System.out.println(plateau.getControleur().getNombreActions());
+                plateau.getControleur().getVueGrille().afficherTuileActuelle(t);
+                while (plateau.getControleur().getNombreActions() < 3) {
+                    for (Tuile t1 : plateau.getControleur().getVueGrille().getTuiles()) {
+                        plateau.getControleur().getVueGrille().getFondTuiles().get(t1).setBackground(Color.WHITE);
+                    }
+
+                    while (!plateau.getControleur().isActionEffectue()) {
+                        plateau.getControleur().getVueGrille().afficherTuileActuelle(t);
+                    }
+                    plateau.getControleur().setActionEffectue(false);
+                    t = plateau.getControleur().getAventurier().getTuile();
+                    // pour afficher en noir  la tuile sur lequel il est
+                    System.out.println(plateau.getControleur().getNombreActions());
+                }
+                plateau.getControleur().setNombreActions(0);
             }
-            plateau.getControleur().setNombreActions(0);
+            plateau.getControleur().setPouvoirIngenieur(false);
+            plateau.getControleur().setPouvoirPilote(false);
+            plateau.getControleur().setTermine(true);
         }
+        plateau.getControleur().getVueAventurier().getWindow().setVisible(false);
+        plateau.getControleur().getVueGrille().getWindow().setVisible(false);
 
         // test Utils.poserQuestion("...") et Utils.afficherInformation("..")
         //if (poserQuestion("Ceci est une question")) {

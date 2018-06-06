@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Pilote extends Aventurier {
 
-    private Boolean pouvoir = false;
+    private Boolean pouvoir = false; // false : pouvoir pas utilisé | true : pouvoir utilisé
 
     // constructeurs
     public Pilote(String nomJoueur, CarteAventurier carteaventurier) {
