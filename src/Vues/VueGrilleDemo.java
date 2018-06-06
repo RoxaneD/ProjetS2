@@ -77,11 +77,12 @@ public class VueGrilleDemo extends Observe {
                     }
                 });
                 boutonEtat.setEnabled(false);
-                boutonEtat.setPreferredSize(new Dimension(((int) ((panelFondTuile.getSize().getWidth()) * (0.9))), ((int) (((panelFondTuile.getSize().getHeight()) * (0.8))))));
+                boutonEtat.setPreferredSize(new Dimension(((int) ((panelFondTuile.getSize().getWidth()) * (0.9))), ((int) (((panelFondTuile.getSize().getHeight()) * (0.7))))));
 
                 //  création de panelInfo : contient les informations de la tuile
                 JPanel panelInfo = new JPanel(new BorderLayout());
                 JLabel labelNomTuile = new JLabel(t.getNom().toString());
+                labelNomTuile.setSize(((int) ((panelFondTuile.getSize().getWidth()) * (0.9))), ( (int) ((panelFondTuile.getSize().getHeight()) * (0.15))));
                 Font font = new Font(Font.SANS_SERIF, Font.BOLD, 9);
                 labelNomTuile.setFont(font);
                 panelInfo.setPreferredSize(new Dimension(((int) ((panelFondTuile.getSize().getWidth()) * (0.9))), ((int) (((panelFondTuile.getSize().getHeight()) * (0.2))))));
@@ -89,7 +90,7 @@ public class VueGrilleDemo extends Observe {
 
                 // ajouts des deux compartiements dans panelDevantTuile
                 panelDevantTuile.add(boutonEtat, BorderLayout.NORTH);
-                panelDevantTuile.add(panelInfo, BorderLayout.CENTER);
+                panelDevantTuile.add(panelInfo, BorderLayout.SOUTH);
 
                 if (t.getEtat() == EtatTuile.inondee) {
                     panelDevantTuile.getComponent(0).setBackground(Color.CYAN);
