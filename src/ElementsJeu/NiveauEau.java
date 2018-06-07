@@ -23,36 +23,36 @@ public class NiveauEau {
     }
 
     public void setSemiNiveau(int semiNiveau) {
-        this.semiNiveau = semiNiveau;  //
-        if (!initialise && (semiNiveau == 1 || semiNiveau == 2)) {
-            setNiveau(2);
-        } else if (!initialise && (semiNiveau ==3 || semiNiveau == 4)) {
-            setNiveau(3);
-        } else if (initialise && (semiNiveau == 3 || semiNiveau == 6 || semiNiveau == 8 || semiNiveau == 10)) {
-            setNiveau(getNiveau() + 1);
+        this.semiNiveau = semiNiveau;  //Initialise la variable avec la valeur donnée en paramètre
+        if (!initialise && (semiNiveau == 1 || semiNiveau == 2)) {  //Vérifie si initialisé et que semiNiveau =1 ou semiNiveau = 2
+            setNiveau(2);  //Initialise Niveau avec la valeur 2 
+        } else if (!initialise && (semiNiveau ==3 || semiNiveau == 4)) {  //Vérifie si intialisé et que semiNiveau = 3 ou semiNiveau = 4
+            setNiveau(3);  //Initialise Niveau à 3 
+        } else if (initialise && (semiNiveau == 3 || semiNiveau == 6 || semiNiveau == 8 || semiNiveau == 10)) {  //Vérifie que initialisé = faux et que semiNiveau= 6 ou 8 ou 10
+            setNiveau(getNiveau() + 1);  //Initialse le niveau avec la valeur niveau + 1
         }
-        initialise = true;
+        initialise = true;  //Initialise la variable à vrai
     }
 
     // getteurs
     public int getMaximum() {
-        return maximum;
+        return maximum;  //Retourne la valeur de maximum
     }
 
     public int getNiveau() {
-        return niveau;
+        return niveau;  //Retourne la valeur de niveau
     }
 
     public int getSemiNiveau() {
-        return semiNiveau;
+        return semiNiveau;  //Retourne la valeur de semiNiveau
     }
 
     // autres
     public void monterNiveau() {
-        setSemiNiveau(semiNiveau + 1);
+        setSemiNiveau(semiNiveau + 1);  //Rajoute un niveau à la valeur de semiNiveau
     }
 
     public void baisserNiveau() {
-        setNiveau(niveau - 1);
+        setNiveau(niveau - 1);  //Retire un niveau à la valeur de semiNiveau
     }
 }
