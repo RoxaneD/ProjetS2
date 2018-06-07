@@ -3,27 +3,27 @@ package ElementsJeu;
 public class NiveauEau {
 
     // attributs
-    private int maximum;
-    private int niveau;
-    private int semiNiveau;
-    private boolean initialise = false;
+    private int maximum;  //Déclaration d'un integer
+    private int niveau;  //Déclaration d'un integer
+    private int semiNiveau;  //Déclaration d'un integer
+    private boolean initialise = false;  //Déclaration d'un booléen et l'initialise avec l'état faux
 
-    // constructeurs
+    // constructeurs du niveau d'eau
     public NiveauEau() {
-        setMaximum(10);
+        setMaximum(10);  //Le niveau Maximum d'eau est de 10
     }
 
     // setteurs
     public void setMaximum(int maximum) {
-        this.maximum = maximum;
+        this.maximum = maximum;  //Initialise la variable avec la valeur donné en paramètre
     }
 
     public void setNiveau(int niveau) {
-        this.niveau = niveau;
+        this.niveau = niveau;  //Initialise la variable avec la valeur donnée en paramètre
     }
 
     public void setSemiNiveau(int semiNiveau) {
-        this.semiNiveau = semiNiveau;
+        this.semiNiveau = semiNiveau;  //
         if (!initialise && (semiNiveau == 1 || semiNiveau == 2)) {
             setNiveau(2);
         } else if (!initialise && (semiNiveau ==3 || semiNiveau == 4)) {
