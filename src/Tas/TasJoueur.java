@@ -9,21 +9,25 @@ public class TasJoueur {
     private ArrayList<Carte> cartes;
 
     // constructeurs
+    //Crée un tas de carte pour le joueur
     public TasJoueur(){
         setCartes();
     }
     
     // setteurs
+    //Crée un ArrayList de carte
     public void setCartes() {
         cartes = new ArrayList<>();
     }
 
     // getteurs
+    //Renvoie un Arraylist de carte
     public ArrayList<Carte> getCartes() {
         return cartes;
     }
 
     // autres
+    //Ajoute une carte au tas
     public void addCarte(Carte carte) {
         // on ajoute une carte à la fin des cartes du tas
         cartes.add(carte);
@@ -31,7 +35,7 @@ public class TasJoueur {
 
     public Carte getCarte(int i) {
         // on récupère la carte positionnée à l'emplacement i
-        Carte carte = cartes.get(i - 1);
-        return carte;
+        Carte carte = cartes.get(i - 1);//décrémente la taille du tas de 1
+        return carte;//renvoie la carte
     }
 }

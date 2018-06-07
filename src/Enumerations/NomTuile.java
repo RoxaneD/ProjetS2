@@ -1,5 +1,5 @@
 package Enumerations;
-
+//Tout les noms des differentes tuiles
 public enum NomTuile {
 	Le_Pont_Des_Abimes,
 	La_Porte_De_Bronze,

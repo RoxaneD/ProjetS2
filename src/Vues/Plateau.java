@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Vues;
-
+//import de tout les package aventurier, les cartes, la grille les enumerations
 import Aventuriers.Aventurier;
 import Aventuriers.Explorateur;
 import Aventuriers.Ingenieur;
@@ -346,6 +346,7 @@ public class Plateau {
 
     // setteurs
     // getteurs
+    //renvoie le controleur
     public Controleur getControleur() {
         return controleur;
     }

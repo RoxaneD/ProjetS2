@@ -1,5 +1,5 @@
 package Enumerations;
-
+//Tout les noms des differents tresors
 public enum NomTresor {
 	La_Pierre_sacree,
 	La_Statue_du_zephyr,

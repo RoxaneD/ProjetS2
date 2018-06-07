@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Jeu_Tests;
-
+//Import de tout les aventuriers, de la grille ,des cartes 
 import Aventuriers.Explorateur;
 import Aventuriers.Ingenieur;
 import Aventuriers.Messager;
@@ -47,6 +47,7 @@ public class TestsAventuriers {
         Navigateur navigateur = new Navigateur("Navigateur", carte6);
 
         // initialisation de la grille de jeu (création des tuiles + ajout des états+ ajout dans la grille)
+        //Crée les tuile et les places dans la grille
         Tuile t1 = new Tuile(grilleDeJeu, 1, 1);
         Tuile t2 = new Tuile(grilleDeJeu, 2, 1);
         Tuile t3 = new Tuile(grilleDeJeu, 3, 1, NomTuile.Le_Pont_Des_Abimes);
@@ -84,6 +85,7 @@ public class TestsAventuriers {
         Tuile t35 = new Tuile(grilleDeJeu, 5, 6);
         Tuile t36 = new Tuile(grilleDeJeu, 6, 6);
 
+        //Changement des etats de certaine tuile
         t4.setEtat(EtatTuile.inondee);
         t15.setEtat(EtatTuile.submergee);
         t20.setEtat(EtatTuile.inondee);
@@ -94,6 +96,7 @@ public class TestsAventuriers {
         t27.setEtat(EtatTuile.submergee);
         t34.setEtat(EtatTuile.inondee);
 
+        //Ajout de toute les tuiles à la grille
         grilleDeJeu.getTuiles().add(t1);
         grilleDeJeu.getTuiles().add(t2);
         grilleDeJeu.getTuiles().add(t3);
@@ -153,13 +156,13 @@ public class TestsAventuriers {
         System.out.println("");
         System.out.println("Tuile où se déplacer :");
         for (Tuile t : explorateur.calculDeplacementPos()) {
-            System.out.println(t.getNom());
+            System.out.println(t.getNom());//Affiche le nom des tuiles où on peut ce déplacer
         }
 
         System.out.println();
         System.out.println("Tuile à assecher :");
         for (Tuile t : explorateur.calculAssechementPos()) {
-            System.out.println(t.getNom());
+            System.out.println(t.getNom());//Affiche le nom des tuiles que l'on peut assecher
         }
         System.out.println("");
 
@@ -174,13 +177,13 @@ public class TestsAventuriers {
         System.out.println("");
         System.out.println("Tuile où se déplacer :");
         for (Tuile t : messager.calculDeplacementPos()) {
-            System.out.println(t.getNom());
+            System.out.println(t.getNom());//Affiche le nom des tuiles où on peut ce déplacer
         }
 
         System.out.println();
         System.out.println("Tuile à assecher :");
         for (Tuile t : messager.calculAssechementPos()) {
-            System.out.println(t.getNom());
+            System.out.println(t.getNom());//Affiche le nom des tuiles que l'on peut assecher
         }
         System.out.println("");
 
@@ -195,20 +198,20 @@ public class TestsAventuriers {
         System.out.println("");
         System.out.println("Tuile où se déplacer (avec son pouvoir activé):");
         for (Tuile t : pilote.calculDeplacementPos()) {
-            System.out.println(t.getNom());
+            System.out.println(t.getNom());//Affiche le nom des tuiles où on peut ce déplacer avec pouvoir
         }
 
         System.out.println("");
         System.out.println("Tuile où se déplacer (avec son pouvoir désactivé):");
          pilote.setPouvoir(true);
         for (Tuile t : pilote.calculDeplacementPos()) {
-            System.out.println(t.getNom());
+            System.out.println(t.getNom());//Affiche le nom des tuiles où on peut ce déplacer sans pouvoir
         }
 
         System.out.println();
         System.out.println("Tuile à assecher :");
         for (Tuile t : pilote.calculAssechementPos()) {
-            System.out.println(t.getNom());
+            System.out.println(t.getNom());//Affiche le nom des tuiles que l'on peut assecher
         }
         System.out.println("");
 
@@ -223,13 +226,13 @@ public class TestsAventuriers {
         System.out.println("");
         System.out.println("Tuile où se déplacer :");
         for (Tuile t : plongeur.calculDeplacementPos()) {
-            System.out.println(t.getNom());
+            System.out.println(t.getNom());//Affiche le nom des tuiles où on peut ce déplacer
         }
 
         System.out.println();
         System.out.println("Tuile à assecher :");
         for (Tuile t : plongeur.calculAssechementPos()) {
-            System.out.println(t.getNom());
+            System.out.println(t.getNom());//Affiche le nom des tuiles que l'on peut assecher
         }
         System.out.println("");
 
@@ -244,13 +247,13 @@ public class TestsAventuriers {
         System.out.println("");
         System.out.println("Tuile où se déplacer :");
         for (Tuile t : ingenieur.calculDeplacementPos()) {
-            System.out.println(t.getNom());
+            System.out.println(t.getNom());//Affiche le nom des tuiles où on peut ce déplacer
         }
 
         System.out.println();
         System.out.println("Tuile à assecher :");
         for (Tuile t : ingenieur.calculAssechementPos()) {
-            System.out.println(t.getNom());
+            System.out.println(t.getNom());//Affiche le nom des tuiles que l'on peut assecher
         }
         System.out.println("");
 
@@ -265,13 +268,13 @@ public class TestsAventuriers {
         System.out.println("");
         System.out.println("Tuile où se déplacer :");
         for (Tuile t : navigateur.calculDeplacementPos()) {
-            System.out.println(t.getNom());
+            System.out.println(t.getNom());//Affiche le nom des tuiles où on peut ce déplacer
         }
 
         System.out.println("");
         System.out.println("Tuile à assecher :");
         for (Tuile t : navigateur.calculAssechementPos()) {
-            System.out.println(t.getNom());
+            System.out.println(t.getNom());//Affiche le nom des tuiles que l'on peut assecher
         }
         System.out.println("");
     }
