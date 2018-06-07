@@ -9,9 +9,9 @@ public abstract class Aventurier {
 
     // attributs
     private String nomJoueur; 
-    private EtatAventurier etat;
+    private EtatAventurier etat;// Si l'aventurier est vivant ou mort
     private CarteAventurier carteAventurier;
-    private Tuile tuile;
+    private Tuile tuile; //Tuile assigner comme sa tuile actuelle
 
     // getteurs
     // Méthode qui renvoie le nom du joueur

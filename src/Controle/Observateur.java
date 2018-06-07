@@ -10,6 +10,6 @@ package Controle;
  * @author deflandr
  */
 public interface Observateur {
-
+    //Méthode qui traite une action
     public void traiterAction(Action action);
 }

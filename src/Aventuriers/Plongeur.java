@@ -67,20 +67,21 @@ public class Plongeur extends Aventurier {
         return tuilesPossibles;
     }
 
+    // Calcul des Tuiles pouvant ètre assechée par le plongeur
     @Override
     public ArrayList<Tuile> calculAssechementPos() {
-        Tuile tuileActuelle = getTuile();
-        ArrayList<Tuile> tuilesPossible = new ArrayList<>();
+        Tuile tuileActuelle = getTuile(); // Tuile où ce trouve le plongeur
+        ArrayList<Tuile> tuilesPossible = new ArrayList<>(); // Collection des tuiles possibles
 
         for (Tuile t : tuileActuelle.getGrille().getTuilesAdjacentes(tuileActuelle)) {
-            if (t.getEtat() == EtatTuile.inondee) {
+            if (t.getEtat() == EtatTuile.inondee) {//on ajoute les tuiles inondée à la collection
                 tuilesPossible.add(t);
             }
-        }
+        }// on verifie si la tuile actuelle est inondée
         if (tuileActuelle.getEtat() == EtatTuile.inondee) {
-            tuilesPossible.add(tuileActuelle);
+            tuilesPossible.add(tuileActuelle);// Si oui on l'ajoute à la collection
         }
-
+        // on renvoie la collection
         return tuilesPossible;
     }
 

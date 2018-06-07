@@ -1,5 +1,5 @@
 package Controle;
-
+// Nom des differentes actions possibles
 public enum TypesActions {
     demandeDeplacement,
     deplacement,
