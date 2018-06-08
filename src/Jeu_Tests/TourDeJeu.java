@@ -51,7 +51,7 @@ public class TourDeJeu {
                 //On passe le nombre d'action à 0
                 plateau.getControleur().setNombreActions(0);
             }
-            //on passe tout les pouvoir a faux et termine a vrai
+            //on passe tous les pouvoirs a faux et termine a vrai
             plateau.getControleur().setPouvoirIngenieur(false);
             plateau.getControleur().setPouvoirPilote(false);
             plateau.getControleur().setTermine(true);
