@@ -3,9 +3,9 @@ package ElementsJeu;
 public class NiveauEau {
 
     // attributs
-    private int maximum;  //Déclaration d'un integer
-    private int niveau;  //Déclaration d'un integer
-    private int semiNiveau;  //Déclaration d'un integer
+    private int maximum;        //Déclaration d'un integer : le maximum
+    private int niveau;         //Déclaration d'un integer : nombre de carte d'inondations à piocher
+    private int semiNiveau;     //Déclaration d'un integer : si il arrive à 10, fin de la partie
     private boolean initialise = false;  //Déclaration d'un booléen et l'initialise avec l'état faux
 
     // constructeurs du niveau d'eau
