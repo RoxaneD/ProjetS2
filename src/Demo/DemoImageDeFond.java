@@ -43,7 +43,7 @@ public class DemoImageDeFond extends JPanel {
         this.height = height ;
         
         try {
-            this.image = ImageIO.read(new File(System.getProperty("user.dir") + "/src/images/ciel.png"));
+            this.image = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/ciel.png"));
         } catch (IOException ex) {
             System.err.println("Erreur de lecture de ciel.png");
         }

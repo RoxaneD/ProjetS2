@@ -27,7 +27,7 @@ public class DemoCalques extends JLayeredPane {
 
     public DemoCalques() {
         // Récupération du chemin vers le dossier contenant les images
-        String imgFolder = System.getProperty("user.dir") + "/src/images/" ;
+        String imgFolder = System.getProperty("user.dir") + "/src/Image/" ;
         
         // Instanciation d'une image pour le jardin
         // Remarque : les positions et les tailles sont en dur !
