@@ -30,6 +30,7 @@ public class Planning {
     *   Aventuriers     - A COMPLETER
     *       Navigateur
     *           1) Construire la méthode qui permet de déplacer un autre joueur d'une ou deux cases adjacentes pour une action
+    *           -> A FAIRE DANS LE CODE DIRECTEMENT
     *   Cartes          - Normalement rien à faire
     *   ElementsJeu     - A COMPLETER
     *       Grille 

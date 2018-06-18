@@ -21,7 +21,6 @@ public class Navigateur extends Aventurier {
 
     // autres
     @Override
-    // A MODIFIER PENDANT LA SEMAINE BLOQUEE
     //Méthode calculant les déplacements possible du Navigateur
     public ArrayList<Tuile> calculDeplacementPos() {
         Tuile tuileActuelle = getTuile();  // Tuile où se trouve le Navigateur
