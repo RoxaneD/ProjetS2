@@ -1,13 +1,13 @@
 package Tas;
 
-import Cartes.Carte;
+import Cartes.CarteTresors;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class TasJoueur{
 
     // attributs
-    private ArrayList<Carte> cartes;
+    private ArrayList<CarteTresors> cartes;
 
     // constructeurs
     //Crée un tas de carte pour le joueur
@@ -23,20 +23,20 @@ public class TasJoueur{
 
     // getteurs
     //Renvoie un Arraylist de carte
-    public ArrayList<Carte> getCartes() {
+    public ArrayList<CarteTresors> getCartes() {
         return cartes;
     }
 
     // autres
     //Ajoute une carte au tas
-    public void addCarte(Carte carte) {
+    public void addCarte(CarteTresors carte) {
         // on ajoute une carte à la fin des cartes du tas
         cartes.add(carte);
     }
 
-    public Carte getCarte(int i) {
+    public CarteTresors getCarte(int i) {
         // on récupère la carte positionnée à l'emplacement i
-        Carte carte = cartes.get(i - 1);//décrémente la taille du tas de 1
+        CarteTresors carte = cartes.get(i - 1);//décrémente la taille du tas de 1
         return carte;//renvoie la carte
     }
 }

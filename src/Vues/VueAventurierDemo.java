@@ -72,8 +72,6 @@ public class VueAventurierDemo extends Observe {
         this.panelCentre.setOpaque(false);
         this.panelCentre.setBorder(new MatteBorder(0, 0, 2, 0, couleur));
         mainPanel.add(this.panelCentre, BorderLayout.CENTER);
-        Action a = new Action(TypesActions.demandePosition);
-        notifierObservateur(a);
         panelCentre.add(new JLabel("Position actuelle : \n" + position, SwingConstants.CENTER));
 
         // =================================================================================
@@ -104,8 +102,6 @@ public class VueAventurierDemo extends Observe {
         btnAutreAction.addActionListener(new ActionListener() {
             @Override//Fait une demande pour d'autre action
             public void actionPerformed(ActionEvent e) {
-                Action a = new Action(TypesActions.demandeAutres);
-                notifierObservateur(a);
             }
         });
         this.btnTerminerTour = new JButton("Terminer Tour");

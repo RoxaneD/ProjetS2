@@ -3,7 +3,13 @@
 package Controle;
 
 import Aventuriers.Aventurier;
+import Aventuriers.Explorateur;
+import Aventuriers.Ingenieur;
+import Aventuriers.Messager;
+import Aventuriers.Navigateur;
 import Aventuriers.Pilote;
+import Aventuriers.Plongeur;
+import Cartes.Carte;
 import Cartes.CarteInondation;
 import Cartes.CarteAventurier;
 import Cartes.CarteTresors;
@@ -12,15 +18,18 @@ import ElementsJeu.NiveauEau;
 import ElementsJeu.Tresor;
 import ElementsJeu.Tuile;
 import Enumerations.NomAventurier;
+import Enumerations.NomTresor;
 import Tas.DefausseInondations;
 import Tas.DefausseTresors;
 import Tas.TasAventuriers;
 import Tas.TasInondations;
+import Tas.TasJoueur;
 import Tas.TasPoubelle;
 import Tas.TasTresors;
 import Vues.VueAventurierDemo;
 import Vues.VueGrilleDemo;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class Controleur implements Observateur {
@@ -30,8 +39,12 @@ public class Controleur implements Observateur {
     private HashMap<String, VueAventurierDemo> vuesAventurier = new HashMap<String, VueAventurierDemo>(); // String : un nom de joueur
     private VueAventurierDemo vueAventurier;         // une pour chaque joueur (il n'y en a qu'une seule à la fois à l'écran)
     private VueGrilleDemo vueGrille;
+    //          ihm fin
+
     //          autres attributs
+    private ArrayList<String> joueurs = new ArrayList<String>(); // contient tous les nom de joueurs
     private HashMap<String, Aventurier> aventuriers = new HashMap<String, Aventurier>(); // String : un nom de joueur
+    private HashMap<String, TasJoueur> tasJoueurs = new HashMap<String, TasJoueur>();
     private Grille grille;
     private NiveauEau niveauEau;
     private Tresor tresor1;
@@ -52,9 +65,28 @@ public class Controleur implements Observateur {
     private boolean pouvoirIngenieur = false;
 
     // constructeur
-    //Crée unc controleur
+    //Crée un controleur
     public Controleur() {
+        // variable interne
         setTermine(false);//en initialisant le termine à faux
+
+        // instantiation des éléments
+        setGrille();
+        setNiveauEau();
+        Tresor tresor1 = new Tresor(NomTresor.La_Pierre_sacree);
+        Tresor tresor2 = new Tresor(NomTresor.La_Statue_du_zephyr);
+        Tresor tresor3 = new Tresor(NomTresor.Le_Cristal_ardent);
+        Tresor tresor4 = new Tresor(NomTresor.Le_Calice_de_l_onde);
+        setTresor1(tresor1);
+        setTresor2(tresor2);
+        setTresor3(tresor3);
+        setTresor4(tresor4);
+        setPoubelle();
+        setTasAventuriers();
+        setDefausseTresor();
+        setTasTresor();
+        setDefausseInondation();
+        setTasInondation();
     }
 
     // setteurs
@@ -71,10 +103,10 @@ public class Controleur implements Observateur {
     public void afficherVueGrille(VueGrilleDemo vueGrille) {
         this.vueGrille = vueGrille;
     }
-    
+
     //Méthode qui met à jour le niveau d'eau
-    public void setNiveauEau(NiveauEau niveauEau) {
-        this.niveauEau = niveauEau;
+    public void setNiveauEau() {
+        this.niveauEau = new NiveauEau();
     }
 
     //Méthode qui met à jour le tresor n°1
@@ -97,8 +129,13 @@ public class Controleur implements Observateur {
         this.tresor4 = tresor4;
     }
 
-    //Méthode qui met à jour la grille
-    public void setGrille(Grille grille) {
+    //Méthode qui initialise la grille
+    public void setGrille() {
+        this.grille = new Grille();
+    }
+
+    //Méthode qui met à jour la grille (à ne pas utiliser)
+    public void initialiserGrille(Grille grille) {
         this.grille = grille;
     }
 
@@ -108,33 +145,33 @@ public class Controleur implements Observateur {
     }
 
     //Méthode qui met à jour le tas poubelle
-    public void setPoubelle(TasPoubelle poubelle) {
-        this.poubelle = poubelle;
+    public void setPoubelle() {
+        this.poubelle = new TasPoubelle();
     }
 
     //Méthode qui met à jour le tas aventurier
-    public void setTasAventuriers(TasAventuriers tasAventuriers) {
-        this.tasAventuriers = tasAventuriers;
+    public void setTasAventuriers() {
+        this.tasAventuriers = new TasAventuriers();
     }
 
     //Méthode qui met à jour la défausse tresor
-    public void setDefausseTresor(DefausseTresors defausseTresor) {
-        this.defausseTresor = defausseTresor;
+    public void setDefausseTresor() {
+        this.defausseTresor = new DefausseTresors();
     }
 
     //Méthode qui met à jour le tas trésor
-    public void setTasTresor(TasTresors tasTresor) {
-        this.tasTresor = tasTresor;
+    public void setTasTresor() {
+        this.tasTresor = new TasTresors();
     }
 
     //Méthode qui met à jour la défausse inondation
-    public void setDefausseInondation(DefausseInondations defausseInondation) {
-        this.defausseInondation = defausseInondation;
+    public void setDefausseInondation() {
+        this.defausseInondation = new DefausseInondations();
     }
 
     //Méthode qui met à jour le tas inondation
-    public void setTasInondation(TasInondations tasInondation) {
-        this.tasInondation = tasInondation;
+    public void setTasInondation() {
+        this.tasInondation = new TasInondations();
     }
 
     //Méthode qui met à jour le booléen termine
@@ -314,11 +351,45 @@ public class Controleur implements Observateur {
         return pouvoirIngenieur;
     }
 
+    public ArrayList<String> getJoueurs() {
+        return joueurs;
+    }
+
+    public HashMap<String, TasJoueur> getTasJoueurs() {
+        return tasJoueurs;
+    }
+
     // autres méthodes
     @Override
     public void traiterAction(Action action) {
-        // pour demander l'affiche des tuiles possibles (pour se déplacer)
-        if (action.getType() == TypesActions.demandeDeplacement) {
+        // pour ajouter un joueur
+        if (action.getType() == TypesActions.ajoutJoueur) {
+            joueurs.add(action.getNom());
+            TasJoueur t = new TasJoueur();
+            tasJoueurs.put(action.getNom(), t);
+            CarteAventurier c = tasAventuriers.getPremiereCarte();
+            if (c.getNom() == NomAventurier.explorateur) {
+                Explorateur av = new Explorateur(action.getNom(), c);
+                aventuriers.put(action.getNom(), av);
+            } else if (c.getNom() == NomAventurier.pilote) {
+                Pilote av = new Pilote(action.getNom(), c);
+                aventuriers.put(action.getNom(), av);
+            } else if (c.getNom() == NomAventurier.navigateur) {
+                Navigateur av = new Navigateur(action.getNom(), c);
+                aventuriers.put(action.getNom(), av);
+            } else if (c.getNom() == NomAventurier.plongeur) {
+                Plongeur av = new Plongeur(action.getNom(), c);
+                aventuriers.put(action.getNom(), av);
+            } else if (c.getNom() == NomAventurier.ingenieur) {
+                Ingenieur av = new Ingenieur(action.getNom(), c);
+                aventuriers.put(action.getNom(), av);
+            } else {
+                Messager av = new Messager(action.getNom(), c);
+                aventuriers.put(action.getNom(), av);
+            }
+
+            // pour demander l'affiche des tuiles possibles (pour se déplacer)
+        } else if (action.getType() == TypesActions.demandeDeplacement) {
             //Si le nombre d'action n'est pas de 2 et que l'aventurier n'est pas l'ingenieur et que sont pouvoir est a faux alors
             if (!(getNombreActions() == 2 && getAventurier().getCarteAventurier().getNom() == NomAventurier.ingenieur && isPouvoirIngenieur())) {
                 Aventurier aventurier = getAventurier();//l'aventurier prend la valeur de l'aventurier qui fait l'action
@@ -328,7 +399,7 @@ public class Controleur implements Observateur {
                 }
                 //Afficher les tuiles possibles dans la vueGrille
                 vueGrille.afficherTuilesPossiblesDeplacement(tuilesPossibles);
-            } 
+            }
 
             // pour demander l'affiche des tuiles possibles (à assécher)
         } else if (action.getType() == TypesActions.demandeAssechement) {
@@ -339,10 +410,6 @@ public class Controleur implements Observateur {
             }
             //Afficher les tuiles possibles dans la vueGrille
             vueGrille.afficherTuilesPossiblesAssechement(tuilesPossibles);
-
-            // autres action possible
-        } else if (action.getType() == TypesActions.demandeAutres) {
-            System.out.println("autres - pas traité pour le moment");
 
             // pour terminer son tour
         } else if (action.getType() == TypesActions.terminer) {
@@ -385,7 +452,7 @@ public class Controleur implements Observateur {
                 this.getAventurier().addTuile(action.getTuile());
                 // on rajoute à la nouvelle tuile l'aventurier
                 action.getTuile().addAventurier(getAventurier());
-                
+
                 i = 0;
                 while (getGrille().getTuiles().get(i) != getAventurier().getTuile()) {
                     i += 1;
@@ -417,10 +484,68 @@ public class Controleur implements Observateur {
             }
             this.setActionEffectue(true);
 
-            // pour récupérer et afficher la position d'un joueur sur sa vue aventurier
-        } else if (action.getType() == TypesActions.demandePosition) {
-            Aventurier av = aventuriers.get(vueAventurier.getNomJoueur()); // <- il ne trouve pas l'aventurier 
-            vueAventurier.setPosition(av.getTuile().getNom().toString() + " | " + av.getTuile().getPosX() + " - " + av.getTuile().getPosY());
+            // pour afficher les cartes qu'on peut utiliser (de ses propres cartes)
+        } else if (action.getType() == TypesActions.demandeUtilisationCarte) {
+            for (CarteTresors c : tasJoueurs.get(action.getNom()).getCartes()) {
+                if (c.getNom() == NomTresor.helico || c.getNom() == NomTresor.monteeEau || c.getNom() == NomTresor.sacSable) {
+                    // ihm2.afficherCarte();
+                }
+            }
+
+            // pour utiliser une carte trésor
+        } else if (action.getType() == TypesActions.utiliserTresor) {
+            if (action.getCarteT().getNom() == NomTresor.helico) {
+
+            } else if (action.getCarteT().getNom() == NomTresor.monteeEau) {
+                // on augmente le semi niveau de 1
+                niveauEau.monterNiveau();
+                // on remet la defausse inondation au dessus du tas de cartes inondation
+                ArrayList<CarteInondation> ci = new ArrayList<>();
+                ci = defausseInondation.recupererCartes();
+                Collections.shuffle(ci);
+                for (CarteInondation c : ci) {
+                    tasInondation.addCarte(c);
+                }
+                // on défausse cette carte dans la defausse tresors
+                defausseTresor.addCarte(action.getCarteT());
+                int i = 0;
+                for (CarteTresors c : tasJoueurs.get(action.getNom()).getCartes()) {
+                    if (c == action.getCarteT()){
+                        tasJoueurs.get(action.getNom()).getCartes().remove(i);
+                    }
+                    i += 1;
+                }
+            } else if (action.getCarteT().getNom() == NomTresor.sacSable) {
+
+            }
+            // pour utiliser une carte inondation
+        } else if (action.getType()
+                == TypesActions.utiliserInondation) {
+
+            // pour piocher une carte trésor
+        } else if (action.getType()
+                == TypesActions.piocherTresor) {
+
+            // pour piocher une carte inondation
+        } else if (action.getType()
+                == TypesActions.piocherInondation) {
+
+            // pour afficher la liste des joueurs à qui on peut donner une carte trésor
+        } else if (action.getType()
+                == TypesActions.demandeDonCarteTresor) {
+
+            // pour donner une carte trésor à un joueur
+        } else if (action.getType()
+                == TypesActions.donCarteTresor) {
+
+            // pour se défausse d'une carte
+        } else if (action.getType()
+                == TypesActions.defausserCarte) {
+
+            // pour recupérer un trésor
+        } else if (action.getType()
+                == TypesActions.recupererTresor) {
+
         }
     }
 

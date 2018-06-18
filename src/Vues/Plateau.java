@@ -25,7 +25,6 @@ import ElementsJeu.Tuile;
 import Enumerations.Couleur;
 import Enumerations.EtatTuile;
 import Enumerations.NomAventurier;
-import Enumerations.NomCarteSpeciale;
 import Enumerations.NomTresor;
 import Enumerations.NomTuile;
 import Tas.DefausseInondations;
@@ -273,7 +272,7 @@ public class Plateau {
         grilleDeJeu.getTuiles().add(t35);
         grilleDeJeu.getTuiles().add(t36);
         
-        controleur.setGrille(grilleDeJeu);
+        controleur.initialiserGrille(grilleDeJeu);
 
         //      NIVEAU D'EAU -------------------------------------------------------------------------------------------------------
         NiveauEau niveauEau = new NiveauEau();

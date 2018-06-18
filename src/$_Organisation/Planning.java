@@ -38,8 +38,8 @@ public class Planning {
     *   Enumerations    - Normalement rien à faire
     *   Tas             - A COMPLETER
     *       POUR TOUS LES TAS 
-    *           1) Construire la méthode qui permet d'instancier aléatoirement les tas
-    *           2) Construire les méthodes pour mélanger ces tas (peut aider pour la méthode du dessus)
+    *           1) Construire la méthode qui permet d'instancier aléatoirement les tas      // OK
+    *           2) Construire les méthodes pour mélanger ces tas (peut aider pour la méthode du dessus) // OK
     *              (Utile pour mélanger les défausses principalement)      
     * 
     * ------------------------------- *
@@ -47,7 +47,7 @@ public class Planning {
     * ------------------------------- *
     *   Controle        - A COMPLETER
     *       Faire les traiterAction() pour :
-    *       1) Utilisation d'une carte Tresor
+    *       1) Utilisation d'une carte Tresor   
     *       2) Utilisation d'une carte Inondation
     *       3) Piocher une carte Tresor
     *       4) Piocher une carte Inondation

@@ -3,7 +3,6 @@ package Tas;
 import Cartes.CarteSpeciale;
 import Cartes.CarteTresor;
 import Cartes.CarteTresors;
-import Enumerations.NomCarteSpeciale;
 import Enumerations.NomTresor;
 import java.util.ArrayList;
 import java.util.Collections;
