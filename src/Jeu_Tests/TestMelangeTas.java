@@ -21,7 +21,7 @@ import java.util.ArrayList;
  *
  * @author dechambm
  */
-public class TestMelange {
+public class TestMelangeTas {
 
     /**
      * @param args the command line arguments
