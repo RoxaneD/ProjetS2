@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vues;
 
 import Cartes.CarteAventurier;
@@ -18,38 +13,36 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-/**
- *
- * @author paradisc
- */
 public class IhmPlateauDeJeu {
 
-    /**
-     * @param args the command line arguments
-     */
+    // attributs
     private final JFrame window;
     private VueAventurierDemo vueAventurier;
+    private ArrayList<VueAventurierDemo> ensembleVuesAventuriers;
     private VueGrilleDemo vueGrille;
     private JPanel panelNorth;
     private JPanel panelCentre;
     private JPanel panelSouth;
     private Dimension dimension;
 
+    // constructeur
     // A changer pour arrayList de joueur
-    public IhmPlateauDeJeu(VueAventurierDemo vueAventurier1, VueGrilleDemo vueGrille1) {
+    public IhmPlateauDeJeu(ArrayList<VueAventurierDemo> ensembleVuesAventuriers, VueGrilleDemo vueGrille1) {
 
-        setVueAventurier(vueAventurier1);
+        setVueAventurier(ensembleVuesAventuriers.get(0));
         setVueGrille(vueGrille1);
 
         window = new JFrame();
         window.setSize(1000, 1000);
         dimension = window.getSize();
         window.setLayout(new BorderLayout());
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         panelNorth = new JPanel();
         panelNorth.setLayout(new FlowLayout());
@@ -58,26 +51,25 @@ public class IhmPlateauDeJeu {
 
         panelCentre = new JPanel();
         panelCentre.setLayout(new BorderLayout());
-        panelCentre.add(vueGrille.getPlateauTuiles(),BorderLayout.CENTER);
+        panelCentre.add(vueGrille.getPlateauTuiles(), BorderLayout.CENTER);
         panelCentre.setSize((int) dimension.getWidth(), (int) (dimension.getHeight() * 0.7));
-        
-        
+
         JPanel panelCentreEst = new JPanel();
-        panelCentreEst.setLayout(new GridLayout(/*Nombre De Joueur*/4,2));
+        panelCentreEst.setLayout(new GridLayout(/*Nombre De Joueur*/4, 2));
         panelCentreEst.setSize(300, 350);
-        panelCentre.add(panelCentreEst,BorderLayout.EAST);
+        panelCentre.add(panelCentreEst, BorderLayout.EAST);
         JPanel panelEstGauche = new JPanel();
-        
+
         int i = 0;
-        for(CarteTresors carte : vueAventurier.getTasJoueur().getCartes()){
+        for (CarteTresors carte : vueAventurier.getTasJoueur().getCartes()) {
             i++;
         }
         panelCentreEst.add(new JLabel(vueAventurier.getNomJoueur()));
-        panelEstGauche.setLayout(new GridLayout(i,1));
-        
-        for(CarteTresors carte : vueAventurier.getTasJoueur().getCartes()){
+        panelEstGauche.setLayout(new GridLayout(i, 1));
+
+        for (CarteTresors carte : vueAventurier.getTasJoueur().getCartes()) {
             JButton bouton = new JButton(carte.getNom().name());
-            panelCentreEst.add(bouton,BorderLayout.EAST);
+            panelCentreEst.add(bouton, BorderLayout.EAST);
             bouton.addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -85,7 +77,7 @@ public class IhmPlateauDeJeu {
 
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    
+
                 }
 
                 @Override
@@ -104,11 +96,9 @@ public class IhmPlateauDeJeu {
             panelCentreEst.add(new JButton(""));
             panelCentreEst.add(new JButton(""));
             panelCentreEst.add(new JButton(""));
-            
+
         }
-        
-        
-        
+
         panelSouth = new JPanel();
         panelSouth.setLayout(new GridLayout(3, 3));
         panelSouth.setSize((int) dimension.getWidth(), (int) (dimension.getHeight() * 0.2));
@@ -128,6 +118,7 @@ public class IhmPlateauDeJeu {
 
     }
 
+    // setteurs
     public void setVueAventurier(VueAventurierDemo vueAventurier) {
         this.vueAventurier = vueAventurier;
     }
@@ -136,20 +127,33 @@ public class IhmPlateauDeJeu {
         this.vueGrille = vueGrille;
     }
 
+    // getteurs
     public JFrame getWindow() {
         return window;
     }
+    
+    public void afficherIhm(){
+        window.setVisible(true);
+    }
+    
+    public void cacherIhm(){
+        window.setVisible(false);
+    }
 
+    // autre méthodes
     public static void main(String[] args) {
         // TODO code application logic here
-       /* CarteAventurier carte = new CarteAventurier(NomAventurier.explorateur, Couleur.bleu);
+        CarteAventurier carte = new CarteAventurier(NomAventurier.explorateur, Couleur.bleu);
         //Création d'une vue aventurier de nom Test1 avec la carte et le pion
         VueAventurierDemo vueAventurier1 = new VueAventurierDemo("Test1", carte, Utils.Pion.BLEU.getCouleur());
         Grille grille = new Grille();
         VueGrilleDemo vueGrille = new VueGrilleDemo(grille);
+
+        ArrayList<VueAventurierDemo> ensembleVueAventurier = new ArrayList<>();
+        ensembleVueAventurier.add(vueAventurier1);
         
-        IhmPrincipale ihm1 = new IhmPrincipale(vueAventurier1,vueGrille);
-        ihm1.getWindow().setVisible(true);*/
+        IhmPlateauDeJeu ihmPlateauDeJeu = new IhmPlateauDeJeu(ensembleVueAventurier, vueGrille);
+        ihmPlateauDeJeu.afficherIhm();
 
     }
 
