@@ -1,6 +1,5 @@
 package Cartes;
 
-import Enumerations.NomCarteSpeciale;
 import Enumerations.NomTresor;
 
 public class CarteTresors extends Carte {
