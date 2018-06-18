@@ -45,13 +45,18 @@ public class VueGrilleDemo extends Observe {
         this.window = new JFrame();  //window est instancié en JFrame
         window.setSize(900, 1000);  //On définie la hauteur et la largeur de la fenêtre window
         window.setTitle("Grille du Jeu");  //On modifie le titre de la fenêtre
-        dimension = window.getSize();  //dimension prend les valeurs de window
+        //dimension = window.getSize();  //dimension prend les valeurs de window
         plateauTuiles = new JPanel(new GridLayout(6, 6));  //Définition de plateauTuiles en JPanel composé d'un GridLayout lui même composé de 6 lignes et 6 colonnes
         Border blackline = BorderFactory.createLineBorder(Color.black, 1);  //Création d'une ligne noir pour les contours des tuiles
         for (Tuile tuile2 : grille.getTuiles()) {
             // création du 1er fond de la tuile (c'est un panel) - indique si la tuile est séléctionnée ou non - rajout dans fondTUiles
             JPanel panelFondTuile = new JPanel();  //Déclaration et initialisation d'une variable panelFondTuile de type JPanel
             panelFondTuile.setBackground(Color.white);  //Mise à jour du fond de la variable panelFondTuile
+            
+            //---------------------------------TEST-----------------------------------------------------------------------------------------------------
+            dimension = new Dimension(600,600);            
+            //---------------------------------FIN TEST------------------------------------------------------------------------------------------------
+            
             panelFondTuile.setSize(dimension.width / 6, dimension.height / 6);  //Mise à jour de la taille du JPanel panelFondTuile
 
             if (tuile2.getEtat() != EtatTuile.inexistante) {  //Vérifie si l'état de la tuile est différent d'inexistant
@@ -113,7 +118,7 @@ public class VueGrilleDemo extends Observe {
             plateauTuiles.add(panelFondTuile);  //Ajout de panelFondTuile dans plateauTuiles
         }
         window.add(plateauTuiles);  //Ajout de plateauTuiles dans window
-        window.setVisible(true);  //Rend window visible
+        window.setVisible(false);  //Rend window visible
     }
 
     // setteurs
@@ -135,7 +140,18 @@ public class VueGrilleDemo extends Observe {
         this.window = window;  //window prend la valeur donné en paramètre
     }
 
+    public void setDimension(Dimension dimension) {
+        this.dimension = dimension;
+    }
+    
+    
+
     // getteurs
+    public JPanel getPlateauTuiles() {
+        return plateauTuiles;
+    }
+    
+    
     public ArrayList<Tuile> getTuiles() {
         return tuiles;  //Retourne les tuiles contenues dans l'ArrayList tuiles
     }
@@ -151,6 +167,12 @@ public class VueGrilleDemo extends Observe {
     public JFrame getWindow() {
         return window;  //retourne window
     }
+
+    public Dimension getDimension() {
+        return dimension;
+    }
+    
+    
 
     // autres méthodes
     public static void main(String[] args) {
