@@ -27,6 +27,9 @@ import Tas.TasInondations;
 import Tas.TasJoueur;
 import Tas.TasPoubelle;
 import Tas.TasTresors;
+import Vues.IhmMenuPrincipal;
+import Vues.IhmObserve;
+import Vues.IhmReglesDuJeu;
 import Vues.VueAventurierDemo;
 import Vues.VueGrilleDemo;
 import java.util.ArrayList;
@@ -41,6 +44,8 @@ public class Controleur implements Observateur {
     private VueAventurierDemo vueAventurier;         // une pour chaque joueur (il n'y en a qu'une seule à la fois à l'écran)
     private VueGrilleDemo vueGrille;
     //          ihm fin
+    private static IhmMenuPrincipal ihmMenuPrincipal;
+    private static IhmReglesDuJeu ihmReglesDuJeu;
 
     //          autres attributs
     private ArrayList<String> joueurs = new ArrayList<String>(); // contient tous les nom de joueurs
@@ -67,10 +72,10 @@ public class Controleur implements Observateur {
 
     // constructeur
     public Controleur() {
-        // variable interne
+        // attributs interne
         setTermine(false);//en initialisant le termine à faux
 
-        // instantiation des éléments
+        // instantiation des éléments internes
         setGrille();
         setNiveauEau();
         Tresor tresor1 = new Tresor(NomTresor.La_Pierre_sacree);
@@ -87,6 +92,18 @@ public class Controleur implements Observateur {
         setTasTresor();
         setDefausseInondation();
         setTasInondation();
+
+        // instantiation des ihm
+        // menu
+        IhmObserve ihmMenuObserve = new IhmObserve();
+        ihmMenuObserve.addObservateur(this);
+        ihmMenuPrincipal = new IhmMenuPrincipal(ihmMenuObserve);
+        // regles du jeu
+        IhmObserve ihmReglesObserve = new IhmObserve();
+        ihmReglesObserve.addObservateur(this);
+        ihmReglesDuJeu = new IhmReglesDuJeu(ihmReglesObserve);
+        // plateau de jeu
+
     }
 
     // setteurs
@@ -359,12 +376,20 @@ public class Controleur implements Observateur {
         return tasJoueurs;
     }
 
+        // POUR LES IHMS
+    public static IhmMenuPrincipal getIhmMenuPrincipal() {
+        return ihmMenuPrincipal;
+    }
+
+    public static IhmReglesDuJeu getIhmReglesDuJeu() {
+        return ihmReglesDuJeu;
+    }
+
     // autres méthodes
     @Override
     public void traiterAction(Action action) {
         // pour ajouter un joueur
         if (action.getType() == TypesActions.commencerPartie) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM 
-            System.out.println("BOuh");
             for (String s : action.getJoueurs()) {
                 joueurs.add(s);
                 TasJoueur t = new TasJoueur();
@@ -553,6 +578,13 @@ public class Controleur implements Observateur {
             // pour recupérer un trésor
         } else if (action.getType() == TypesActions.recupererTresor) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
 
+            // pour afficher les règles du jeu
+        } else if (action.getType() == TypesActions.reglesJeu) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
+            ihmReglesDuJeu.afficherIhm();
+            
+            // pour fermer les règles du jeu
+        } else if (action.getType() == TypesActions.fermerReglesJeu) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
+            ihmReglesDuJeu.cacherIhm();
         }
     }
 

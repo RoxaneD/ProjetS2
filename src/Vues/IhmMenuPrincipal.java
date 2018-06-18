@@ -22,10 +22,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class IHM_intro extends JPanel {
+public class IhmMenuPrincipal extends JPanel {
 
     // variable
-    private IHM_Menu menu;
+    private IhmObserve ihmObserve;
 
     // variables internes
     private int nombreJoueurs = 2; // représente le nombre de joueurs
@@ -33,6 +33,7 @@ public class IHM_intro extends JPanel {
     private Integer width, height;
 
     // éléments de l'ihm
+    private JFrame window;
     private JPanel panelTitre = new JPanel(new BorderLayout()); // représente l'espace pour le titre
     private JPanel panelJoueurs = new JPanel(); // représente les joueurs
     private JPanel panelInfos = new JPanel(new BorderLayout()); // pour : 'ajouter un joueur' + 'commencer' + 'regles du jeu'
@@ -58,12 +59,12 @@ public class IHM_intro extends JPanel {
     private JButton supp6 = new JButton("X");
 
     // constructeurs
-    public IHM_intro(IHM_Menu ihm) {
+    public IhmMenuPrincipal(IhmObserve ihm) {
         super();
         width = 508;
         height = 532;
 
-        setIhm(ihm);
+        setIhmObserve(ihm);
 
         this.setLayout(new BorderLayout());
         this.setSize(508, 532);
@@ -280,7 +281,15 @@ public class IHM_intro extends JPanel {
                     i += 1;
                 }
                 Action a = new Action(TypesActions.commencerPartie, nomJoueurs);
-                getIhm().notifierObservateur(a);
+                getIhmObserve().notifierObservateur(a);
+            }
+        });
+
+        regles.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                Action a = new Action(TypesActions.reglesJeu);
+                getIhmObserve().notifierObservateur(a);
             }
         });
 
@@ -289,8 +298,8 @@ public class IHM_intro extends JPanel {
     }
 
     // setteurs
-    public void setIhm(IHM_Menu ihm) {
-        this.menu = ihm;
+    public void setIhmObserve(IhmObserve ihm) {
+        this.ihmObserve = ihm;
     }
 
     public void setCommencer(JButton commencer) {
@@ -313,9 +322,9 @@ public class IHM_intro extends JPanel {
     public boolean isPressed() {
         return presse;
     }
-    
-    public IHM_Menu getIhm(){
-        return this.menu;
+
+    public IhmObserve getIhmObserve() {
+        return this.ihmObserve;
     }
 
     public ArrayList<String> getNomJoueurs() {
@@ -381,7 +390,7 @@ public class IHM_intro extends JPanel {
     }
 
     public void afficherIhm() {
-        JFrame window = new JFrame();
+        window = new JFrame();
         window.setLocationRelativeTo(null);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setSize(508, 532);
@@ -395,11 +404,15 @@ public class IHM_intro extends JPanel {
         window.setVisible(true);
         this.repaint();
     }
+    
+    public void cacherIhm(){
+        window.setVisible(false);
+    }
 
     public static void main(String[] args) {
-        IHM_Menu menu = new IHM_Menu();
-        IHM_intro ihm = new IHM_intro(menu);
-        
+        IhmObserve ihmObserve = new IhmObserve();
+        IhmMenuPrincipal ihm = new IhmMenuPrincipal(ihmObserve);
+
         ihm.afficherIhm();
     }
 }

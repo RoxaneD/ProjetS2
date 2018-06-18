@@ -15,7 +15,7 @@ import Enumerations.NomAventurier;
 import Enumerations.NomTresor;
 import Enumerations.NomTuile;
 import Util.Utils;
-import Vues.IhmPrincipale;
+import Vues.IhmPlateauDeJeu;
 import Vues.Plateau;
 import Vues.VueAventurierDemo;
 import Vues.VueGrilleDemo;
@@ -31,7 +31,7 @@ public class TestIhmPrincipale {
     /**
      * @param args the command line arguments
      */
-    private static IhmPrincipale ihm;
+    private static IhmPlateauDeJeu ihm;
 
     public static void main(String[] args) {
         // TODO code application logic here
@@ -47,7 +47,7 @@ public class TestIhmPrincipale {
         //vueGrille.getWindow().setVisible(false);
         // vueJoueur1.getWindow().setVisible(false);
 
-        ihm = new IhmPrincipale(vueJoueur1, vueGrille);
+        ihm = new IhmPlateauDeJeu(vueJoueur1, vueGrille);
         ihm.getWindow().setVisible(true);
 
         /*  while (plateau.getControleur().isTermine() == false) {

@@ -16,5 +16,6 @@ public enum TypesActions {
     donCarteTresor,         // PAS traité
     defausserCarte,         // PAS traité
     recupererTresor,        // PAS traité
-    reglesJeu               // PAS traité
+    reglesJeu,               // PAS traité
+    fermerReglesJeu
 }

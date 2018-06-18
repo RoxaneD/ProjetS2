@@ -27,7 +27,7 @@ import javax.swing.JPanel;
  *
  * @author paradisc
  */
-public class IhmPrincipale {
+public class IhmPlateauDeJeu {
 
     /**
      * @param args the command line arguments
@@ -41,7 +41,7 @@ public class IhmPrincipale {
     private Dimension dimension;
 
     // A changer pour arrayList de joueur
-    public IhmPrincipale(VueAventurierDemo vueAventurier1, VueGrilleDemo vueGrille1) {
+    public IhmPlateauDeJeu(VueAventurierDemo vueAventurier1, VueGrilleDemo vueGrille1) {
 
         setVueAventurier(vueAventurier1);
         setVueGrille(vueGrille1);
