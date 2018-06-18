@@ -83,35 +83,35 @@ public class VueAventurierDemo extends Observe {
         mainPanel.add(this.panelBoutons, BorderLayout.SOUTH);
 
         this.btnBouger = new JButton("Bouger");
-        btnBouger.addActionListener(new ActionListener() {
+      /*  btnBouger.addActionListener(new ActionListener() {
             @Override//Fait une demande de deplacement
             public void actionPerformed(ActionEvent e) {
                 Action a = new Action(TypesActions.demandeDeplacement);
                 notifierObservateur(a);
             }
-        });
+        });*/
         this.btnAssecher = new JButton("Assecher");
-        btnAssecher.addActionListener(new ActionListener() {
+    /*    btnAssecher.addActionListener(new ActionListener() {
             @Override//fait une demande d'assechement
             public void actionPerformed(ActionEvent e) {
                 Action a = new Action(TypesActions.demandeAssechement);
                 notifierObservateur(a);
             }
-        });
+        });*/
         this.btnAutreAction = new JButton("AutreAction");
-        btnAutreAction.addActionListener(new ActionListener() {
+      /*  btnAutreAction.addActionListener(new ActionListener() {
             @Override//Fait une demande pour d'autre action
             public void actionPerformed(ActionEvent e) {
             }
-        });
+        });*/
         this.btnTerminerTour = new JButton("Terminer Tour");
-        btnTerminerTour.addActionListener(new ActionListener() {
+       /* btnTerminerTour.addActionListener(new ActionListener() {
             @Override//Fait une demande pour terminer le tour
             public void actionPerformed(ActionEvent e) {
                 Action a = new Action(TypesActions.terminer);
                 notifierObservateur(a);
             }
-        });
+        });*/
         //Ajout de tout les boutons au JPanel
         this.panelBoutons.add(btnBouger);
         this.panelBoutons.add(btnAssecher);
@@ -192,11 +192,11 @@ public class VueAventurierDemo extends Observe {
     public static void main(String[] args) {
         // Instanciation de la fenêtre - exemple
         //création d'une carte aventurier explorateur
-        CarteAventurier carte = new CarteAventurier(NomAventurier.explorateur, Couleur.bleu);
+       /* CarteAventurier carte = new CarteAventurier(NomAventurier.explorateur, Couleur.bleu);
         //Création d'une vue aventurier de nom Test1 avec la carte et le pion
         VueAventurierDemo vueAventurier1 = new VueAventurierDemo("Test1", carte, Pion.BLEU.getCouleur());
         //affichage sur la fenetre de cette vue
-        vueAventurier1.getWindow().setVisible(true);
+        vueAventurier1.getWindow().setVisible(true);*/
     }
 
 }

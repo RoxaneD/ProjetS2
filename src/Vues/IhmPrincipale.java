@@ -36,6 +36,7 @@ public class IhmPrincipale {
     private Dimension dimension;
 
     public IhmPrincipale(VueAventurierDemo vueAventurier1, VueGrilleDemo vueGrille1) {
+
         setVueAventurier(vueAventurier1);
         setVueGrille(vueGrille1);
 
@@ -46,25 +47,16 @@ public class IhmPrincipale {
 
         panelNorth = new JPanel();
         panelNorth.setLayout(new FlowLayout());
-        panelNorth.setSize((int) dimension.getWidth(), (int)(dimension.getHeight() * 0.1));
+        panelNorth.setSize((int) dimension.getWidth(), (int) (dimension.getHeight() * 0.1));
         panelNorth.add(new JLabel("Tour du joueur " + this.vueAventurier.getNomJoueur()));
 
         panelGrille = new JPanel();
-       
         panelGrille.add(vueGrille.getPlateauTuiles());
-        panelGrille.setSize((int) dimension.getWidth(), (int)(dimension.getHeight() * 0.7));
-        System.out.println("Panel Grille ::::" + panelGrille.getSize());
-        vueGrille.getDimension().setSize(panelGrille.getSize());        
-        
-        
-        /*panelGrille.setSize(vueGrille.getDimension().getSize());
-        System.out.println("Panel Grille :" + panelGrille.getSize());
-        System.out.println("Panel Plateau  :" + vueGrille.getDimension().getSize());*/
-         
+        panelGrille.setSize((int) dimension.getWidth(), (int) (dimension.getHeight() * 0.7));
 
         panelSouth = new JPanel();
         panelSouth.setLayout(new GridLayout(3, 3));
-        panelSouth.setSize((int) dimension.getWidth(), (int)(dimension.getHeight() * 0.2));
+        panelSouth.setSize((int) dimension.getWidth(), (int) (dimension.getHeight() * 0.2));
         panelSouth.add(new JLabel(""));
         panelSouth.add(vueAventurier.getBtnAssecher());
         panelSouth.add(vueAventurier.getBtnBouger());
@@ -78,13 +70,7 @@ public class IhmPrincipale {
         window.add(panelNorth, BorderLayout.NORTH);
         window.add(panelGrille, BorderLayout.CENTER);
         window.add(panelSouth, BorderLayout.SOUTH);
-        
-        System.out.println("jnrjgkej enjkgrbejkgberjkgbjk"+panelGrille.getSize());
 
-    }
-
-    public IhmPrincipale(VueAventurierDemo vueJoueur1, Grille grilleDeJeu) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public void setVueAventurier(VueAventurierDemo vueAventurier) {
@@ -101,14 +87,14 @@ public class IhmPrincipale {
 
     public static void main(String[] args) {
         // TODO code application logic here
-        /*CarteAventurier carte = new CarteAventurier(NomAventurier.explorateur, Couleur.bleu);
+       /* CarteAventurier carte = new CarteAventurier(NomAventurier.explorateur, Couleur.bleu);
         //Création d'une vue aventurier de nom Test1 avec la carte et le pion
         VueAventurierDemo vueAventurier1 = new VueAventurierDemo("Test1", carte, Utils.Pion.BLEU.getCouleur());
         Grille grille = new Grille();
         VueGrilleDemo vueGrille = new VueGrilleDemo(grille);
         
-        IhmPrincipale ihm1 = new IhmPrincipale(vueAventurier1,vueGrille);*/
- /*ihm1.getWindow().setVisible(true);*/
+        IhmPrincipale ihm1 = new IhmPrincipale(vueAventurier1,vueGrille);
+        ihm1.getWindow().setVisible(true);*/
 
     }
 
