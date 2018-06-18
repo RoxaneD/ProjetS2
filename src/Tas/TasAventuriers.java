@@ -3,7 +3,7 @@ package Tas;
 import Cartes.CarteAventurier;
 import java.util.ArrayList;
 
-public class TasAventuriers {
+public class TasAventuriers extends Tas{
 
     // attributs
     private ArrayList<CarteAventurier> cartesAventuriers;
