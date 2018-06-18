@@ -13,7 +13,6 @@ public class TasPoubelle{
     //Crée un tas poubelle
     public TasPoubelle() {
         setCartes();
-        Collections.shuffle(cartes);
     }
 
     // setteurs

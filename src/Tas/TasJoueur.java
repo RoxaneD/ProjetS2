@@ -13,7 +13,6 @@ public class TasJoueur{
     //Crée un tas de carte pour le joueur
     public TasJoueur(){
         setCartes();
-        Collections.shuffle(cartes);
     }
     
     // setteurs
