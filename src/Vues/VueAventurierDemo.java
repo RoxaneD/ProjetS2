@@ -215,7 +215,4 @@ public class VueAventurierDemo extends Observe {
         //affichage sur la fenetre de cette vue
         vueAventurier1.getWindow().setVisible(true);*/
     }
-
-    
-
 }

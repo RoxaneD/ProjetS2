@@ -36,10 +36,6 @@ import Tas.TasTresors;
 import java.awt.Color;
 import java.util.HashMap;
 
-/**
- *
- * @author deflandr
- */
 public class Plateau {
 
     // attributs
@@ -352,7 +348,5 @@ public class Plateau {
     }
 
     public static void main(String[] args) {
-
     }
-
 }

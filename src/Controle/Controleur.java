@@ -66,7 +66,6 @@ public class Controleur implements Observateur {
     private boolean pouvoirIngenieur = false;
 
     // constructeur
-    //Crée un controleur
     public Controleur() {
         // variable interne
         setTermine(false);//en initialisant le termine à faux
@@ -392,7 +391,6 @@ public class Controleur implements Observateur {
                 }
                 // fermer IHM_Menu
                 // ouvrir ihm principale
-                System.out.println(s);
             }
 
             // pour demander l'affiche des tuiles possibles (pour se déplacer)

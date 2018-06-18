@@ -22,10 +22,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-/**
- *
- * @author fourniep
- */
 public class IHM_intro extends JPanel {
 
     // variable
@@ -61,6 +57,7 @@ public class IHM_intro extends JPanel {
     private JButton supp5 = new JButton("X");
     private JButton supp6 = new JButton("X");
 
+    // constructeurs
     public IHM_intro(IHM_Menu ihm) {
         super();
         width = 508;
@@ -391,7 +388,7 @@ public class IHM_intro extends JPanel {
 
         // Centrage de la fenêtre sur l'écran
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        window.setLocation((dim.width / 2) - 225, (dim.height / 2) - 150);
+        window.setLocation((dim.width / 2) - 225, (dim.height / 2) - 241);
 
         window.add(this);
 
