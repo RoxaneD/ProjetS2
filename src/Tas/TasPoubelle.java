@@ -2,6 +2,7 @@ package Tas;
 
 import Cartes.Carte;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class TasPoubelle{
 
@@ -12,6 +13,7 @@ public class TasPoubelle{
     //Crée un tas poubelle
     public TasPoubelle() {
         setCartes();
+        Collections.shuffle(cartes);
     }
 
     // setteurs
