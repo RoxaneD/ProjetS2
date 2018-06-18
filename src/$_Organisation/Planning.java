@@ -34,7 +34,7 @@ public class Planning {
     *   Cartes          - Normalement rien à faire
     *   ElementsJeu     - A COMPLETER
     *       Grille 
-    *           1) Construire la méthode qui permet d'instancier aléatoirement une grille
+    *           1) Construire la méthode qui permet d'instancier aléatoirement une grille // OK
     *   Enumerations    - Normalement rien à faire
     *   Tas             - A COMPLETER
     *       POUR TOUS LES TAS 
