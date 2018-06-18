@@ -42,13 +42,10 @@ public class VueGrilleDemo extends Observe {
     public VueGrilleDemo(Grille grille) {
         setTuiles(grille);  //Mise à jour de grille
         this.window = new JFrame();  //window est instancié en JFrame
-        window.setSize(900, 1000);  //On définie la hauteur et la largeur de la fenêtre window
+        window.setSize(1000/2, 700/2);  //On définie la hauteur et la largeur de la fenêtre window
         window.setTitle("Grille du Jeu");  //On modifie le titre de la fenêtre
-      //  dimension = window.getSize();  //dimension prend les valeurs de window
+        dimension = window.getSize();  //dimension prend les valeurs de window
         
-        //-------------------------------TEST-------------------------------------
-        dimension = new Dimension(400,400);
-        //------------------------------------------------------------------------
         
         plateauTuiles = new JPanel(new GridLayout(6, 6));  //Définition de plateauTuiles en JPanel composé d'un GridLayout lui même composé de 6 lignes et 6 colonnes
         Border blackline = BorderFactory.createLineBorder(Color.black, 1);  //Création d'une ligne noir pour les contours des tuiles
@@ -120,7 +117,7 @@ public class VueGrilleDemo extends Observe {
             plateauTuiles.add(panelFondTuile);  //Ajout de panelFondTuile dans plateauTuiles
         }
         window.add(plateauTuiles);  //Ajout de plateauTuiles dans window
-         window.setVisible(true);  //Rend window visible
+       //  window.setVisible(true);  //Rend window visible
     }
 
     // setteurs

@@ -6,14 +6,19 @@
 package Vues;
 
 import Cartes.CarteAventurier;
+import Cartes.CarteTresors;
 import ElementsJeu.Grille;
 import Enumerations.Couleur;
 import Enumerations.NomAventurier;
 import Util.Utils;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,10 +36,11 @@ public class IhmPrincipale {
     private VueAventurierDemo vueAventurier;
     private VueGrilleDemo vueGrille;
     private JPanel panelNorth;
-    private JPanel panelGrille;
+    private JPanel panelCentre;
     private JPanel panelSouth;
     private Dimension dimension;
 
+    // A changer pour arrayList de joueur
     public IhmPrincipale(VueAventurierDemo vueAventurier1, VueGrilleDemo vueGrille1) {
 
         setVueAventurier(vueAventurier1);
@@ -50,10 +56,59 @@ public class IhmPrincipale {
         panelNorth.setSize((int) dimension.getWidth(), (int) (dimension.getHeight() * 0.1));
         panelNorth.add(new JLabel("Tour du joueur " + this.vueAventurier.getNomJoueur()));
 
-        panelGrille = new JPanel();
-        panelGrille.add(vueGrille.getPlateauTuiles());
-        panelGrille.setSize((int) dimension.getWidth(), (int) (dimension.getHeight() * 0.7));
+        panelCentre = new JPanel();
+        panelCentre.setLayout(new BorderLayout());
+        panelCentre.add(vueGrille.getPlateauTuiles(),BorderLayout.CENTER);
+        panelCentre.setSize((int) dimension.getWidth(), (int) (dimension.getHeight() * 0.7));
+        
+        
+        JPanel panelCentreEst = new JPanel();
+        panelCentreEst.setLayout(new GridLayout(/*Nombre De Joueur*/4,2));
+        panelCentreEst.setSize(300, 350);
+        panelCentre.add(panelCentreEst,BorderLayout.EAST);
+        JPanel panelEstGauche = new JPanel();
+        
+        int i = 0;
+        for(CarteTresors carte : vueAventurier.getTasJoueur().getCartes()){
+            i++;
+        }
+        panelCentreEst.add(new JLabel(vueAventurier.getNomJoueur()));
+        panelEstGauche.setLayout(new GridLayout(i,1));
+        
+        for(CarteTresors carte : vueAventurier.getTasJoueur().getCartes()){
+            JButton bouton = new JButton(carte.getNom().name());
+            panelCentreEst.add(bouton,BorderLayout.EAST);
+            bouton.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                }
 
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                }
+            });
+            panelCentreEst.add(new JButton(""));
+            panelCentreEst.add(new JButton(""));
+            panelCentreEst.add(new JButton(""));
+            panelCentreEst.add(new JButton(""));
+            
+        }
+        
+        
+        
         panelSouth = new JPanel();
         panelSouth.setLayout(new GridLayout(3, 3));
         panelSouth.setSize((int) dimension.getWidth(), (int) (dimension.getHeight() * 0.2));
@@ -68,7 +123,7 @@ public class IhmPrincipale {
         panelSouth.add(new JLabel(""));
 
         window.add(panelNorth, BorderLayout.NORTH);
-        window.add(panelGrille, BorderLayout.CENTER);
+        window.add(panelCentre, BorderLayout.CENTER);
         window.add(panelSouth, BorderLayout.SOUTH);
 
     }

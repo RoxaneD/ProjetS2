@@ -6,11 +6,13 @@
 package Jeu_Tests;
 
 import Cartes.CarteAventurier;
+import Cartes.CarteTresors;
 import ElementsJeu.Grille;
 import ElementsJeu.Tuile;
 import Enumerations.Couleur;
 import Enumerations.EtatTuile;
 import Enumerations.NomAventurier;
+import Enumerations.NomTresor;
 import Enumerations.NomTuile;
 import Util.Utils;
 import Vues.IhmPrincipale;
@@ -33,11 +35,14 @@ public class TestIhmPrincipale {
 
     public static void main(String[] args) {
         // TODO code application logic here
-        CarteAventurier carte = new CarteAventurier(NomAventurier.explorateur, Couleur.bleu);
-        VueAventurierDemo vueJoueur1 = new VueAventurierDemo("Test1", carte, Utils.Pion.BLEU.getCouleur());
-        Grille grilleDeJeu = new Grille();
         
+        Grille grilleDeJeu = new Grille();
         VueGrilleDemo vueGrille = new VueGrilleDemo(grilleDeJeu);
+        
+         CarteAventurier carte = new CarteAventurier(NomAventurier.explorateur, Couleur.bleu);
+        VueAventurierDemo vueJoueur1 = new VueAventurierDemo("Aventurier 1", carte, Utils.Pion.BLEU.getCouleur());
+        CarteTresors carteT = new CarteTresors( NomTresor.La_Pierre_sacree);
+        vueJoueur1.addCarteTresors(carteT);
 
         //vueGrille.getWindow().setVisible(false);
         // vueJoueur1.getWindow().setVisible(false);
