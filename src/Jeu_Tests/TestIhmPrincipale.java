@@ -41,13 +41,15 @@ public class TestIhmPrincipale {
         
          CarteAventurier carte = new CarteAventurier(NomAventurier.explorateur, Couleur.bleu);
         VueAventurierDemo vueJoueur1 = new VueAventurierDemo("Aventurier 1", carte, Utils.Pion.BLEU.getCouleur());
+        ArrayList<VueAventurierDemo> ensembleVueAventurier = new ArrayList<>();
+        ensembleVueAventurier.add(vueJoueur1);
         CarteTresors carteT = new CarteTresors( NomTresor.La_Pierre_sacree);
         vueJoueur1.addCarteTresors(carteT);
 
         //vueGrille.getWindow().setVisible(false);
         // vueJoueur1.getWindow().setVisible(false);
 
-        ihm = new IhmPlateauDeJeu(vueJoueur1, vueGrille);
+        ihm = new IhmPlateauDeJeu(ensembleVueAventurier, vueGrille);
         ihm.getWindow().setVisible(true);
 
         /*  while (plateau.getControleur().isTermine() == false) {
