@@ -17,6 +17,7 @@ import ElementsJeu.Grille;
 import ElementsJeu.NiveauEau;
 import ElementsJeu.Tresor;
 import ElementsJeu.Tuile;
+import Enumerations.EtatTuile;
 import Enumerations.NomAventurier;
 import Enumerations.NomTresor;
 import Tas.DefausseInondations;
@@ -363,7 +364,7 @@ public class Controleur implements Observateur {
     @Override
     public void traiterAction(Action action) {
         // pour ajouter un joueur
-        if (action.getType() == TypesActions.ajoutJoueur) {
+        if (action.getType() == TypesActions.ajoutJoueur) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM 
             joueurs.add(action.getNom());
             TasJoueur t = new TasJoueur();
             tasJoueurs.put(action.getNom(), t);
@@ -389,7 +390,7 @@ public class Controleur implements Observateur {
             }
 
             // pour demander l'affiche des tuiles possibles (pour se déplacer)
-        } else if (action.getType() == TypesActions.demandeDeplacement) {
+        } else if (action.getType() == TypesActions.demandeDeplacement) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
             //Si le nombre d'action n'est pas de 2 et que l'aventurier n'est pas l'ingenieur et que sont pouvoir est a faux alors
             if (!(getNombreActions() == 2 && getAventurier().getCarteAventurier().getNom() == NomAventurier.ingenieur && isPouvoirIngenieur())) {
                 Aventurier aventurier = getAventurier();//l'aventurier prend la valeur de l'aventurier qui fait l'action
@@ -402,7 +403,7 @@ public class Controleur implements Observateur {
             }
 
             // pour demander l'affiche des tuiles possibles (à assécher)
-        } else if (action.getType() == TypesActions.demandeAssechement) {
+        } else if (action.getType() == TypesActions.demandeAssechement) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
             Aventurier aventurier = getAventurier();//l'aventurier prend la valeur de l'aventurier qui fait l'action
             ArrayList<Tuile> tuilesPossibles = new ArrayList<>();// Collection des tuiles possible
             for (Tuile t : aventurier.calculAssechementPos()) {//Calcul des assechements possible pour cette aventurier
@@ -412,12 +413,12 @@ public class Controleur implements Observateur {
             vueGrille.afficherTuilesPossiblesAssechement(tuilesPossibles);
 
             // pour terminer son tour
-        } else if (action.getType() == TypesActions.terminer) {
+        } else if (action.getType() == TypesActions.terminer) { // PAS BESOIN DE MODIFIER
             this.setNombreActions(3);// Met le nombre d'action a 3 pour que le tour ce finisse
             this.setActionEffectue(true);//Met le booléen action effectuer a vrai
 
             // pour se déplacer sur une tuile
-        } else if (action.getType() == TypesActions.deplacement) {
+        } else if (action.getType() == TypesActions.deplacement) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
             //si le pouvoir du pilote est à faux et que cette aventurier est le pilote alors
             if (!pouvoirPilote && getAventurier().getCarteAventurier().getNom() == NomAventurier.pilote) {
                 Pilote pilote2 = (Pilote) getAventurier();//pilote2 est objet de la classe pilote
@@ -470,7 +471,7 @@ public class Controleur implements Observateur {
             }
 
             // pour assécher une tuile
-        } else if (action.getType() == TypesActions.assechement) {
+        } else if (action.getType() == TypesActions.assechement) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
             // on met à jour la grille
             getGrille().getTuile(action.getTuile().getPosX(), action.getTuile().getPosY()).assecher();
             // on met à jour la vueGrille, et on la réinitialise
@@ -485,7 +486,7 @@ public class Controleur implements Observateur {
             this.setActionEffectue(true);
 
             // pour afficher les cartes qu'on peut utiliser (de ses propres cartes)
-        } else if (action.getType() == TypesActions.demandeUtilisationCarte) {
+        } else if (action.getType() == TypesActions.demandeUtilisationCarte) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
             for (CarteTresors c : tasJoueurs.get(action.getNom()).getCartes()) {
                 if (c.getNom() == NomTresor.helico || c.getNom() == NomTresor.monteeEau || c.getNom() == NomTresor.sacSable) {
                     // ihm2.afficherCarte();
@@ -493,9 +494,11 @@ public class Controleur implements Observateur {
             }
 
             // pour utiliser une carte trésor
-        } else if (action.getType() == TypesActions.utiliserTresor) {
+        } else if (action.getType() == TypesActions.utiliserTresor) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
+            // pour une carte hélicoptère
             if (action.getCarteT().getNom() == NomTresor.helico) {
 
+            // pour une carte montée des eaux
             } else if (action.getCarteT().getNom() == NomTresor.monteeEau) {
                 // on augmente le semi niveau de 1
                 niveauEau.monterNiveau();
@@ -515,36 +518,36 @@ public class Controleur implements Observateur {
                     }
                     i += 1;
                 }
+            // pour une carte sac de sable
             } else if (action.getCarteT().getNom() == NomTresor.sacSable) {
-
+                ArrayList<Tuile> tuilesPos = new ArrayList<>();
+                for (Tuile t : grille.getTuiles()){
+                    if (t.getEtat() == EtatTuile.inondee){
+                        tuilesPos.add(t);
+                    }
+                }
+                // ihm2.afficherTuile(ArrayList<Tuile>);
             }
             // pour utiliser une carte inondation
-        } else if (action.getType()
-                == TypesActions.utiliserInondation) {
+        } else if (action.getType() == TypesActions.utiliserInondation) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
 
             // pour piocher une carte trésor
-        } else if (action.getType()
-                == TypesActions.piocherTresor) {
+        } else if (action.getType() == TypesActions.piocherTresor) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
 
             // pour piocher une carte inondation
-        } else if (action.getType()
-                == TypesActions.piocherInondation) {
+        } else if (action.getType() == TypesActions.piocherInondation) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
 
             // pour afficher la liste des joueurs à qui on peut donner une carte trésor
-        } else if (action.getType()
-                == TypesActions.demandeDonCarteTresor) {
+        } else if (action.getType() == TypesActions.demandeDonCarteTresor) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
 
             // pour donner une carte trésor à un joueur
-        } else if (action.getType()
-                == TypesActions.donCarteTresor) {
+        } else if (action.getType() == TypesActions.donCarteTresor) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
 
             // pour se défausse d'une carte
-        } else if (action.getType()
-                == TypesActions.defausserCarte) {
+        } else if (action.getType() == TypesActions.defausserCarte) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
 
             // pour recupérer un trésor
-        } else if (action.getType()
-                == TypesActions.recupererTresor) {
+        } else if (action.getType() == TypesActions.recupererTresor) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
 
         }
     }
