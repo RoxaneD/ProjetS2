@@ -1,7 +1,7 @@
 package Controle;
 // Nom des differentes actions possibles
 public enum TypesActions {
-    ajoutJoueur,            // traité  - a tester - OK
+    commencerPartie,        // traité  - a tester - OK
     demandeDeplacement,     // traité
     deplacement,            // traité
     demandeAssechement,     // traité
@@ -15,5 +15,6 @@ public enum TypesActions {
     demandeDonCarteTresor,  // PAS traité
     donCarteTresor,         // PAS traité
     defausserCarte,         // PAS traité
-    recupererTresor         // PAS traité
+    recupererTresor,        // PAS traité
+    reglesJeu               // PAS traité
 }

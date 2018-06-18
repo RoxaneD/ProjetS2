@@ -364,29 +364,35 @@ public class Controleur implements Observateur {
     @Override
     public void traiterAction(Action action) {
         // pour ajouter un joueur
-        if (action.getType() == TypesActions.ajoutJoueur) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM 
-            joueurs.add(action.getNom());
-            TasJoueur t = new TasJoueur();
-            tasJoueurs.put(action.getNom(), t);
-            CarteAventurier c = tasAventuriers.getPremiereCarte();
-            if (c.getNom() == NomAventurier.explorateur) {
-                Explorateur av = new Explorateur(action.getNom(), c);
-                aventuriers.put(action.getNom(), av);
-            } else if (c.getNom() == NomAventurier.pilote) {
-                Pilote av = new Pilote(action.getNom(), c);
-                aventuriers.put(action.getNom(), av);
-            } else if (c.getNom() == NomAventurier.navigateur) {
-                Navigateur av = new Navigateur(action.getNom(), c);
-                aventuriers.put(action.getNom(), av);
-            } else if (c.getNom() == NomAventurier.plongeur) {
-                Plongeur av = new Plongeur(action.getNom(), c);
-                aventuriers.put(action.getNom(), av);
-            } else if (c.getNom() == NomAventurier.ingenieur) {
-                Ingenieur av = new Ingenieur(action.getNom(), c);
-                aventuriers.put(action.getNom(), av);
-            } else {
-                Messager av = new Messager(action.getNom(), c);
-                aventuriers.put(action.getNom(), av);
+        if (action.getType() == TypesActions.commencerPartie) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM 
+            System.out.println("BOuh");
+            for (String s : action.getJoueurs()) {
+                joueurs.add(s);
+                TasJoueur t = new TasJoueur();
+                tasJoueurs.put(s, t);
+                CarteAventurier c = tasAventuriers.getPremiereCarte();
+                if (c.getNom() == NomAventurier.explorateur) {
+                    Explorateur av = new Explorateur(action.getNom(), c);
+                    aventuriers.put(s, av);
+                } else if (c.getNom() == NomAventurier.pilote) {
+                    Pilote av = new Pilote(action.getNom(), c);
+                    aventuriers.put(s, av);
+                } else if (c.getNom() == NomAventurier.navigateur) {
+                    Navigateur av = new Navigateur(action.getNom(), c);
+                    aventuriers.put(s, av);
+                } else if (c.getNom() == NomAventurier.plongeur) {
+                    Plongeur av = new Plongeur(action.getNom(), c);
+                    aventuriers.put(s, av);
+                } else if (c.getNom() == NomAventurier.ingenieur) {
+                    Ingenieur av = new Ingenieur(action.getNom(), c);
+                    aventuriers.put(s, av);
+                } else {
+                    Messager av = new Messager(action.getNom(), c);
+                    aventuriers.put(s, av);
+                }
+                // fermer IHM_Menu
+                // ouvrir ihm principale
+                System.out.println(s);
             }
 
             // pour demander l'affiche des tuiles possibles (pour se déplacer)
@@ -498,7 +504,7 @@ public class Controleur implements Observateur {
             // pour une carte hélicoptère
             if (action.getCarteT().getNom() == NomTresor.helico) {
 
-            // pour une carte montée des eaux
+                // pour une carte montée des eaux
             } else if (action.getCarteT().getNom() == NomTresor.monteeEau) {
                 // on augmente le semi niveau de 1
                 niveauEau.monterNiveau();
@@ -513,16 +519,16 @@ public class Controleur implements Observateur {
                 defausseTresor.addCarte(action.getCarteT());
                 int i = 0;
                 for (CarteTresors c : tasJoueurs.get(action.getNom()).getCartes()) {
-                    if (c == action.getCarteT()){
+                    if (c == action.getCarteT()) {
                         tasJoueurs.get(action.getNom()).getCartes().remove(i);
                     }
                     i += 1;
                 }
-            // pour une carte sac de sable
+                // pour une carte sac de sable
             } else if (action.getCarteT().getNom() == NomTresor.sacSable) {
                 ArrayList<Tuile> tuilesPos = new ArrayList<>();
-                for (Tuile t : grille.getTuiles()){
-                    if (t.getEtat() == EtatTuile.inondee){
+                for (Tuile t : grille.getTuiles()) {
+                    if (t.getEtat() == EtatTuile.inondee) {
                         tuilesPos.add(t);
                     }
                 }

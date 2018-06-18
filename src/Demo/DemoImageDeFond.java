@@ -24,51 +24,49 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Eric
- * Cette classe contient 3 images superposées : 
- * - une photo de jardin en arrière-plan
- * - une statue en plan intermédiaire
- * - un dragon au premier plan
+ * @author Eric Cette classe contient 3 images superposées : - une photo de
+ * jardin en arrière-plan - une statue en plan intermédiaire - un dragon au
+ * premier plan
  */
 public class DemoImageDeFond extends JPanel {
 
-    private Image image ;
-    private Integer width, height ;
-    JLabel titre ;
-    JTextField champNom, champPrenom ;
+    private Image image;
+    private Integer width, height;
+    JLabel titre;
+    JTextField champNom, champPrenom;
 
     public DemoImageDeFond(int width, int height) {
         super();
-        this.width = width ;
-        this.height = height ;
-        
+        this.width = width;
+        this.height = height;
+
         try {
             this.image = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/ciel.png"));
         } catch (IOException ex) {
             System.err.println("Erreur de lecture de ciel.png");
         }
-        
+
         this.setLayout(new BorderLayout());
-        
+
         titre = new JLabel("Mon IHM", JLabel.CENTER);
         titre.setFont(new Font(titre.getFont().getFamily(), titre.getFont().getStyle(), 24));
         titre.setForeground(Color.ORANGE);
         this.add(titre, BorderLayout.NORTH);
 
-        JPanel panelCentre = new JPanel(new GridLayout(2,2));
+        JPanel panelCentre = new JPanel(new GridLayout(2, 2));
         panelCentre.setOpaque(false);
         this.add(panelCentre, BorderLayout.CENTER);
 
         panelCentre.add(new JLabel("nom : ", JLabel.RIGHT));
-        
+
         champNom = new JTextField();
         panelCentre.add(champNom);
 
         panelCentre.add(new JLabel("prénom : ", JLabel.RIGHT));
-        
+
         champPrenom = new JTextField();
         panelCentre.add(champPrenom);
-        
+
         JPanel panelBas = new JPanel(new GridLayout());
         panelBas.setOpaque(false);
         this.add(panelBas, BorderLayout.SOUTH);
@@ -77,27 +75,27 @@ public class DemoImageDeFond extends JPanel {
         JButton btnValider = new JButton("Valider");
         panelBas.add(btnValider);
         panelBas.add(new JLabel(""));
-        
+
     }
 
     @Override
     /**
-     * paintComponent permet de gérer l'affichage / la mise à jour des
-     * images, à condition que le paintComponent de chaque objet soit appelé
-     * avec le même contexte graphique (Graphics)
+     * paintComponent permet de gérer l'affichage / la mise à jour des images, à
+     * condition que le paintComponent de chaque objet soit appelé avec le même
+     * contexte graphique (Graphics)
      */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(image, 0, 0, width, height, null, this);
     }
-    
+
     public static void main(String[] args) {
-        JFrame window = new JFrame() ;
+        JFrame window = new JFrame();
         window.setSize(450, 300);
         // Centrage de la fenêtre sur l'écran
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
-        window.setLocation(100, dim.height/2-window.getSize().height/2);
+        window.setLocation(100, dim.height / 2 - window.getSize().height / 2);
 
         DemoImageDeFond demo = new DemoImageDeFond(450, 300);
         window.add(demo);
@@ -105,5 +103,5 @@ public class DemoImageDeFond extends JPanel {
         window.setVisible(true);
         demo.repaint();
     }
-    
+
 }

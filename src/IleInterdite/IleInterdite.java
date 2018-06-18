@@ -1,21 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package IleInterdite;
 
-/**
- *
- * @author deflandr
- */
-public class IleInterdite {
+import Controle.Controleur;
+import Vues.IHM_Menu;
+import Vues.IHM_intro;
 
-    /**
-     * @param args the command line arguments
-     */
+public class IleInterdite {
+    
+    // attributs
+    private static Controleur controleur = new Controleur();
+    private static IHM_Menu ihmMenu = new IHM_Menu();
+    private static IHM_intro ihmIntro = new IHM_intro(ihmMenu);
+    
     public static void main(String[] args) {
+        ihmMenu.addObservateur(controleur);
+        ihmMenu.afficherIhm();
+        
         
     }
-    
 }

@@ -3,6 +3,7 @@ package Controle;
 
 import Cartes.CarteTresors;
 import ElementsJeu.Tuile;
+import java.util.ArrayList;
 
 public class Action {
 
@@ -11,6 +12,7 @@ public class Action {
     private Tuile tuile;//Tuile où s'effectue l'action
     private String nom;
     private CarteTresors carteT;
+    private ArrayList<String> joueurs = new ArrayList<>();
 
     // constructeurs
     //Crée une action
@@ -24,15 +26,20 @@ public class Action {
         setTuile(tuile);//avec la tuile fournis en paramètre
     }
 
-    public Action(TypesActions type, String nom) {  // pour ajouter un joueur
+    public Action(TypesActions type, String nom) {  // pour ???
         setType(type);//avec le type fournit en paramètre
         setNom(nom);
     }
-    
-    public Action(TypesActions type, CarteTresors carte, String nom){   // pour jouer une carte Tresor
+
+    public Action(TypesActions type, CarteTresors carte, String nom) {   // pour jouer une carte Tresor
         setType(type);//avec le type fournit en paramètre
         setNom(nom);
         setCarteT(carte);
+    }
+
+    public Action(TypesActions type, ArrayList<String> joueurs) {
+        setType(type);
+        setJoueurs(joueurs);
     }
 
     // setteurs
@@ -55,6 +62,10 @@ public class Action {
         this.carteT = carteT;
     }
 
+    public void setJoueurs(ArrayList<String> joueurs) {
+        this.joueurs = joueurs;
+    }
+
     // getteurs
     //Méthode qui renvoie le type d'action
     public TypesActions getType() {
@@ -73,7 +84,12 @@ public class Action {
     public CarteTresors getCarteT() {
         return carteT;
     }
+
+    public ArrayList<String> getJoueurs() {
+        return joueurs;
+    }
+
+    
     
     // autres
-
 }
