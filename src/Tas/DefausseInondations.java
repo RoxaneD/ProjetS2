@@ -3,7 +3,7 @@ package Tas;
 import Cartes.CarteInondation;
 import java.util.ArrayList;
 
-public class DefausseInondations extends Tas{
+public class DefausseInondations{
 
     // attributs
     private ArrayList<CarteInondation> cartesInondation;

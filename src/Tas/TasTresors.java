@@ -3,7 +3,7 @@ package Tas;
 import Cartes.CarteTresors;
 import java.util.ArrayList;
 
-public class TasTresors extends Tas{
+public class TasTresors{
 
     // attributs
     private ArrayList<CarteTresors> cartesTresors;
