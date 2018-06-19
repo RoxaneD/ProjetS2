@@ -55,9 +55,8 @@ public class IhmAventurier extends JPanel {
     private JPanel titre = new JPanel();                   // dans panelVisible
     private JPanel panelCartesVisibles = new JPanel(new BorderLayout());     // dans panelVisible
     private JPanel carteAventurier = new JPanel();         // dans panelVisible
-    private JPanel panelCartesJoueur = new JPanel();       // dans panelVisible
-    private JPanel actionsPion = new JPanel(new GridLayout(1, 4));             // dans panelInvisible
-    private JPanel actionsCartes = new JPanel(new GridLayout(3, 1));           // dans panelInvisible
+    private JPanel panelCartesJoueur = new JPanel();       // dans panelVisible            
+    private JPanel actions = new JPanel(new GridLayout(9, 1)); // dans panelInvisible
     private JPanel panelCartesTirages = new JPanel();      // dans panelInvisible
 
     private Image imageCarteAventurier;
@@ -140,25 +139,27 @@ public class IhmAventurier extends JPanel {
         add(panelVisible, BorderLayout.NORTH);
 
         // pour le panel invisible
-        //      partie supérieure
         JPanel p = new JPanel(new BorderLayout());
+        p.setOpaque(false);
         p.add(panelCartesTirages, BorderLayout.WEST);
 
-        actionsCartes.add(defausser);
-        actionsCartes.add(utiliser);
-        actionsCartes.add(donner);
-
-        p.add(actionsCartes, BorderLayout.EAST);
-        panelInvisible.add(p, BorderLayout.NORTH);
-
-        //      partie inférieure
-        actionsPion.add(deplacer);
-        actionsPion.add(assecher);
-        actionsPion.add(recupererTresor);
-        actionsPion.add(terminer);
-        panelInvisible.add(actionsPion, BorderLayout.SOUTH);
+        actions.add(defausser);
+        actions.add(utiliser);
+        actions.add(donner);
+        actions.add(new JLabel(""));
+        actions.add(deplacer);
+        actions.add(assecher);
+        actions.add(recupererTresor);
+        actions.add(new JLabel(""));
+        actions.add(terminer);
+        
+        p.add(actions, BorderLayout.EAST);
+        
+        panelInvisible.add(p);
 
         add(panelInvisible, BorderLayout.SOUTH);
+
+        repaint();
     }
 
     // setteurs
@@ -177,11 +178,13 @@ public class IhmAventurier extends JPanel {
             panelVisible.setOpaque(false);
             panelInvisible.setOpaque(false);
             panelCartesJoueur.setOpaque(false);
+            actions.setOpaque(false);
+
             carteAventurier.setSize(150, 210);
-            g.drawImage(imageCarteAventurier, 0, titre.getHeight(), carteAventurier.getWidth(), carteAventurier.getHeight(), null, carteAventurier);
+            g.drawImage(imageCarteAventurier, 0, titre.getHeight() + 10, carteAventurier.getWidth(), carteAventurier.getHeight(), null, carteAventurier);
 
             int taille = aventurier.getTasJoueur().getCartes().size();
-            panelCartesVisibles = new JPanel(new GridLayout(1, taille));
+            panelCartesVisibles.setLayout(new GridLayout(1, taille));
             int i1 = 0;
             for (CarteTresors c : aventurier.getTasJoueur().getCartes()) {
                 JPanel p = new JPanel();
@@ -190,12 +193,13 @@ public class IhmAventurier extends JPanel {
                 } catch (IOException ex) {
                     System.err.println("Erreur de lecture de" + "/src/Image/Carte" + c.getNom().toString() + ".png");
                 }
-                g.drawImage(imageV1, 160 + ((432 / taille) * i1), titre.getHeight(), carteAventurier.getWidth(), carteAventurier.getHeight(), null, p);
+                g.drawImage(imageV1, 160 + ((432 / taille) * i1), titre.getHeight() + 10, carteAventurier.getWidth(), carteAventurier.getHeight(), null, p);
                 panelCartesVisibles.add(p);
                 i1 += 1;
             }
 
             taille = aventurier.getTasTirage().size();
+            panelCartesTirages.setLayout(new GridLayout(1, taille));
             int i2 = 0;
             for (Carte c : aventurier.getTasTirage()) {
                 JPanel p = new JPanel();
@@ -206,7 +210,7 @@ public class IhmAventurier extends JPanel {
                     } catch (IOException ex) {
                         System.err.println("Erreur de lecture de" + "/src/Image/Carte" + a.getNom().toString() + ".png");
                     }
-                } else if (c.getDescription()=="inondation"){
+                } else if (c.getDescription() == "inondation") {
                     CarteInondation a = (CarteInondation) (c);
                     try {
                         this.imageIV1 = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/Carte" + a.getNom().toString() + ".png"));
@@ -215,8 +219,8 @@ public class IhmAventurier extends JPanel {
                     }
                 }
 
-                g.drawImage(imageIV1, ((432 / taille) * i2), titre.getHeight()+230, carteAventurier.getWidth(), carteAventurier.getHeight(), null, p);
-                panelCartesVisibles.add(p);
+                g.drawImage(imageIV1, ((400 / taille) * i2), titre.getHeight() + 230, carteAventurier.getWidth(), carteAventurier.getHeight(), null, p);
+                panelCartesTirages.add(p);
                 i2 += 1;
             }
         } else {
@@ -250,7 +254,7 @@ public class IhmAventurier extends JPanel {
         JFrame window = new JFrame();
         window.setLocationRelativeTo(null);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setSize(700, 500);
+        window.setSize(700, 509);
 
         // Centrage de la fenêtre sur l'écran
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
