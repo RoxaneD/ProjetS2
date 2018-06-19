@@ -1,16 +1,23 @@
 package Vues;
 
 import Aventuriers.Aventurier;
+import Aventuriers.Explorateur;
+import Aventuriers.Ingenieur;
+import Aventuriers.Messager;
+import Aventuriers.Navigateur;
+import Aventuriers.Pilote;
 import Aventuriers.Plongeur;
 import Cartes.Carte;
 import Cartes.CarteAventurier;
+import Cartes.CarteTresors;
 import Enumerations.Couleur;
 import Enumerations.NomAventurier;
-import Tas.TasJoueur;
+import Enumerations.NomTresor;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
@@ -37,7 +44,7 @@ public class IhmAventurier extends JPanel {
     // attributs internes
     private Integer width, height;
     private boolean complete = false;
-    private TasJoueur tasJoueur = new TasJoueur();
+    private Aventurier aventurier;
 
     // attributs visuels
     private JPanel panelVisible = new JPanel(new BorderLayout());            // cartes visible par tous + nom du joueur
@@ -51,8 +58,33 @@ public class IhmAventurier extends JPanel {
     private JPanel actionsCartes = new JPanel();           // dans panelInvisible
     private JPanel panelCartesTirages = new JPanel();      // dans panelInvisible
 
-    private Image image;
-    
+    private Image imageCarteAventurier;
+    private Image imageV1;
+    private Image imageV2;
+    private Image imageV3;
+    private Image imageV4;
+    private Image imageV5;
+    private Image imageV6;
+    private Image imageV7;
+    private Image imageV8;
+    private Image imageV9;
+    private Image imageV10;
+    private Image imageV11;
+    private Image imageV12;
+    private Image imageV13;
+    private Image imageV14;
+    private Image imageV15;
+
+    private Image imageIV1;
+    private Image imageIV2;
+    private Image imageIV3;
+    private Image imageIV4;
+    private Image imageIV5;
+    private Image imageIV6;
+    private Image imageIV7;
+    private Image imageIV8;
+    private Image imageIV9;
+
     private ArrayList<JButton> cartesVisibles = new ArrayList<>();
     private JButton visible1 = new JButton();
     private JButton visible2 = new JButton();
@@ -97,18 +129,32 @@ public class IhmAventurier extends JPanel {
         this.setLayout(new BorderLayout());
 
         // instantiations des attributs
-        // pour les attributs interne
-        tasJoueur = a.getTasJoueur();
-        
+        //
+        if (a.getCarteAventurier().getNom() == NomAventurier.explorateur) {
+            aventurier = new Explorateur(a.getNomJoueur(), a.getCarteAventurier());
+        } else if (a.getCarteAventurier().getNom() == NomAventurier.plongeur) {
+            aventurier = new Plongeur(a.getNomJoueur(), a.getCarteAventurier());
+        } else if (a.getCarteAventurier().getNom() == NomAventurier.messager) {
+            aventurier = new Messager(a.getNomJoueur(), a.getCarteAventurier());
+        } else if (a.getCarteAventurier().getNom() == NomAventurier.navigateur) {
+            aventurier = new Navigateur(a.getNomJoueur(), a.getCarteAventurier());
+        } else if (a.getCarteAventurier().getNom() == NomAventurier.ingenieur) {
+            aventurier = new Ingenieur(a.getNomJoueur(), a.getCarteAventurier());
+        } else if (a.getCarteAventurier().getNom() == NomAventurier.pilote) {
+            aventurier = new Pilote(a.getNomJoueur(), a.getCarteAventurier());
+        }
+        aventurier.setTasJoueur(a.getTasJoueur());
+        aventurier.setTasTirage(a.getTasTirage());
+
         // pour le panel visible
-        Border noir = BorderFactory.createLineBorder(Color.black, 1); 
+        Border noir = BorderFactory.createLineBorder(Color.black, 1);
         Border bleu = BorderFactory.createLineBorder(Color.blue, 1);
         Border vert = BorderFactory.createLineBorder(Color.green, 1);
         Border rouge = BorderFactory.createLineBorder(Color.red, 1);
         Border jaune = BorderFactory.createLineBorder(Color.yellow, 1);
-        
+
         panelVisible.setBorder(noir);
-        
+
         // partie supérieure
         JLabel labelTitre = new JLabel(a.getNomJoueur() + " : " + a.getCarteAventurier().getNom().toString());
         titre.add(labelTitre);
@@ -118,11 +164,11 @@ public class IhmAventurier extends JPanel {
         // partie inférieure
         panelCartesVisibles.setBorder(vert);
         try {
-            this.image = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/"+a.getCarteAventurier().getNom().toString().toLowerCase()+".png"));
+            this.imageCarteAventurier = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/" + a.getCarteAventurier().getNom().toString().toLowerCase() + ".png"));
         } catch (IOException ex) {
-            System.err.println("Erreur de lecture de"+"/src/Image/"+a.getCarteAventurier().getNom().toString().toLowerCase()+".png");
+            System.err.println("Erreur de lecture de" + "/src/Image/" + a.getCarteAventurier().getNom().toString().toLowerCase() + ".png");
         }
-        
+
         carteAventurier.setOpaque(true);
         carteAventurier.setBorder(rouge);
         panelCartesVisibles.add(carteAventurier, BorderLayout.WEST);
@@ -144,27 +190,44 @@ public class IhmAventurier extends JPanel {
     // autres méthodes
     @Override
     public void paintComponent(Graphics g) {
-        if (complete){
+        if (complete) {
             titre.setOpaque(false);
-        panelCartesVisibles.setOpaque(false);
-        carteAventurier.setOpaque(false);
-        panelVisible.setOpaque(false);
-        panelInvisible.setOpaque(false);
-        panelCartesJoueur.setOpaque(false);
-        carteAventurier.setSize(150,210);
-        g.drawImage(image,0,titre.getHeight(),carteAventurier.getWidth(), carteAventurier.getHeight(),null, carteAventurier);
-        for (Carte c : tasJoueur.getCartes()){
-            if ()
-        }
+            panelCartesVisibles.setOpaque(false);
+            carteAventurier.setOpaque(false);
+            panelVisible.setOpaque(false);
+            panelInvisible.setOpaque(false);
+            panelCartesJoueur.setOpaque(false);
+            carteAventurier.setSize(150, 210);
+            g.drawImage(imageCarteAventurier, 0, titre.getHeight(), carteAventurier.getWidth(), carteAventurier.getHeight(), null, carteAventurier);
+
+            CarteTresors carteTresor1 = new CarteTresors(NomTresor.LaPierreSacree);
+            aventurier.getTasJoueur().addCarte(carteTresor1);
+
+            int taille = aventurier.getTasJoueur().getCartes().size();
+            panelCartesVisibles = new JPanel(new GridLayout(1, taille));
+
+            for (CarteTresors c : aventurier.getTasJoueur().getCartes()) {
+                JPanel p = new JPanel();
+                try {
+                    this.imageV1 = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/" + c.getNom().toString() + ".png"));
+                } catch (IOException ex) {
+                    System.err.println("Erreur de lecture de" + "/src/Image/" + c.getNom().toString() + ".png");
+                }
+                panelCartesVisibles.add(p);
+            }
+
+            for (Carte c : aventurier.getTasTirage()) {
+
+            }
         } else {
             titre.setOpaque(false);
-        panelCartesVisibles.setOpaque(false);
-        carteAventurier.setOpaque(false);
-        panelVisible.setOpaque(false);
-        panelInvisible.setOpaque(false);
-        panelCartesJoueur.setOpaque(false);
-        carteAventurier.setSize(150,210);
-        g.drawImage(image,0,titre.getHeight(),carteAventurier.getWidth(), carteAventurier.getHeight(),null, carteAventurier);
+            panelCartesVisibles.setOpaque(false);
+            carteAventurier.setOpaque(false);
+            panelVisible.setOpaque(false);
+            panelInvisible.setOpaque(false);
+            panelCartesJoueur.setOpaque(false);
+            carteAventurier.setSize(150, 210);
+            g.drawImage(imageCarteAventurier, 0, titre.getHeight(), carteAventurier.getWidth(), carteAventurier.getHeight(), null, carteAventurier);
         }
     }
 
@@ -182,7 +245,7 @@ public class IhmAventurier extends JPanel {
     public static void main(String[] args) {
         JFrame window = new JFrame();
         window.setLocationRelativeTo(null);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setSize(500, 700);
 
         // Centrage de la fenêtre sur l'écran

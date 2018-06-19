@@ -32,7 +32,7 @@ public class IhmGrille extends JPanel {
     // 
     Grille grille = new Grille();
     ImageContainerCalques LePontDesAbimes;
-    Tuile lepont = new Tuile(grille, 1,1,NomTuile.Le_Pont_Des_Abimes);
+    Tuile lepont = new Tuile(grille, 1,1,NomTuile.LePontDesAbimes);
     public IhmGrille() {
     String imgFolder = System.getProperty("user.dir") + "/src/Image/" ;
     LePontDesAbimes = new ImageContainerCalques(imgFolder+"LePontDesAbimes.png", 0, 0, 450, 300);

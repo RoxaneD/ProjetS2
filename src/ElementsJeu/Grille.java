@@ -29,36 +29,36 @@ public class Grille {
         CarteAventurier carteAventurier5 = new CarteAventurier(NomAventurier.ingenieur, Couleur.rouge);
         CarteAventurier carteAventurier6 = new CarteAventurier(NomAventurier.navigateur, Couleur.jaune);
 
-        Tresor tresor1 = new Tresor(NomTresor.La_Pierre_sacree);
-        Tresor tresor2 = new Tresor(NomTresor.La_Statue_du_zephyr);
-        Tresor tresor3 = new Tresor(NomTresor.Le_Cristal_ardent);
-        Tresor tresor4 = new Tresor(NomTresor.Le_Calice_de_l_onde);
+        Tresor tresor1 = new Tresor(NomTresor.LaPierreSacree);
+        Tresor tresor2 = new Tresor(NomTresor.LaStatueDuZephyr);
+        Tresor tresor3 = new Tresor(NomTresor.LeCristalArdent);
+        Tresor tresor4 = new Tresor(NomTresor.LeCaliceDelOnde);
 
         ArrayList<NomTuile> nomTuiles = new ArrayList<NomTuile>();
-        nomTuiles.add(NomTuile.Le_Pont_Des_Abimes);
-        nomTuiles.add(NomTuile.La_Porte_De_Bronze);
-        nomTuiles.add(NomTuile.La_Caverne_Des_Ombres);
-        nomTuiles.add(NomTuile.La_Porte_De_Fer);
-        nomTuiles.add(NomTuile.La_Porte_d_Or);
-        nomTuiles.add(NomTuile.Les_Falaises_De_L_Oubli);
-        nomTuiles.add(NomTuile.Le_Palais_De_Corail);
-        nomTuiles.add(NomTuile.La_Porte_d_Argent);
-        nomTuiles.add(NomTuile.Les_Dunes_De_L_illusion);
+        nomTuiles.add(NomTuile.LePontDesAbimes);
+        nomTuiles.add(NomTuile.LaPorteDeBronze);
+        nomTuiles.add(NomTuile.LaCaverneDesOmbres);
+        nomTuiles.add(NomTuile.LaPorteDeFer);
+        nomTuiles.add(NomTuile.LaPortedOr);
+        nomTuiles.add(NomTuile.LesFalaisesDeLOubli);
+        nomTuiles.add(NomTuile.LePalaisDeCorail);
+        nomTuiles.add(NomTuile.LaPortedArgent);
+        nomTuiles.add(NomTuile.LesDunesDeLillusion);
         nomTuiles.add(NomTuile.Heliport);
-        nomTuiles.add(NomTuile.La_Porte_De_Cuivre);
-        nomTuiles.add(NomTuile.Le_Jardin_Des_Hurlements);
-        nomTuiles.add(NomTuile.La_Foret_Pourpre);
-        nomTuiles.add(NomTuile.Le_Lagon_Perdu);
-        nomTuiles.add(NomTuile.Le_Marais_Brumeux);
+        nomTuiles.add(NomTuile.LaPorteDeCuivre);
+        nomTuiles.add(NomTuile.LeJardinDesHurlements);
+        nomTuiles.add(NomTuile.LaForetPourpre);
+        nomTuiles.add(NomTuile.LeLagonPerdu);
+        nomTuiles.add(NomTuile.LeMaraisBrumeux);
         nomTuiles.add(NomTuile.Observatoire);
-        nomTuiles.add(NomTuile.Le_Rocher_Fantome);
-        nomTuiles.add(NomTuile.La_Caverne_Du_Braisier);
-        nomTuiles.add(NomTuile.Le_Temple_Du_Soleil);
-        nomTuiles.add(NomTuile.Le_Temple_De_La_Lune);
-        nomTuiles.add(NomTuile.Le_Palais_Des_Marees);
-        nomTuiles.add(NomTuile.Le_Val_Du_Crepuscule);
-        nomTuiles.add(NomTuile.La_Tour_Du_Guet);
-        nomTuiles.add(NomTuile.Le_Jardin_Des_Murmures);
+        nomTuiles.add(NomTuile.LeRocherFantome);
+        nomTuiles.add(NomTuile.LaCaverneDuBraisier);
+        nomTuiles.add(NomTuile.LeTempleDuSoleil);
+        nomTuiles.add(NomTuile.LeTempleDeLaLune);
+        nomTuiles.add(NomTuile.LePalaisDesMarees);
+        nomTuiles.add(NomTuile.LeValDuCrepuscule);
+        nomTuiles.add(NomTuile.LaTourDuGuet);
+        nomTuiles.add(NomTuile.LeJardinDesMurmures);
 
         Collections.shuffle(nomTuiles);
 
@@ -100,33 +100,33 @@ public class Grille {
         tuiles.add(new Tuile(this, 6, 6));
 
         for (Tuile t : tuiles) {
-            if (t.getNom() == NomTuile.La_Porte_De_Bronze) {
+            if (t.getNom() == NomTuile.LaPorteDeBronze) {
                 t.setEmplacementAventurier(carteAventurier5);
-            } else if (t.getNom() == NomTuile.La_Caverne_Des_Ombres) {
+            } else if (t.getNom() == NomTuile.LaCaverneDesOmbres) {
                 t.setEmplacementTresor(tresor3);
-            } else if (t.getNom() == NomTuile.La_Porte_De_Fer) {
+            } else if (t.getNom() == NomTuile.LaPorteDeFer) {
                 t.setEmplacementAventurier(carteAventurier4);
-            } else if (t.getNom() == NomTuile.La_Porte_d_Or) {
+            } else if (t.getNom() == NomTuile.LaPortedOr) {
                 t.setEmplacementAventurier(carteAventurier6);
-            } else if (t.getNom() == NomTuile.Le_Palais_De_Corail) {
+            } else if (t.getNom() == NomTuile.LePalaisDeCorail) {
                 t.setEmplacementTresor(tresor4);
-            } else if (t.getNom() == NomTuile.La_Porte_d_Argent) {
+            } else if (t.getNom() == NomTuile.LaPortedArgent) {
                 t.setEmplacementAventurier(carteAventurier2);
             } else if (t.getNom() == NomTuile.Heliport) {
                 t.setEmplacementAventurier(carteAventurier3);
-            } else if (t.getNom() == NomTuile.La_Porte_De_Cuivre) {
+            } else if (t.getNom() == NomTuile.LaPorteDeCuivre) {
                 t.setEmplacementAventurier(carteAventurier1);
-            } else if (t.getNom() == NomTuile.Le_Jardin_Des_Hurlements) {
+            } else if (t.getNom() == NomTuile.LeJardinDesHurlements) {
                 t.setEmplacementTresor(tresor2);
-            } else if (t.getNom() == NomTuile.La_Caverne_Du_Braisier) {
+            } else if (t.getNom() == NomTuile.LaCaverneDuBraisier) {
                 t.setEmplacementTresor(tresor3);
-            } else if (t.getNom() == NomTuile.Le_Temple_Du_Soleil) {
+            } else if (t.getNom() == NomTuile.LeTempleDuSoleil) {
                 t.setEmplacementTresor(tresor1);
-            } else if (t.getNom() == NomTuile.Le_Temple_De_La_Lune) {
+            } else if (t.getNom() == NomTuile.LeTempleDeLaLune) {
                 t.setEmplacementTresor(tresor1);
-            } else if (t.getNom() == NomTuile.Le_Palais_Des_Marees) {
+            } else if (t.getNom() == NomTuile.LePalaisDesMarees) {
                 t.setEmplacementTresor(tresor4);
-            } else if (t.getNom() == NomTuile.Le_Jardin_Des_Murmures) {
+            } else if (t.getNom() == NomTuile.LeJardinDesMurmures) {
                 t.setEmplacementTresor(tresor2);
             }
         } 
