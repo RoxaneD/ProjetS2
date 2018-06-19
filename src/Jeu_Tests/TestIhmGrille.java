@@ -30,7 +30,7 @@ public class TestIhmGrille {
     public static void main(String[] args) {
         // TODO code application logic here
         window.add(ihm);
-        window.setSize(600, 600);
+        window.setSize(1200, 1200);
         window.setVisible(true);
         
     }

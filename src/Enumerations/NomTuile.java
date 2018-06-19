@@ -18,7 +18,7 @@ public enum NomTuile {
 	LeMaraisBrumeux,//
 	Observatoire,//
 	LeRocherFantome,//
-	LaCaverneDuBraisier,//
+	LaCaverneDuBrasier,//
 	LeTempleDuSoleil,//
 	LeTempleDeLaLune,//
 	LePalaisDesMarees,//

@@ -30,122 +30,177 @@ public class IhmGrille extends JPanel {
     //                            -> l'emplacement des trésors (image)
     //                            -> l'emplacement des aventuriers (pendant la partie)
     // 
-    Grille grille = new Grille();
-    ImageContainerCalques LePontDesAbimes;
-    Tuile lepont = new Tuile(grille, 1,1,NomTuile.LePontDesAbimes);
-    public IhmGrille() {
-    String imgFolder = System.getProperty("user.dir") + "/src/Image/" ;
-    LePontDesAbimes = new ImageContainerCalques(imgFolder+"LePontDesAbimes.png", 0, 0, 450, 300);
-    this.add(LePontDesAbimes, -2000);
-    this.repaint();
+    private Grille grille;
+    private ArrayList<Tuile> tuiles;
+    private HashMap<Tuile, JButton> boutons = new HashMap<>();
+    private ImageContainerCalques LePontDesAbimes;
+    private ImageContainerCalques LaPorteDeBronze;
+    private ImageContainerCalques LaCaverneDesOmbres;
+    private ImageContainerCalques LaPorteDeFer;
+    private ImageContainerCalques LaPortedOr;
+    private ImageContainerCalques LesFalaisesDeLOubli;
+    private ImageContainerCalques LePalaisDeCorail;
+    private ImageContainerCalques LaPortedArgent;
+    private ImageContainerCalques LesDunesDeLillusion;
+    private ImageContainerCalques Heliport;
+    private ImageContainerCalques LaPorteDeCuivre;
+    private ImageContainerCalques LeJardinDesHurlements;
+    private ImageContainerCalques LaForetPourpre;
+    private ImageContainerCalques LeLagonPerdu;
+    private ImageContainerCalques LeMaraisBrumeux;
+    private ImageContainerCalques Observatoire;
+    private ImageContainerCalques LeRocherFantome;
+    private ImageContainerCalques LaCaverneDuBrasier;
+    private ImageContainerCalques LeTempleDuSoleil;
+    private ImageContainerCalques LeTempleDeLaLune;
+    private ImageContainerCalques LePalaisDesMarees;
+    private ImageContainerCalques LeValDuCrepuscule;
+    private ImageContainerCalques LaTourDuGuet;
+    private ImageContainerCalques LeJardinDesMurmures;
 
+    public IhmGrille(Grille grille) {
+        setGrille(grille);
+        this.tuiles = grille.getTuiles();
+        this.setLayout(new GridLayout(6, 6, 5, 5));
+        String imgFolder = System.getProperty("user.dir") + "/src/Image/";
+
+        for (Tuile tuile : tuiles) {
+            if (tuile.getNom() == null) {
+                this.add(new JLabel(""));
+            } else if (tuile.getNom() == NomTuile.LePontDesAbimes) {
+                boutons.put(tuile, new JButton());
+                LePontDesAbimes = new ImageContainerCalques(imgFolder + "LePontDesAbimes.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(LePontDesAbimes);
+                this.add(boutons.get(tuile));
+            } else if (tuile.getNom() == NomTuile.Heliport) {
+                boutons.put(tuile, new JButton());
+                Heliport = new ImageContainerCalques(imgFolder + "Heliport.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(Heliport);
+                this.add(boutons.get(tuile));
+            } else if (tuile.getNom() == NomTuile.LaCaverneDesOmbres) {
+                boutons.put(tuile, new JButton());
+                LaCaverneDesOmbres = new ImageContainerCalques(imgFolder + "LaCaverneDesOmbres.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(LaCaverneDesOmbres);
+                this.add(boutons.get(tuile));
+            } else if (tuile.getNom() == NomTuile.LaCaverneDuBrasier) {
+                boutons.put(tuile, new JButton());
+                LaCaverneDuBrasier = new ImageContainerCalques(imgFolder + "LaCaverneDuBrasier.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(LaCaverneDuBrasier);
+                this.add(boutons.get(tuile));
+            } else if (tuile.getNom() == NomTuile.LaForetPourpre) {
+                boutons.put(tuile, new JButton());
+                LaForetPourpre = new ImageContainerCalques(imgFolder + "LaForetPourpre.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(LaForetPourpre);
+                this.add(boutons.get(tuile));
+            } else if (tuile.getNom() == NomTuile.LaPorteDeBronze) {
+                boutons.put(tuile, new JButton());
+                LaPorteDeBronze = new ImageContainerCalques(imgFolder + "LaPorteDeBronze.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(LaPorteDeBronze);
+                this.add(boutons.get(tuile));
+            } else if (tuile.getNom() == NomTuile.LaPorteDeCuivre) {
+                boutons.put(tuile, new JButton());
+                LaPorteDeCuivre = new ImageContainerCalques(imgFolder + "LaPorteDeCuivre.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(LaPorteDeCuivre);
+                this.add(boutons.get(tuile));
+            } else if (tuile.getNom() == NomTuile.LaPorteDeFer) {
+                boutons.put(tuile, new JButton());
+                LaPorteDeFer = new ImageContainerCalques(imgFolder + "LaPorteDeFer.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(LaPorteDeFer);
+                this.add(boutons.get(tuile));
+            } else if (tuile.getNom() == NomTuile.LaPortedArgent) {
+                boutons.put(tuile, new JButton());
+                LaPortedArgent = new ImageContainerCalques(imgFolder + "LaPortedArgent.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(LaPortedArgent);
+                this.add(boutons.get(tuile));
+            } else if (tuile.getNom() == NomTuile.LaPortedOr) {
+                boutons.put(tuile, new JButton());
+                LaPortedOr = new ImageContainerCalques(imgFolder + "LaPortedOr.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(LaPortedOr);
+                this.add(boutons.get(tuile));
+            } else if (tuile.getNom() == NomTuile.LaTourDuGuet) {
+                boutons.put(tuile, new JButton());
+                LaTourDuGuet = new ImageContainerCalques(imgFolder + "LaTourDuGuet.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(LaTourDuGuet);
+                this.add(boutons.get(tuile));
+            } else if (tuile.getNom() == NomTuile.LeJardinDesHurlements) {
+                boutons.put(tuile, new JButton());
+                LeJardinDesHurlements = new ImageContainerCalques(imgFolder + "LeJardinDesHurlements.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(LeJardinDesHurlements);
+                this.add(boutons.get(tuile));
+            } else if (tuile.getNom() == NomTuile.LeJardinDesMurmures) {
+                boutons.put(tuile, new JButton());
+                LeJardinDesMurmures = new ImageContainerCalques(imgFolder + "LeJardinDesMurmures.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(LeJardinDesMurmures);
+                this.add(boutons.get(tuile));
+            } else if (tuile.getNom() == NomTuile.LeLagonPerdu) {
+                boutons.put(tuile, new JButton());
+                LeLagonPerdu = new ImageContainerCalques(imgFolder + "LeLagonPerdu.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(LeLagonPerdu);
+                this.add(boutons.get(tuile));
+            } else if (tuile.getNom() == NomTuile.LeMaraisBrumeux) {
+                boutons.put(tuile, new JButton());
+                LeMaraisBrumeux = new ImageContainerCalques(imgFolder + "LeMaraisBrumeux.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(LeMaraisBrumeux);
+                this.add(boutons.get(tuile));
+            } else if (tuile.getNom() == NomTuile.LePalaisDeCorail) {
+                boutons.put(tuile, new JButton());
+                LePalaisDeCorail = new ImageContainerCalques(imgFolder + "LePalaisDeCorail.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(LePalaisDeCorail);
+                this.add(boutons.get(tuile));
+            } else if (tuile.getNom() == NomTuile.LePalaisDesMarees) {
+                boutons.put(tuile, new JButton());
+                LePalaisDesMarees = new ImageContainerCalques(imgFolder + "LePalaisDesMarees.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(LePalaisDesMarees);
+                this.add(boutons.get(tuile));
+            } else if (tuile.getNom() == NomTuile.LeRocherFantome) {
+                boutons.put(tuile, new JButton());
+                LeRocherFantome = new ImageContainerCalques(imgFolder + "LeRocherFantome.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(LeRocherFantome);
+                this.add(boutons.get(tuile));
+            } else if (tuile.getNom() == NomTuile.LeTempleDeLaLune) {
+                boutons.put(tuile, new JButton());
+                LeTempleDeLaLune = new ImageContainerCalques(imgFolder + "LeTempleDeLaLune.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(LeTempleDeLaLune);
+                this.add(boutons.get(tuile));
+            } else if (tuile.getNom() == NomTuile.LeTempleDuSoleil) {
+                boutons.put(tuile, new JButton());
+                LeTempleDuSoleil = new ImageContainerCalques(imgFolder + "LeTempleDuSoleil.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(LeTempleDuSoleil);
+                this.add(boutons.get(tuile));
+            } else if (tuile.getNom() == NomTuile.LeValDuCrepuscule) {
+                boutons.put(tuile, new JButton());
+                LeValDuCrepuscule = new ImageContainerCalques(imgFolder + "LeValDuCrepuscule.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(LeValDuCrepuscule);
+                this.add(boutons.get(tuile));
+            } else if (tuile.getNom() == NomTuile.LesDunesDeLillusion) {
+                boutons.put(tuile, new JButton());
+                LesDunesDeLillusion = new ImageContainerCalques(imgFolder + "LesDunesDeLillusion.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(LesDunesDeLillusion);
+                this.add(boutons.get(tuile));
+            } else if (tuile.getNom() == NomTuile.LesFalaisesDeLOubli) {
+                boutons.put(tuile, new JButton());
+                LesFalaisesDeLOubli = new ImageContainerCalques(imgFolder + "LesFalaisesDeLOubli.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(LesFalaisesDeLOubli);
+                this.add(boutons.get(tuile));
+            } else if (tuile.getNom() == NomTuile.Observatoire) {
+                boutons.put(tuile, new JButton());
+                Observatoire = new ImageContainerCalques(imgFolder + "Observatoire.png", 0, 0, 160, 140);
+                boutons.get(tuile).add(Observatoire);
+                this.add(boutons.get(tuile));
+            }
+        }
+
+        //this.repaint();
     }
-    
-    public void paintComponent(Graphics g) {
+
+    /*public void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (this.LePontDesAbimes != null) {
             this.LePontDesAbimes.paintComponent(g);
         }
        
-    }
-    
-    
-    
-    
+    }*/
     public static void main(String[] args) {
-       JFrame window = new JFrame() ;
-        window.setSize(450, 300);
-        // Centrage de la fenêtre sur l'écran
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-
-        window.setLocation(100, dim.height/2-window.getSize().height/2);
-
-        window.add(new IhmGrille());
-
-        window.setVisible(true);
-        
-       /* JButton bouton11 = new JButton();
-        JButton bouton12 = new JButton();
-        JButton bouton13 = new JButton();
-        JButton bouton14 = new JButton();
-        JButton bouton15 = new JButton();
-        JButton bouton16 = new JButton();
-        JButton bouton21 = new JButton();
-        JButton bouton22 = new JButton();
-        JButton bouton23 = new JButton();
-        JButton bouton24 = new JButton();
-        JButton bouton25 = new JButton();
-        JButton bouton26 = new JButton();
-        JButton bouton31 = new JButton();
-        JButton bouton32 = new JButton();
-        JButton bouton33 = new JButton();
-        JButton bouton34 = new JButton();
-        JButton bouton35 = new JButton();
-        JButton bouton36 = new JButton();
-        JButton bouton41 = new JButton();
-        JButton bouton42 = new JButton();
-        JButton bouton43 = new JButton();
-        JButton bouton44 = new JButton();
-        JButton bouton45 = new JButton();
-        JButton bouton46 = new JButton();
-        JButton bouton51 = new JButton();
-        JButton bouton52 = new JButton();
-        JButton bouton53 = new JButton();
-        JButton bouton54 = new JButton();
-        JButton bouton55 = new JButton();
-        JButton bouton56 = new JButton();
-        JButton bouton61 = new JButton();
-        JButton bouton62 = new JButton();
-        JButton bouton63 = new JButton();
-        JButton bouton64 = new JButton();
-        JButton bouton65 = new JButton();
-        JButton bouton66 = new JButton();
-        
-        ArrayList<JButton> boutons = new ArrayList<>();
-        
-        boutons.add(bouton11);
-        boutons.add(bouton12);
-        boutons.add(bouton13);
-        boutons.add(bouton14);
-        boutons.add(bouton15);
-        boutons.add(bouton16);
-        boutons.add(bouton21);
-        boutons.add(bouton22);
-        boutons.add(bouton23);
-        boutons.add(bouton24);
-        boutons.add(bouton25);
-        boutons.add(bouton26);
-        boutons.add(bouton31);
-        boutons.add(bouton32);
-        boutons.add(bouton33);
-        boutons.add(bouton34);
-        boutons.add(bouton35);
-        boutons.add(bouton36);
-        boutons.add(bouton41);
-        boutons.add(bouton42);
-        boutons.add(bouton43);
-        boutons.add(bouton44);
-        boutons.add(bouton45);
-        boutons.add(bouton46);
-        boutons.add(bouton51);
-        boutons.add(bouton52);
-        boutons.add(bouton53);
-        boutons.add(bouton54);
-        boutons.add(bouton55);
-        boutons.add(bouton56);
-        boutons.add(bouton61);
-        boutons.add(bouton62);
-        boutons.add(bouton63);
-        boutons.add(bouton64);
-        boutons.add(bouton65);
-        boutons.add(bouton66);
-        
-        for(JButton bouton : boutons){
-            bouton.setBorder(blackline);
-            this.add(bouton);
-        }*/
-
-        
 
     }
 
@@ -159,13 +214,4 @@ public class IhmGrille extends JPanel {
         this.grille = grille;
     }
 
-    
-     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        if (this.LePontDesAbimes != null) {
-            this.LePontDesAbimes.paintComponent(g);
-        }
-       
-    }
 }
-

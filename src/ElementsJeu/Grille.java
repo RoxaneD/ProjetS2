@@ -52,7 +52,7 @@ public class Grille {
         nomTuiles.add(NomTuile.LeMaraisBrumeux);
         nomTuiles.add(NomTuile.Observatoire);
         nomTuiles.add(NomTuile.LeRocherFantome);
-        nomTuiles.add(NomTuile.LaCaverneDuBraisier);
+        nomTuiles.add(NomTuile.LaCaverneDuBrasier);
         nomTuiles.add(NomTuile.LeTempleDuSoleil);
         nomTuiles.add(NomTuile.LeTempleDeLaLune);
         nomTuiles.add(NomTuile.LePalaisDesMarees);
@@ -118,7 +118,7 @@ public class Grille {
                 t.setEmplacementAventurier(carteAventurier1);
             } else if (t.getNom() == NomTuile.LeJardinDesHurlements) {
                 t.setEmplacementTresor(tresor2);
-            } else if (t.getNom() == NomTuile.LaCaverneDuBraisier) {
+            } else if (t.getNom() == NomTuile.LaCaverneDuBrasier) {
                 t.setEmplacementTresor(tresor3);
             } else if (t.getNom() == NomTuile.LeTempleDuSoleil) {
                 t.setEmplacementTresor(tresor1);

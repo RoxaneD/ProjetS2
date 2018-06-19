@@ -384,7 +384,7 @@ public class IhmAventurier extends JPanel {
         CarteTresors carteTresor10 = new CarteTresors(NomTresor.MonteeDesEaux);
         CarteTresors carteTresor11 = new CarteTresors(NomTresor.MonteeDesEaux);
         CarteInondation carte1 = new CarteInondation(NomTuile.Heliport);
-        CarteInondation carte2 = new CarteInondation(NomTuile.LaCaverneDuBraisier);
+        CarteInondation carte2 = new CarteInondation(NomTuile.LaCaverneDuBrasier);
         CarteInondation carte3 = new CarteInondation(NomTuile.LaForetPourpre);
         CarteInondation carte4 = new CarteInondation(NomTuile.LeValDuCrepuscule);
         CarteInondation carte5 = new CarteInondation(NomTuile.LesDunesDeLillusion);
