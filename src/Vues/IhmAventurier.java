@@ -1,6 +1,8 @@
 package Vues;
 
-public class IhmAventurier {
+import javax.swing.JPanel;
+
+public class IhmAventurier extends JPanel {
 
     // doit contenir -> son tas de carte
     // sa couleur - sa classe (sa carte aventurier)

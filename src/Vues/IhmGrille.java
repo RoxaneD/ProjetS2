@@ -1,6 +1,8 @@
 package Vues;
 
-public class IhmGrille {
+import javax.swing.JPanel;
+
+public class IhmGrille extends JPanel {
 
     // doit contenir : les tuiles -> Pas de nom et de couleur, mais l'image associée (en fonction de asseché/innondé)
     //                            -> l'emplacement des trésors (image)
