@@ -28,7 +28,6 @@ import Tas.TasJoueur;
 import Tas.TasPoubelle;
 import Tas.TasTresors;
 import Vues.IhmMenuPrincipal;
-import Vues.IhmObserve;
 import Vues.IhmReglesDuJeu;
 import Vues.VueAventurierDemo;
 import Vues.VueGrilleDemo;
@@ -95,13 +94,11 @@ public class Controleur implements Observateur {
 
         // instantiation des ihm
         // menu
-        IhmObserve ihmMenuObserve = new IhmObserve();
-        ihmMenuObserve.addObservateur(this);
-        ihmMenuPrincipal = new IhmMenuPrincipal(ihmMenuObserve);
+        ihmMenuPrincipal = new IhmMenuPrincipal();
+        ihmMenuPrincipal.addObservateur(this);
         // regles du jeu
-        IhmObserve ihmReglesObserve = new IhmObserve();
-        ihmReglesObserve.addObservateur(this);
-        ihmReglesDuJeu = new IhmReglesDuJeu(ihmReglesObserve);
+        ihmReglesDuJeu = new IhmReglesDuJeu();
+        ihmReglesDuJeu.addObservateur(this);
         // plateau de jeu
 
     }

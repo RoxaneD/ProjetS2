@@ -1,6 +1,7 @@
 package Vues;
 
 import Controle.Action;
+import Controle.Observateur;
 import Controle.TypesActions;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -13,27 +14,26 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class IhmReglesDuJeu extends JPanel {
+public class IhmReglesDuJeu extends JPanel implements Observe {
 
     // attributs
-    private IhmObserve ihm;
+    private Observateur observateur;
 
     private Integer width, height;
 
-    private JFrame window; 
+    private JFrame window;
     private JPanel titre;
     private JPanel informations;
     private JPanel options;
     private JButton fermer;
 
     // constructeur
-    public IhmReglesDuJeu(IhmObserve ihm) {
+    public IhmReglesDuJeu() {
         super();
         width = 508;
         height = 532;
         this.setLayout(new BorderLayout());
         this.setSize(508, 532);
-        setIhmObserve(ihm);
 
         titre = new JPanel();
         titre.add(new JLabel("Règle du jeu : Île Interdite"));
@@ -56,21 +56,11 @@ public class IhmReglesDuJeu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 Action a = new Action(TypesActions.fermerReglesJeu);
-                getIhmObserve().notifierObservateur(a);
+                notifierObservateur(a);
             }
         });
 
         setVisible(false);
-    }
-
-    // setteurs
-    public void setIhmObserve(IhmObserve ihm) {
-        this.ihm = ihm;
-    }
-
-    // getteurs
-    public IhmObserve getIhmObserve() {
-        return ihm;
     }
 
     // autres méthodes
@@ -90,16 +80,27 @@ public class IhmReglesDuJeu extends JPanel {
         window.setVisible(true);
         this.repaint();
     }
-    
-    public void cacherIhm(){
+
+    public void cacherIhm() {
         window.setVisible(false);
     }
 
     // main
     public static void main(String[] args) {
-        IhmObserve ihmObserve = new IhmObserve();
-        IhmReglesDuJeu ihm = new IhmReglesDuJeu(ihmObserve);
+        IhmReglesDuJeu ihm = new IhmReglesDuJeu();
 
         ihm.afficherIhm();
+    }
+
+    @Override
+    public void addObservateur(Observateur o) {
+        this.observateur = o;
+    }
+
+    @Override
+    public void notifierObservateur(Action action) {
+        if (observateur != null) {
+            observateur.traiterAction(action);
+        }
     }
 }

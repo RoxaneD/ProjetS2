@@ -9,8 +9,6 @@ import ElementsJeu.Tuile;
 
 public class TestControleurObservateur {
 
-    private static TestControleurObserve t;
-
     public static void main(String[] args) {
         Controleur c = new Controleur();
 

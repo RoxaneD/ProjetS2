@@ -11,6 +11,8 @@ import Cartes.Carte;
 import Cartes.CarteAventurier;
 import Cartes.CarteInondation;
 import Cartes.CarteTresors;
+import Controle.Action;
+import Controle.Observateur;
 import Enumerations.Couleur;
 import Enumerations.NomAventurier;
 import Enumerations.NomTresor;
@@ -22,8 +24,8 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,7 +37,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-public class IhmAventurier extends JPanel {
+public class IhmAventurier extends JPanel implements Observe {
 
     // doit contenir -> son tas de carte
     // sa couleur - sa classe (sa carte aventurier)
@@ -43,7 +45,7 @@ public class IhmAventurier extends JPanel {
     // les boutons pour ses actions -> deplacer - assecher - defausser - utiliser - recuperer tresor - rien faire - donner une carte
     //
     // attribut qui permet la communication
-    private IhmObserve ihmObserve;
+    private Observateur observateur;
 
     // attributs internes
     private boolean complete = false;
@@ -96,10 +98,9 @@ public class IhmAventurier extends JPanel {
     private JButton donner = new JButton("           Donner           ");                 // dans actionsCartes
 
     // constructeur
-    public IhmAventurier(IhmObserve ihm, Aventurier a) {
+    public IhmAventurier(Aventurier a) {
         // instantiations obligatoires
         super();
-        setIhmObserve(ihm);
         this.setLayout(new BorderLayout());
 
         // BORDURES :D
@@ -165,14 +166,37 @@ public class IhmAventurier extends JPanel {
 
         add(panelInvisible, BorderLayout.SOUTH);
         repaint();
+
+        this.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+        });
+
     }
 
-    // setteurs
-    public void setIhmObserve(IhmObserve ihm) {
-        this.ihmObserve = ihm;
-    }
-
-    // getteurs
     // autres méthodes
     @Override
     public void paintComponent(Graphics g) {
@@ -231,7 +255,7 @@ public class IhmAventurier extends JPanel {
                 }
 
                 g.drawImage(imageIV1, ((400 / taille) * i2), titre.getHeight() + 230, carteAventurier.getWidth(), carteAventurier.getHeight(), null, panelCartesTirages);
-                
+
                 i2 += 1;
             }
 
@@ -272,7 +296,6 @@ public class IhmAventurier extends JPanel {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         window.setLocation((dim.width / 2) - 225, (dim.height / 2) - 241);
 
-        IhmObserve ihmObserve = new IhmObserve();
         CarteAventurier c = new CarteAventurier(NomAventurier.plongeur, Couleur.noir);
         Plongeur a = new Plongeur("Marie", c);
         CarteTresors carteTresor1 = new CarteTresors(NomTresor.Pierre);
@@ -315,10 +338,22 @@ public class IhmAventurier extends JPanel {
          * a.getTasTirage().add(carte7);*
          */
 
-        IhmAventurier ihm = new IhmAventurier(ihmObserve, a);
+        IhmAventurier ihm = new IhmAventurier(a);
 
         window.add(ihm);
         ihm.afficherIhmComplete();
         window.setVisible(true);
+    }
+
+    @Override
+    public void addObservateur(Observateur o) {
+        this.observateur = o;
+    }
+
+    @Override
+    public void notifierObservateur(Action action) {
+        if (observateur != null) {
+            observateur.traiterAction(action);
+        }
     }
 }

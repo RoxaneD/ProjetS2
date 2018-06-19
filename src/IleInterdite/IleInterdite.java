@@ -1,7 +1,6 @@
 package IleInterdite;
 
 import Controle.Controleur;
-import Vues.IhmObserve;
 import Vues.IhmMenuPrincipal;
 import Vues.IhmReglesDuJeu;
 

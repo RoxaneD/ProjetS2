@@ -1,6 +1,7 @@
 package Vues;
 
 import Controle.Action;
+import Controle.Observateur;
 import Controle.TypesActions;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -22,11 +23,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class IhmMenuPrincipal extends JPanel {
+public class IhmMenuPrincipal extends JPanel implements Observe {
 
     // variable
-    private IhmObserve ihmObserve;
-
+    private Observateur observateur;
+    
     // variables internes
     private int nombreJoueurs = 2; // représente le nombre de joueurs
     private boolean presse = false;
@@ -59,12 +60,10 @@ public class IhmMenuPrincipal extends JPanel {
     private JButton supp6 = new JButton("X");
 
     // constructeurs
-    public IhmMenuPrincipal(IhmObserve ihm) {
+    public IhmMenuPrincipal() {
         super();
         width = 508;
         height = 532;
-
-        setIhmObserve(ihm);
 
         this.setLayout(new BorderLayout());
         this.setSize(508, 532);
@@ -281,7 +280,8 @@ public class IhmMenuPrincipal extends JPanel {
                     i += 1;
                 }
                 Action a = new Action(TypesActions.commencerPartie, nomJoueurs);
-                getIhmObserve().notifierObservateur(a);
+                notifierObservateur(a);
+                repaint();
             }
         });
 
@@ -289,7 +289,8 @@ public class IhmMenuPrincipal extends JPanel {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 Action a = new Action(TypesActions.reglesJeu);
-                getIhmObserve().notifierObservateur(a);
+                notifierObservateur(a);
+                repaint();
             }
         });
 
@@ -298,9 +299,6 @@ public class IhmMenuPrincipal extends JPanel {
     }
 
     // setteurs
-    public void setIhmObserve(IhmObserve ihm) {
-        this.ihmObserve = ihm;
-    }
 
     public void setCommencer(JButton commencer) {
         this.commencer = commencer;
@@ -321,10 +319,6 @@ public class IhmMenuPrincipal extends JPanel {
 
     public boolean isPressed() {
         return presse;
-    }
-
-    public IhmObserve getIhmObserve() {
-        return this.ihmObserve;
     }
 
     public ArrayList<String> getNomJoueurs() {
@@ -385,8 +379,8 @@ public class IhmMenuPrincipal extends JPanel {
             joueur6.setVisible(true);
             supp6.setVisible(true);
         }
-        this.setSize(509, 532);
-        this.setSize(508, 532);
+        this.setPreferredSize(new Dimension(509, 532));
+        this.setPreferredSize(new Dimension(508, 532));
     }
 
     public void afficherIhm() {
@@ -402,17 +396,30 @@ public class IhmMenuPrincipal extends JPanel {
         window.add(this);
 
         window.setVisible(true);
-        this.repaint();
+        repaint();
     }
-    
-    public void cacherIhm(){
+
+    public void cacherIhm() {
         window.setVisible(false);
     }
 
     public static void main(String[] args) {
-        IhmObserve ihmObserve = new IhmObserve();
-        IhmMenuPrincipal ihm = new IhmMenuPrincipal(ihmObserve);
+        IhmMenuPrincipal ihm = new IhmMenuPrincipal();
 
         ihm.afficherIhm();
+    }
+
+    @Override
+    public void addObservateur(Observateur o) {
+        this.observateur = o;
+    }
+
+    @Override
+    public void notifierObservateur(Action action) {
+        if (observateur != null) {
+            observateur.traiterAction(action);
+        }
+        window.setPreferredSize(new Dimension(509, 532));
+        window.setPreferredSize(new Dimension(508, 532));
     }
 }

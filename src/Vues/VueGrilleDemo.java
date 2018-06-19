@@ -2,6 +2,7 @@ package Vues;
 
 //Importation de tous les packages Controle, ElementsJeu, java.awt, java.util, javax.swing
 import Controle.Action;
+import Controle.Observateur;
 import Controle.TypesActions;
 import ElementsJeu.Grille;
 import ElementsJeu.Tuile;
@@ -25,7 +26,7 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 
-public class VueGrilleDemo extends Observe {
+public class VueGrilleDemo implements Observe {
 
     // attributs - interne
     private ArrayList<Tuile> tuiles = new ArrayList<>();  //Déclaration d'un ArrayList tuiles de type Tuile et initialisation de ce dernier
@@ -214,6 +215,16 @@ public class VueGrilleDemo extends Observe {
                 }
             }
         }
+    }
+
+    @Override
+    public void addObservateur(Observateur o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void notifierObservateur(Action action) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

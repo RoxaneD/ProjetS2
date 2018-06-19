@@ -5,6 +5,7 @@ import Cartes.CarteAventurier;
 import Cartes.CarteTresor;
 import Cartes.CarteTresors;
 import Controle.Action;
+import Controle.Observateur;
 import Controle.TypesActions;
 import Enumerations.Couleur;
 import Enumerations.NomAventurier;
@@ -25,7 +26,7 @@ import Util.Utils.Pion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class VueAventurierDemo extends Observe {
+public class VueAventurierDemo implements Observe {
 
     // attributs - internes
     private String nomJoueur;
@@ -214,5 +215,15 @@ public class VueAventurierDemo extends Observe {
         VueAventurierDemo vueAventurier1 = new VueAventurierDemo("Test1", carte, Pion.BLEU.getCouleur());
         //affichage sur la fenetre de cette vue
         vueAventurier1.getWindow().setVisible(true);*/
+    }
+
+    @Override
+    public void addObservateur(Observateur o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void notifierObservateur(Action action) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
