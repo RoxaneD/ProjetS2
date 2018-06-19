@@ -20,12 +20,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class IhmPlateauDeJeu {
-
-    // attributs
-    private final JFrame window;
+    // avec l'ancienne ihm
     private VueAventurierDemo vueAventurier;
     private ArrayList<VueAventurierDemo> ensembleVuesAventuriers;
     private VueGrilleDemo vueGrille;
+    
+    // avec la nouvelle ihm
+    
+    // composants visuels
+    private final JFrame window;
     private JPanel panelNorth;
     private JPanel panelCentre;
     private JPanel panelSouth;
