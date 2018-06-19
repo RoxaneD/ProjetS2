@@ -6,9 +6,11 @@
 package Jeu_Tests;
 
 import ElementsJeu.Grille;
+import Enumerations.EtatTuile;
 import Vues.IhmGrille;
 import java.awt.Component;
 import javax.swing.JFrame;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 
 /**
@@ -22,16 +24,21 @@ public class TestIhmGrille {
      */
     private static JFrame window = new JFrame();
     private static Grille grille = new Grille();
-    private static IhmGrille ihm = new IhmGrille(grille);
-
+    private static IhmGrille ihm;
     
     
     
     public static void main(String[] args) {
         // TODO code application logic here
+        //grille.getTuile(4,4).setEtat(EtatTuile.inondee);
+        //grille.getTuile(3,3).setEtat(EtatTuile.submergee);
+        ihm = new IhmGrille(grille);
+        System.out.println("test3");
         window.add(ihm);
         window.setSize(1200, 1200);
         window.setVisible(true);
+        window.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
         
     }
     

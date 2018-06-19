@@ -147,6 +147,16 @@ public class Grille {
         }
         return tuileRecherchee;  //Retourne la tuile trouvée
     }
+    
+    public Tuile getTuile(NomTuile nom) {
+        Tuile tuileRecherchee = null;  //Initialisation de tuileRecherchée avec pour valeur null
+        for (Tuile t : tuiles) {  //Parcours de l'arrayList tuiles
+            if (t.getNom() == nom) {  //Condition pour trouver la tuile recherchée avec l'indice x et y 
+                tuileRecherchee = t;  //tuileRecherchee prend pour valeur les coordonnées de la tuile correspondantes dand l'ArrayList 
+            }
+        }
+        return tuileRecherchee;  //Retourne la tuile trouvée
+    }
 
     //getteur d'un ArrayList de Tuile avec une tuile en paramètre
     public ArrayList<Tuile> getTuilesAdjacentes(Tuile tuile) {
