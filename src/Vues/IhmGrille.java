@@ -1,5 +1,17 @@
 package Vues;
 
+import Demo.ImageContainerCalques;
+import ElementsJeu.Grille;
+import ElementsJeu.Tuile;
+import Enumerations.NomTuile;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 import ElementsJeu.Grille;
 import ElementsJeu.Tuile;
 import java.awt.Color;
@@ -20,14 +32,51 @@ public class IhmGrille extends JPanel {
     //                              
     private Grille grille;
     private ArrayList<Tuile> tuiles;
-    private HashMap<Tuile,JButton> boutons = new HashMap<>();;
+    private HashMap<Tuile,JButton> boutons = new HashMap<>();
+    ImageContainerCalques LePontDesAbimes;
 
     //Constructeur
+    
+     public IhmGrille() {
+    String imgFolder = System.getProperty("user.dir") + "/src/Image/" ;
+    LePontDesAbimes = new ImageContainerCalques(imgFolder+"LePontDesAbimes.png", 0, 0, 450, 300);
+    this.add(LePontDesAbimes, -2000);
+    this.repaint();
+
+    }
+     
     public IhmGrille(Grille grille) {
         this.grille = grille;
         tuiles = grille.getTuiles();
         this.setLayout(new GridLayout(6, 6, 5, 5));
         Border blackline = BorderFactory.createLineBorder(Color.black, 2);
+    // 
+    ImageContainerCalques LePontDesAbimes;
+    Tuile lepont = new Tuile(grille, 1,1,NomTuile.Le_Pont_Des_Abimes);
+    
+    for (Tuile tuile : tuiles) {
+            if (tuile.getNom() != null) {
+                boutons.put(tuile,new JButton(""+tuile.getNom()));
+                this.add(boutons.get(tuile));
+            }else{
+                this.add(new JLabel(""));
+            }
+        }
+     
+    }
+    
+    
+    public static void main(String[] args) {
+       JFrame window = new JFrame() ;
+        window.setSize(450, 300);
+        // Centrage de la fenêtre sur l'écran
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+
+        window.setLocation(100, dim.height/2-window.getSize().height/2);
+
+        window.add(new IhmGrille());
+
+        window.setVisible(true);
         
        /* JButton bouton11 = new JButton();
         JButton bouton12 = new JButton();
@@ -110,14 +159,7 @@ public class IhmGrille extends JPanel {
             this.add(bouton);
         }*/
 
-        for (Tuile tuile : tuiles) {
-            if (tuile.getNom() != null) {
-                boutons.put(tuile,new JButton(""+tuile.getNom()));
-                this.add(boutons.get(tuile));
-            }else{
-                this.add(new JLabel(""));
-            }
-        }
+        
 
     }
 
@@ -131,7 +173,13 @@ public class IhmGrille extends JPanel {
         this.grille = grille;
     }
 
-    public static void main(String[] args) {
-
+    
+     public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (this.LePontDesAbimes != null) {
+            this.LePontDesAbimes.paintComponent(g);
+        }
+       
     }
 }
+
