@@ -10,7 +10,7 @@ public class CarteInondation extends Carte {
     // constructeurs
     //Crée une carte
     public CarteInondation(NomTuile nom){
-        setDescription("");// Description par défault de la carte
+        setDescription("inondation");// Description par défault de la carte
         setNom(nom);//avec celui fournit en paramètre
     }
     

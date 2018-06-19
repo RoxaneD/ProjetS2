@@ -78,10 +78,10 @@ public class Controleur implements Observateur {
         // instantiation des éléments internes
         setGrille();
         setNiveauEau();
-        Tresor tresor1 = new Tresor(NomTresor.LaPierreSacree);
-        Tresor tresor2 = new Tresor(NomTresor.LaStatueDuZephyr);
-        Tresor tresor3 = new Tresor(NomTresor.LeCristalArdent);
-        Tresor tresor4 = new Tresor(NomTresor.LeCaliceDelOnde);
+        Tresor tresor1 = new Tresor(NomTresor.Pierre);
+        Tresor tresor2 = new Tresor(NomTresor.Zephyr);
+        Tresor tresor3 = new Tresor(NomTresor.Cristal);
+        Tresor tresor4 = new Tresor(NomTresor.Calice);
         setTresor1(tresor1);
         setTresor2(tresor2);
         setTresor3(tresor3);
@@ -518,7 +518,7 @@ public class Controleur implements Observateur {
             // pour afficher les cartes qu'on peut utiliser (de ses propres cartes)
         } else if (action.getType() == TypesActions.demandeUtilisationCarte) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
             for (CarteTresors c : tasJoueurs.get(action.getNom()).getCartes()) {
-                if (c.getNom() == NomTresor.helicoptere || c.getNom() == NomTresor.MonteeDesEaux || c.getNom() == NomTresor.SacsDeSable) {
+                if (c.getNom() == NomTresor.Helicoptere || c.getNom() == NomTresor.MonteeDesEaux || c.getNom() == NomTresor.SacsDeSable) {
                     // ihm2.afficherCarte();
                 }
             }
@@ -526,7 +526,7 @@ public class Controleur implements Observateur {
             // pour utiliser une carte trésor
         } else if (action.getType() == TypesActions.utiliserTresor) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
             // pour une carte hélicoptère
-            if (action.getCarteT().getNom() == NomTresor.helicoptere) {
+            if (action.getCarteT().getNom() == NomTresor.Helicoptere) {
 
                 // pour une carte montée des eaux
             } else if (action.getCarteT().getNom() == NomTresor.MonteeDesEaux) {

@@ -81,30 +81,30 @@ public class Plateau {
         CarteInondation carteInondation23 = new CarteInondation(NomTuile.LaTourDuGuet);
         CarteInondation carteInondation24 = new CarteInondation(NomTuile.LeJardinDesMurmures);
         //          cartes trésors
-        CarteTresors carteTresor1 = new CarteTresors(NomTresor.LaPierreSacree);
-        CarteTresors carteTresor2 = new CarteTresors(NomTresor.LaPierreSacree);
-        CarteTresors carteTresor3 = new CarteTresors(NomTresor.LaPierreSacree);
-        CarteTresors carteTresor4 = new CarteTresors(NomTresor.LaPierreSacree);
-        CarteTresors carteTresor5 = new CarteTresors(NomTresor.LaPierreSacree);
-        CarteTresors carteTresor6 = new CarteTresors(NomTresor.LaStatueDuZephyr);
-        CarteTresors carteTresor7 = new CarteTresors(NomTresor.LaStatueDuZephyr);
-        CarteTresors carteTresor8 = new CarteTresors(NomTresor.LaStatueDuZephyr);
-        CarteTresors carteTresor9 = new CarteTresors(NomTresor.LaStatueDuZephyr);
-        CarteTresors carteTresor10 = new CarteTresors(NomTresor.LaStatueDuZephyr);
-        CarteTresors carteTresor11 = new CarteTresors(NomTresor.LeCristalArdent);
-        CarteTresors carteTresor12 = new CarteTresors(NomTresor.LeCristalArdent);
-        CarteTresors carteTresor13 = new CarteTresors(NomTresor.LeCristalArdent);
-        CarteTresors carteTresor14 = new CarteTresors(NomTresor.LeCristalArdent);
-        CarteTresors carteTresor15 = new CarteTresors(NomTresor.LeCristalArdent);
-        CarteTresors carteTresor16 = new CarteTresors(NomTresor.LeCaliceDelOnde);
-        CarteTresors carteTresor17 = new CarteTresors(NomTresor.LeCaliceDelOnde);
-        CarteTresors carteTresor18 = new CarteTresors(NomTresor.LeCaliceDelOnde);
-        CarteTresors carteTresor19 = new CarteTresors(NomTresor.LeCaliceDelOnde);
-        CarteTresors carteTresor20 = new CarteTresors(NomTresor.LeCaliceDelOnde);
+        CarteTresors carteTresor1 = new CarteTresors(NomTresor.Pierre);
+        CarteTresors carteTresor2 = new CarteTresors(NomTresor.Pierre);
+        CarteTresors carteTresor3 = new CarteTresors(NomTresor.Pierre);
+        CarteTresors carteTresor4 = new CarteTresors(NomTresor.Pierre);
+        CarteTresors carteTresor5 = new CarteTresors(NomTresor.Pierre);
+        CarteTresors carteTresor6 = new CarteTresors(NomTresor.Zephyr);
+        CarteTresors carteTresor7 = new CarteTresors(NomTresor.Zephyr);
+        CarteTresors carteTresor8 = new CarteTresors(NomTresor.Zephyr);
+        CarteTresors carteTresor9 = new CarteTresors(NomTresor.Zephyr);
+        CarteTresors carteTresor10 = new CarteTresors(NomTresor.Zephyr);
+        CarteTresors carteTresor11 = new CarteTresors(NomTresor.Cristal);
+        CarteTresors carteTresor12 = new CarteTresors(NomTresor.Cristal);
+        CarteTresors carteTresor13 = new CarteTresors(NomTresor.Cristal);
+        CarteTresors carteTresor14 = new CarteTresors(NomTresor.Cristal);
+        CarteTresors carteTresor15 = new CarteTresors(NomTresor.Cristal);
+        CarteTresors carteTresor16 = new CarteTresors(NomTresor.Calice);
+        CarteTresors carteTresor17 = new CarteTresors(NomTresor.Calice);
+        CarteTresors carteTresor18 = new CarteTresors(NomTresor.Calice);
+        CarteTresors carteTresor19 = new CarteTresors(NomTresor.Calice);
+        CarteTresors carteTresor20 = new CarteTresors(NomTresor.Calice);
         //          cartes spéciales
-        CarteTresors carteSpeciale1 = new CarteTresors(NomTresor.helicoptere);
-        CarteTresors carteSpeciale2 = new CarteTresors(NomTresor.helicoptere);
-        CarteTresors carteSpeciale3 = new CarteTresors(NomTresor.helicoptere);
+        CarteTresors carteSpeciale1 = new CarteTresors(NomTresor.Helicoptere);
+        CarteTresors carteSpeciale2 = new CarteTresors(NomTresor.Helicoptere);
+        CarteTresors carteSpeciale3 = new CarteTresors(NomTresor.Helicoptere);
         CarteTresors carteSpeciale4 = new CarteTresors(NomTresor.MonteeDesEaux);
         CarteTresors carteSpeciale5 = new CarteTresors(NomTresor.MonteeDesEaux);
         CarteTresors carteSpeciale6 = new CarteTresors(NomTresor.MonteeDesEaux);
@@ -176,10 +176,10 @@ public class Plateau {
         tasInondation.addCarte(carteInondation24);
 
         //      TRESORS --------------------------------------------------------------------------------------------------------------
-        Tresor tresor1 = new Tresor(NomTresor.LaPierreSacree);
-        Tresor tresor2 = new Tresor(NomTresor.LaStatueDuZephyr);
-        Tresor tresor3 = new Tresor(NomTresor.LeCristalArdent);
-        Tresor tresor4 = new Tresor(NomTresor.LeCaliceDelOnde);
+        Tresor tresor1 = new Tresor(NomTresor.Pierre);
+        Tresor tresor2 = new Tresor(NomTresor.Zephyr);
+        Tresor tresor3 = new Tresor(NomTresor.Cristal);
+        Tresor tresor4 = new Tresor(NomTresor.Calice);
 
         //      GRILLE + TUILES -------------------------------------------------------------------------------------------------------
         Grille grilleDeJeu = new Grille();

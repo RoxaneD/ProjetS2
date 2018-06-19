@@ -43,7 +43,7 @@ public class TestIhmPrincipale {
         VueAventurierDemo vueJoueur1 = new VueAventurierDemo("Aventurier 1", carte, Utils.Pion.BLEU.getCouleur());
         ArrayList<VueAventurierDemo> ensembleVueAventurier = new ArrayList<>();
         ensembleVueAventurier.add(vueJoueur1);
-        CarteTresors carteT = new CarteTresors( NomTresor.LaPierreSacree);
+        CarteTresors carteT = new CarteTresors( NomTresor.Pierre);
         vueJoueur1.addCarteTresors(carteT);
 
         //vueGrille.getWindow().setVisible(false);

@@ -29,10 +29,10 @@ public class Grille {
         CarteAventurier carteAventurier5 = new CarteAventurier(NomAventurier.ingenieur, Couleur.rouge);
         CarteAventurier carteAventurier6 = new CarteAventurier(NomAventurier.navigateur, Couleur.jaune);
 
-        Tresor tresor1 = new Tresor(NomTresor.LaPierreSacree);
-        Tresor tresor2 = new Tresor(NomTresor.LaStatueDuZephyr);
-        Tresor tresor3 = new Tresor(NomTresor.LeCristalArdent);
-        Tresor tresor4 = new Tresor(NomTresor.LeCaliceDelOnde);
+        Tresor tresor1 = new Tresor(NomTresor.Pierre);
+        Tresor tresor2 = new Tresor(NomTresor.Zephyr);
+        Tresor tresor3 = new Tresor(NomTresor.Cristal);
+        Tresor tresor4 = new Tresor(NomTresor.Calice);
 
         ArrayList<NomTuile> nomTuiles = new ArrayList<NomTuile>();
         nomTuiles.add(NomTuile.LePontDesAbimes);

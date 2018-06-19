@@ -10,7 +10,7 @@ public class CarteTresors extends Carte {
     // constructeurs
     //Crée une carte
     public CarteTresors(){
-        setDescription("");//Description par défault de la carte
+        setDescription("tresors");//Description par défault de la carte
     }
     
     //Crée une carte

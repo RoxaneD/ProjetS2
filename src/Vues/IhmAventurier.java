@@ -9,10 +9,12 @@ import Aventuriers.Pilote;
 import Aventuriers.Plongeur;
 import Cartes.Carte;
 import Cartes.CarteAventurier;
+import Cartes.CarteInondation;
 import Cartes.CarteTresors;
 import Enumerations.Couleur;
 import Enumerations.NomAventurier;
 import Enumerations.NomTresor;
+import Enumerations.NomTuile;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -54,36 +56,13 @@ public class IhmAventurier extends JPanel {
     private JPanel panelCartesVisibles = new JPanel(new BorderLayout());     // dans panelVisible
     private JPanel carteAventurier = new JPanel();         // dans panelVisible
     private JPanel panelCartesJoueur = new JPanel();       // dans panelVisible
-    private JPanel actionsPion = new JPanel();             // dans panelInvisible
-    private JPanel actionsCartes = new JPanel();           // dans panelInvisible
+    private JPanel actionsPion = new JPanel(new GridLayout(1, 4));             // dans panelInvisible
+    private JPanel actionsCartes = new JPanel(new GridLayout(3, 1));           // dans panelInvisible
     private JPanel panelCartesTirages = new JPanel();      // dans panelInvisible
 
     private Image imageCarteAventurier;
     private Image imageV1;
-    private Image imageV2;
-    private Image imageV3;
-    private Image imageV4;
-    private Image imageV5;
-    private Image imageV6;
-    private Image imageV7;
-    private Image imageV8;
-    private Image imageV9;
-    private Image imageV10;
-    private Image imageV11;
-    private Image imageV12;
-    private Image imageV13;
-    private Image imageV14;
-    private Image imageV15;
-
     private Image imageIV1;
-    private Image imageIV2;
-    private Image imageIV3;
-    private Image imageIV4;
-    private Image imageIV5;
-    private Image imageIV6;
-    private Image imageIV7;
-    private Image imageIV8;
-    private Image imageIV9;
 
     private ArrayList<JButton> cartesVisibles = new ArrayList<>();
     private JButton visible1 = new JButton();
@@ -95,12 +74,6 @@ public class IhmAventurier extends JPanel {
     private JButton visible7 = new JButton();
     private JButton visible8 = new JButton();
     private JButton visible9 = new JButton();
-    private JButton visible10 = new JButton();
-    private JButton visible11 = new JButton();
-    private JButton visible12 = new JButton();
-    private JButton visible13 = new JButton();
-    private JButton visible14 = new JButton();
-    private JButton visible15 = new JButton();
 
     private ArrayList<JButton> cartesTirages = new ArrayList<>();
     private JButton tirage1 = new JButton();
@@ -113,13 +86,13 @@ public class IhmAventurier extends JPanel {
     private JButton tirage8 = new JButton();
     private JButton tirage9 = new JButton();
 
-    private JButton deplacer = new JButton();               // dans actionsPion
-    private JButton assecher = new JButton();               // dans actionsPion
-    private JButton terminer = new JButton();               // dans actionsPion
-    private JButton recupererTresor = new JButton();        // dans actionsPion
-    private JButton defausser = new JButton();              // dans actionsCartes
-    private JButton utiliser = new JButton();               // dans actionsCartes
-    private JButton donner = new JButton();                 // dans actionsCartes
+    private JButton deplacer = new JButton("Déplacer");               // dans actionsPion
+    private JButton assecher = new JButton("Assècher");               // dans actionsPion
+    private JButton terminer = new JButton("Terminer");               // dans actionsPion
+    private JButton recupererTresor = new JButton("Récuperer trésor");        // dans actionsPion
+    private JButton defausser = new JButton("Defausser");              // dans actionsCartes
+    private JButton utiliser = new JButton("Utiliser");               // dans actionsCartes
+    private JButton donner = new JButton("           Donner           ");                 // dans actionsCartes
 
     // constructeur
     public IhmAventurier(IhmObserve ihm, Aventurier a) {
@@ -147,22 +120,12 @@ public class IhmAventurier extends JPanel {
         aventurier.setTasTirage(a.getTasTirage());
 
         // pour le panel visible
-        Border noir = BorderFactory.createLineBorder(Color.black, 1);
-        Border bleu = BorderFactory.createLineBorder(Color.blue, 1);
-        Border vert = BorderFactory.createLineBorder(Color.green, 1);
-        Border rouge = BorderFactory.createLineBorder(Color.red, 1);
-        Border jaune = BorderFactory.createLineBorder(Color.yellow, 1);
-
-        panelVisible.setBorder(noir);
-
-        // partie supérieure
+        //      partie supérieure
         JLabel labelTitre = new JLabel(a.getNomJoueur() + " : " + a.getCarteAventurier().getNom().toString());
         titre.add(labelTitre);
-        titre.setBorder(bleu);
         panelVisible.add(titre, BorderLayout.NORTH);
 
-        // partie inférieure
-        panelCartesVisibles.setBorder(vert);
+        //      partie inférieure
         try {
             this.imageCarteAventurier = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/" + a.getCarteAventurier().getNom().toString().toLowerCase() + ".png"));
         } catch (IOException ex) {
@@ -170,7 +133,6 @@ public class IhmAventurier extends JPanel {
         }
 
         carteAventurier.setOpaque(true);
-        carteAventurier.setBorder(rouge);
         panelCartesVisibles.add(carteAventurier, BorderLayout.WEST);
         panelCartesVisibles.add(panelCartesJoueur, BorderLayout.CENTER);
         panelVisible.add(panelCartesVisibles, BorderLayout.SOUTH);
@@ -178,6 +140,24 @@ public class IhmAventurier extends JPanel {
         add(panelVisible, BorderLayout.NORTH);
 
         // pour le panel invisible
+        //      partie supérieure
+        JPanel p = new JPanel(new BorderLayout());
+        p.add(panelCartesTirages, BorderLayout.WEST);
+
+        actionsCartes.add(defausser);
+        actionsCartes.add(utiliser);
+        actionsCartes.add(donner);
+
+        p.add(actionsCartes, BorderLayout.EAST);
+        panelInvisible.add(p, BorderLayout.NORTH);
+
+        //      partie inférieure
+        actionsPion.add(deplacer);
+        actionsPion.add(assecher);
+        actionsPion.add(recupererTresor);
+        actionsPion.add(terminer);
+        panelInvisible.add(actionsPion, BorderLayout.SOUTH);
+
         add(panelInvisible, BorderLayout.SOUTH);
     }
 
@@ -200,24 +180,44 @@ public class IhmAventurier extends JPanel {
             carteAventurier.setSize(150, 210);
             g.drawImage(imageCarteAventurier, 0, titre.getHeight(), carteAventurier.getWidth(), carteAventurier.getHeight(), null, carteAventurier);
 
-            CarteTresors carteTresor1 = new CarteTresors(NomTresor.LaPierreSacree);
-            aventurier.getTasJoueur().addCarte(carteTresor1);
-
             int taille = aventurier.getTasJoueur().getCartes().size();
             panelCartesVisibles = new JPanel(new GridLayout(1, taille));
-
+            int i1 = 0;
             for (CarteTresors c : aventurier.getTasJoueur().getCartes()) {
                 JPanel p = new JPanel();
                 try {
-                    this.imageV1 = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/" + c.getNom().toString() + ".png"));
+                    this.imageV1 = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/Carte" + c.getNom().toString() + ".png"));
                 } catch (IOException ex) {
-                    System.err.println("Erreur de lecture de" + "/src/Image/" + c.getNom().toString() + ".png");
+                    System.err.println("Erreur de lecture de" + "/src/Image/Carte" + c.getNom().toString() + ".png");
                 }
+                g.drawImage(imageV1, 160 + ((432 / taille) * i1), titre.getHeight(), carteAventurier.getWidth(), carteAventurier.getHeight(), null, p);
                 panelCartesVisibles.add(p);
+                i1 += 1;
             }
 
+            taille = aventurier.getTasTirage().size();
+            int i2 = 0;
             for (Carte c : aventurier.getTasTirage()) {
+                JPanel p = new JPanel();
+                if (c.getDescription() == "tresors") {
+                    CarteTresors a = (CarteTresors) (c);
+                    try {
+                        this.imageIV1 = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/Carte" + a.getNom().toString() + ".png"));
+                    } catch (IOException ex) {
+                        System.err.println("Erreur de lecture de" + "/src/Image/Carte" + a.getNom().toString() + ".png");
+                    }
+                } else if (c.getDescription()=="inondation"){
+                    CarteInondation a = (CarteInondation) (c);
+                    try {
+                        this.imageIV1 = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/Carte" + a.getNom().toString() + ".png"));
+                    } catch (IOException ex) {
+                        System.err.println("Erreur de lecture de" + "/src/Image/Carte" + a.getNom().toString() + ".png");
+                    }
+                }
 
+                g.drawImage(imageIV1, ((432 / taille) * i2), titre.getHeight()+230, carteAventurier.getWidth(), carteAventurier.getHeight(), null, p);
+                panelCartesVisibles.add(p);
+                i2 += 1;
             }
         } else {
             titre.setOpaque(false);
@@ -241,12 +241,16 @@ public class IhmAventurier extends JPanel {
         repaint();
     }
 
+    public void afficherCarte() {
+
+    }
+
     // main (test)
     public static void main(String[] args) {
         JFrame window = new JFrame();
         window.setLocationRelativeTo(null);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setSize(500, 700);
+        window.setSize(700, 500);
 
         // Centrage de la fenêtre sur l'écran
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -255,11 +259,44 @@ public class IhmAventurier extends JPanel {
         IhmObserve ihmObserve = new IhmObserve();
         CarteAventurier c = new CarteAventurier(NomAventurier.plongeur, Couleur.noir);
         Plongeur a = new Plongeur("Marie", c);
+        CarteTresors carteTresor1 = new CarteTresors(NomTresor.Pierre);
+        CarteTresors carteTresor2 = new CarteTresors(NomTresor.Zephyr);
+        CarteTresors carteTresor3 = new CarteTresors(NomTresor.Cristal);
+        CarteTresors carteTresor4 = new CarteTresors(NomTresor.Calice);
+        CarteTresors carteTresor5 = new CarteTresors(NomTresor.Helicoptere);
+        CarteTresors carteTresor6 = new CarteTresors(NomTresor.SacsDeSable);
+        CarteTresors carteTresor7 = new CarteTresors(NomTresor.Zephyr);
+        CarteTresors carteTresor8 = new CarteTresors(NomTresor.Cristal);
+        CarteTresors carteTresor9 = new CarteTresors(NomTresor.Pierre);
+        a.getTasJoueur().addCarte(carteTresor1);
+        a.getTasJoueur().addCarte(carteTresor2);
+        a.getTasJoueur().addCarte(carteTresor3);
+        a.getTasJoueur().addCarte(carteTresor4);
+        a.getTasJoueur().addCarte(carteTresor5);
+
+        CarteTresors carteTresor10 = new CarteTresors(NomTresor.MonteeDesEaux);
+        CarteTresors carteTresor11 = new CarteTresors(NomTresor.MonteeDesEaux);
+        CarteInondation carte1 = new CarteInondation(NomTuile.Heliport);
+        CarteInondation carte2 = new CarteInondation(NomTuile.LaCaverneDuBraisier);
+        CarteInondation carte3 = new CarteInondation(NomTuile.LaForetPourpre);
+        CarteInondation carte4 = new CarteInondation(NomTuile.LeValDuCrepuscule);
+        CarteInondation carte5 = new CarteInondation(NomTuile.LesDunesDeLillusion);
+        CarteInondation carte6 = new CarteInondation(NomTuile.LaPortedOr);
+        CarteInondation carte7 = new CarteInondation(NomTuile.LePalaisDesMarees);
+        a.getTasTirage().add(carteTresor10);
+        a.getTasTirage().add(carteTresor11);
+        a.getTasTirage().add(carte1);
+        a.getTasTirage().add(carte2);
+        a.getTasTirage().add(carte3);
+        a.getTasTirage().add(carte4);
+        a.getTasTirage().add(carte5);
+        a.getTasTirage().add(carte6);
+        a.getTasTirage().add(carte7);
+
         IhmAventurier ihm = new IhmAventurier(ihmObserve, a);
 
         window.add(ihm);
         ihm.afficherIhmComplete();
         window.setVisible(true);
-
     }
 }
