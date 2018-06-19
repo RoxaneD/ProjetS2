@@ -415,6 +415,7 @@ public class Controleur implements Observateur {
                     aventuriers.put(s, av);
                 }
                 // fermer IHM_Menu
+                    // -> on donne un ArrayList d'aventurier à l'ihm
                 // ouvrir ihm principale
             }
 

@@ -29,41 +29,27 @@ public class IhmGrille extends JPanel {
     // doit contenir : les tuiles -> Pas de nom et de couleur, mais l'image associée (en fonction de asseché/innondé)
     //                            -> l'emplacement des trésors (image)
     //                            -> l'emplacement des aventuriers (pendant la partie)
-    //                              
-    private Grille grille;
-    private ArrayList<Tuile> tuiles;
-    private HashMap<Tuile,JButton> boutons = new HashMap<>();
+    // 
+    Grille grille = new Grille();
     ImageContainerCalques LePontDesAbimes;
-
-    //Constructeur
-    
-     public IhmGrille() {
+    Tuile lepont = new Tuile(grille, 1,1,NomTuile.Le_Pont_Des_Abimes);
+    public IhmGrille() {
     String imgFolder = System.getProperty("user.dir") + "/src/Image/" ;
     LePontDesAbimes = new ImageContainerCalques(imgFolder+"LePontDesAbimes.png", 0, 0, 450, 300);
     this.add(LePontDesAbimes, -2000);
     this.repaint();
 
     }
-     
-    public IhmGrille(Grille grille) {
-        this.grille = grille;
-        tuiles = grille.getTuiles();
-        this.setLayout(new GridLayout(6, 6, 5, 5));
-        Border blackline = BorderFactory.createLineBorder(Color.black, 2);
-    // 
-    ImageContainerCalques LePontDesAbimes;
-    Tuile lepont = new Tuile(grille, 1,1,NomTuile.Le_Pont_Des_Abimes);
     
-    for (Tuile tuile : tuiles) {
-            if (tuile.getNom() != null) {
-                boutons.put(tuile,new JButton(""+tuile.getNom()));
-                this.add(boutons.get(tuile));
-            }else{
-                this.add(new JLabel(""));
-            }
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (this.LePontDesAbimes != null) {
+            this.LePontDesAbimes.paintComponent(g);
         }
-     
+       
     }
+    
+    
     
     
     public static void main(String[] args) {

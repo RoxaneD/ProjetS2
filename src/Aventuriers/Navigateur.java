@@ -17,6 +17,7 @@ public class Navigateur extends Aventurier {
         setNomJoueur(nomJoueur);
         setEtat(EtatAventurier.vivant);
         setCarteAventurier(carteaventurier);
+        setTasJoueur();
     }
 
     // autres
