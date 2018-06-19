@@ -1,6 +1,8 @@
 package Aventuriers;
 
+import Cartes.Carte;
 import Cartes.CarteAventurier;
+import Cartes.CarteTresors;
 import ElementsJeu.Tuile;
 import Enumerations.EtatAventurier;
 import Tas.TasJoueur;
@@ -13,7 +15,8 @@ public abstract class Aventurier {
     private EtatAventurier etat;// Si l'aventurier est vivant ou mort
     private CarteAventurier carteAventurier;
     private Tuile tuile; //Tuile assigner comme sa tuile actuelle
-    private TasJoueur tasJoueur;
+    private TasJoueur tasJoueur = new TasJoueur();
+    private ArrayList<Carte> tasTirage = new ArrayList<>();
 
     // getteurs
     // Méthode qui renvoie le nom du joueur
@@ -40,6 +43,10 @@ public abstract class Aventurier {
         return tasJoueur;
     }
 
+    public ArrayList<Carte> getTasTirage() {
+        return tasTirage;
+    }
+
     // setteurs
     // Méthode qui met à jour nom du joueur avec la chaine de caractères fournit
     public void setNomJoueur(String nomJoueur) {
@@ -56,8 +63,18 @@ public abstract class Aventurier {
         this.carteAventurier = carteAventurier;
     }
 
-    public void setTasJoueur() {
+    public void setTasJoueur(TasJoueur tasJoueur) {
         this.tasJoueur = new TasJoueur();
+        for (CarteTresors t : tasJoueur.getCartes()){
+            this.tasJoueur.addCarte(t);
+        }
+    }
+    
+    public void setTasTirage(ArrayList<Carte> cartes){
+        this.tasTirage = new ArrayList<Carte>();
+        for (Carte t : cartes){
+            this.tasTirage.add(t);
+        }
     }
 
     //Méthode qui assigne une tuile à un aventurier

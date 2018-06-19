@@ -78,10 +78,10 @@ public class Controleur implements Observateur {
         // instantiation des éléments internes
         setGrille();
         setNiveauEau();
-        Tresor tresor1 = new Tresor(NomTresor.La_Pierre_sacree);
-        Tresor tresor2 = new Tresor(NomTresor.La_Statue_du_zephyr);
-        Tresor tresor3 = new Tresor(NomTresor.Le_Cristal_ardent);
-        Tresor tresor4 = new Tresor(NomTresor.Le_Calice_de_l_onde);
+        Tresor tresor1 = new Tresor(NomTresor.Pierre);
+        Tresor tresor2 = new Tresor(NomTresor.Zephyr);
+        Tresor tresor3 = new Tresor(NomTresor.Cristal);
+        Tresor tresor4 = new Tresor(NomTresor.Calice);
         setTresor1(tresor1);
         setTresor2(tresor2);
         setTresor3(tresor3);
@@ -518,7 +518,7 @@ public class Controleur implements Observateur {
             // pour afficher les cartes qu'on peut utiliser (de ses propres cartes)
         } else if (action.getType() == TypesActions.demandeUtilisationCarte) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
             for (CarteTresors c : tasJoueurs.get(action.getNom()).getCartes()) {
-                if (c.getNom() == NomTresor.helico || c.getNom() == NomTresor.monteeEau || c.getNom() == NomTresor.sacSable) {
+                if (c.getNom() == NomTresor.Helicoptere || c.getNom() == NomTresor.MonteeDesEaux || c.getNom() == NomTresor.SacsDeSable) {
                     // ihm2.afficherCarte();
                 }
             }
@@ -526,10 +526,10 @@ public class Controleur implements Observateur {
             // pour utiliser une carte trésor
         } else if (action.getType() == TypesActions.utiliserTresor) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
             // pour une carte hélicoptère
-            if (action.getCarteT().getNom() == NomTresor.helico) {
+            if (action.getCarteT().getNom() == NomTresor.Helicoptere) {
 
                 // pour une carte montée des eaux
-            } else if (action.getCarteT().getNom() == NomTresor.monteeEau) {
+            } else if (action.getCarteT().getNom() == NomTresor.MonteeDesEaux) {
                 // on augmente le semi niveau de 1
                 niveauEau.monterNiveau();
                 // on remet la defausse inondation au dessus du tas de cartes inondation
@@ -549,7 +549,7 @@ public class Controleur implements Observateur {
                     i += 1;
                 }
                 // pour une carte sac de sable
-            } else if (action.getCarteT().getNom() == NomTresor.sacSable) {
+            } else if (action.getCarteT().getNom() == NomTresor.SacsDeSable) {
                 ArrayList<Tuile> tuilesPos = new ArrayList<>();
                 for (Tuile t : grille.getTuiles()) {
                     if (t.getEtat() == EtatTuile.inondee) {

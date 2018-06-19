@@ -15,7 +15,6 @@ public class Explorateur extends Aventurier {
         setNomJoueur(nomJoueur); //appel de la fonction setNomJoueur avec nomJoueur en argument
         setEtat(EtatAventurier.vivant);  // Etat de l'aventurier est mis à vivant
         setCarteAventurier(carteaventurier); //Initialisation case départ de l'aventurier selon son nom
-        setTasJoueur();
     }
 
     // autres
