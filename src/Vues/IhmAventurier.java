@@ -50,6 +50,8 @@ public class IhmAventurier extends JPanel implements Observe {
     // attributs internes
     private boolean complete = false;
     private Aventurier aventurier;
+    private String choix; // est mit à jour après un clic sur un bouton d'actions de cartes
+    private ArrayList<Integer> pos = new ArrayList<>(); // arrayList retourné par le controleur qui contient les positions des cartes pouvant etre utilisées/donnés/défaussés
 
     // attributs visuels
     private JPanel panelVisible = new JPanel(new BorderLayout());            // cartes visible par tous + nom du joueur
@@ -170,27 +172,61 @@ public class IhmAventurier extends JPanel implements Observe {
         this.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                int taille1 = a.getTasJoueur().getCartes().size();
+                int taille2 = a.getTasTirage().size();
 
+                if (choix == "utiliser") {
+                    int i = 0;
+                    for (Integer a : pos) {
+                        i+=1;
+                        if (a < 10) { // pour les cartes du tasJoueur
+                            if (i == taille1){ // alors -> dernière carte
+                                
+                            } else { // les autres cartes
+                                
+                            }
+                        } else { // pour les cartes tirages
+
+                        }
+                    }
+                } else if (choix == "donner") {
+                    for (Integer a : pos) {
+                        if (a < 10) { // pour les cartes du tasJoueur
+
+                        } else { // pour les cartes tirages
+
+                        }
+                    }
+                } else if (choix == "defausser") {
+                    for (Integer a : pos) {
+                        if (a < 10) { // pour les cartes du tasJoueur
+
+                        } else { // pour les cartes tirages
+
+                        }
+                    }
+                }
+                if (e.getX() > 160 * a && e.getX() < (160 + ((432 / taille1)))) {
+                    if (e.getY() > (titre.getHeight() + 10) && e.getY() < (titre.getHeight() + 220)) {
+                        Action action = new Action(TypesActions.)
+                    }
+                }
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
         });
