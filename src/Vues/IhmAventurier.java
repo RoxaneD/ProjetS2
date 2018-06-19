@@ -178,12 +178,12 @@ public class IhmAventurier extends JPanel implements Observe {
                 if (choix == "utiliser") {
                     int i = 0;
                     for (Integer a : pos) {
-                        i+=1;
+                        i += 1;
                         if (a < 10) { // pour les cartes du tasJoueur
-                            if (i == taille1){ // alors -> dernière carte
-                                
+                            if (i == taille1) { // alors -> dernière carte
+
                             } else { // les autres cartes
-                                
+
                             }
                         } else { // pour les cartes tirages
 
@@ -206,11 +206,12 @@ public class IhmAventurier extends JPanel implements Observe {
                         }
                     }
                 }
-                if (e.getX() > 160 * a && e.getX() < (160 + ((432 / taille1)))) {
-                    if (e.getY() > (titre.getHeight() + 10) && e.getY() < (titre.getHeight() + 220)) {
-                        Action action = new Action(TypesActions.)
-                    }
-                }
+                /**
+                 * if (e.getX() > (160 * a)) { if (e.getX() < (160 + ((432 / taille1)))) {
+                 * if (e.getY() > (titre.getHeight() + 10) && e.getY() <
+                 * (titre.getHeight() + 220)) { } }
+                }*
+                 */
             }
 
             @Override
@@ -345,15 +346,15 @@ public class IhmAventurier extends JPanel implements Observe {
         CarteTresors carteTresor9 = new CarteTresors(NomTresor.Pierre);
         a.getTasJoueur().addCarte(carteTresor1);
         a.getTasJoueur().addCarte(carteTresor2);
-        a.getTasJoueur().addCarte(carteTresor3);
-        a.getTasJoueur().addCarte(carteTresor4);
         /**
+         * a.getTasJoueur().addCarte(carteTresor3);
+         * a.getTasJoueur().addCarte(carteTresor4);
          * a.getTasJoueur().addCarte(carteTresor5);
          * a.getTasJoueur().addCarte(carteTresor1);
          * a.getTasJoueur().addCarte(carteTresor2);
          * a.getTasJoueur().addCarte(carteTresor3);
-         * a.getTasJoueur().addCarte(carteTresor4);*
-         */
+         * a.getTasJoueur().addCarte(carteTresor4);
+         **/
 
         CarteTresors carteTresor10 = new CarteTresors(NomTresor.MonteeDesEaux);
         CarteTresors carteTresor11 = new CarteTresors(NomTresor.MonteeDesEaux);
