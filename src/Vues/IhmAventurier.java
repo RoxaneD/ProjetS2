@@ -2,6 +2,7 @@ package Vues;
 
 import Aventuriers.Aventurier;
 import Aventuriers.Plongeur;
+import Cartes.Carte;
 import Cartes.CarteAventurier;
 import Enumerations.Couleur;
 import Enumerations.NomAventurier;
@@ -152,6 +153,9 @@ public class IhmAventurier extends JPanel {
         panelCartesJoueur.setOpaque(false);
         carteAventurier.setSize(150,210);
         g.drawImage(image,0,titre.getHeight(),carteAventurier.getWidth(), carteAventurier.getHeight(),null, carteAventurier);
+        for (Carte c : tasJoueur.getCartes()){
+            if ()
+        }
         } else {
             titre.setOpaque(false);
         panelCartesVisibles.setOpaque(false);

@@ -1,5 +1,6 @@
 package Aventuriers;
 
+import Cartes.Carte;
 import Cartes.CarteAventurier;
 import ElementsJeu.Tuile;
 import Enumerations.EtatAventurier;
@@ -14,6 +15,7 @@ public abstract class Aventurier {
     private CarteAventurier carteAventurier;
     private Tuile tuile; //Tuile assigner comme sa tuile actuelle
     private TasJoueur tasJoueur;
+    private ArrayList<Carte> tasTirage = new ArrayList<>();
 
     // getteurs
     // Méthode qui renvoie le nom du joueur
@@ -38,6 +40,10 @@ public abstract class Aventurier {
 
     public TasJoueur getTasJoueur() {
         return tasJoueur;
+    }
+
+    public ArrayList<Carte> getTasTirage() {
+        return tasTirage;
     }
 
     // setteurs
