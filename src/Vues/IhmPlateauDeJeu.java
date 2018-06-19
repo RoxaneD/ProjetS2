@@ -1,23 +1,17 @@
 package Vues;
 
 import Aventuriers.Aventurier;
+import Aventuriers.Pilote;
+import Aventuriers.Plongeur;
 import Cartes.CarteAventurier;
-import Cartes.CarteTresors;
 import ElementsJeu.Grille;
 import Enumerations.Couleur;
 import Enumerations.NomAventurier;
-import Util.Utils;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.HashMap;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class IhmPlateauDeJeu {
@@ -36,12 +30,12 @@ public class IhmPlateauDeJeu {
     private JPanel eauEtCartes = new JPanel(new BorderLayout());    // dans panelGauche en bas
     private JPanel cartes = new JPanel();                           // dans eauEtCartes à droite
     private JPanel eau = new JPanel();                              // dans eauEtCartes à gauche
-    
+
     // attributs interne
-    private Dimension dimension = new Dimension();
+    private Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 
     // constructeur
-    public IhmPlateauDeJeu(HashMap<String, Aventurier> aventuriers,Grille grille) {
+    public IhmPlateauDeJeu(HashMap<String, Aventurier> aventuriers, Grille grille) {
 
         // instantiations des ihms
         for (Aventurier a : aventuriers.values()) {
@@ -50,13 +44,25 @@ public class IhmPlateauDeJeu {
         }
         setIhmAventurierActuelle(ihmAventuriers.get(0));
         ihmGrille = new IhmGrille(grille);
-        
+
         // instantiation des composants organisationnels
-        window.setSize(1000, 1000);
-        dimension = window.getSize();
+        window.setSize(dimension.width, dimension.height);
         window.setLayout(new BorderLayout());
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // panel droit
+        panelDroit.setPreferredSize(new Dimension((int) (dimension.width * 0.4), (int) (dimension.height * 0.3)));
+        panelDroit.add(ihmAventurier, BorderLayout.NORTH);
+        // AJOUTER IHMAVENTURIERS EN DESSOUS
+        panelPrincipal.add(panelDroit, BorderLayout.EAST);
+
+        // panel gauche
+        panelGauche.setPreferredSize(new Dimension((int) (dimension.width * 0.5), (int) (dimension.height*0.5)));
+        panelGauche.add(ihmGrille, BorderLayout.NORTH);
+
+        panelPrincipal.add(panelGauche, BorderLayout.WEST);
+
+        window.add(panelPrincipal);
     }
 
     // setteurs
@@ -76,9 +82,22 @@ public class IhmPlateauDeJeu {
     public void cacherIhm() {
         window.setVisible(false);
     }
-    
+
     // autre méthodes
     public static void main(String[] args) {
+        Grille grille = new Grille();
+        CarteAventurier carte1 = new CarteAventurier(NomAventurier.plongeur, Couleur.noir);
+        CarteAventurier carte2 = new CarteAventurier(NomAventurier.plongeur, Couleur.noir);
+
+        Plongeur aventurier1 = new Plongeur("Marie", carte1);
+        Pilote aventurier2 = new Pilote("Roxane", carte2);
+
+        HashMap<String, Aventurier> aventuriers = new HashMap<>();
+        aventuriers.put(aventurier1.getNomJoueur(), aventurier1);
+        aventuriers.put(aventurier2.getNomJoueur(), aventurier2);
+
+        IhmPlateauDeJeu ihm = new IhmPlateauDeJeu(aventuriers, grille);
+        ihm.afficherIhm();
     }
 
 }
