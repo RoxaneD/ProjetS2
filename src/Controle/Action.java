@@ -34,15 +34,8 @@ public class Action {
         setNom(nom);
     }
 
-    public Action(TypesActions type, CarteTresors carte, String nom) {   // pour jouer une carte du tas joueur
-        setType(type);//avec le type fournit en paramètre
-        setNom(nom);
-        setCarteT(carte);
-    }
-
-    public Action(TypesActions type, Carte carte, String nom) {
+    public Action(TypesActions type, Carte carte) {
         setType(type);
-        setNom(nom);
         setCarteTirage(carte);
     }
 

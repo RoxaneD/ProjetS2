@@ -1,21 +1,31 @@
 package Controle;
 // Nom des differentes actions possibles
+
 public enum TypesActions {
-    commencerPartie,        // traité  - a tester - OK
-    demandeDeplacement,     // traité
-    deplacement,            // traité
-    demandeAssechement,     // traité
-    assechement,            // traité
-    terminer,               // traité
+    // ihm menu
+    commencerPartie, // traité  - a tester - OK
+    // ihm aventurier
+    //      pion
+    demandeDeplacement, // traité
+    deplacement, // traité
+    demandeAssechement, // traité
+    assechement, // traité
+    terminerTour, // traité
+    recupererTresor, // PAS traité
+
+    //      cartes
     demandeUtilisationCarte,// PAS traité    
-    utiliserCarteTasJoueur,         // PAS traité
-    utiliserCarteTasTirage,     // PAS traité
-    piocherTresor,          // PAS traité
-    piocherInondation,      // PAS traité
-    demandeDonCarteTresor,  // PAS traité
-    donCarteTresor,         // PAS traité
-    defausserCarte,         // PAS traité
-    recupererTresor,        // PAS traité
-    reglesJeu,               // PAS traité
+    utiliserCarte, // PAS traité
+    demandeDonCarte, // PAS traité
+    donCarte, // PAS traité
+    demandeDefausseCarte,
+    defausserCarte, // PAS traité
+
+    // automatique
+    piocherTresor, // PAS traité
+    piocherInondation, // PAS traité
+
+    // toujours
+    reglesJeu, // PAS traité
     fermerReglesJeu
 }

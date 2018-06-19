@@ -373,7 +373,7 @@ public class Controleur implements Observateur {
         return tasJoueurs;
     }
 
-        // POUR LES IHMS
+    // POUR LES IHMS
     public static IhmMenuPrincipal getIhmMenuPrincipal() {
         return ihmMenuPrincipal;
     }
@@ -412,7 +412,7 @@ public class Controleur implements Observateur {
                     aventuriers.put(s, av);
                 }
                 // fermer IHM_Menu
-                    // -> on donne un ArrayList d'aventurier à l'ihm
+                // -> on donne un ArrayList d'aventurier à l'ihm
                 // ouvrir ihm principale
             }
 
@@ -438,12 +438,6 @@ public class Controleur implements Observateur {
             }
             //Afficher les tuiles possibles dans la vueGrille
             vueGrille.afficherTuilesPossiblesAssechement(tuilesPossibles);
-
-            // pour terminer son tour
-        } else if (action.getType() == TypesActions.terminer) { // PAS BESOIN DE MODIFIER
-            this.setNombreActions(3);// Met le nombre d'action a 3 pour que le tour ce finisse
-            this.setActionEffectue(true);//Met le booléen action effectuer a vrai
-
             // pour se déplacer sur une tuile
         } else if (action.getType() == TypesActions.deplacement) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
             //si le pouvoir du pilote est à faux et que cette aventurier est le pilote alors
@@ -512,6 +506,14 @@ public class Controleur implements Observateur {
             }
             this.setActionEffectue(true);
 
+            // pour terminer son tour
+        } else if (action.getType() == TypesActions.terminerTour) { // PAS BESOIN DE MODIFIER
+            this.setNombreActions(3);// Met le nombre d'action a 3 pour que le tour ce finisse
+            this.setActionEffectue(true);//Met le booléen action effectuer a vrai
+
+            // pour recupérer un trésor
+        } else if (action.getType() == TypesActions.recupererTresor) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
+
             // pour afficher les cartes qu'on peut utiliser (de ses propres cartes)
         } else if (action.getType() == TypesActions.demandeUtilisationCarte) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
             for (CarteTresors c : tasJoueurs.get(action.getNom()).getCartes()) {
@@ -520,8 +522,11 @@ public class Controleur implements Observateur {
                 }
             }
 
-            // pour utiliser une carte trésor
-        } else if (action.getType() == TypesActions.utiliserCarteTasJoueur) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
+            // pour afficher les cartes qu'on peut utiliser
+        } else if (action.getType() == TypesActions.demandeUtilisationCarte) {
+
+            // pour utiliser une carte
+        } else if (action.getType() == TypesActions.utiliserCarte) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
             // pour une carte hélicoptère
             if (action.getCarteT().getNom() == NomTresor.Helicoptere) {
 
@@ -555,8 +560,18 @@ public class Controleur implements Observateur {
                 }
                 // ihm2.afficherTuile(ArrayList<Tuile>);
             }
-            // pour utiliser une carte inondation
-        } else if (action.getType() == TypesActions.utiliserCarteTasTirage) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
+
+            // pour afficher la liste des joueurs à qui on peut donner une carte trésor
+        } else if (action.getType() == TypesActions.demandeDonCarte) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
+
+            // pour donner une carte trésor à un joueur
+        } else if (action.getType() == TypesActions.donCarte) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
+
+            // pour recevoir la liste des cartes qu'on peut défausser
+        } else if (action.getType() == TypesActions.demandeDefausseCarte) {
+
+            // pour se défausse d'une carte
+        } else if (action.getType() == TypesActions.defausserCarte) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
 
             // pour piocher une carte trésor
         } else if (action.getType() == TypesActions.piocherTresor) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
@@ -564,22 +579,10 @@ public class Controleur implements Observateur {
             // pour piocher une carte inondation
         } else if (action.getType() == TypesActions.piocherInondation) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
 
-            // pour afficher la liste des joueurs à qui on peut donner une carte trésor
-        } else if (action.getType() == TypesActions.demandeDonCarteTresor) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
-
-            // pour donner une carte trésor à un joueur
-        } else if (action.getType() == TypesActions.donCarteTresor) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
-
-            // pour se défausse d'une carte
-        } else if (action.getType() == TypesActions.defausserCarte) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
-
-            // pour recupérer un trésor
-        } else if (action.getType() == TypesActions.recupererTresor) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
-
             // pour afficher les règles du jeu
         } else if (action.getType() == TypesActions.reglesJeu) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
             ihmReglesDuJeu.afficherIhm();
-            
+
             // pour fermer les règles du jeu
         } else if (action.getType() == TypesActions.fermerReglesJeu) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
             ihmReglesDuJeu.cacherIhm();

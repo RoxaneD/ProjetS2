@@ -113,7 +113,7 @@ public class VueAventurierDemo implements Observe {
         btnTerminerTour.addActionListener(new ActionListener() {
             @Override//Fait une demande pour terminer le tour
             public void actionPerformed(ActionEvent e) {
-                Action a = new Action(TypesActions.terminer);
+                Action a = new Action(TypesActions.terminerTour);
                 notifierObservateur(a);
             }
         });
