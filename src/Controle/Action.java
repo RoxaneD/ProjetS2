@@ -1,6 +1,8 @@
 //
 package Controle;
 
+import Cartes.Carte;
+import Cartes.CarteInondation;
 import Cartes.CarteTresors;
 import ElementsJeu.Tuile;
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ public class Action {
     private Tuile tuile;//Tuile où s'effectue l'action
     private String nom;
     private CarteTresors carteT;
+    private CarteInondation carteI;
     private ArrayList<String> joueurs = new ArrayList<>();
 
     // constructeurs
@@ -31,10 +34,16 @@ public class Action {
         setNom(nom);
     }
 
-    public Action(TypesActions type, CarteTresors carte, String nom) {   // pour jouer une carte Tresor
+    public Action(TypesActions type, CarteTresors carte, String nom) {   // pour jouer une carte du tas joueur
         setType(type);//avec le type fournit en paramètre
         setNom(nom);
         setCarteT(carte);
+    }
+
+    public Action(TypesActions type, Carte carte, String nom) {
+        setType(type);
+        setNom(nom);
+        setCarteTirage(carte);
     }
 
     public Action(TypesActions type, ArrayList<String> joueurs) {
@@ -60,6 +69,14 @@ public class Action {
 
     public void setCarteT(CarteTresors carteT) {
         this.carteT = carteT;
+    }
+
+    public void setCarteTirage(Carte carte) {
+        if (carte.getDescription() == "inondation") {
+            this.carteI = (CarteInondation) (carte);
+        } else {
+            this.carteT = (CarteTresors) (carte);
+        }
     }
 
     public void setJoueurs(ArrayList<String> joueurs) {
@@ -89,7 +106,5 @@ public class Action {
         return joueurs;
     }
 
-    
-    
     // autres
 }

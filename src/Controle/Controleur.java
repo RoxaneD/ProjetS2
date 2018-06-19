@@ -521,7 +521,7 @@ public class Controleur implements Observateur {
             }
 
             // pour utiliser une carte trésor
-        } else if (action.getType() == TypesActions.utiliserTresor) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
+        } else if (action.getType() == TypesActions.utiliserCarteTasJoueur) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
             // pour une carte hélicoptère
             if (action.getCarteT().getNom() == NomTresor.Helicoptere) {
 
@@ -556,7 +556,7 @@ public class Controleur implements Observateur {
                 // ihm2.afficherTuile(ArrayList<Tuile>);
             }
             // pour utiliser une carte inondation
-        } else if (action.getType() == TypesActions.utiliserInondation) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
+        } else if (action.getType() == TypesActions.utiliserCarteTasTirage) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
 
             // pour piocher une carte trésor
         } else if (action.getType() == TypesActions.piocherTresor) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM

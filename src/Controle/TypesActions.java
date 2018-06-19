@@ -8,8 +8,8 @@ public enum TypesActions {
     assechement,            // traité
     terminer,               // traité
     demandeUtilisationCarte,// PAS traité    
-    utiliserTresor,         // PAS traité
-    utiliserInondation,     // PAS traité
+    utiliserCarteTasJoueur,         // PAS traité
+    utiliserCarteTasTirage,     // PAS traité
     piocherTresor,          // PAS traité
     piocherInondation,      // PAS traité
     demandeDonCarteTresor,  // PAS traité
