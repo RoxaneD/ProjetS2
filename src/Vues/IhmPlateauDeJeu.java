@@ -4,6 +4,8 @@ import Aventuriers.Aventurier;
 import Aventuriers.Pilote;
 import Aventuriers.Plongeur;
 import Cartes.CarteAventurier;
+import Controle.Action;
+import Controle.Observateur;
 import ElementsJeu.Grille;
 import Enumerations.Couleur;
 import Enumerations.NomAventurier;
@@ -14,8 +16,11 @@ import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class IhmPlateauDeJeu {
+public class IhmPlateauDeJeu extends JPanel implements Observe {
 
+    //
+    private Observateur observateur;
+    
     // ihms
     private ArrayList<IhmAventurier> ihmAventuriers = new ArrayList<>();
     private IhmAventurier ihmAventurier;
@@ -57,8 +62,8 @@ public class IhmPlateauDeJeu {
         panelPrincipal.add(panelDroit, BorderLayout.EAST);
 
         // panel gauche
-        panelGauche.setPreferredSize(new Dimension((int) (dimension.width * 0.5), (int) (dimension.height*0.5)));
-        panelGauche.add(ihmGrille, BorderLayout.NORTH);
+        panelGauche.setPreferredSize(new Dimension((int) (dimension.width * 0.5), (int) (dimension.height * 0.5)));
+        panelGauche.add(ihmGrille, BorderLayout.CENTER);
 
         panelPrincipal.add(panelGauche, BorderLayout.WEST);
 
@@ -98,6 +103,16 @@ public class IhmPlateauDeJeu {
 
         IhmPlateauDeJeu ihm = new IhmPlateauDeJeu(aventuriers, grille);
         ihm.afficherIhm();
+    }
+
+    @Override
+    public void addObservateur(Observateur o) {
+        this.observateur = o;
+    }
+
+    @Override
+    public void notifierObservateur(Action action) {
+        observateur.traiterAction(action);
     }
 
 }
