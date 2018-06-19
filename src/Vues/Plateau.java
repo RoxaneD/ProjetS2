@@ -1,9 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+
 package Vues;
+/**
 //import de tout les package aventurier, les cartes, la grille les enumerations
 import Aventuriers.Aventurier;
 import Aventuriers.Explorateur;
@@ -350,3 +348,4 @@ public class Plateau {
     public static void main(String[] args) {
     }
 }
+**/

@@ -1,8 +1,8 @@
 // petit test qui permet de voir à peu près comment fonctionne le controleur avec les vues
 package Jeu_Tests;
 
+/**
 import ElementsJeu.Tuile;
-import Vues.Plateau;
 import Vues.VueAventurierDemo;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -66,4 +66,4 @@ public class TourDeJeu {
         //}
     }
 
-}
+}**/
