@@ -281,7 +281,6 @@ public class IhmMenuPrincipal extends JPanel implements Observe {
                 }
                 Action a = new Action(TypesActions.commencerPartie, nomJoueurs);
                 notifierObservateur(a);
-                repaint();
             }
         });
 
@@ -290,7 +289,6 @@ public class IhmMenuPrincipal extends JPanel implements Observe {
             public void actionPerformed(ActionEvent ae) {
                 Action a = new Action(TypesActions.reglesJeu);
                 notifierObservateur(a);
-                repaint();
             }
         });
 
@@ -379,8 +377,6 @@ public class IhmMenuPrincipal extends JPanel implements Observe {
             joueur6.setVisible(true);
             supp6.setVisible(true);
         }
-        this.setPreferredSize(new Dimension(509, 532));
-        this.setPreferredSize(new Dimension(508, 532));
     }
 
     public void afficherIhm() {
@@ -396,7 +392,6 @@ public class IhmMenuPrincipal extends JPanel implements Observe {
         window.add(this);
 
         window.setVisible(true);
-        repaint();
     }
 
     public void cacherIhm() {
@@ -419,7 +414,5 @@ public class IhmMenuPrincipal extends JPanel implements Observe {
         if (observateur != null) {
             observateur.traiterAction(action);
         }
-        window.setPreferredSize(new Dimension(509, 532));
-        window.setPreferredSize(new Dimension(508, 532));
     }
 }
