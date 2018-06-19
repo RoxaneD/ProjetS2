@@ -73,7 +73,7 @@ public class Plateau {
         CarteInondation carteInondation15 = new CarteInondation(NomTuile.LeMaraisBrumeux);
         CarteInondation carteInondation16 = new CarteInondation(NomTuile.Observatoire);
         CarteInondation carteInondation17 = new CarteInondation(NomTuile.LeRocherFantome);
-        CarteInondation carteInondation18 = new CarteInondation(NomTuile.LaCaverneDuBraisier);
+        CarteInondation carteInondation18 = new CarteInondation(NomTuile.LaCaverneDuBrasier);
         CarteInondation carteInondation19 = new CarteInondation(NomTuile.LeTempleDuSoleil);
         CarteInondation carteInondation20 = new CarteInondation(NomTuile.LeTempleDeLaLune);
         CarteInondation carteInondation21 = new CarteInondation(NomTuile.LePalaisDesMarees);
@@ -207,7 +207,7 @@ public class Plateau {
         Tuile t21 = new Tuile(grilleDeJeu, 3, 4, NomTuile.LeMaraisBrumeux);
         Tuile t22 = new Tuile(grilleDeJeu, 4, 4, NomTuile.Observatoire);
         Tuile t23 = new Tuile(grilleDeJeu, 5, 4, NomTuile.LeRocherFantome);
-        Tuile t24 = new Tuile(grilleDeJeu, 6, 4, NomTuile.LaCaverneDuBraisier, tresor3);
+        Tuile t24 = new Tuile(grilleDeJeu, 6, 4, NomTuile.LaCaverneDuBrasier, tresor3);
         Tuile t25 = new Tuile(grilleDeJeu, 1, 5);
         Tuile t26 = new Tuile(grilleDeJeu, 2, 5, NomTuile.LeTempleDuSoleil, tresor1);
         Tuile t27 = new Tuile(grilleDeJeu, 3, 5, NomTuile.LeTempleDeLaLune, tresor1);

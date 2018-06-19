@@ -39,7 +39,7 @@ public class TasInondations{
         CarteInondation carteInondation15 = new CarteInondation(NomTuile.LeMaraisBrumeux);
         CarteInondation carteInondation16 = new CarteInondation(NomTuile.Observatoire);
         CarteInondation carteInondation17 = new CarteInondation(NomTuile.LeRocherFantome);
-        CarteInondation carteInondation18 = new CarteInondation(NomTuile.LaCaverneDuBraisier);
+        CarteInondation carteInondation18 = new CarteInondation(NomTuile.LaCaverneDuBrasier);
         CarteInondation carteInondation19 = new CarteInondation(NomTuile.LeTempleDuSoleil);
         CarteInondation carteInondation20 = new CarteInondation(NomTuile.LeTempleDeLaLune);
         CarteInondation carteInondation21 = new CarteInondation(NomTuile.LePalaisDesMarees);
