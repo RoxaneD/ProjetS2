@@ -50,7 +50,6 @@ public class TasTresors{
         CarteTresors carteSpeciale3 = new CarteTresors(NomTresor.helico);
         CarteTresors carteSpeciale4 = new CarteTresors(NomTresor.monteeEau);
         CarteTresors carteSpeciale5 = new CarteTresors(NomTresor.monteeEau);
-        CarteTresors carteSpeciale6 = new CarteTresors(NomTresor.monteeEau);
         CarteTresors carteSpeciale7 = new CarteTresors(NomTresor.sacSable);
         CarteTresors carteSpeciale8 = new CarteTresors(NomTresor.sacSable);
         //ajout
@@ -79,7 +78,6 @@ public class TasTresors{
         cartesTresors.add(carteSpeciale3);
         cartesTresors.add(carteSpeciale4);
         cartesTresors.add(carteSpeciale5);
-        cartesTresors.add(carteSpeciale6);
         cartesTresors.add(carteSpeciale7);
         cartesTresors.add(carteSpeciale8);
     }

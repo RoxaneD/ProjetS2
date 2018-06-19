@@ -15,6 +15,7 @@ public class Messager extends Aventurier {
         setNomJoueur(nomJoueur);  //Attribution du nom avec setNomJoueur() et le nom du messager en paramètre
         setEtat(EtatAventurier.vivant);  //Mise à jour de l'état aventurier en lui donnant pour valeur Vivant
         setCarteAventurier(carteaventurier);  //Attribution de la carte aventurier avec setCarteAventurier() et carteAventurier en paramètre
+        setTasJoueur();
     }
 
     // autres
