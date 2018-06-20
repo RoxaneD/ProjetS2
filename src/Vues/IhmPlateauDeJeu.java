@@ -79,7 +79,7 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         }
         setIhmAventurierActuelle(ihmAventuriers.get(0));
         ihmGrille = new IhmGrille(grille);
-        ihmGrille.setVisible(false);
+        ihmGrille.setVisible(true);
 
         this.window = new JFrame("Île Interdite");
         window.setSize(dimension.width, dimension.height);
@@ -283,8 +283,10 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         panelPrincipal.add(panelDroit, BorderLayout.EAST);
 
         // panel gauche
-        panelGauche.setPreferredSize(new Dimension((int) (dimension.width * 0.6), (int) (dimension.height)));
+        //panelGauche.setPreferredSize(new Dimension((int) (dimension.width * 0.5), (int) (dimension.height)));
 
+        ihmGrille.setPreferredSize(new Dimension((int) (dimension.width * 0.5), (int) (dimension.height*0.5)));
+        
         panelGauche.add(ihmGrille, BorderLayout.CENTER);
 
         panelPrincipal.add(panelGauche, BorderLayout.WEST);
