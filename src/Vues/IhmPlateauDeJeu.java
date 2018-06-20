@@ -4,24 +4,22 @@ import Aventuriers.Aventurier;
 import Aventuriers.Pilote;
 import Aventuriers.Plongeur;
 import Cartes.CarteAventurier;
+import Cartes.CarteInondation;
 import Cartes.CarteTresors;
 import Controle.Action;
 import Controle.Observateur;
 import ElementsJeu.Grille;
+import ElementsJeu.NiveauEau;
 import Enumerations.Couleur;
 import Enumerations.NomAventurier;
 import Enumerations.NomTresor;
+import Enumerations.NomTuile;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -40,15 +38,13 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
     // attributs internes
     private Observateur observateur;
     private int nombreJoueurs;
-    private Image image1;
-    private Image image2;
-    private Image image3;
-    private Image image4;
 
     // ihms
     private ArrayList<IhmAventurier> ihmAventuriers = new ArrayList<>();
     private IhmAventurier ihmAventurier;
     private IhmGrille ihmGrille;
+    private IhmNiveauDeau ihmNiveauEau;
+    private IhmTasDeCarte ihmTasDeCarte;
 
     // composants organisationnels
     private JFrame window = new JFrame("Île Interdite");      // la fenêtre de jeu
@@ -76,7 +72,7 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
     private Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 
     // constructeur
-    public IhmPlateauDeJeu(HashMap<String, Aventurier> aventuriers, Grille grille) {
+    public IhmPlateauDeJeu(HashMap<String, Aventurier> aventuriers, Grille grille, NiveauEau niveauEau) {
 
         // instantiations des ihms
         nombreJoueurs = aventuriers.size();
@@ -86,6 +82,13 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
             ihmAventuriers.add(ihm);
 
         }
+        ihmNiveauEau = new IhmNiveauDeau(niveauEau);
+        ihmNiveauEau.afficherIhm();
+        ihmTasDeCarte = new IhmTasDeCarte();
+        ihmTasDeCarte.setSize(443, 175);
+        ihmTasDeCarte.afficherIhm();
+        System.out.println(ihmTasDeCarte.getSize().width);
+
         setIhmAventurierActuelle(ihmAventuriers.get(0));
         ihmGrille = new IhmGrille(grille);
         ihmGrille.setVisible(true);
@@ -121,6 +124,14 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         return this.ihmAventuriers;
     }
 
+    public IhmNiveauDeau getIhmNiveauEau() {
+        return ihmNiveauEau;
+    }
+
+    public IhmTasDeCarte getIhmTasDeCarte() {
+        return ihmTasDeCarte;
+    }
+
     // autre méthodes
     public void afficherIhm() {
         window.setVisible(true);
@@ -150,7 +161,7 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         panelAv23 = new JPanel(new BorderLayout());
 
         panelGauche = new JPanel(new BorderLayout());    // pour l'ihm grille + tas de carte + niveau d'eau
-        eauEtCartes = new JPanel(new BorderLayout());    // dans panelGauche en bas
+        eauEtCartes = new JPanel(new GridLayout(1, 2));    // dans panelGauche en bas
         cartes = new JPanel();                           // dans eauEtCartes à droite
         eau = new JPanel();
 
@@ -310,15 +321,14 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
 
         // PANEL GAUCHE (2)
         //panelGauche.setPreferredSize(new Dimension((int) (dimension.width * 0.5), (int) (dimension.height)));
-        ihmGrille.setPreferredSize(new Dimension((int) (dimension.width * 0.5), (int) (dimension.height * 0.7125)));
+        ihmGrille.setPreferredSize(new Dimension((int) (dimension.width * 0.525), (int) (dimension.height * 0.7125)));
 
         panelGauche.add(ihmGrille, BorderLayout.NORTH);
-        eauEtCartes.add(eau, BorderLayout.WEST);
-        eau.setBorder(rouge);
-        eau.setPreferredSize(new Dimension(400, 200));
-        eauEtCartes.add(cartes, BorderLayout.EAST);
-        cartes.setBorder(bleu);
-        cartes.setPreferredSize(new Dimension(500, 200));
+        eauEtCartes.add(ihmNiveauEau);
+        ihmNiveauEau.setSize(431, 276);
+        eauEtCartes.add(ihmTasDeCarte);
+        System.out.println(eauEtCartes.getSize().height);
+        ihmTasDeCarte.setSize(443, 175);
         panelGauche.add(eauEtCartes, BorderLayout.CENTER);
         eauEtCartes.setBorder(vert);
 
@@ -347,25 +357,6 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         panelAv23.setOpaque(false);
 
         afficherIhm();
-        System.out.println(this.getSize().width);
-        System.out.println(this.getSize().height);
-        System.out.println(isVisible());
-
-        this.repaint();
-        System.out.println("Demande de repaint");
-    }
-
-    @Override
-    public void paintComponent(Graphics g) {
-        System.out.println("effectué");
-        try {
-            this.image1 = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/CarteFond rouge.png"));
-        } catch (IOException ex) {
-            System.err.println("Erreur de lecture de" + "/src/Image/CarteFond rouge.png");
-        }
-
-        g.drawImage(image1, 0, 0, cartes);
-        g.drawImage(image1, 0, 0, 150, 210, null, cartes);
     }
 
     // Observe
@@ -423,8 +414,17 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         aventuriers.put(aventurier4.getNomJoueur(), aventurier4);
         aventuriers.put(aventurier5.getNomJoueur(), aventurier5);
         aventuriers.put(aventurier6.getNomJoueur(), aventurier6);
+        
+        NiveauEau niveauEau = new NiveauEau();
 
-        IhmPlateauDeJeu ihm = new IhmPlateauDeJeu(aventuriers, grille);
+        CarteTresors carteTresor15 = new CarteTresors(NomTresor.Cristal);
+        CarteInondation carteInondation9 = new CarteInondation(NomTuile.LesDunesDeLillusion);
+
+        IhmPlateauDeJeu ihm = new IhmPlateauDeJeu(aventuriers, grille, niveauEau);
+
+        ihm.getIhmTasDeCarte().setCi(carteInondation9);
+        ihm.getIhmTasDeCarte().setCt(carteTresor15);
+
         ihm.afficherIhm();
         ihm.mettreAJour();
     }

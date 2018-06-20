@@ -396,7 +396,7 @@ public class Controleur implements Observateur {
                 // fermer IHM_Menu
                 ihmMenuPrincipal.cacherIhm();
                 // ouvrir ihm principale
-                ihmPlateauDeJeu = new IhmPlateauDeJeu(aventuriers,this.getGrille());
+                ihmPlateauDeJeu = new IhmPlateauDeJeu(aventuriers,this.getGrille(),getNiveauEau());
                 ihmPlateauDeJeu.afficherIhm();
             }
 
