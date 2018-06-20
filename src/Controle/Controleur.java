@@ -394,11 +394,11 @@ public class Controleur implements Observateur {
                     aventuriers.put(s, av);
                 }
                 // fermer IHM_Menu
-                ihmMenuPrincipal.cacherIhm();
-                // ouvrir ihm principale
+                ihmMenuPrincipal.cacherIhm();               
+            }
+             // ouvrir ihm principale
                 ihmPlateauDeJeu = new IhmPlateauDeJeu(aventuriers,this.getGrille(),getNiveauEau());
                 ihmPlateauDeJeu.afficherIhm();
-            }
 
             // pour demander l'affiche des tuiles possibles (pour se déplacer)
         } else if (action.getType() == TypesActions.demandeDeplacement) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
@@ -468,7 +468,7 @@ public class Controleur implements Observateur {
                 getGrille().getTuile(getAventurier().getTuile().getPosX(), getAventurier().getTuile().getPosY()).addAventurier(getAventurier());
 
                 // on met à jour la vueGrille, et on la réinitialise
-                getIhmGrille().setTuiles(getGrille());
+                getIhmGrille().setTuiles(getGrille().getTuiles());
                 getIhmGrille().revenirGrilleDepart();
 
                 setNombreActions(getNombreActions() + 1);

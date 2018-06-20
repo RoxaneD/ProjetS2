@@ -70,10 +70,8 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
     // constructeur
     public IhmPlateauDeJeu(HashMap<String, Aventurier> aventuriers, Grille grille, NiveauEau niveauEau) {
 
-        // instantiations des ihms
-        nombreJoueurs = aventuriers.size();
-
-        for (Aventurier a : aventuriers.values()) {
+        // instantiations des ihms        
+        for (Aventurier a : aventuriers.values()) {           
             IhmAventurier ihm = new IhmAventurier(a);
             ihmAventuriers.add(ihm);
 
@@ -87,6 +85,7 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
 
         setIhmAventurierActuelle(ihmAventuriers.get(0));
         ihmGrille = new IhmGrille(grille);
+        ihmGrille.revenirGrilleDepart();
         ihmGrille.setVisible(true);
 
         this.setSize(dimension.width, dimension.height);
