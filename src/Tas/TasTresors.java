@@ -1,7 +1,6 @@
 package Tas;
 
-import Cartes.CarteSpeciale;
-import Cartes.CarteTresor;
+
 import Cartes.CarteTresors;
 import Enumerations.NomTresor;
 import java.util.ArrayList;
