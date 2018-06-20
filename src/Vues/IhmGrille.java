@@ -204,7 +204,6 @@ public class IhmGrille extends JPanel {
         listLabel.add(label34);
         listLabel.add(label35);
         listLabel.add(label36);
-
         repaint();
     }
 
