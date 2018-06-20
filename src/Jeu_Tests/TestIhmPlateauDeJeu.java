@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Jeu_Tests;
-
+/**
 import Aventuriers.Aventurier;
 import Aventuriers.Pilote;
 import Aventuriers.Plongeur;
@@ -25,10 +25,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- *
- * @author paradisc
- */
 public class TestIhmPlateauDeJeu {
 
     public static void main(String[] args) {
@@ -82,5 +78,6 @@ public class TestIhmPlateauDeJeu {
         //if (poserQuestion("Ceci est une question")) {
         //    afficherInformation("Ceci est une information");
         //}
-    }
-}
+//    }
+
+//}
