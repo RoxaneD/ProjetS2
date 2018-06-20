@@ -26,6 +26,8 @@ import Tas.TasInondations;
 import Tas.TasJoueur;
 import Tas.TasPoubelle;
 import Tas.TasTresors;
+import Vues.IhmAventurier;
+import Vues.IhmGrille;
 import Vues.IhmMenuPrincipal;
 import Vues.IhmPlateauDeJeu;
 import Vues.IhmReglesDuJeu;
@@ -37,9 +39,9 @@ public class Controleur implements Observateur {
 
     // attributs
     //          ihm 
-    private IhmPlateauDeJeu ihmPlateauDeJeu;
     private static IhmMenuPrincipal ihmMenuPrincipal;
     private static IhmReglesDuJeu ihmReglesDuJeu;
+    private IhmPlateauDeJeu ihmPlateauDeJeu;
 
     //          autres attributs
     private ArrayList<String> joueurs = new ArrayList<String>(); // contient tous les nom de joueurs
@@ -96,21 +98,6 @@ public class Controleur implements Observateur {
         ihmReglesDuJeu.addObservateur(this);
         // plateau de jeu
 
-    }
-
-    // setteurs
-    //Méthode qui affiche la vue aventurier
-    public void afficherVueAventurier(VueAventurierDemo vueAventurier) {
-        for (String s : vuesAventurier.keySet()) {//Met toute les vues aventuriers en false pour ne pas qu'elle s'affiche
-            vuesAventurier.get(s).getWindow().setVisible(false);
-        }
-        this.ihmAventurier = vueAventurier;// Met en visible seul l'aventurier actuelle
-        this.ihmAventurier.getWindow().setVisible(true);
-    }
-
-    //Méthode qui met à jour la vueGrille
-    public void afficherVueGrille(VueGrilleDemo vueGrille) {
-        this.ihmGrille = vueGrille;
     }
 
     //Méthode qui met à jour le niveau d'eau
@@ -210,8 +197,8 @@ public class Controleur implements Observateur {
 
     // getteurs attributs
     //Méthode qui renvoie la vue aventurier
-    public VueAventurierDemo getVueAventurier() {
-        return ihmAventurier;
+    public IhmAventurier getIhmAventurierActuelle() {
+        return ihmPlateauDeJeu.getIhmAventurierActuelle();
     }
 
     //Méthode qui renvoie le niveau d'eau
@@ -250,8 +237,8 @@ public class Controleur implements Observateur {
     }
 
     //Méthode qui renvoie le HashMap vues aventurier
-    public HashMap<String, VueAventurierDemo> getVuesAventurier() {
-        return vuesAventurier;
+    public ArrayList<IhmAventurier> getIhmAventurier() {
+        return ihmPlateauDeJeu.getIhmAventuriers();
     }
 
     //Méthode qui renvoie la poubelle
@@ -312,12 +299,12 @@ public class Controleur implements Observateur {
 
     //Méthode qui renvoie le nom du joueur
     public String getNomJoueur() {
-        return getVueAventurier().getNomJoueur();
+        return getIhmAventurierActuelle().getNomAventurier();
     }
 
     //Méthode qui renvoie la carte de l'aventurier
     public CarteAventurier getCarteAventurier() {
-        return getVueAventurier().getCarteAventurier();
+        return getIhmAventurierActuelle().getCarteAventurier();
     }
 
     //Méthode qui renvoie le nom de l'aventurier
@@ -341,8 +328,8 @@ public class Controleur implements Observateur {
     }
 
     //Méthode qui renvoie la vueGrille
-    public VueGrilleDemo getVueGrille() {
-        return ihmGrille;
+    public IhmGrille getIhmGrille() {
+        return ihmPlateauDeJeu.getIhmGrille();
     }
 
     //Méthode qui renvoie le booléen actionEffectuer
@@ -381,7 +368,7 @@ public class Controleur implements Observateur {
     @Override
     public void traiterAction(Action action) {
         // pour ajouter un joueur
-        if (action.getType() == TypesActions.commencerPartie) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM 
+        if (action.getType() == TypesActions.commencerPartie) {
             for (String s : action.getJoueurs()) {
                 joueurs.add(s);
                 TasJoueur t = new TasJoueur();
@@ -423,7 +410,7 @@ public class Controleur implements Observateur {
                     tuilesPossibles.add(tuile2);
                 }
                 //Afficher les tuiles possibles dans la vueGrille
-                ihmGrille.afficherTuilesPossiblesDeplacement(tuilesPossibles);
+                getIhmGrille().afficherTuilesPossiblesDeplacement(tuilesPossibles);
             }
 
             // pour demander l'affiche des tuiles possibles (à assécher)
@@ -434,7 +421,7 @@ public class Controleur implements Observateur {
                 tuilesPossibles.add(t);
             }
             //Afficher les tuiles possibles dans la vueGrille
-            ihmGrille.afficherTuilesPossiblesAssechement(tuilesPossibles);
+            getIhmGrille().afficherTuilesPossiblesAssechement(tuilesPossibles);
             // pour se déplacer sur une tuile
         } else if (action.getType() == TypesActions.deplacement) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
             //si le pouvoir du pilote est à faux et que cette aventurier est le pilote alors
@@ -481,8 +468,8 @@ public class Controleur implements Observateur {
                 getGrille().getTuile(getAventurier().getTuile().getPosX(), getAventurier().getTuile().getPosY()).addAventurier(getAventurier());
 
                 // on met à jour la vueGrille, et on la réinitialise
-                ihmGrille.setTuiles(getGrille());
-                ihmGrille.revenirGrilleDepart();
+                getIhmGrille().setTuiles(getGrille());
+                getIhmGrille().revenirGrilleDepart();
 
                 setNombreActions(getNombreActions() + 1);
                 this.setActionEffectue(true);
@@ -493,7 +480,7 @@ public class Controleur implements Observateur {
             // on met à jour la grille
             getGrille().getTuile(action.getTuile().getPosX(), action.getTuile().getPosY()).assecher();
             // on met à jour la vueGrille, et on la réinitialise
-            ihmGrille.revenirGrilleDepart();
+            getIhmGrille().revenirGrilleDepart();
             //Si l'aventurier n'est pas l'ingenieur ou que le pouvoir ingenieur est à vrai
             if (getAventurier().getCarteAventurier().getNom() != NomAventurier.ingenieur || isPouvoirIngenieur()) {
                 setNombreActions(getNombreActions() + 1);//on augmente le nombre d'action de 1

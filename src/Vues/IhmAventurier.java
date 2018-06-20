@@ -166,56 +166,56 @@ public class IhmAventurier extends JPanel implements Observe {
         actions.add(recupererTresor);
         actions.add(new JLabel(""));
         actions.add(terminer);
-        
-        defausser.addActionListener(new ActionListener(){
+
+        defausser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 Action a = new Action(TypesActions.demandeDefausseCarte);
                 notifierObservateur(a);
             }
         });
-        
-        utiliser.addActionListener(new ActionListener(){
+
+        utiliser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 Action a = new Action(TypesActions.demandeUtilisationCarte);
                 notifierObservateur(a);
             }
         });
-        
-        donner.addActionListener(new ActionListener(){
+
+        donner.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 Action a = new Action(TypesActions.demandeDonCarte);
                 notifierObservateur(a);
             }
         });
-        
-        deplacer.addActionListener(new ActionListener(){
+
+        deplacer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 Action a = new Action(TypesActions.demandeDeplacement);
                 notifierObservateur(a);
             }
         });
-        
-        assecher.addActionListener(new ActionListener(){
+
+        assecher.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 Action a = new Action(TypesActions.demandeAssechement);
                 notifierObservateur(a);
             }
         });
-        
-        recupererTresor.addActionListener(new ActionListener(){
+
+        recupererTresor.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 Action a = new Action(TypesActions.recupererTresor);
                 notifierObservateur(a);
             }
         });
-        
-        terminer.addActionListener(new ActionListener(){
+
+        terminer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 Action a = new Action(TypesActions.terminerTour);
@@ -276,7 +276,7 @@ public class IhmAventurier extends JPanel implements Observe {
                                 }
                             } else { // les autres cartes
                                 if (taille2 < 3) {
-                                    if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9))+150))) {
+                                    if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 150))) {
                                         if ((e.getY() > (titre.getHeight() + 230)) && (e.getY() < (titre.getHeight() + 440))) {
                                             Action action = new Action(TypesActions.utiliserCarte, aventurier.getTasTirage().get(a - 9));
                                             notifierObservateur(action);
@@ -339,7 +339,7 @@ public class IhmAventurier extends JPanel implements Observe {
                                 }
                             } else { // les autres cartes
                                 if (taille2 < 3) {
-                                    if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9))+150))) {
+                                    if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 150))) {
                                         if ((e.getY() > (titre.getHeight() + 230)) && (e.getY() < (titre.getHeight() + 440))) {
                                             Action action = new Action(TypesActions.donCarte, aventurier.getTasTirage().get(a - 9));
                                             notifierObservateur(action);
@@ -402,7 +402,7 @@ public class IhmAventurier extends JPanel implements Observe {
                                 }
                             } else { // les autres cartes
                                 if (taille2 < 3) {
-                                    if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9))+150))) {
+                                    if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 150))) {
                                         if ((e.getY() > (titre.getHeight() + 230)) && (e.getY() < (titre.getHeight() + 440))) {
                                             Action action = new Action(TypesActions.defausserCarte, aventurier.getTasTirage().get(a - 9));
                                             notifierObservateur(action);
@@ -513,15 +513,52 @@ public class IhmAventurier extends JPanel implements Observe {
             carteAventurier.setOpaque(false);
             panelVisible.setOpaque(false);
             panelInvisible.setOpaque(false);
+            panelInvisible.setVisible(false);
             panelCartesJoueur.setOpaque(false);
+            panelCartesTirages.setOpaque(false);
+            panelCartesTirages.setVisible(false);
+            actions.setOpaque(false);
+            actions.setVisible(false);
+            defausser.setVisible(false);
+            utiliser.setVisible(false);
+            donner.setVisible(false);
+            deplacer.setVisible(false);
+            assecher.setVisible(false);
+            recupererTresor.setVisible(false);
+            terminer.setVisible(false);
+
             carteAventurier.setSize(150, 210);
-            g.drawImage(imageCarteAventurier, 0, titre.getHeight(), carteAventurier.getWidth(), carteAventurier.getHeight(), null, carteAventurier);
+            g.drawImage(imageCarteAventurier, 0, titre.getHeight() + 10, carteAventurier.getWidth(), carteAventurier.getHeight(), null, carteAventurier);
+
+            int taille = aventurier.getTasJoueur().getCartes().size();
+            panelCartesVisibles.setLayout(new GridLayout(1, taille));
+            int i1 = 0;
+            for (CarteTresors c : aventurier.getTasJoueur().getCartes()) {
+                try {
+                    this.imageV1 = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/Carte" + c.getNom().toString() + ".png"));
+                } catch (IOException ex) {
+                    System.err.println("Erreur de lecture de" + "/src/Image/Carte" + c.getNom().toString() + ".png");
+                }
+                g.drawImage(imageV1, 160 + ((432 / taille) * i1), titre.getHeight() + 10, carteAventurier.getWidth(), carteAventurier.getHeight(), null, panelCartesVisibles);
+
+                i1 += 1;
+            }
+
         }
     }
 
     // setteurs
     public void setChoix(String choix) {
         this.choix = choix;
+    }
+    
+    // getteurs
+    public String getNomAventurier(){
+        return aventurier.getNomJoueur();
+    }
+    
+    public CarteAventurier getCarteAventurier(){
+        return aventurier.getCarteAventurier();
     }
 
     // autres méthodes
@@ -575,13 +612,13 @@ public class IhmAventurier extends JPanel implements Observe {
         CarteTresors carteTresor9 = new CarteTresors(NomTresor.Pierre);
         a.getTasJoueur().addCarte(carteTresor1);
         a.getTasJoueur().addCarte(carteTresor2);
-        /**a.getTasJoueur().addCarte(carteTresor3);
+        a.getTasJoueur().addCarte(carteTresor3);
         a.getTasJoueur().addCarte(carteTresor4);
         a.getTasJoueur().addCarte(carteTresor5);
         a.getTasJoueur().addCarte(carteTresor1);
         a.getTasJoueur().addCarte(carteTresor2);
         a.getTasJoueur().addCarte(carteTresor3);
-        a.getTasJoueur().addCarte(carteTresor4);**/
+        a.getTasJoueur().addCarte(carteTresor4);
 
         CarteTresors carteTresor10 = new CarteTresors(NomTresor.MonteeDesEaux);
         CarteTresors carteTresor11 = new CarteTresors(NomTresor.MonteeDesEaux);
@@ -594,37 +631,56 @@ public class IhmAventurier extends JPanel implements Observe {
         CarteInondation carte7 = new CarteInondation(NomTuile.LePalaisDesMarees);
         a.getTasTirage().add(carteTresor10);
         a.getTasTirage().add(carteTresor11);
-        /**a.getTasTirage().add(carte1);
+
+        a.getTasTirage().add(carte1);
         a.getTasTirage().add(carte2);
         a.getTasTirage().add(carte3);
         a.getTasTirage().add(carte4);
         a.getTasTirage().add(carte5);
         a.getTasTirage().add(carte6);
-        a.getTasTirage().add(carte7);**/
+        a.getTasTirage().add(carte7);
 
         IhmAventurier ihm = new IhmAventurier(a);
         ihm.setChoix("utiliser");
         ihm.pos.add(0);
         ihm.pos.add(1);
-        /**ihm.pos.add(2);
+        ihm.pos.add(2);
         ihm.pos.add(3);
         ihm.pos.add(4);
         ihm.pos.add(5);
         ihm.pos.add(6);
         ihm.pos.add(7);
-        ihm.pos.add(8);**/
+        ihm.pos.add(8);
+
         ihm.pos.add(9);
         ihm.pos.add(10);
-        /**ihm.pos.add(11);
+        ihm.pos.add(11);
         ihm.pos.add(12);
         ihm.pos.add(13);
         ihm.pos.add(14);
         ihm.pos.add(15);
         ihm.pos.add(16);
-        ihm.pos.add(17);**/
+        ihm.pos.add(17);
 
+        // pour une ihm réduite
+        /**
+        window.add(ihm); 
+        ihm.afficherIhmReduite(); 
+        ihm.repaint();
+        window.setPreferredSize(new Dimension(705,285));
+        window.setPreferredSize(new Dimension(700,285));
+        window.setSize(700,285); 
+        window.setVisible(true);
+        window.setEnabled(false);
+         **/
+        
+        
+        // pour une ihm complete
+        /**
         window.add(ihm);
+        window.setSize(700, 550);
         ihm.afficherIhmComplete();
         window.setVisible(true);
+        **/ 
     }
 }

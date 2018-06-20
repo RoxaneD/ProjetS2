@@ -20,7 +20,7 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
 
     //
     private Observateur observateur;
-    
+
     // ihms
     private ArrayList<IhmAventurier> ihmAventuriers = new ArrayList<>();
     private IhmAventurier ihmAventurier;
@@ -80,29 +80,25 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         return window;
     }
 
+    public IhmAventurier getIhmAventurierActuelle() {
+        return this.ihmAventurier;
+    }
+
+    public IhmGrille getIhmGrille() {
+        return this.ihmGrille;
+    }
+
+    public ArrayList<IhmAventurier> getIhmAventuriers() {
+        return this.ihmAventuriers;
+    }
+
+    // autre méthodes
     public void afficherIhm() {
         window.setVisible(true);
     }
 
     public void cacherIhm() {
         window.setVisible(false);
-    }
-
-    // autre méthodes
-    public static void main(String[] args) {
-        Grille grille = new Grille();
-        CarteAventurier carte1 = new CarteAventurier(NomAventurier.plongeur, Couleur.noir);
-        CarteAventurier carte2 = new CarteAventurier(NomAventurier.plongeur, Couleur.noir);
-
-        Plongeur aventurier1 = new Plongeur("Marie", carte1);
-        Pilote aventurier2 = new Pilote("Roxane", carte2);
-
-        HashMap<String, Aventurier> aventuriers = new HashMap<>();
-        aventuriers.put(aventurier1.getNomJoueur(), aventurier1);
-        aventuriers.put(aventurier2.getNomJoueur(), aventurier2);
-
-        IhmPlateauDeJeu ihm = new IhmPlateauDeJeu(aventuriers, grille);
-        ihm.afficherIhm();
     }
 
     @Override
@@ -113,6 +109,23 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
     @Override
     public void notifierObservateur(Action action) {
         observateur.traiterAction(action);
+    }
+
+    // main
+    public static void main(String[] args) {
+        Grille grille = new Grille();
+        CarteAventurier carte1 = new CarteAventurier(NomAventurier.plongeur, Couleur.noir);
+        CarteAventurier carte2 = new CarteAventurier(NomAventurier.pilote, Couleur.bleu);
+
+        Plongeur aventurier1 = new Plongeur("Marie", carte1);
+        Pilote aventurier2 = new Pilote("Roxane", carte2);
+
+        HashMap<String, Aventurier> aventuriers = new HashMap<>();
+        aventuriers.put(aventurier1.getNomJoueur(), aventurier1);
+        aventuriers.put(aventurier2.getNomJoueur(), aventurier2);
+
+        IhmPlateauDeJeu ihm = new IhmPlateauDeJeu(aventuriers, grille);
+        ihm.afficherIhm();
     }
 
 }
