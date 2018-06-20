@@ -47,16 +47,16 @@ public class IhmGrille extends JPanel {
     private ImageContainerCalques pionRouge;
     private ImageContainerCalques pionGris;
     private ImageContainerCalques pionNoir;
-
+    
     private ArrayList<JButton> listBouton = new ArrayList<>();
     private ArrayList<JLabel> listLabel = new ArrayList<>();
-
+    
     public IhmGrille(Grille grille) {
         setGrille(grille);
-
+        
         this.tuiles = grille.getTuiles();
         this.setLayout(new GridLayout(6, 6, 5, 5));
-
+        
         JButton bouton11 = new JButton();
         JButton bouton12 = new JButton();
         JButton bouton13 = new JButton();
@@ -93,7 +93,7 @@ public class IhmGrille extends JPanel {
         JButton bouton64 = new JButton();
         JButton bouton65 = new JButton();
         JButton bouton66 = new JButton();
-
+        
         listBouton.add(bouton11);
         listBouton.add(bouton12);
         listBouton.add(bouton13);
@@ -130,7 +130,7 @@ public class IhmGrille extends JPanel {
         listBouton.add(bouton64);
         listBouton.add(bouton65);
         listBouton.add(bouton66);
-
+        
         JLabel label1 = new JLabel();
         JLabel label2 = new JLabel();
         JLabel label3 = new JLabel();
@@ -167,7 +167,7 @@ public class IhmGrille extends JPanel {
         JLabel label34 = new JLabel();
         JLabel label35 = new JLabel();
         JLabel label36 = new JLabel();
-
+        
         listLabel.add(label1);
         listLabel.add(label2);
         listLabel.add(label3);
@@ -204,30 +204,26 @@ public class IhmGrille extends JPanel {
         listLabel.add(label34);
         listLabel.add(label35);
         listLabel.add(label36);
-
-        System.out.println("test1");
-        repaint();
-
+        
     }
-
+    
     public void paintComponent(Graphics g) {
-        System.out.println("test2");
         int i = 0;
         int j = 0;
-
+        
         for (Tuile tuile : tuiles) {
-
+            
             if (tuile.getEtat() == EtatTuile.inexistante) {
                 if (tuileInexistante.get(tuile) == null) {
                     tuileInexistante.put(tuile, listLabel.get(j));
                     this.add(listLabel.get(j));
                     j++;
                 }
-
+                
             } else if (tuile.getEtat() == EtatTuile.normal) {
                 imageTuile = new ImageContainerCalques(imgFolder + tuile.getNom().toString() + ".png", 0, 0, 100, 110);
                 if (boutons.put(tuile, listBouton.get(i)) == null) {
-
+                    
                     boutons.put(tuile, listBouton.get(i));
                     if (tuile.getEmplacementAventurier() != null) {
                         if (tuile.getEmplacementAventurier().getNom() == NomAventurier.explorateur) {
@@ -253,7 +249,7 @@ public class IhmGrille extends JPanel {
                     boutons.get(tuile).add(imageTuile);
                     this.add(boutons.get(tuile));
                 } else {
-
+                    
                     boutons.get(tuile).remove(imageTuile);
                     if (tuile.getEmplacementAventurier() != null) {
                         if (tuile.getEmplacementAventurier().getNom() == NomAventurier.explorateur) {
@@ -276,11 +272,11 @@ public class IhmGrille extends JPanel {
                             boutons.get(tuile).add(pionNoir);
                         }
                     }
-
+                    
                     boutons.get(tuile).add(imageTuile);
-
+                    
                 }
-
+                
             } else if (tuile.getEtat() == EtatTuile.inondee) {
                 imageTuile = new ImageContainerCalques(imgFolder + tuile.getNom().toString() + "_Inonde.png", 0, 0, 100, 110);
                 if (boutons.put(tuile, listBouton.get(i)) == null) {
@@ -332,21 +328,28 @@ public class IhmGrille extends JPanel {
                         }
                     }
                     boutons.get(tuile).add(imageTuile);
-
+                    
                 }
-
+                
             } else if (tuile.getEtat() == EtatTuile.submergee) {
-                if (tuileInexistante.get(tuile) == null) {
-                    tuileInexistante.put(tuile, listLabel.get(j));
-                    this.add(listLabel.get(j));
-                    j++;
+                if (boutons.get(tuile) == null) {
+                    boutons.put(tuile, listBouton.get(i));
+                    boutons.get(tuile).setOpaque(true);
+                    boutons.get(tuile).setEnabled(false);
+                    boutons.get(tuile).setBorder(null);                    
+                    this.add(listBouton.get(i));
+                } else {
+                    boutons.get(tuile).setOpaque(true);
+                    boutons.get(tuile).setEnabled(false);
+                    boutons.get(tuile).setBorder(null);
+                    
                 }
             }
             /*if (tuile.getEmplacementAventurier() != null) {
                 boutons.get(tuile).setBackground(Color.red);
-
+            
                 pionRouge = new ImageContainerCalques(imgFolder + "pionRouge.png", 0, 0, 25, 25);
-
+            
                 boutons.get(tuile).add(pionRouge);
                 pionRouge.paintComponent(g);
                 boutons.get(tuile).paintComponents(g);
@@ -361,56 +364,115 @@ public class IhmGrille extends JPanel {
 
             i++;
         }
-
+        
     }
-
-    public static void main(String[] args) {
-
-    }
-
-    /*public void afficherTuilesPossiblesDeplacement(ArrayList<Tuile> t2) {
-      //  revenirGrilleDepart();  //Appel de la méthode pour réinitialiser la grille
     
+    public static void main(String[] args) {
+        
+    }
+    
+    public void afficherTuilesPossiblesDeplacement(ArrayList<Tuile> t2) {
+        revenirGrilleDepart();  //Appel de la méthode pour réinitialiser la grille
         for (Tuile tuile : t2) {
             boutons.get(tuile).setBackground(Color.RED);  //Mise à jour des tuiles en mettant un fond Rouge
+            boutons.get(tuile).setOpaque(true);
             boutons.get(tuile).setEnabled(true);  //Rend les tuils actives
         }
     }
-
+    
     public void afficherTuilesPossiblesAssechement(ArrayList<Tuile> t2) {
         revenirGrilleDepart();  //Appel de la méthode pour réinitialiser la grille
         for (Tuile tuile : t2) {
             boutons.get(tuile).setBackground(Color.MAGENTA);  //Redéfinie la couleur de fond en Magenta
+            boutons.get(tuile).setOpaque(true);
             boutons.get(tuile).setEnabled(true);  //Rend les tuiles actives
         }
     }
+    
+    public void afficherTuileActuelle(Tuile t) {
+        boutons.get(t).setBackground(Color.black);  //Rend la tuile Noir
+    }
+    
     public void revenirGrilleDepart() {
+        int i = 0;
+        int j = 0;
         for (Tuile tuile : tuiles) {
             
-            boutons.get(tuile).setBackground(Color.white);  //Mert la couleur Blanche en fond dans la tuile
-            /*if (tuile.getEtat() != EtatTuile.inexistante) {  //Vérifie si l'état de la tuile est différent d'inexistant
+            if (tuile.getEtat() != EtatTuile.inexistante) {  //Vérifie si l'état de la tuile est différent d'inexistant
+                if (boutons.put(tuile, listBouton.get(i)) == null) {
+                    boutons.put(tuile, listBouton.get(i));
+                    this.add(boutons.get(tuile));
+                }
                 boutons.get(tuile).setEnabled(false);  //rend la tuile inactives
-            }
-            if (tuile.getEtat() == EtatTuile.inondee) {  //Vérifie si l'état de la tuile correspond à inondé
-                boutons.get(tuile).setBackground(Color.CYAN);  //Mets la couleur Cyan en fond
-            } else {  //Sinon
-                if (tuile.getEtat() == EtatTuile.submergee) {  //Vérifie si l'état de la tuile correspond à submergé
-                    boutons.get(tuile).setBackground(Color.blue);  //Mets la couleur Bleue en fond
-                } else {  //Sinon
-                    if (tuile.getEtat() == EtatTuile.normal) {  //Vérifie si l'état de la tuile correspond a normal
-                        boutons.get(tuile).setBackground(Color.orange);  //mets la couleur Orange en fond
-                    }
+                //boutons.get(tuile).setBackground(Color.white);  //Mert la couleur Blanche en fond dans la tuile
+
+            } else {
+                if (tuileInexistante.get(tuile) == null) {
+                    tuileInexistante.put(tuile, listLabel.get(j));
+                    this.add(listLabel.get(j));
+                    j++;
                 }
             }
+            
+            if (tuile.getEtat() == EtatTuile.submergee) {  //Vérifie si l'état de la tuile correspond à submergé
+                if (boutons.get(tuile) == null) {
+                    boutons.put(tuile, listBouton.get(i));
+                    
+                }
+                
+            }
+            i++;
         }
-    }*/
+    }
+    
     //Getteur
     public Grille getGrille() {
         return grille;
+    }
+    
+    public ArrayList<Tuile> getTuiles() {
+        return tuiles;
+    }
+    
+    public HashMap<Tuile, JButton> getBoutons() {
+        return boutons;
+    }
+    
+    public HashMap<Tuile, JLabel> getTuileInexistante() {
+        return tuileInexistante;
+    }
+    
+    public ArrayList<JButton> getListBouton() {
+        return listBouton;
+    }
+    
+    public ArrayList<JLabel> getListLabel() {
+        return listLabel;
     }
 
     //Setteur
     public void setGrille(Grille grille) {
         this.grille = grille;
     }
+    
+    public void setTuiles(ArrayList<Tuile> tuiles) {
+        this.tuiles = tuiles;
+    }
+    
+    public void setBoutons(HashMap<Tuile, JButton> boutons) {
+        this.boutons = boutons;
+    }
+    
+    public void setTuileInexistante(HashMap<Tuile, JLabel> tuileInexistante) {
+        this.tuileInexistante = tuileInexistante;
+    }
+    
+    public void setListBouton(ArrayList<JButton> listBouton) {
+        this.listBouton = listBouton;
+    }
+    
+    public void setListLabel(ArrayList<JLabel> listLabel) {
+        this.listLabel = listLabel;
+    }
+    
 }
