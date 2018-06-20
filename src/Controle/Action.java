@@ -16,6 +16,7 @@ public class Action {
     private CarteTresors carteT;
     private CarteInondation carteI;
     private ArrayList<String> joueurs = new ArrayList<>();
+    private int niveau;
 
     // constructeurs
     //Crée une action
@@ -39,9 +40,10 @@ public class Action {
         setCarteTirage(carte);
     }
 
-    public Action(TypesActions type, ArrayList<String> joueurs) {
+    public Action(TypesActions type, ArrayList<String> joueurs, int i) { // pour commencer une partie
         setType(type);
         setJoueurs(joueurs);
+        setNiveau(i);
     }
 
     // setteurs
@@ -76,6 +78,10 @@ public class Action {
         this.joueurs = joueurs;
     }
 
+    public void setNiveau(int niveau) {
+        this.niveau = niveau;
+    }
+
     // getteurs
     //Méthode qui renvoie le type d'action
     public TypesActions getType() {
@@ -97,6 +103,10 @@ public class Action {
 
     public ArrayList<String> getJoueurs() {
         return joueurs;
+    }
+
+    public int getNiveau() {
+        return niveau;
     }
 
     // autres

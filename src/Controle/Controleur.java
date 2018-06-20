@@ -97,7 +97,7 @@ public class Controleur implements Observateur {
         ihmReglesDuJeu = new IhmReglesDuJeu();
         ihmReglesDuJeu.addObservateur(this);
         // plateau de jeu
-
+        // fait dans traiterAction(commencer)
     }
 
     //Méthode qui met à jour le niveau d'eau
@@ -375,29 +375,35 @@ public class Controleur implements Observateur {
                 tasJoueurs.put(s, t);
                 CarteAventurier c = tasAventuriers.getPremiereCarte();
                 if (c.getNom() == NomAventurier.explorateur) {
-                    Explorateur av = new Explorateur(action.getNom(), c);
+                    Explorateur av = new Explorateur(s, c);
                     aventuriers.put(s, av);
                 } else if (c.getNom() == NomAventurier.pilote) {
-                    Pilote av = new Pilote(action.getNom(), c);
+                    Pilote av = new Pilote(s, c);
                     aventuriers.put(s, av);
                 } else if (c.getNom() == NomAventurier.navigateur) {
-                    Navigateur av = new Navigateur(action.getNom(), c);
+                    Navigateur av = new Navigateur(s, c);
                     aventuriers.put(s, av);
                 } else if (c.getNom() == NomAventurier.plongeur) {
-                    Plongeur av = new Plongeur(action.getNom(), c);
+                    Plongeur av = new Plongeur(s, c);
                     aventuriers.put(s, av);
                 } else if (c.getNom() == NomAventurier.ingenieur) {
-                    Ingenieur av = new Ingenieur(action.getNom(), c);
+                    Ingenieur av = new Ingenieur(s, c);
                     aventuriers.put(s, av);
                 } else {
-                    Messager av = new Messager(action.getNom(), c);
+                    Messager av = new Messager(s, c);
                     aventuriers.put(s, av);
                 }
                 // fermer IHM_Menu
                 ihmMenuPrincipal.cacherIhm();               
             }
+            
+            this.getNiveauEau().setSemiNiveau(action.getNiveau());
              // ouvrir ihm principale
                 ihmPlateauDeJeu = new IhmPlateauDeJeu(aventuriers,this.getGrille(),getNiveauEau());
+                ihmPlateauDeJeu.getIhmGrille().addObservateur(this);
+                for (IhmAventurier ihm : ihmPlateauDeJeu.getIhmAventuriers()){
+                    ihm.addObservateur(this);
+                }
                 ihmPlateauDeJeu.afficherIhm();
 
             // pour demander l'affiche des tuiles possibles (pour se déplacer)
