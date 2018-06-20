@@ -14,9 +14,14 @@ import Enumerations.NomTresor;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -35,6 +40,10 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
     // attributs internes
     private Observateur observateur;
     private int nombreJoueurs;
+    private Image image1;
+    private Image image2;
+    private Image image3;
+    private Image image4;
 
     // ihms
     private ArrayList<IhmAventurier> ihmAventuriers = new ArrayList<>();
@@ -81,7 +90,7 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         ihmGrille = new IhmGrille(grille);
         ihmGrille.setVisible(true);
 
-        this.window = new JFrame("Île Interdite");
+        this.setSize(dimension.width, dimension.height);
         window.setSize(dimension.width, dimension.height);
 
         window.setLayout(new BorderLayout());
@@ -124,6 +133,7 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
     public void mettreAJour() {
         // on efface et recréé les composants
         window.remove(panelPrincipal);
+        this.setVisible(true);
 
         panelPrincipal = new JPanel(new BorderLayout());
         panelDroit = new JPanel(new GridLayout(3, 1));   // pour l'ihm aventurier actuelle + les autres
@@ -161,7 +171,7 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         panelAv22.setOpaque(false);
         panelAv23.setOpaque(false);
 
-        // panel droit
+        // PANEL DROIT (1)
         panelDroit.setPreferredSize(
                 new Dimension((int) (dimension.width * 0.4), (int) (dimension.height)));
         // pour les aventuriers
@@ -170,12 +180,14 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
 
         ihmAventurier.afficherIhmComplete();
         ihmAventurier.setBorder(noir);
+        ihmAventurier.setEnabled(true);
 
         if (nombreJoueurs
                 == 2) {
             panelAventuriers1 = new JPanel(new GridLayout(3, 1));
             panelAv11.add(ihmAventuriers.get(1), BorderLayout.CENTER);
             ihmAventuriers.get(1).afficherIhmReduite();
+            ihmAventuriers.get(1).setEnabled(false);
             ihmAventuriers.get(1).setBorder(noir);
             panelAventuriers1.add(panelAv11);
             panelAventuriers1.add(new JLabel(""));
@@ -191,10 +203,12 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
             panelAv11.add(ihmAventuriers.get(1), BorderLayout.CENTER);
             panelAventuriers1.add(panelAv11);
             ihmAventuriers.get(1).afficherIhmReduite();
+            ihmAventuriers.get(1).setEnabled(false);
             ihmAventuriers.get(1).setBorder(noir);
             panelAv12.add(ihmAventuriers.get(2), BorderLayout.CENTER);
             panelAventuriers1.add(panelAv12);
             ihmAventuriers.get(2).afficherIhmReduite();
+            ihmAventuriers.get(2).setEnabled(false);
             ihmAventuriers.get(2).setBorder(noir);
             panelAventuriers1.add(new JLabel(""));
             panelAventuriers2 = new JPanel(new GridLayout(3, 1));
@@ -207,14 +221,17 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
             panelAventuriers1 = new JPanel(new GridLayout(3, 1));
             panelAv11.add(ihmAventuriers.get(1), BorderLayout.CENTER);
             ihmAventuriers.get(1).afficherIhmReduite();
+            ihmAventuriers.get(1).setEnabled(false);
             ihmAventuriers.get(1).setBorder(noir);
             panelAventuriers1.add(panelAv11);
             panelAv12.add(ihmAventuriers.get(2), BorderLayout.CENTER);
             ihmAventuriers.get(2).afficherIhmReduite();
+            ihmAventuriers.get(2).setEnabled(false);
             ihmAventuriers.get(2).setBorder(noir);
             panelAventuriers1.add(panelAv12);
             panelAv13.add(ihmAventuriers.get(3), BorderLayout.CENTER);
             ihmAventuriers.get(3).afficherIhmReduite();
+            ihmAventuriers.get(3).setEnabled(false);
             ihmAventuriers.get(3).setBorder(noir);
             panelAventuriers1.add(panelAv13);
 
@@ -228,19 +245,23 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
             panelAventuriers1 = new JPanel(new GridLayout(3, 1));
             panelAv11.add(ihmAventuriers.get(1), BorderLayout.CENTER);
             ihmAventuriers.get(1).afficherIhmReduite();
+            ihmAventuriers.get(1).setEnabled(false);
             ihmAventuriers.get(1).setBorder(noir);
             panelAventuriers1.add(panelAv11);
             panelAv12.add(ihmAventuriers.get(2), BorderLayout.CENTER);
             ihmAventuriers.get(2).afficherIhmReduite();
+            ihmAventuriers.get(2).setEnabled(false);
             ihmAventuriers.get(2).setBorder(noir);
             panelAventuriers1.add(panelAv12);
             panelAv13.add(ihmAventuriers.get(3), BorderLayout.CENTER);
             ihmAventuriers.get(3).afficherIhmReduite();
+            ihmAventuriers.get(3).setEnabled(false);
             ihmAventuriers.get(3).setBorder(noir);
             panelAventuriers1.add(panelAv13);
             panelAventuriers2 = new JPanel(new GridLayout(3, 1));
             panelAv21.add(ihmAventuriers.get(4), BorderLayout.CENTER);
             ihmAventuriers.get(4).afficherIhmReduite();
+            ihmAventuriers.get(4).setEnabled(false);
             ihmAventuriers.get(4).setBorder(noir);
             panelAventuriers2.add(panelAv21);
 
@@ -252,23 +273,28 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
             panelAventuriers1 = new JPanel(new GridLayout(3, 1));
             panelAv11.add(ihmAventuriers.get(1), BorderLayout.CENTER);
             ihmAventuriers.get(1).afficherIhmReduite();
+            ihmAventuriers.get(1).setEnabled(false);
             ihmAventuriers.get(1).setBorder(noir);
             panelAventuriers1.add(panelAv11);
             panelAv12.add(ihmAventuriers.get(2), BorderLayout.CENTER);
             ihmAventuriers.get(2).afficherIhmReduite();
+            ihmAventuriers.get(2).setEnabled(false);
             ihmAventuriers.get(2).setBorder(noir);
             panelAventuriers1.add(panelAv12);
             panelAv13.add(ihmAventuriers.get(3), BorderLayout.CENTER);
             ihmAventuriers.get(3).afficherIhmReduite();
+            ihmAventuriers.get(3).setEnabled(false);
             ihmAventuriers.get(3).setBorder(noir);
             panelAventuriers1.add(panelAv13);
             panelAventuriers2 = new JPanel(new GridLayout(3, 1));
             panelAv21.add(ihmAventuriers.get(4), BorderLayout.CENTER);
             ihmAventuriers.get(4).afficherIhmReduite();
+            ihmAventuriers.get(4).setEnabled(false);
             ihmAventuriers.get(4).setBorder(noir);
             panelAventuriers2.add(panelAv21);
             panelAv22.add(ihmAventuriers.get(5), BorderLayout.CENTER);
             ihmAventuriers.get(5).afficherIhmReduite();
+            ihmAventuriers.get(5).setEnabled(false);
             ihmAventuriers.get(5).setBorder(noir);
             panelAventuriers2.add(panelAv22);
 
@@ -282,12 +308,19 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         // AJOUTER IHMAVENTURIERS EN DESSOUS
         panelPrincipal.add(panelDroit, BorderLayout.EAST);
 
-        // panel gauche
+        // PANEL GAUCHE (2)
         //panelGauche.setPreferredSize(new Dimension((int) (dimension.width * 0.5), (int) (dimension.height)));
+        ihmGrille.setPreferredSize(new Dimension((int) (dimension.width * 0.5), (int) (dimension.height * 0.7125)));
 
-        ihmGrille.setPreferredSize(new Dimension((int) (dimension.width * 0.5), (int) (dimension.height*0.5)));
-        
-        panelGauche.add(ihmGrille, BorderLayout.CENTER);
+        panelGauche.add(ihmGrille, BorderLayout.NORTH);
+        eauEtCartes.add(eau, BorderLayout.WEST);
+        eau.setBorder(rouge);
+        eau.setPreferredSize(new Dimension(400, 200));
+        eauEtCartes.add(cartes, BorderLayout.EAST);
+        cartes.setBorder(bleu);
+        cartes.setPreferredSize(new Dimension(500, 200));
+        panelGauche.add(eauEtCartes, BorderLayout.CENTER);
+        eauEtCartes.setBorder(vert);
 
         panelPrincipal.add(panelGauche, BorderLayout.WEST);
 
@@ -314,8 +347,28 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         panelAv23.setOpaque(false);
 
         afficherIhm();
+        System.out.println(this.getSize().width);
+        System.out.println(this.getSize().height);
+        System.out.println(isVisible());
+
+        this.repaint();
+        System.out.println("Demande de repaint");
     }
 
+    @Override
+    public void paintComponent(Graphics g) {
+        System.out.println("effectué");
+        try {
+            this.image1 = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/CarteFond rouge.png"));
+        } catch (IOException ex) {
+            System.err.println("Erreur de lecture de" + "/src/Image/CarteFond rouge.png");
+        }
+
+        g.drawImage(image1, 0, 0, cartes);
+        g.drawImage(image1, 0, 0, 150, 210, null, cartes);
+    }
+
+    // Observe
     @Override
     public void addObservateur(Observateur o) {
         this.observateur = o;
@@ -354,6 +407,14 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         aventurier4.getTasJoueur().addCarte(carteTresor6);
         aventurier4.getTasJoueur().addCarte(carteTresor7);
         aventurier4.getTasJoueur().addCarte(carteTresor8);
+        aventurier4.getTasJoueur().addCarte(carteTresor6);
+        aventurier4.getTasJoueur().addCarte(carteTresor7);
+        aventurier4.getTasJoueur().addCarte(carteTresor8);
+        aventurier4.getTasJoueur().addCarte(carteTresor6);
+        aventurier4.getTasJoueur().addCarte(carteTresor7);
+        aventurier4.getTasJoueur().addCarte(carteTresor8);
+
+        aventurier1.getTasTirage().add(carteTresor6);
 
         HashMap<String, Aventurier> aventuriers = new HashMap<>();
         aventuriers.put(aventurier1.getNomJoueur(), aventurier1);
@@ -367,4 +428,5 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         ihm.afficherIhm();
         ihm.mettreAJour();
     }
+
 }

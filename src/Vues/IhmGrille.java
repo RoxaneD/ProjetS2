@@ -205,13 +205,11 @@ public class IhmGrille extends JPanel {
         listLabel.add(label35);
         listLabel.add(label36);
 
-        System.out.println("test1");
         repaint();
-
     }
 
+    @Override
     public void paintComponent(Graphics g) {
-        System.out.println("test2");
         int i = 0;
         int j = 0;
 

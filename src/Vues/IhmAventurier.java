@@ -244,8 +244,8 @@ public class IhmAventurier extends JPanel implements Observe {
                     for (Integer a : pos) {
                         if (a < 9) { // pour les cartes du tasJoueur
                             if (a + 1 == taille1) { // alors -> dernière carte
-                                if ((e.getX() > (160 + ((432 / taille1) * a))) && (e.getX() < (160 + ((432 / taille1) * a) + 150))) {
-                                    if ((e.getY() > (titre.getHeight() + 10)) && (e.getY() < (titre.getHeight() + 220))) {
+                                if ((e.getX() > 110 + ((432 / taille1) * a)) && (e.getX() < (110 + ((432 / taille1) * a) + 100))) {
+                                    if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
                                         Action action = new Action(TypesActions.utiliserCarte, aventurier.getTasJoueur().getCarte(a + 1));
                                         notifierObservateur(action);
                                         System.out.println("utiliser - dernière carte du tasJoueur");
@@ -253,16 +253,16 @@ public class IhmAventurier extends JPanel implements Observe {
                                 }
                             } else { // les autres cartes
                                 if (taille1 < 3) { // dans ce cas il y a un espace entre les différentes cartes
-                                    if ((e.getX() > (160 + ((432 / taille1) * a))) && (e.getX() < (160 + ((432 / taille1) * a) + 150))) {
-                                        if ((e.getY() > (titre.getHeight() + 10)) && (e.getY() < (titre.getHeight() + 220))) {
+                                    if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * a) + 100))) {
+                                        if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
                                             Action action = new Action(TypesActions.utiliserCarte, aventurier.getTasJoueur().getCarte(a + 1));
                                             notifierObservateur(action);
                                             System.out.println("utiliser - carte n°" + (a + 1) + " du tasJoueur");
                                         }
                                     }
                                 } else {
-                                    if ((e.getX() > (160 + ((432 / taille1) * a))) && (e.getX() < (160 + ((432 / taille1) * (a + 1))))) {
-                                        if ((e.getY() > (titre.getHeight() + 10)) && (e.getY() < (titre.getHeight() + 220))) {
+                                    if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * (a + 1))))) {
+                                        if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
                                             Action action = new Action(TypesActions.utiliserCarte, aventurier.getTasJoueur().getCarte(a + 1));
                                             notifierObservateur(action);
                                             System.out.println("utiliser - carte n°" + (a + 1) + " du tasJoueur");
@@ -273,8 +273,8 @@ public class IhmAventurier extends JPanel implements Observe {
                             }
                         } else { // pour les cartes tirages
                             if (a + 1 - 9 == taille2) { // alors -> dernière carte
-                                if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 150))) {
-                                    if ((e.getY() > (titre.getHeight() + 230)) && (e.getY() < (titre.getHeight() + 440))) {
+                                if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 100))) {
+                                    if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
                                         Action action = new Action(TypesActions.utiliserCarte, aventurier.getTasTirage().get(a - 9));
                                         notifierObservateur(action);
                                         System.out.println("utiliser - dernière carte du tasTirage");
@@ -283,8 +283,8 @@ public class IhmAventurier extends JPanel implements Observe {
                                 }
                             } else { // les autres cartes
                                 if (taille2 < 3) {
-                                    if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 150))) {
-                                        if ((e.getY() > (titre.getHeight() + 230)) && (e.getY() < (titre.getHeight() + 440))) {
+                                    if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 100))) {
+                                        if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
                                             Action action = new Action(TypesActions.utiliserCarte, aventurier.getTasTirage().get(a - 9));
                                             notifierObservateur(action);
                                             System.out.println("utiliser - carte n°" + (a - 8) + " du tasTirage");
@@ -292,7 +292,7 @@ public class IhmAventurier extends JPanel implements Observe {
                                     }
                                 } else {
                                     if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < ((400 / taille2) * (a - 8)))) {
-                                        if ((e.getY() > (titre.getHeight() + 230)) && (e.getY() < (titre.getHeight() + 440))) {
+                                        if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
                                             Action action = new Action(TypesActions.utiliserCarte, aventurier.getTasTirage().get(a - 9));
                                             notifierObservateur(action);
                                             System.out.println("utiliser - carte n°" + (a - 8) + " du tasTirage");
@@ -307,8 +307,8 @@ public class IhmAventurier extends JPanel implements Observe {
                     for (Integer a : pos) {
                         if (a < 9) { // pour les cartes du tasJoueur
                             if (a + 1 == taille1) { // alors -> dernière carte
-                                if ((e.getX() > (160 + ((432 / taille1) * a))) && (e.getX() < (160 + ((432 / taille1) * a) + 150))) {
-                                    if ((e.getY() > (titre.getHeight() + 10)) && (e.getY() < (titre.getHeight() + 220))) {
+                                if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (160 + ((432 / taille1) * a) + 100))) {
+                                    if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
                                         Action action = new Action(TypesActions.donCarte, aventurier.getTasJoueur().getCarte(a + 1));
                                         notifierObservateur(action);
                                         System.out.println("donner - dernière carte du tasJoueur");
@@ -316,16 +316,16 @@ public class IhmAventurier extends JPanel implements Observe {
                                 }
                             } else { // les autres cartes
                                 if (taille1 < 3) { // dans ce cas il y a un espace entre les différentes cartes
-                                    if ((e.getX() > (160 + ((432 / taille1) * a))) && (e.getX() < (160 + ((432 / taille1) * a) + 150))) {
-                                        if ((e.getY() > (titre.getHeight() + 10)) && (e.getY() < (titre.getHeight() + 220))) {
+                                    if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (160 + ((432 / taille1) * a) + 100))) {
+                                        if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
                                             Action action = new Action(TypesActions.donCarte, aventurier.getTasJoueur().getCarte(a + 1));
                                             notifierObservateur(action);
                                             System.out.println("donner - carte n°" + (a + 1) + " du tasJoueur");
                                         }
                                     }
                                 } else {
-                                    if ((e.getX() > (160 + ((432 / taille1) * a))) && (e.getX() < (160 + ((432 / taille1) * (a + 1))))) {
-                                        if ((e.getY() > (titre.getHeight() + 10)) && (e.getY() < (titre.getHeight() + 220))) {
+                                    if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (160 + ((432 / taille1) * (a + 1))))) {
+                                        if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
                                             Action action = new Action(TypesActions.donCarte, aventurier.getTasJoueur().getCarte(a + 1));
                                             notifierObservateur(action);
                                             System.out.println("donner - carte n°" + (a + 1) + " du tasJoueur");
@@ -336,8 +336,8 @@ public class IhmAventurier extends JPanel implements Observe {
                             }
                         } else { // pour les cartes tirages
                             if (a + 1 - 9 == taille2) { // alors -> dernière carte
-                                if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 150))) {
-                                    if ((e.getY() > (titre.getHeight() + 230)) && (e.getY() < (titre.getHeight() + 440))) {
+                                if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 100))) {
+                                    if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
                                         Action action = new Action(TypesActions.donCarte, aventurier.getTasTirage().get(a - 9));
                                         notifierObservateur(action);
                                         System.out.println("donner - dernière carte du tasTirage");
@@ -346,8 +346,8 @@ public class IhmAventurier extends JPanel implements Observe {
                                 }
                             } else { // les autres cartes
                                 if (taille2 < 3) {
-                                    if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 150))) {
-                                        if ((e.getY() > (titre.getHeight() + 230)) && (e.getY() < (titre.getHeight() + 440))) {
+                                    if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 100))) {
+                                        if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
                                             Action action = new Action(TypesActions.donCarte, aventurier.getTasTirage().get(a - 9));
                                             notifierObservateur(action);
                                             System.out.println("donner - carte n°" + (a - 8) + " du tasTirage");
@@ -355,7 +355,7 @@ public class IhmAventurier extends JPanel implements Observe {
                                     }
                                 } else {
                                     if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < ((400 / taille2) * (a - 8)))) {
-                                        if ((e.getY() > (titre.getHeight() + 230)) && (e.getY() < (titre.getHeight() + 440))) {
+                                        if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
                                             Action action = new Action(TypesActions.donCarte, aventurier.getTasTirage().get(a - 9));
                                             notifierObservateur(action);
                                             System.out.println("donner - carte n°" + (a - 8) + " du tasTirage");
@@ -370,8 +370,8 @@ public class IhmAventurier extends JPanel implements Observe {
                     for (Integer a : pos) {
                         if (a < 9) { // pour les cartes du tasJoueur
                             if (a + 1 == taille1) { // alors -> dernière carte
-                                if ((e.getX() > (160 + ((432 / taille1) * a))) && (e.getX() < (160 + ((432 / taille1) * a) + 150))) {
-                                    if ((e.getY() > (titre.getHeight() + 10)) && (e.getY() < (titre.getHeight() + 220))) {
+                                if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (160 + ((432 / taille1) * a) + 100))) {
+                                    if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
                                         Action action = new Action(TypesActions.defausserCarte, aventurier.getTasJoueur().getCarte(a + 1));
                                         notifierObservateur(action);
                                         System.out.println("defausser - dernière carte du tasJoueur");
@@ -379,16 +379,16 @@ public class IhmAventurier extends JPanel implements Observe {
                                 }
                             } else { // les autres cartes
                                 if (taille1 < 3) { // dans ce cas il y a un espace entre les différentes cartes
-                                    if ((e.getX() > (160 + ((432 / taille1) * a))) && (e.getX() < (160 + ((432 / taille1) * a) + 150))) {
-                                        if ((e.getY() > (titre.getHeight() + 10)) && (e.getY() < (titre.getHeight() + 220))) {
+                                    if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (160 + ((432 / taille1) * a) + 100))) {
+                                        if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
                                             Action action = new Action(TypesActions.defausserCarte, aventurier.getTasJoueur().getCarte(a + 1));
                                             notifierObservateur(action);
                                             System.out.println("defausser - carte n°" + (a + 1) + " du tasJoueur");
                                         }
                                     }
                                 } else {
-                                    if ((e.getX() > (160 + ((432 / taille1) * a))) && (e.getX() < (160 + ((432 / taille1) * (a + 1))))) {
-                                        if ((e.getY() > (titre.getHeight() + 10)) && (e.getY() < (titre.getHeight() + 220))) {
+                                    if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (160 + ((432 / taille1) * (a + 1))))) {
+                                        if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
                                             Action action = new Action(TypesActions.defausserCarte, aventurier.getTasJoueur().getCarte(a + 1));
                                             notifierObservateur(action);
                                             System.out.println("defausser - carte n°" + (a + 1) + " du tasJoueur");
@@ -399,8 +399,8 @@ public class IhmAventurier extends JPanel implements Observe {
                             }
                         } else { // pour les cartes tirages
                             if (a + 1 - 9 == taille2) { // alors -> dernière carte
-                                if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 150))) {
-                                    if ((e.getY() > (titre.getHeight() + 230)) && (e.getY() < (titre.getHeight() + 440))) {
+                                if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 100))) {
+                                    if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
                                         Action action = new Action(TypesActions.defausserCarte, aventurier.getTasTirage().get(a - 9));
                                         notifierObservateur(action);
                                         System.out.println("defausser - dernière carte du tasTirage");
@@ -409,8 +409,8 @@ public class IhmAventurier extends JPanel implements Observe {
                                 }
                             } else { // les autres cartes
                                 if (taille2 < 3) {
-                                    if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 150))) {
-                                        if ((e.getY() > (titre.getHeight() + 230)) && (e.getY() < (titre.getHeight() + 440))) {
+                                    if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 100))) {
+                                        if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
                                             Action action = new Action(TypesActions.defausserCarte, aventurier.getTasTirage().get(a - 9));
                                             notifierObservateur(action);
                                             System.out.println("defausser - carte n°" + (a - 8) + " du tasTirage");
@@ -418,7 +418,7 @@ public class IhmAventurier extends JPanel implements Observe {
                                     }
                                 } else {
                                     if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < ((400 / taille2) * (a - 8)))) {
-                                        if ((e.getY() > (titre.getHeight() + 230)) && (e.getY() < (titre.getHeight() + 440))) {
+                                        if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
                                             Action action = new Action(TypesActions.defausserCarte, aventurier.getTasTirage().get(a - 9));
                                             notifierObservateur(action);
                                             System.out.println("defausser - carte n°" + (a - 8) + " du tasTirage");
@@ -582,7 +582,7 @@ public class IhmAventurier extends JPanel implements Observe {
         JFrame window = new JFrame();
         window.setLocationRelativeTo(null);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setSize(660, 270);
+        window.setSize(660, 365);
 
         // Centrage de la fenêtre sur l'écran
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -662,9 +662,9 @@ public class IhmAventurier extends JPanel implements Observe {
          */
         // pour une ihm complete
         JPanel p = new JPanel(new BorderLayout());
-        p.setSize(700, 360);
+        p.setSize(700, 500);
         p.add(ihm, BorderLayout.CENTER);
-        ihm.afficherIhmReduite();
+        ihm.afficherIhmComplete();
         window.add(p);
         System.out.println(p.getSize().width);
         System.out.println(p.getSize().height);
