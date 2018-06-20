@@ -4,11 +4,13 @@ import Aventuriers.Aventurier;
 import Aventuriers.Pilote;
 import Aventuriers.Plongeur;
 import Cartes.CarteAventurier;
+import Cartes.CarteTresors;
 import Controle.Action;
 import Controle.Observateur;
 import ElementsJeu.Grille;
 import Enumerations.Couleur;
 import Enumerations.NomAventurier;
+import Enumerations.NomTresor;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -77,13 +79,14 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         }
         setIhmAventurierActuelle(ihmAventuriers.get(0));
         ihmGrille = new IhmGrille(grille);
-        ihmGrille.setVisible(true);
+        ihmGrille.setVisible(false);
 
         this.window = new JFrame("Île Interdite");
         window.setSize(dimension.width, dimension.height);
 
         window.setLayout(new BorderLayout());
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         mettreAJour();
     }
 
@@ -120,12 +123,21 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
 
     public void mettreAJour() {
         // on efface et recréé les composants
+        window.remove(panelPrincipal);
+
         panelPrincipal = new JPanel(new BorderLayout());
         panelDroit = new JPanel(new GridLayout(3, 1));   // pour l'ihm aventurier actuelle + les autres
-        panelAventurier = new JPanel();                                 // pour l'ihm aventurier actuelle
+        panelAventurier = new JPanel(new BorderLayout());                                 // pour l'ihm aventurier actuelle
 
         panelAventuriers1 = new JPanel(new GridLayout(3, 1));                               // pour les autres ihms aventurier
-        panelAventuriers2 = new JPanel(new GridLayout(3, 1));                              // pour les autres ihms aventurier
+        panelAventuriers2 = new JPanel(new GridLayout(3, 1)); // pour les autres ihms aventurier
+
+        panelAv11 = new JPanel(new BorderLayout());
+        panelAv12 = new JPanel(new BorderLayout());
+        panelAv13 = new JPanel(new BorderLayout());
+        panelAv21 = new JPanel(new BorderLayout());
+        panelAv22 = new JPanel(new BorderLayout());
+        panelAv23 = new JPanel(new BorderLayout());
 
         panelGauche = new JPanel(new BorderLayout());    // pour l'ihm grille + tas de carte + niveau d'eau
         eauEtCartes = new JPanel(new BorderLayout());    // dans panelGauche en bas
@@ -136,118 +148,142 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         panelPrincipal.setOpaque(false);
         panelDroit.setOpaque(false);
         panelAventurier.setOpaque(false);
-        panelAventuriers1.setOpaque(false);     
-        panelAventuriers2.setOpaque(false);      
-        panelGauche.setOpaque(false);        
+        panelAventuriers1.setOpaque(false);
+        panelAventuriers2.setOpaque(false);
+        panelGauche.setOpaque(false);
         eauEtCartes.setOpaque(false);
-        cartes.setOpaque(false);        
-        eau.setOpaque(false);        
-                
+        cartes.setOpaque(false);
+        eau.setOpaque(false);
+        panelAv11.setOpaque(false);
+        panelAv12.setOpaque(false);
+        panelAv13.setOpaque(false);
+        panelAv21.setOpaque(false);
+        panelAv22.setOpaque(false);
+        panelAv23.setOpaque(false);
+
         // panel droit
-        panelDroit.setPreferredSize(new Dimension((int) (dimension.width * 0.4), (int) (dimension.height)));
-
-        panelAventurier.setBorder(noir);
-
-        panelAventuriers1.setBorder(bleu);
-
-        panelAventuriers2.setBorder(rouge);
-
-        panelDroit.setBorder(jaune);
+        panelDroit.setPreferredSize(
+                new Dimension((int) (dimension.width * 0.4), (int) (dimension.height)));
         // pour les aventuriers
 
-        panelAventurier.add(ihmAventurier);
+        panelAventurier.add(ihmAventurier, BorderLayout.CENTER);
 
         ihmAventurier.afficherIhmComplete();
+        ihmAventurier.setBorder(noir);
+
         if (nombreJoueurs
                 == 2) {
             panelAventuriers1 = new JPanel(new GridLayout(3, 1));
-            panelAventuriers1.add(ihmAventuriers.get(1));
-            panelAventuriers1.add(new JLabel("a"));
-            panelAventuriers1.add(new JLabel("b"));
-            panelAventuriers2 = new JPanel(new GridLayout(3, 1));
-            panelAventuriers2.add(new JLabel("c"));
-            panelAventuriers2.add(new JLabel("d"));
-            panelAventuriers2.add(new JLabel("e"));
-
+            panelAv11.add(ihmAventuriers.get(1), BorderLayout.CENTER);
             ihmAventuriers.get(1).afficherIhmReduite();
+            ihmAventuriers.get(1).setBorder(noir);
+            panelAventuriers1.add(panelAv11);
+            panelAventuriers1.add(new JLabel(""));
+            panelAventuriers1.add(new JLabel(""));
+            panelAventuriers2 = new JPanel(new GridLayout(3, 1));
+            panelAventuriers2.add(new JLabel(""));
+            panelAventuriers2.add(new JLabel(""));
+            panelAventuriers2.add(new JLabel(""));
 
         } else if (nombreJoueurs
                 == 3) {
             panelAventuriers1 = new JPanel(new GridLayout(3, 1));
-            panelAventuriers1.add(ihmAventuriers.get(1));
-            panelAventuriers1.add(ihmAventuriers.get(2));
-            panelAventuriers1.add(new JLabel());
-            panelAventuriers2 = new JPanel(new GridLayout(3, 1));
-            panelAventuriers2.add(new JPanel());
-            panelAventuriers2.add(new JPanel());
-            panelAventuriers2.add(new JPanel());
-
+            panelAv11.add(ihmAventuriers.get(1), BorderLayout.CENTER);
+            panelAventuriers1.add(panelAv11);
             ihmAventuriers.get(1).afficherIhmReduite();
+            ihmAventuriers.get(1).setBorder(noir);
+            panelAv12.add(ihmAventuriers.get(2), BorderLayout.CENTER);
+            panelAventuriers1.add(panelAv12);
             ihmAventuriers.get(2).afficherIhmReduite();
+            ihmAventuriers.get(2).setBorder(noir);
+            panelAventuriers1.add(new JLabel(""));
+            panelAventuriers2 = new JPanel(new GridLayout(3, 1));
+            panelAventuriers2.add(new JLabel(""));
+            panelAventuriers2.add(new JLabel(""));
+            panelAventuriers2.add(new JLabel(""));
 
         } else if (nombreJoueurs
                 == 4) {
             panelAventuriers1 = new JPanel(new GridLayout(3, 1));
-            panelAventuriers1.add(ihmAventuriers.get(1));
-            panelAventuriers1.add(ihmAventuriers.get(2));
-            panelAventuriers1.add(ihmAventuriers.get(3));
-            panelAventuriers2 = new JPanel(new GridLayout(3, 1));
-            panelAventuriers2.add(new JPanel());
-            panelAventuriers2.add(new JPanel());
-            panelAventuriers2.add(new JPanel());
-
+            panelAv11.add(ihmAventuriers.get(1), BorderLayout.CENTER);
             ihmAventuriers.get(1).afficherIhmReduite();
+            ihmAventuriers.get(1).setBorder(noir);
+            panelAventuriers1.add(panelAv11);
+            panelAv12.add(ihmAventuriers.get(2), BorderLayout.CENTER);
             ihmAventuriers.get(2).afficherIhmReduite();
+            ihmAventuriers.get(2).setBorder(noir);
+            panelAventuriers1.add(panelAv12);
+            panelAv13.add(ihmAventuriers.get(3), BorderLayout.CENTER);
             ihmAventuriers.get(3).afficherIhmReduite();
+            ihmAventuriers.get(3).setBorder(noir);
+            panelAventuriers1.add(panelAv13);
+
+            panelAventuriers2 = new JPanel(new GridLayout(3, 1));
+            panelAventuriers2.add(new JLabel(""));
+            panelAventuriers2.add(new JLabel(""));
+            panelAventuriers2.add(new JLabel(""));
 
         } else if (nombreJoueurs
                 == 5) {
             panelAventuriers1 = new JPanel(new GridLayout(3, 1));
-            panelAventuriers1.add(ihmAventuriers.get(1));
-            panelAventuriers1.add(ihmAventuriers.get(2));
-            panelAventuriers1.add(ihmAventuriers.get(3));
-            panelAventuriers2 = new JPanel(new GridLayout(3, 1));
-            panelAventuriers2.add(ihmAventuriers.get(4));
-            panelAventuriers2.add(new JPanel());
-            panelAventuriers2.add(new JPanel());
-
+            panelAv11.add(ihmAventuriers.get(1), BorderLayout.CENTER);
             ihmAventuriers.get(1).afficherIhmReduite();
+            ihmAventuriers.get(1).setBorder(noir);
+            panelAventuriers1.add(panelAv11);
+            panelAv12.add(ihmAventuriers.get(2), BorderLayout.CENTER);
             ihmAventuriers.get(2).afficherIhmReduite();
+            ihmAventuriers.get(2).setBorder(noir);
+            panelAventuriers1.add(panelAv12);
+            panelAv13.add(ihmAventuriers.get(3), BorderLayout.CENTER);
             ihmAventuriers.get(3).afficherIhmReduite();
+            ihmAventuriers.get(3).setBorder(noir);
+            panelAventuriers1.add(panelAv13);
+            panelAventuriers2 = new JPanel(new GridLayout(3, 1));
+            panelAv21.add(ihmAventuriers.get(4), BorderLayout.CENTER);
             ihmAventuriers.get(4).afficherIhmReduite();
+            ihmAventuriers.get(4).setBorder(noir);
+            panelAventuriers2.add(panelAv21);
+
+            panelAventuriers2.add(new JLabel(""));
+            panelAventuriers2.add(new JLabel(""));
 
         } else if (nombreJoueurs
                 == 6) {
             panelAventuriers1 = new JPanel(new GridLayout(3, 1));
-            panelAventuriers1.add(ihmAventuriers.get(1));
-            panelAventuriers1.add(ihmAventuriers.get(2));
-            panelAventuriers1.add(ihmAventuriers.get(3));
-            panelAventuriers2 = new JPanel(new GridLayout(3, 1));
-            panelAventuriers2.add(ihmAventuriers.get(4));
-            panelAventuriers2.add(ihmAventuriers.get(5));
-            panelAventuriers2.add(new JPanel());
-
+            panelAv11.add(ihmAventuriers.get(1), BorderLayout.CENTER);
             ihmAventuriers.get(1).afficherIhmReduite();
+            ihmAventuriers.get(1).setBorder(noir);
+            panelAventuriers1.add(panelAv11);
+            panelAv12.add(ihmAventuriers.get(2), BorderLayout.CENTER);
             ihmAventuriers.get(2).afficherIhmReduite();
+            ihmAventuriers.get(2).setBorder(noir);
+            panelAventuriers1.add(panelAv12);
+            panelAv13.add(ihmAventuriers.get(3), BorderLayout.CENTER);
             ihmAventuriers.get(3).afficherIhmReduite();
+            ihmAventuriers.get(3).setBorder(noir);
+            panelAventuriers1.add(panelAv13);
+            panelAventuriers2 = new JPanel(new GridLayout(3, 1));
+            panelAv21.add(ihmAventuriers.get(4), BorderLayout.CENTER);
             ihmAventuriers.get(4).afficherIhmReduite();
+            ihmAventuriers.get(4).setBorder(noir);
+            panelAventuriers2.add(panelAv21);
+            panelAv22.add(ihmAventuriers.get(5), BorderLayout.CENTER);
             ihmAventuriers.get(5).afficherIhmReduite();
+            ihmAventuriers.get(5).setBorder(noir);
+            panelAventuriers2.add(panelAv22);
 
+            panelAventuriers2.add(new JLabel(""));
         }
 
         panelDroit.add(panelAventurier);
-
         panelDroit.add(panelAventuriers1);
-
         panelDroit.add(panelAventuriers2);
 
         // AJOUTER IHMAVENTURIERS EN DESSOUS
         panelPrincipal.add(panelDroit, BorderLayout.EAST);
 
         // panel gauche
-        panelGauche.setPreferredSize(
-                new Dimension((int) (dimension.width * 0.6), (int) (dimension.height)));
-        panelGauche.setBorder(vert);
+        panelGauche.setPreferredSize(new Dimension((int) (dimension.width * 0.6), (int) (dimension.height)));
 
         panelGauche.add(ihmGrille, BorderLayout.CENTER);
 
@@ -259,6 +295,22 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         // pour les tas de cartes
         // pour le niveau d'eau
         // réafficher l'ihm
+        panelPrincipal.setOpaque(false);
+        panelDroit.setOpaque(false);
+        panelAventurier.setOpaque(false);
+        panelAventuriers1.setOpaque(false);
+        panelAventuriers2.setOpaque(false);
+        panelGauche.setOpaque(false);
+        eauEtCartes.setOpaque(false);
+        cartes.setOpaque(false);
+        eau.setOpaque(false);
+        panelAv11.setOpaque(false);
+        panelAv12.setOpaque(false);
+        panelAv13.setOpaque(false);
+        panelAv21.setOpaque(false);
+        panelAv22.setOpaque(false);
+        panelAv23.setOpaque(false);
+
         afficherIhm();
     }
 
@@ -280,15 +332,37 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
 
         Plongeur aventurier1 = new Plongeur("Marie", carte1);
         Pilote aventurier2 = new Pilote("Roxane", carte2);
+        Pilote aventurier3 = new Pilote("Roxane2", carte2);
+        Pilote aventurier4 = new Pilote("Roxane3", carte2);
+        Pilote aventurier5 = new Pilote("Roxaned", carte2);
+        Pilote aventurier6 = new Pilote("mARIE2", carte2);
+
+        CarteTresors carteTresor6 = new CarteTresors(NomTresor.SacsDeSable);
+        CarteTresors carteTresor7 = new CarteTresors(NomTresor.Zephyr);
+        CarteTresors carteTresor8 = new CarteTresors(NomTresor.Cristal);
+        aventurier1.getTasJoueur().addCarte(carteTresor6);
+        aventurier1.getTasJoueur().addCarte(carteTresor7);
+        aventurier1.getTasJoueur().addCarte(carteTresor8);
+        aventurier2.getTasJoueur().addCarte(carteTresor6);
+        aventurier2.getTasJoueur().addCarte(carteTresor7);
+        aventurier2.getTasJoueur().addCarte(carteTresor8);
+        aventurier3.getTasJoueur().addCarte(carteTresor6);
+        aventurier3.getTasJoueur().addCarte(carteTresor7);
+        aventurier3.getTasJoueur().addCarte(carteTresor8);
+        aventurier4.getTasJoueur().addCarte(carteTresor6);
+        aventurier4.getTasJoueur().addCarte(carteTresor7);
+        aventurier4.getTasJoueur().addCarte(carteTresor8);
 
         HashMap<String, Aventurier> aventuriers = new HashMap<>();
         aventuriers.put(aventurier1.getNomJoueur(), aventurier1);
         aventuriers.put(aventurier2.getNomJoueur(), aventurier2);
+        aventuriers.put(aventurier3.getNomJoueur(), aventurier3);
+        aventuriers.put(aventurier4.getNomJoueur(), aventurier4);
+        aventuriers.put(aventurier5.getNomJoueur(), aventurier5);
+        aventuriers.put(aventurier6.getNomJoueur(), aventurier6);
 
         IhmPlateauDeJeu ihm = new IhmPlateauDeJeu(aventuriers, grille);
         ihm.afficherIhm();
-        ihm.mettreAJour();
-        ihm.mettreAJour();
         ihm.mettreAJour();
     }
 }

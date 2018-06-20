@@ -42,6 +42,13 @@ import javax.swing.border.Border;
 
 public class IhmAventurier extends JPanel implements Observe {
 
+    // BORDURES :D
+    private static Border noir = BorderFactory.createLineBorder(Color.black, 1);
+    private static Border bleu = BorderFactory.createLineBorder(Color.blue, 1);
+    private static Border vert = BorderFactory.createLineBorder(Color.green, 1);
+    private static Border rouge = BorderFactory.createLineBorder(Color.red, 1);
+    private static Border jaune = BorderFactory.createLineBorder(Color.yellow, 1);
+
     // doit contenir -> son tas de carte
     // sa couleur - sa classe (sa carte aventurier)
     // son nom
@@ -455,59 +462,58 @@ public class IhmAventurier extends JPanel implements Observe {
         Border rouge = BorderFactory.createLineBorder(Color.red, 1);
         Border jaune = BorderFactory.createLineBorder(Color.yellow, 1);
 
-        if (complete) {
-            titre.setOpaque(false);
-            panelCartesVisibles.setOpaque(false);
-            carteAventurier.setOpaque(false);
-            panelVisible.setOpaque(false);
-            panelInvisible.setOpaque(false);
-            panelCartesJoueur.setOpaque(false);
-            panelCartesTirages.setOpaque(false);
-            actions.setOpaque(false);
+        titre.setOpaque(false);
+        panelCartesVisibles.setOpaque(false);
+        carteAventurier.setOpaque(false);
+        panelVisible.setOpaque(false);
+        panelInvisible.setOpaque(false);
+        panelCartesJoueur.setOpaque(false);
+        panelCartesTirages.setOpaque(false);
+        actions.setOpaque(false);
 
-            carteAventurier.setSize(150, 210);
-            g.drawImage(imageCarteAventurier, 0, titre.getHeight() + 10, carteAventurier.getWidth(), carteAventurier.getHeight(), null, carteAventurier);
+        carteAventurier.setSize(100, 140); // 150,210
+        g.drawImage(imageCarteAventurier, 0, titre.getHeight() + 10, carteAventurier.getWidth(), carteAventurier.getHeight(), null, carteAventurier);
 
-            int taille = aventurier.getTasJoueur().getCartes().size();
-            panelCartesVisibles.setLayout(new GridLayout(1, taille));
-            int i1 = 0;
-            for (CarteTresors c : aventurier.getTasJoueur().getCartes()) {
+        int taille = aventurier.getTasJoueur().getCartes().size();
+        panelCartesVisibles.setLayout(new GridLayout(1, taille));
+        int i1 = 0;
+        for (CarteTresors c : aventurier.getTasJoueur().getCartes()) {
+            try {
+                this.imageV1 = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/Carte" + c.getNom().toString() + ".png"));
+            } catch (IOException ex) {
+                System.err.println("Erreur de lecture de" + "/src/Image/Carte" + c.getNom().toString() + ".png");
+            }
+            g.drawImage(imageV1, 110 + ((432 / taille) * i1), titre.getHeight() + 5, carteAventurier.getWidth(), carteAventurier.getHeight(), null, panelCartesVisibles);
+
+            i1 += 1;
+        }
+
+        taille = aventurier.getTasTirage().size();
+        panelCartesTirages.setLayout(new GridLayout(1, taille));
+        int i2 = 0;
+        for (Carte c : aventurier.getTasTirage()) {
+            if (c.getDescription() == "inondation") {
+                CarteInondation a = (CarteInondation) (c);
                 try {
-                    this.imageV1 = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/Carte" + c.getNom().toString() + ".png"));
+                    this.imageIV1 = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/Carte" + a.getNom().toString() + ".png"));
                 } catch (IOException ex) {
-                    System.err.println("Erreur de lecture de" + "/src/Image/Carte" + c.getNom().toString() + ".png");
+                    System.err.println("Erreur de lecture de" + "/src/Image/Carte" + a.getNom().toString() + ".png");
                 }
-                g.drawImage(imageV1, 160 + ((432 / taille) * i1), titre.getHeight() + 10, carteAventurier.getWidth(), carteAventurier.getHeight(), null, panelCartesVisibles);
-
-                i1 += 1;
+            } else {
+                CarteTresors a = (CarteTresors) (c);
+                try {
+                    this.imageIV1 = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/Carte" + a.getNom().toString() + ".png"));
+                } catch (IOException ex) {
+                    System.err.println("Erreur de lecture de" + "/src/Image/Carte" + a.getNom().toString() + ".png");
+                }
             }
 
-            taille = aventurier.getTasTirage().size();
-            panelCartesTirages.setLayout(new GridLayout(1, taille));
-            int i2 = 0;
-            for (Carte c : aventurier.getTasTirage()) {
-                if (c.getDescription() == "inondation") {
-                    CarteInondation a = (CarteInondation) (c);
-                    try {
-                        this.imageIV1 = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/Carte" + a.getNom().toString() + ".png"));
-                    } catch (IOException ex) {
-                        System.err.println("Erreur de lecture de" + "/src/Image/Carte" + a.getNom().toString() + ".png");
-                    }
-                } else {
-                    CarteTresors a = (CarteTresors) (c);
-                    try {
-                        this.imageIV1 = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/Carte" + a.getNom().toString() + ".png"));
-                    } catch (IOException ex) {
-                        System.err.println("Erreur de lecture de" + "/src/Image/Carte" + a.getNom().toString() + ".png");
-                    }
-                }
+            g.drawImage(imageIV1, ((400 / taille) * i2), titre.getHeight() + 160, carteAventurier.getWidth(), carteAventurier.getHeight(), null, panelCartesTirages);
 
-                g.drawImage(imageIV1, ((400 / taille) * i2), titre.getHeight() + 230, carteAventurier.getWidth(), carteAventurier.getHeight(), null, panelCartesTirages);
+            i2 += 1;
+        }
 
-                i2 += 1;
-            }
-
-        } else {
+        if (!complete) {
             titre.setOpaque(false);
             panelCartesVisibles.setOpaque(false);
             carteAventurier.setOpaque(false);
@@ -527,23 +533,6 @@ public class IhmAventurier extends JPanel implements Observe {
             recupererTresor.setVisible(false);
             terminer.setVisible(false);
 
-            carteAventurier.setSize(150, 210);
-            g.drawImage(imageCarteAventurier, 0, titre.getHeight() + 10, carteAventurier.getWidth(), carteAventurier.getHeight(), null, carteAventurier);
-
-            int taille = aventurier.getTasJoueur().getCartes().size();
-            panelCartesVisibles.setLayout(new GridLayout(1, taille));
-            int i1 = 0;
-            for (CarteTresors c : aventurier.getTasJoueur().getCartes()) {
-                try {
-                    this.imageV1 = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/Carte" + c.getNom().toString() + ".png"));
-                } catch (IOException ex) {
-                    System.err.println("Erreur de lecture de" + "/src/Image/Carte" + c.getNom().toString() + ".png");
-                }
-                g.drawImage(imageV1, 160 + ((432 / taille) * i1), titre.getHeight() + 10, carteAventurier.getWidth(), carteAventurier.getHeight(), null, panelCartesVisibles);
-
-                i1 += 1;
-            }
-
         }
     }
 
@@ -551,13 +540,13 @@ public class IhmAventurier extends JPanel implements Observe {
     public void setChoix(String choix) {
         this.choix = choix;
     }
-    
+
     // getteurs
-    public String getNomAventurier(){
+    public String getNomAventurier() {
         return aventurier.getNomJoueur();
     }
-    
-    public CarteAventurier getCarteAventurier(){
+
+    public CarteAventurier getCarteAventurier() {
         return aventurier.getCarteAventurier();
     }
 
@@ -593,7 +582,7 @@ public class IhmAventurier extends JPanel implements Observe {
         JFrame window = new JFrame();
         window.setLocationRelativeTo(null);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setSize(700, 550);
+        window.setSize(660, 270);
 
         // Centrage de la fenêtre sur l'écran
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -664,24 +653,23 @@ public class IhmAventurier extends JPanel implements Observe {
 
         // pour une ihm réduite
         /**
-        window.add(ihm); 
-        ihm.afficherIhmReduite(); 
-        ihm.repaint();
-        window.setPreferredSize(new Dimension(705,285));
-        window.setPreferredSize(new Dimension(700,285));
-        window.setSize(700,285); 
-        window.setVisible(true);
-        window.setEnabled(false);
-         **/
-        
-        
+         * window.add(ihm); ihm.afficherIhmReduite(); ihm.repaint();
+         * window.setPreferredSize(new Dimension(705,285));
+         * window.setPreferredSize(new Dimension(700,285));
+         * window.setSize(700,285); window.setVisible(true);
+         * window.setEnabled(false);
+         *
+         */
         // pour une ihm complete
-        
-        window.add(ihm);
-        System.out.println(window.size().width);
-        window.setSize(700, 510);
-        ihm.afficherIhmComplete();
+        JPanel p = new JPanel(new BorderLayout());
+        p.setSize(700, 360);
+        p.add(ihm, BorderLayout.CENTER);
+        ihm.afficherIhmReduite();
+        window.add(p);
+        System.out.println(p.getSize().width);
+        System.out.println(p.getSize().height);
+        p.setBorder(noir);
         window.setVisible(true);
-        
+
     }
 }
