@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package Jeu_Tests;
-/**
-import Aventuriers.Aventurier;
+
+/**import Aventuriers.Aventurier;
 import Aventuriers.Pilote;
 import Aventuriers.Plongeur;
 import Cartes.CarteAventurier;
@@ -79,5 +79,4 @@ public class TestIhmPlateauDeJeu {
         //    afficherInformation("Ceci est une information");
         //}
 //    }
-
 //}

@@ -1,6 +1,8 @@
 package Vues;
 
 import Aventuriers.Aventurier;
+import Controle.Action;
+import Controle.Observateur;
 import Demo.ImageContainerCalques;
 import ElementsJeu.Grille;
 import ElementsJeu.Tuile;
@@ -29,12 +31,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-public class IhmGrille extends JPanel {
+public class IhmGrille extends JPanel implements Observe {
 
     // doit contenir : les tuiles -> Pas de nom et de couleur, mais l'image associée (en fonction de asseché/innondé)
     //                            -> l'emplacement des trésors (image)
     //                            -> l'emplacement des aventuriers (pendant la partie)
     // 
+    private Observateur observateur;
+    
     private Grille grille;
     private ArrayList<Tuile> tuiles;
     private HashMap<Tuile, JButton> boutons = new HashMap<>();
@@ -47,16 +51,16 @@ public class IhmGrille extends JPanel {
     private ImageContainerCalques pionRouge;
     private ImageContainerCalques pionGris;
     private ImageContainerCalques pionNoir;
-    
+
     private ArrayList<JButton> listBouton = new ArrayList<>();
     private ArrayList<JLabel> listLabel = new ArrayList<>();
-    
+
     public IhmGrille(Grille grille) {
         setGrille(grille);
-        
+
         this.tuiles = grille.getTuiles();
         this.setLayout(new GridLayout(6, 6, 5, 5));
-        
+
         JButton bouton11 = new JButton();
         JButton bouton12 = new JButton();
         JButton bouton13 = new JButton();
@@ -93,7 +97,7 @@ public class IhmGrille extends JPanel {
         JButton bouton64 = new JButton();
         JButton bouton65 = new JButton();
         JButton bouton66 = new JButton();
-        
+
         listBouton.add(bouton11);
         listBouton.add(bouton12);
         listBouton.add(bouton13);
@@ -130,7 +134,7 @@ public class IhmGrille extends JPanel {
         listBouton.add(bouton64);
         listBouton.add(bouton65);
         listBouton.add(bouton66);
-        
+
         JLabel label1 = new JLabel();
         JLabel label2 = new JLabel();
         JLabel label3 = new JLabel();
@@ -167,7 +171,7 @@ public class IhmGrille extends JPanel {
         JLabel label34 = new JLabel();
         JLabel label35 = new JLabel();
         JLabel label36 = new JLabel();
-        
+
         listLabel.add(label1);
         listLabel.add(label2);
         listLabel.add(label3);
@@ -211,20 +215,20 @@ public class IhmGrille extends JPanel {
     public void paintComponent(Graphics g) {
         int i = 0;
         int j = 0;
-        
+
         for (Tuile tuile : tuiles) {
-            
+
             if (tuile.getEtat() == EtatTuile.inexistante) {
                 if (tuileInexistante.get(tuile) == null) {
                     tuileInexistante.put(tuile, listLabel.get(j));
                     this.add(listLabel.get(j));
                     j++;
                 }
-                
+
             } else if (tuile.getEtat() == EtatTuile.normal) {
                 imageTuile = new ImageContainerCalques(imgFolder + tuile.getNom().toString() + ".png", 0, 0, 100, 110);
                 if (boutons.put(tuile, listBouton.get(i)) == null) {
-                    
+
                     boutons.put(tuile, listBouton.get(i));
                     if (tuile.getEmplacementAventurier() != null) {
                         if (tuile.getEmplacementAventurier().getNom() == NomAventurier.explorateur) {
@@ -250,7 +254,7 @@ public class IhmGrille extends JPanel {
                     boutons.get(tuile).add(imageTuile);
                     this.add(boutons.get(tuile));
                 } else {
-                    
+
                     boutons.get(tuile).remove(imageTuile);
                     if (tuile.getEmplacementAventurier() != null) {
                         if (tuile.getEmplacementAventurier().getNom() == NomAventurier.explorateur) {
@@ -273,11 +277,11 @@ public class IhmGrille extends JPanel {
                             boutons.get(tuile).add(pionNoir);
                         }
                     }
-                    
+
                     boutons.get(tuile).add(imageTuile);
-                    
+
                 }
-                
+
             } else if (tuile.getEtat() == EtatTuile.inondee) {
                 imageTuile = new ImageContainerCalques(imgFolder + tuile.getNom().toString() + "_Inonde.png", 0, 0, 100, 110);
                 if (boutons.put(tuile, listBouton.get(i)) == null) {
@@ -329,32 +333,32 @@ public class IhmGrille extends JPanel {
                         }
                     }
                     boutons.get(tuile).add(imageTuile);
-                    
+
                 }
-                
+
             } else if (tuile.getEtat() == EtatTuile.submergee) {
                 if (boutons.get(tuile) == null) {
                     boutons.put(tuile, listBouton.get(i));
                     boutons.get(tuile).setOpaque(true);
                     boutons.get(tuile).setEnabled(false);
-                    boutons.get(tuile).setBorder(null);                    
+                    boutons.get(tuile).setBorder(null);
                     this.add(listBouton.get(i));
                 } else {
                     boutons.get(tuile).setOpaque(true);
                     boutons.get(tuile).setEnabled(false);
                     boutons.get(tuile).setBorder(null);
-                    
+
                 }
-            }            
+            }
             i++;
         }
-        
+
     }
-    
+
     public static void main(String[] args) {
-        
+
     }
-    
+
     public void afficherTuilesPossiblesDeplacement(ArrayList<Tuile> t2) {
         revenirGrilleDepart();  //Appel de la méthode pour réinitialiser la grille
         for (Tuile tuile : t2) {
@@ -363,7 +367,7 @@ public class IhmGrille extends JPanel {
             boutons.get(tuile).setEnabled(true);  //Rend les tuils actives
         }
     }
-    
+
     public void afficherTuilesPossiblesAssechement(ArrayList<Tuile> t2) {
         revenirGrilleDepart();  //Appel de la méthode pour réinitialiser la grille
         for (Tuile tuile : t2) {
@@ -372,16 +376,16 @@ public class IhmGrille extends JPanel {
             boutons.get(tuile).setEnabled(true);  //Rend les tuiles actives
         }
     }
-    
+
     public void afficherTuileActuelle(Tuile t) {
         boutons.get(t).setBackground(Color.black);  //Rend la tuile Noir
     }
-    
+
     public void revenirGrilleDepart() {
         int i = 0;
         int j = 0;
         for (Tuile tuile : tuiles) {
-            
+
             if (tuile.getEtat() != EtatTuile.inexistante) {  //Vérifie si l'état de la tuile est différent d'inexistant
                 if (boutons.put(tuile, listBouton.get(i)) == null) {
                     boutons.put(tuile, listBouton.get(i));
@@ -397,39 +401,39 @@ public class IhmGrille extends JPanel {
                     j++;
                 }
             }
-            
+
             if (tuile.getEtat() == EtatTuile.submergee) {  //Vérifie si l'état de la tuile correspond à submergé
                 if (boutons.get(tuile) == null) {
                     boutons.put(tuile, listBouton.get(i));
-                    
+
                 }
-                
+
             }
             i++;
         }
     }
-    
+
     //Getteur
     public Grille getGrille() {
         return grille;
     }
-    
+
     public ArrayList<Tuile> getTuiles() {
         return tuiles;
     }
-    
+
     public HashMap<Tuile, JButton> getBoutons() {
         return boutons;
     }
-    
+
     public HashMap<Tuile, JLabel> getTuileInexistante() {
         return tuileInexistante;
     }
-    
+
     public ArrayList<JButton> getListBouton() {
         return listBouton;
     }
-    
+
     public ArrayList<JLabel> getListLabel() {
         return listLabel;
     }
@@ -438,25 +442,35 @@ public class IhmGrille extends JPanel {
     public void setGrille(Grille grille) {
         this.grille = grille;
     }
-    
+
     public void setTuiles(ArrayList<Tuile> tuiles) {
         this.tuiles = tuiles;
     }
-    
+
     public void setBoutons(HashMap<Tuile, JButton> boutons) {
         this.boutons = boutons;
     }
-    
+
     public void setTuileInexistante(HashMap<Tuile, JLabel> tuileInexistante) {
         this.tuileInexistante = tuileInexistante;
     }
-    
+
     public void setListBouton(ArrayList<JButton> listBouton) {
         this.listBouton = listBouton;
     }
-    
+
     public void setListLabel(ArrayList<JLabel> listLabel) {
         this.listLabel = listLabel;
     }
-    
+
+    @Override
+    public void addObservateur(Observateur o) {
+        this.observateur = o;
+    }
+
+    @Override
+    public void notifierObservateur(Action action) {
+        observateur.traiterAction(action);
+    }
+
 }
