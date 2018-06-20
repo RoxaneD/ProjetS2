@@ -30,10 +30,6 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
 
     // BORDURES :D
     Border noir = BorderFactory.createLineBorder(Color.black, 1);
-    Border bleu = BorderFactory.createLineBorder(Color.blue, 1);
-    Border vert = BorderFactory.createLineBorder(Color.green, 1);
-    Border rouge = BorderFactory.createLineBorder(Color.red, 1);
-    Border jaune = BorderFactory.createLineBorder(Color.yellow, 1);
 
     // attributs internes
     private Observateur observateur;
@@ -330,7 +326,6 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         System.out.println(eauEtCartes.getSize().height);
         ihmTasDeCarte.setSize(443, 175);
         panelGauche.add(eauEtCartes, BorderLayout.CENTER);
-        eauEtCartes.setBorder(vert);
 
         panelPrincipal.add(panelGauche, BorderLayout.WEST);
 
