@@ -1,5 +1,6 @@
 package Vues;
 
+import Aventuriers.Aventurier;
 import Demo.ImageContainerCalques;
 import ElementsJeu.Grille;
 import ElementsJeu.Tuile;
@@ -15,8 +16,11 @@ import javax.swing.JFrame;
 import ElementsJeu.Grille;
 import ElementsJeu.Tuile;
 import Enumerations.EtatTuile;
+import Enumerations.NomAventurier;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.BorderFactory;
@@ -34,856 +38,372 @@ public class IhmGrille extends JPanel {
     private Grille grille;
     private ArrayList<Tuile> tuiles;
     private HashMap<Tuile, JButton> boutons = new HashMap<>();
+    private HashMap<Tuile, JLabel> tuileInexistante = new HashMap<>();
     private String imgFolder = System.getProperty("user.dir") + "/src/Image/";
-    private ImageContainerCalques LePontDesAbimes;
-    private ImageContainerCalques LaPorteDeBronze;
-    private ImageContainerCalques LaCaverneDesOmbres;
-    private ImageContainerCalques LaPorteDeFer;
-    private ImageContainerCalques LaPortedOr;
-    private ImageContainerCalques LesFalaisesDeLOubli;
-    private ImageContainerCalques LePalaisDeCorail;
-    private ImageContainerCalques LaPortedArgent;
-    private ImageContainerCalques LesDunesDeLillusion;
-    private ImageContainerCalques Heliport;
-    private ImageContainerCalques LaPorteDeCuivre;
-    private ImageContainerCalques LeJardinDesHurlements;
-    private ImageContainerCalques LaForetPourpre;
-    private ImageContainerCalques LeLagonPerdu;
-    private ImageContainerCalques LeMaraisBrumeux;
-    private ImageContainerCalques Observatoire;
-    private ImageContainerCalques LeRocherFantome;
-    private ImageContainerCalques LaCaverneDuBrasier;
-    private ImageContainerCalques LeTempleDuSoleil;
-    private ImageContainerCalques LeTempleDeLaLune;
-    private ImageContainerCalques LePalaisDesMarees;
-    private ImageContainerCalques LeValDuCrepuscule;
-    private ImageContainerCalques LaTourDuGuet;
-    private ImageContainerCalques LeJardinDesMurmures;
+    private ImageContainerCalques imageTuile;
+    private ImageContainerCalques pionBleu;
+    private ImageContainerCalques pionVert;
+    private ImageContainerCalques pionJaune;
+    private ImageContainerCalques pionRouge;
+    private ImageContainerCalques pionGris;
+    private ImageContainerCalques pionNoir;
+
+    private ArrayList<JButton> listBouton = new ArrayList<>();
+    private ArrayList<JLabel> listLabel = new ArrayList<>();
 
     public IhmGrille(Grille grille) {
         setGrille(grille);
+
         this.tuiles = grille.getTuiles();
         this.setLayout(new GridLayout(6, 6, 5, 5));
+
+        JButton bouton11 = new JButton();
+        JButton bouton12 = new JButton();
+        JButton bouton13 = new JButton();
+        JButton bouton14 = new JButton();
+        JButton bouton15 = new JButton();
+        JButton bouton16 = new JButton();
+        JButton bouton21 = new JButton();
+        JButton bouton22 = new JButton();
+        JButton bouton23 = new JButton();
+        JButton bouton24 = new JButton();
+        JButton bouton25 = new JButton();
+        JButton bouton26 = new JButton();
+        JButton bouton31 = new JButton();
+        JButton bouton32 = new JButton();
+        JButton bouton33 = new JButton();
+        JButton bouton34 = new JButton();
+        JButton bouton35 = new JButton();
+        JButton bouton36 = new JButton();
+        JButton bouton41 = new JButton();
+        JButton bouton42 = new JButton();
+        JButton bouton43 = new JButton();
+        JButton bouton44 = new JButton();
+        JButton bouton45 = new JButton();
+        JButton bouton46 = new JButton();
+        JButton bouton51 = new JButton();
+        JButton bouton52 = new JButton();
+        JButton bouton53 = new JButton();
+        JButton bouton54 = new JButton();
+        JButton bouton55 = new JButton();
+        JButton bouton56 = new JButton();
+        JButton bouton61 = new JButton();
+        JButton bouton62 = new JButton();
+        JButton bouton63 = new JButton();
+        JButton bouton64 = new JButton();
+        JButton bouton65 = new JButton();
+        JButton bouton66 = new JButton();
+
+        listBouton.add(bouton11);
+        listBouton.add(bouton12);
+        listBouton.add(bouton13);
+        listBouton.add(bouton14);
+        listBouton.add(bouton15);
+        listBouton.add(bouton16);
+        listBouton.add(bouton21);
+        listBouton.add(bouton22);
+        listBouton.add(bouton23);
+        listBouton.add(bouton24);
+        listBouton.add(bouton25);
+        listBouton.add(bouton26);
+        listBouton.add(bouton31);
+        listBouton.add(bouton32);
+        listBouton.add(bouton33);
+        listBouton.add(bouton34);
+        listBouton.add(bouton35);
+        listBouton.add(bouton36);
+        listBouton.add(bouton41);
+        listBouton.add(bouton42);
+        listBouton.add(bouton43);
+        listBouton.add(bouton44);
+        listBouton.add(bouton45);
+        listBouton.add(bouton46);
+        listBouton.add(bouton51);
+        listBouton.add(bouton52);
+        listBouton.add(bouton53);
+        listBouton.add(bouton54);
+        listBouton.add(bouton55);
+        listBouton.add(bouton56);
+        listBouton.add(bouton61);
+        listBouton.add(bouton62);
+        listBouton.add(bouton63);
+        listBouton.add(bouton64);
+        listBouton.add(bouton65);
+        listBouton.add(bouton66);
+
+        JLabel label1 = new JLabel();
+        JLabel label2 = new JLabel();
+        JLabel label3 = new JLabel();
+        JLabel label4 = new JLabel();
+        JLabel label5 = new JLabel();
+        JLabel label6 = new JLabel();
+        JLabel label7 = new JLabel();
+        JLabel label8 = new JLabel();
+        JLabel label9 = new JLabel();
+        JLabel label10 = new JLabel();
+        JLabel label11 = new JLabel();
+        JLabel label12 = new JLabel();
+        JLabel label13 = new JLabel();
+        JLabel label14 = new JLabel();
+        JLabel label15 = new JLabel();
+        JLabel label16 = new JLabel();
+        JLabel label17 = new JLabel();
+        JLabel label18 = new JLabel();
+        JLabel label19 = new JLabel();
+        JLabel label20 = new JLabel();
+        JLabel label21 = new JLabel();
+        JLabel label22 = new JLabel();
+        JLabel label23 = new JLabel();
+        JLabel label24 = new JLabel();
+        JLabel label25 = new JLabel();
+        JLabel label26 = new JLabel();
+        JLabel label27 = new JLabel();
+        JLabel label28 = new JLabel();
+        JLabel label29 = new JLabel();
+        JLabel label30 = new JLabel();
+        JLabel label31 = new JLabel();
+        JLabel label32 = new JLabel();
+        JLabel label33 = new JLabel();
+        JLabel label34 = new JLabel();
+        JLabel label35 = new JLabel();
+        JLabel label36 = new JLabel();
+
+        listLabel.add(label1);
+        listLabel.add(label2);
+        listLabel.add(label3);
+        listLabel.add(label4);
+        listLabel.add(label5);
+        listLabel.add(label6);
+        listLabel.add(label7);
+        listLabel.add(label8);
+        listLabel.add(label9);
+        listLabel.add(label10);
+        listLabel.add(label11);
+        listLabel.add(label12);
+        listLabel.add(label13);
+        listLabel.add(label14);
+        listLabel.add(label15);
+        listLabel.add(label16);
+        listLabel.add(label17);
+        listLabel.add(label18);
+        listLabel.add(label19);
+        listLabel.add(label20);
+        listLabel.add(label21);
+        listLabel.add(label22);
+        listLabel.add(label23);
+        listLabel.add(label24);
+        listLabel.add(label25);
+        listLabel.add(label26);
+        listLabel.add(label27);
+        listLabel.add(label28);
+        listLabel.add(label29);
+        listLabel.add(label30);
+        listLabel.add(label31);
+        listLabel.add(label32);
+        listLabel.add(label33);
+        listLabel.add(label34);
+        listLabel.add(label35);
+        listLabel.add(label36);
+
         System.out.println("test1");
-        for (Tuile tuile : tuiles) {
-            if (tuile.getNom() == null) {
-                this.add(new JLabel(""));
-            } else if (tuile.getNom() == NomTuile.LePontDesAbimes) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LePontDesAbimes = new ImageContainerCalques(imgFolder + "LePontDesAbimes.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LePontDesAbimes);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LePontDesAbimes = new ImageContainerCalques(imgFolder + "LePontDesAbimes_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LePontDesAbimes);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
+        repaint();
 
-            } else if (tuile.getNom() == NomTuile.Heliport) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    Heliport = new ImageContainerCalques(imgFolder + "Heliport.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(Heliport);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    Heliport = new ImageContainerCalques(imgFolder + "Heliport_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(Heliport);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
-
-            } else if (tuile.getNom() == NomTuile.LaCaverneDesOmbres) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LaCaverneDesOmbres = new ImageContainerCalques(imgFolder + "LaCaverneDesOmbres.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LaCaverneDesOmbres);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LaCaverneDesOmbres = new ImageContainerCalques(imgFolder + "LaCaverneDesOmbres_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LaCaverneDesOmbres);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
-
-            } else if (tuile.getNom() == NomTuile.LaCaverneDuBrasier) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LaCaverneDuBrasier = new ImageContainerCalques(imgFolder + "LaCaverneDuBrasier.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LaCaverneDuBrasier);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LaCaverneDuBrasier = new ImageContainerCalques(imgFolder + "LaCaverneDuBrasier_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LaCaverneDuBrasier);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
-
-            } else if (tuile.getNom() == NomTuile.LaForetPourpre) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LaForetPourpre = new ImageContainerCalques(imgFolder + "LaForetPourpre.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LaForetPourpre);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LaForetPourpre = new ImageContainerCalques(imgFolder + "LaForetPourpre_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LaForetPourpre);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
-
-            } else if (tuile.getNom() == NomTuile.LaPorteDeBronze) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LaPorteDeBronze = new ImageContainerCalques(imgFolder + "LaPorteDeBronze.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LaPorteDeBronze);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LaPorteDeBronze = new ImageContainerCalques(imgFolder + "LaPorteDeBronze_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LaPorteDeBronze);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
-
-            } else if (tuile.getNom() == NomTuile.LaPorteDeCuivre) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LaPorteDeCuivre = new ImageContainerCalques(imgFolder + "LaPorteDeCuivre.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LaPorteDeCuivre);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LaPorteDeCuivre = new ImageContainerCalques(imgFolder + "LaPorteDeCuivre_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LaPorteDeCuivre);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
-
-            } else if (tuile.getNom() == NomTuile.LaPorteDeFer) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LaPorteDeFer = new ImageContainerCalques(imgFolder + "LaPorteDeFer.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LaPorteDeFer);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LaPorteDeFer = new ImageContainerCalques(imgFolder + "LaPorteDeFer_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LaPorteDeFer);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
-
-            } else if (tuile.getNom() == NomTuile.LaPortedArgent) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LaPortedArgent = new ImageContainerCalques(imgFolder + "LaPortedArgent.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LaPortedArgent);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LaPortedArgent = new ImageContainerCalques(imgFolder + "LaPortedArgent_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LaPortedArgent);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
-
-            } else if (tuile.getNom() == NomTuile.LaPortedOr) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LaPortedOr = new ImageContainerCalques(imgFolder + "LaPortedOr.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LaPortedOr);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LaPortedOr = new ImageContainerCalques(imgFolder + "LaPortedOr_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LaPortedOr);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
-
-            } else if (tuile.getNom() == NomTuile.LaTourDuGuet) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LaTourDuGuet = new ImageContainerCalques(imgFolder + "LaTourDuGuet.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LaTourDuGuet);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LaTourDuGuet = new ImageContainerCalques(imgFolder + "LaTourDuGuet_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LaTourDuGuet);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
-
-            } else if (tuile.getNom() == NomTuile.LeJardinDesHurlements) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LeJardinDesHurlements = new ImageContainerCalques(imgFolder + "LeJardinDesHurlements.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LeJardinDesHurlements);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LeJardinDesHurlements = new ImageContainerCalques(imgFolder + "LeJardinDesHurlements_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LeJardinDesHurlements);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
-
-            } else if (tuile.getNom() == NomTuile.LeJardinDesMurmures) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LeJardinDesMurmures = new ImageContainerCalques(imgFolder + "LeJardinDesMurmures.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LeJardinDesMurmures);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LeJardinDesMurmures = new ImageContainerCalques(imgFolder + "LeJardinDesMurmures_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LeJardinDesMurmures);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
-
-            } else if (tuile.getNom() == NomTuile.LeLagonPerdu) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LeLagonPerdu = new ImageContainerCalques(imgFolder + "LeLagonPerdu.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LeLagonPerdu);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LeLagonPerdu = new ImageContainerCalques(imgFolder + "LeLagonPerdu_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LeLagonPerdu);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
-
-            } else if (tuile.getNom() == NomTuile.LeMaraisBrumeux) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LeMaraisBrumeux = new ImageContainerCalques(imgFolder + "LeMaraisBrumeux.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LeMaraisBrumeux);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LeMaraisBrumeux = new ImageContainerCalques(imgFolder + "LeMaraisBrumeux_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LeMaraisBrumeux);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
-
-            } else if (tuile.getNom() == NomTuile.LePalaisDeCorail) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LePalaisDeCorail = new ImageContainerCalques(imgFolder + "LePalaisDeCorail.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LePalaisDeCorail);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LePalaisDeCorail = new ImageContainerCalques(imgFolder + "LePalaisDeCorail_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LePalaisDeCorail);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
-
-            } else if (tuile.getNom() == NomTuile.LePalaisDesMarees) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LePalaisDesMarees = new ImageContainerCalques(imgFolder + "LePalaisDesMarees.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LePalaisDesMarees);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LePalaisDesMarees = new ImageContainerCalques(imgFolder + "LePalaisDesMarees_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LePalaisDesMarees);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
-
-            } else if (tuile.getNom() == NomTuile.LeRocherFantome) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LeRocherFantome = new ImageContainerCalques(imgFolder + "LeRocherFantome.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LeRocherFantome);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LeRocherFantome = new ImageContainerCalques(imgFolder + "LeRocherFantome_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LeRocherFantome);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
-
-            } else if (tuile.getNom() == NomTuile.LeTempleDeLaLune) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LeTempleDeLaLune = new ImageContainerCalques(imgFolder + "LeTempleDeLaLune.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LeTempleDeLaLune);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LeTempleDeLaLune = new ImageContainerCalques(imgFolder + "LeTempleDeLaLune_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LeTempleDeLaLune);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
-
-            } else if (tuile.getNom() == NomTuile.LeTempleDuSoleil) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LeTempleDuSoleil = new ImageContainerCalques(imgFolder + "LeTempleDuSoleil.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LeTempleDuSoleil);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LeTempleDuSoleil = new ImageContainerCalques(imgFolder + "LeTempleDuSoleil_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LeTempleDuSoleil);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
-
-            } else if (tuile.getNom() == NomTuile.LeValDuCrepuscule) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LeValDuCrepuscule = new ImageContainerCalques(imgFolder + "LeValDuCrepuscule.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LeValDuCrepuscule);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LeValDuCrepuscule = new ImageContainerCalques(imgFolder + "LeValDuCrepuscule_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LeValDuCrepuscule);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
-
-            } else if (tuile.getNom() == NomTuile.LesDunesDeLillusion) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LesDunesDeLillusion = new ImageContainerCalques(imgFolder + "LesDunesDeLillusion.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LesDunesDeLillusion);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LesDunesDeLillusion = new ImageContainerCalques(imgFolder + "LesDunesDeLillusion_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LesDunesDeLillusion);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
-
-            } else if (tuile.getNom() == NomTuile.LesFalaisesDeLOubli) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LesFalaisesDeLOubli = new ImageContainerCalques(imgFolder + "LesFalaisesDeLOubli.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LesFalaisesDeLOubli);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LesFalaisesDeLOubli = new ImageContainerCalques(imgFolder + "LesFalaisesDeLOubli_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(LesFalaisesDeLOubli);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
-
-            } else if (tuile.getNom() == NomTuile.Observatoire) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    Observatoire = new ImageContainerCalques(imgFolder + "Observatoire.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(Observatoire);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    Observatoire = new ImageContainerCalques(imgFolder + "Observatoire_Inonde.png", 0, 0, 160, 140);
-                    boutons.put(tuile, new JButton());
-                    boutons.get(tuile).add(Observatoire);
-                    this.add(boutons.get(tuile));
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    this.add(new JLabel(""));
-                }
-            }
-        }
     }
 
     public void paintComponent(Graphics g) {
         System.out.println("test2");
+        int i = 0;
+        int j = 0;
 
         for (Tuile tuile : tuiles) {
-            if (tuile.getNom() == null) {
-                this.add(new JLabel(""));
-            } else if (tuile.getNom() == NomTuile.LePontDesAbimes) {
 
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LePontDesAbimes = new ImageContainerCalques(imgFolder + "LePontDesAbimes.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(LePontDesAbimes);
-                    boutons.get(tuile).add(LePontDesAbimes);
-                   
-                    
+            if (tuile.getEtat() == EtatTuile.inexistante) {
+                if (tuileInexistante.get(tuile) == null) {
+                    tuileInexistante.put(tuile, listLabel.get(j));
+                    this.add(listLabel.get(j));
+                    j++;
+                }
 
-                   /* this.remove(boutons.get(tuile));
-                    this.add(boutons.get(tuile));*/
+            } else if (tuile.getEtat() == EtatTuile.normal) {
+                imageTuile = new ImageContainerCalques(imgFolder + tuile.getNom().toString() + ".png", 0, 0, 100, 110);
+                if (boutons.put(tuile, listBouton.get(i)) == null) {
 
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LePontDesAbimes = new ImageContainerCalques(imgFolder + "LePontDesAbimes_Inonde.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(LePontDesAbimes);
-                    boutons.get(tuile).add(LePontDesAbimes);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        //this.add(new JLabel(""));
+                    boutons.put(tuile, listBouton.get(i));
+                    if (tuile.getEmplacementAventurier() != null) {
+                        if (tuile.getEmplacementAventurier().getNom() == NomAventurier.explorateur) {
+                            pionVert = new ImageContainerCalques(imgFolder + "pionVert.png", 0, 0, 30, 30);
+                            boutons.get(tuile).add(pionVert);
+                        } else if (tuile.getEmplacementAventurier().getNom() == NomAventurier.ingenieur) {
+                            pionRouge = new ImageContainerCalques(imgFolder + "pionRouge.png", 0, 70, 30, 30);
+                            boutons.get(tuile).add(pionRouge);
+                        } else if (tuile.getEmplacementAventurier().getNom() == NomAventurier.messager) {
+                            pionGris = new ImageContainerCalques(imgFolder + "pionGris.png", 70, 0, 30, 30);
+                            boutons.get(tuile).add(pionGris);
+                        } else if (tuile.getEmplacementAventurier().getNom() == NomAventurier.navigateur) {
+                            pionJaune = new ImageContainerCalques(imgFolder + "pionJaune.png", 70, 70, 30, 30);
+                            boutons.get(tuile).add(pionJaune);
+                        } else if (tuile.getEmplacementAventurier().getNom() == NomAventurier.pilote) {
+                            pionBleu = new ImageContainerCalques(imgFolder + "pionBleu.png", 0, 35, 30, 30);
+                            boutons.get(tuile).add(pionBleu);
+                        } else if (tuile.getEmplacementAventurier().getNom() == NomAventurier.plongeur) {
+                            pionNoir = new ImageContainerCalques(imgFolder + "pionNoir.png", 70, 35, 30, 30);
+                            boutons.get(tuile).add(pionNoir);
+                        }
                     }
+                    boutons.get(tuile).add(imageTuile);
+                    this.add(boutons.get(tuile));
+                } else {
 
-                }
-            } else if (tuile.getNom() == NomTuile.Heliport) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    Heliport = new ImageContainerCalques(imgFolder + "Heliport.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(Heliport);
-                    boutons.get(tuile).add(Heliport);
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    Heliport = new ImageContainerCalques(imgFolder + "Heliport_Inonde.png", 0, 0, 160, 140);
-                   boutons.get(tuile).remove(Heliport);
-                    boutons.get(tuile).add(Heliport);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        // this.add(new JLabel(""));
-                    }//this.remove(boutons.get(tuile));
-                }
-            } else if (tuile.getNom() == NomTuile.LaCaverneDesOmbres) {
-
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LaCaverneDesOmbres = new ImageContainerCalques(imgFolder + "LaCaverneDesOmbres.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(LaCaverneDesOmbres);
-                    boutons.get(tuile).add(LaCaverneDesOmbres);
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LaCaverneDesOmbres = new ImageContainerCalques(imgFolder + "LaCaverneDesOmbres_Inonde.png", 0, 0, 160, 140);
-                   boutons.get(tuile).remove(LaCaverneDesOmbres);
-                    boutons.get(tuile).add(LaCaverneDesOmbres);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    //this.remove(boutons.get(tuile));
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        // this.add(new JLabel(""));
-                    }
-                }
-            } else if (tuile.getNom() == NomTuile.LaCaverneDuBrasier) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LaCaverneDuBrasier = new ImageContainerCalques(imgFolder + "LaCaverneDuBrasier.png", 0, 0, 160, 140);
-                   boutons.get(tuile).remove(LaCaverneDuBrasier);
-                    boutons.get(tuile).add(LaCaverneDuBrasier);
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LaCaverneDuBrasier = new ImageContainerCalques(imgFolder + "LaCaverneDuBrasier_Inonde.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(LaCaverneDuBrasier);
-                    boutons.get(tuile).add(LaCaverneDuBrasier);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        // this.add(new JLabel(""));
-                    }
-                }
-            } else if (tuile.getNom() == NomTuile.LaForetPourpre) {
-
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LaForetPourpre = new ImageContainerCalques(imgFolder + "LaForetPourpre.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(LaForetPourpre);
-                    boutons.get(tuile).add(LaForetPourpre);
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LaForetPourpre = new ImageContainerCalques(imgFolder + "LaForetPourpre_Inonde.png", 0, 0, 160, 140);
-                   boutons.get(tuile).remove(LaForetPourpre);
-                    boutons.get(tuile).add(LaForetPourpre);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        // this.add(new JLabel(""));
+                    boutons.get(tuile).remove(imageTuile);
+                    if (tuile.getEmplacementAventurier() != null) {
+                        if (tuile.getEmplacementAventurier().getNom() == NomAventurier.explorateur) {
+                            pionVert = new ImageContainerCalques(imgFolder + "pionVert.png", 0, 0, 30, 30);
+                            boutons.get(tuile).add(pionVert);
+                        } else if (tuile.getEmplacementAventurier().getNom() == NomAventurier.ingenieur) {
+                            pionRouge = new ImageContainerCalques(imgFolder + "pionRouge.png", 0, 70, 30, 30);
+                            boutons.get(tuile).add(pionRouge);
+                        } else if (tuile.getEmplacementAventurier().getNom() == NomAventurier.messager) {
+                            pionGris = new ImageContainerCalques(imgFolder + "pionGris.png", 70, 0, 30, 30);
+                            boutons.get(tuile).add(pionGris);
+                        } else if (tuile.getEmplacementAventurier().getNom() == NomAventurier.navigateur) {
+                            pionJaune = new ImageContainerCalques(imgFolder + "pionJaune.png", 70, 70, 30, 30);
+                            boutons.get(tuile).add(pionJaune);
+                        } else if (tuile.getEmplacementAventurier().getNom() == NomAventurier.pilote) {
+                            pionBleu = new ImageContainerCalques(imgFolder + "pionBleu.png", 0, 35, 30, 30);
+                            boutons.get(tuile).add(pionBleu);
+                        } else if (tuile.getEmplacementAventurier().getNom() == NomAventurier.plongeur) {
+                            pionNoir = new ImageContainerCalques(imgFolder + "pionNoir.png", 35, 0, 30, 30);
+                            boutons.get(tuile).add(pionNoir);
+                        }
                     }
 
-                }
-            } else if (tuile.getNom() == NomTuile.LaPorteDeBronze) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LaPorteDeBronze = new ImageContainerCalques(imgFolder + "LaPorteDeBronze.png", 0, 0, 160, 140);
-                   boutons.get(tuile).remove(LaPorteDeBronze);
-                    boutons.get(tuile).add(LaPorteDeBronze);
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LaPorteDeBronze = new ImageContainerCalques(imgFolder + "LaPorteDeBronze_Inonde.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(LaPorteDeBronze);
-                    boutons.get(tuile).add(LaPorteDeBronze);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    // this.remove(boutons.get(tuile));
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        // this.add(new JLabel(""));
-                    }
-                }
-            } else if (tuile.getNom() == NomTuile.LaPorteDeCuivre) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LaPorteDeCuivre = new ImageContainerCalques(imgFolder + "LaPorteDeCuivre.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(LaPorteDeCuivre);
-                    boutons.get(tuile).add(LaPorteDeCuivre);
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LaPorteDeCuivre = new ImageContainerCalques(imgFolder + "LaPorteDeCuivre_Inonde.png", 0, 0, 160, 140);
-                   boutons.get(tuile).remove(LaPorteDeCuivre);
-                    boutons.get(tuile).add(LaPorteDeCuivre);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    //this.remove(boutons.get(tuile));
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        // this.add(new JLabel(""));
-                    }
-                }
-            } else if (tuile.getNom() == NomTuile.LaPorteDeFer) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LaPorteDeFer = new ImageContainerCalques(imgFolder + "LaPorteDeFer.png", 0, 0, 160, 140);
-                   boutons.get(tuile).remove(LaPorteDeFer);
-                    boutons.get(tuile).add(LaPorteDeFer);
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LaPorteDeFer = new ImageContainerCalques(imgFolder + "LaPorteDeFer_Inonde.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(LaPorteDeFer);
-                    boutons.get(tuile).add(LaPorteDeFer);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    // this.remove(boutons.get(tuile));
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        // this.add(new JLabel(""));
-                    }
-                }
-            } else if (tuile.getNom() == NomTuile.LaPortedArgent) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LaPortedArgent = new ImageContainerCalques(imgFolder + "LaPortedArgent.png", 0, 0, 160, 140);
-                   boutons.get(tuile).remove(LaPortedArgent);
-                    boutons.get(tuile).add(LaPortedArgent);
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LaPortedArgent = new ImageContainerCalques(imgFolder + "LaPortedArgent_Inonde.png", 0, 0, 160, 140);
-                   boutons.get(tuile).remove(LaPortedArgent);
-                    boutons.get(tuile).add(LaPortedArgent);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    // this.remove(boutons.get(tuile));
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        // this.add(new JLabel(""));
-                    }
-                }
-            } else if (tuile.getNom() == NomTuile.LaPortedOr) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LaPortedOr = new ImageContainerCalques(imgFolder + "LaPortedOr.png", 0, 0, 160, 140);
-                   boutons.get(tuile).remove(LaPortedOr);
-                    boutons.get(tuile).add(LaPortedOr);
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LaPortedOr = new ImageContainerCalques(imgFolder + "LaPortedOr_Inonde.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(LaPortedOr);
-                    boutons.get(tuile).add(LaPortedOr);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    //  this.remove(boutons.get(tuile));
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        //this.add(new JLabel(""));
-                    }
+                    boutons.get(tuile).add(imageTuile);
 
                 }
-            } else if (tuile.getNom() == NomTuile.LaTourDuGuet) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LaTourDuGuet = new ImageContainerCalques(imgFolder + "LaTourDuGuet.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(LaTourDuGuet);
-                    boutons.get(tuile).add(LaTourDuGuet);
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LaTourDuGuet = new ImageContainerCalques(imgFolder + "LaTourDuGuet_Inonde.png", 0, 0, 160, 140);
-                   boutons.get(tuile).remove(LaTourDuGuet);
-                    boutons.get(tuile).add(LaTourDuGuet);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        //this.add(new JLabel(""));
+
+            } else if (tuile.getEtat() == EtatTuile.inondee) {
+                imageTuile = new ImageContainerCalques(imgFolder + tuile.getNom().toString() + "_Inonde.png", 0, 0, 100, 110);
+                if (boutons.put(tuile, listBouton.get(i)) == null) {
+                    boutons.put(tuile, listBouton.get(i));
+                    if (tuile.getEmplacementAventurier() != null) {
+                        if (tuile.getEmplacementAventurier().getNom() == NomAventurier.explorateur) {
+                            pionVert = new ImageContainerCalques(imgFolder + "pionVert.png", 0, 0, 30, 30);
+                            boutons.get(tuile).add(pionVert);
+                        } else if (tuile.getEmplacementAventurier().getNom() == NomAventurier.ingenieur) {
+                            pionRouge = new ImageContainerCalques(imgFolder + "pionRouge.png", 0, 70, 30, 30);
+                            boutons.get(tuile).add(pionRouge);
+                        } else if (tuile.getEmplacementAventurier().getNom() == NomAventurier.messager) {
+                            pionGris = new ImageContainerCalques(imgFolder + "pionGris.png", 70, 0, 30, 30);
+                            boutons.get(tuile).add(pionGris);
+                        } else if (tuile.getEmplacementAventurier().getNom() == NomAventurier.navigateur) {
+                            pionJaune = new ImageContainerCalques(imgFolder + "pionJaune.png", 70, 70, 30, 30);
+                            boutons.get(tuile).add(pionJaune);
+                        } else if (tuile.getEmplacementAventurier().getNom() == NomAventurier.pilote) {
+                            pionBleu = new ImageContainerCalques(imgFolder + "pionBleu.png", 0, 35, 30, 30);
+                            boutons.get(tuile).add(pionBleu);
+                        } else if (tuile.getEmplacementAventurier().getNom() == NomAventurier.plongeur) {
+                            pionNoir = new ImageContainerCalques(imgFolder + "pionNoir.png", 35, 0, 30, 30);
+                            boutons.get(tuile).add(pionNoir);
+                        }
                     }
+                    boutons.get(tuile).add(imageTuile);
+                    this.add(boutons.get(tuile));
+                } else {
+                    boutons.get(tuile).remove(imageTuile);
+                    if (tuile.getEmplacementAventurier() != null) {
+                        if (tuile.getEmplacementAventurier().getNom() == NomAventurier.explorateur) {
+                            pionVert = new ImageContainerCalques(imgFolder + "pionVert.png", 0, 0, 30, 30);
+                            boutons.get(tuile).add(pionVert);
+                        } else if (tuile.getEmplacementAventurier().getNom() == NomAventurier.ingenieur) {
+                            pionRouge = new ImageContainerCalques(imgFolder + "pionRouge.png", 0, 70, 30, 30);
+                            boutons.get(tuile).add(pionRouge);
+                        } else if (tuile.getEmplacementAventurier().getNom() == NomAventurier.messager) {
+                            pionGris = new ImageContainerCalques(imgFolder + "pionGris.png", 70, 0, 30, 30);
+                            boutons.get(tuile).add(pionGris);
+                        } else if (tuile.getEmplacementAventurier().getNom() == NomAventurier.navigateur) {
+                            pionJaune = new ImageContainerCalques(imgFolder + "pionJaune.png", 70, 70, 30, 30);
+                            boutons.get(tuile).add(pionJaune);
+                        } else if (tuile.getEmplacementAventurier().getNom() == NomAventurier.pilote) {
+                            pionBleu = new ImageContainerCalques(imgFolder + "pionBleu.png", 0, 35, 30, 30);
+                            boutons.get(tuile).add(pionBleu);
+                        } else if (tuile.getEmplacementAventurier().getNom() == NomAventurier.plongeur) {
+                            pionNoir = new ImageContainerCalques(imgFolder + "pionNoir.png", 35, 0, 30, 30);
+                            boutons.get(tuile).add(pionNoir);
+                        }
+                    }
+                    boutons.get(tuile).add(imageTuile);
+
                 }
-            } else if (tuile.getNom() == NomTuile.LeJardinDesHurlements) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LeJardinDesHurlements = new ImageContainerCalques(imgFolder + "LeJardinDesHurlements.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(LeJardinDesHurlements);
-                    boutons.get(tuile).add(LeJardinDesHurlements);
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LeJardinDesHurlements = new ImageContainerCalques(imgFolder + "LeJardinDesHurlements_Inonde.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(LeJardinDesHurlements);
-                    boutons.get(tuile).add(LeJardinDesHurlements);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    //this.remove(boutons.get(tuile));
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        //this.add(new JLabel(""));
-                    }
-                }
-            } else if (tuile.getNom() == NomTuile.LeJardinDesMurmures) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LeJardinDesMurmures = new ImageContainerCalques(imgFolder + "LeJardinDesMurmures.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(LeJardinDesMurmures);
-                    boutons.get(tuile).add(LeJardinDesMurmures);
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LeJardinDesMurmures = new ImageContainerCalques(imgFolder + "LeJardinDesMurmures_Inonde.png", 0, 0, 160, 140);
-                   boutons.get(tuile).remove(LeJardinDesMurmures);
-                    boutons.get(tuile).add(LeJardinDesMurmures);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    // this.remove(boutons.get(tuile));
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        //this.add(new JLabel(""));
-                    }
-                }
-            } else if (tuile.getNom() == NomTuile.LeLagonPerdu) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LeLagonPerdu = new ImageContainerCalques(imgFolder + "LeLagonPerdu.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(LeLagonPerdu);
-                    boutons.get(tuile).add(LeLagonPerdu);
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LeLagonPerdu = new ImageContainerCalques(imgFolder + "LeLagonPerdu_Inonde.png", 0, 0, 160, 140);
-                   boutons.get(tuile).remove(LeLagonPerdu);
-                    boutons.get(tuile).add(LeLagonPerdu);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    // this.remove(boutons.get(tuile));
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        //this.add(new JLabel(""));
-                    }
-                }
-            } else if (tuile.getNom() == NomTuile.LeMaraisBrumeux) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LeMaraisBrumeux = new ImageContainerCalques(imgFolder + "LeMaraisBrumeux.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(LeMaraisBrumeux);
-                    boutons.get(tuile).add(LeMaraisBrumeux);
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LeMaraisBrumeux = new ImageContainerCalques(imgFolder + "LeMaraisBrumeux_Inonde.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(LeMaraisBrumeux);
-                    boutons.get(tuile).add(LeMaraisBrumeux);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    //this.remove(boutons.get(tuile));
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        //this.add(new JLabel(""));
-                    }
-                }
-            } else if (tuile.getNom() == NomTuile.LePalaisDeCorail) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LePalaisDeCorail = new ImageContainerCalques(imgFolder + "LePalaisDeCorail.png", 0, 0, 160, 140);
-                   boutons.get(tuile).remove(LePalaisDeCorail);
-                    boutons.get(tuile).add(LePalaisDeCorail);
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LePalaisDeCorail = new ImageContainerCalques(imgFolder + "LePalaisDeCorail_Inonde.png", 0, 0, 160, 140);
-                   boutons.get(tuile).remove(LePalaisDeCorail);
-                    boutons.get(tuile).add(LePalaisDeCorail);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    //this.remove(boutons.get(tuile));
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        // this.add(new JLabel(""));
-                    }
-                }
-            } else if (tuile.getNom() == NomTuile.LePalaisDesMarees) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LePalaisDesMarees = new ImageContainerCalques(imgFolder + "LePalaisDesMarees.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(LePalaisDesMarees);
-                    boutons.get(tuile).add(LePalaisDesMarees);
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LePalaisDesMarees = new ImageContainerCalques(imgFolder + "LePalaisDesMarees_Inonde.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(LePalaisDesMarees);
-                    boutons.get(tuile).add(LePalaisDesMarees);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    //this.remove(boutons.get(tuile));
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        // this.add(new JLabel(""));
-                    }
-                }
-            } else if (tuile.getNom() == NomTuile.LeRocherFantome) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LeRocherFantome = new ImageContainerCalques(imgFolder + "LeRocherFantome.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(LeRocherFantome);
-                    boutons.get(tuile).add(LeRocherFantome);
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LeRocherFantome = new ImageContainerCalques(imgFolder + "LeRocherFantome_Inonde.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(LeRocherFantome);
-                    boutons.get(tuile).add(LeRocherFantome);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    // this.remove(boutons.get(tuile));
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        //this.add(new JLabel(""));
-                    }
-                }
-            } else if (tuile.getNom() == NomTuile.LeTempleDeLaLune) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LeTempleDeLaLune = new ImageContainerCalques(imgFolder + "LeTempleDeLaLune.png", 0, 0, 160, 140);
-                   boutons.get(tuile).remove(LeTempleDeLaLune);
-                    boutons.get(tuile).add(LeTempleDeLaLune);
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LeTempleDeLaLune = new ImageContainerCalques(imgFolder + "LeTempleDeLaLune_Inonde.png", 0, 0, 160, 140);
-                   boutons.get(tuile).remove(LeTempleDeLaLune);
-                    boutons.get(tuile).add(LeTempleDeLaLune);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    //this.remove(boutons.get(tuile));
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        //  this.add(new JLabel(""));
-                    }
-                }
-            } else if (tuile.getNom() == NomTuile.LeTempleDuSoleil) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LeTempleDuSoleil = new ImageContainerCalques(imgFolder + "LeTempleDuSoleil.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(LeTempleDuSoleil);
-                    boutons.get(tuile).add(LeTempleDuSoleil);
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LeTempleDuSoleil = new ImageContainerCalques(imgFolder + "LeTempleDuSoleil_Inonde.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(LeTempleDuSoleil);
-                    boutons.get(tuile).add(LeTempleDuSoleil);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    // this.remove(boutons.get(tuile));
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        //  this.add(new JLabel(""));
-                    }
-                }
-            } else if (tuile.getNom() == NomTuile.LeValDuCrepuscule) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LeValDuCrepuscule = new ImageContainerCalques(imgFolder + "LeValDuCrepuscule.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(LeValDuCrepuscule);
-                    boutons.get(tuile).add(LeValDuCrepuscule);
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LeValDuCrepuscule = new ImageContainerCalques(imgFolder + "LeValDuCrepuscule_Inonde.png", 0, 0, 160, 140);
-                  boutons.get(tuile).remove(LeValDuCrepuscule);
-                    boutons.get(tuile).add(LeValDuCrepuscule);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    //this.remove(boutons.get(tuile));
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        //this.add(new JLabel(""));
-                    }
-                }
-            } else if (tuile.getNom() == NomTuile.LesDunesDeLillusion) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LesDunesDeLillusion = new ImageContainerCalques(imgFolder + "LesDunesDeLillusion.png", 0, 0, 160, 140);
-                   
-                   boutons.get(tuile).remove(LesDunesDeLillusion);
-                    boutons.get(tuile).add(LesDunesDeLillusion);
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LesDunesDeLillusion = new ImageContainerCalques(imgFolder + "LesDunesDeLillusion_Inonde.png", 0, 0, 160, 140);
-                   boutons.get(tuile).remove(LesDunesDeLillusion);
-                    boutons.get(tuile).add(LesDunesDeLillusion);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        // this.add(new JLabel(""));
-                    }
-                }
-            } else if (tuile.getNom() == NomTuile.LesFalaisesDeLOubli) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    LesFalaisesDeLOubli = new ImageContainerCalques(imgFolder + "LesFalaisesDeLOubli.png", 0, 0, 160, 140);
-                   boutons.get(tuile).remove(LesFalaisesDeLOubli);
-                    boutons.get(tuile).add(LesFalaisesDeLOubli);
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    LesFalaisesDeLOubli = new ImageContainerCalques(imgFolder + "LesFalaisesDeLOubli_Inonde.png", 0, 0, 160, 140);
-                   boutons.get(tuile).remove(LesFalaisesDeLOubli);
-                    boutons.get(tuile).add(LesFalaisesDeLOubli);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    // this.remove(boutons.get(tuile));
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        //  this.add(new JLabel(""));
-                    }
-                }
-            } else if (tuile.getNom() == NomTuile.Observatoire) {
-                if (tuile.getEtat() == EtatTuile.normal) {
-                    Observatoire = new ImageContainerCalques(imgFolder + "Observatoire.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(Observatoire);
-                    boutons.get(tuile).add(Observatoire);
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    Observatoire = new ImageContainerCalques(imgFolder + "Observatoire_Inonde.png", 0, 0, 160, 140);
-                    boutons.get(tuile).remove(Observatoire);
-                    boutons.get(tuile).add(Observatoire);
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    // this.remove(boutons.get(tuile));
-                    if (boutons.get(tuile) != null) {
-                        this.remove(boutons.get(tuile));
-                        this.add(new JLabel(""));
-                    } else {
-                        // this.add(new JLabel(""));
-                    }
+
+            } else if (tuile.getEtat() == EtatTuile.submergee) {
+                if (tuileInexistante.get(tuile) == null) {
+                    tuileInexistante.put(tuile, listLabel.get(j));
+                    this.add(listLabel.get(j));
+                    j++;
                 }
             }
+            /*if (tuile.getEmplacementAventurier() != null) {
+                boutons.get(tuile).setBackground(Color.red);
+
+                pionRouge = new ImageContainerCalques(imgFolder + "pionRouge.png", 0, 0, 25, 25);
+
+                boutons.get(tuile).add(pionRouge);
+                pionRouge.paintComponent(g);
+                boutons.get(tuile).paintComponents(g);
+            }
+            /*else if(tuile.getNom() == NomTuile.Heliport){
+                pionBleu = new ImageContainerCalques(imgFolder + "pionBleu.png", boutons.get(tuile).getWidth(), boutons.get(tuile).getHeight(), 25,25 );
+                pionBleu.paintComponent(g);
+                boutons.get(tuile).add(pionBleu);
+                
+               
+            }*/
+
+            i++;
         }
+
     }
 
     public static void main(String[] args) {
 
     }
 
+    /*public void afficherTuilesPossiblesDeplacement(ArrayList<Tuile> t2) {
+      //  revenirGrilleDepart();  //Appel de la méthode pour réinitialiser la grille
+    
+        for (Tuile tuile : t2) {
+            boutons.get(tuile).setBackground(Color.RED);  //Mise à jour des tuiles en mettant un fond Rouge
+            boutons.get(tuile).setEnabled(true);  //Rend les tuils actives
+        }
+    }
+
+    public void afficherTuilesPossiblesAssechement(ArrayList<Tuile> t2) {
+        revenirGrilleDepart();  //Appel de la méthode pour réinitialiser la grille
+        for (Tuile tuile : t2) {
+            boutons.get(tuile).setBackground(Color.MAGENTA);  //Redéfinie la couleur de fond en Magenta
+            boutons.get(tuile).setEnabled(true);  //Rend les tuiles actives
+        }
+    }
+    public void revenirGrilleDepart() {
+        for (Tuile tuile : tuiles) {
+            
+            boutons.get(tuile).setBackground(Color.white);  //Mert la couleur Blanche en fond dans la tuile
+            /*if (tuile.getEtat() != EtatTuile.inexistante) {  //Vérifie si l'état de la tuile est différent d'inexistant
+                boutons.get(tuile).setEnabled(false);  //rend la tuile inactives
+            }
+            if (tuile.getEtat() == EtatTuile.inondee) {  //Vérifie si l'état de la tuile correspond à inondé
+                boutons.get(tuile).setBackground(Color.CYAN);  //Mets la couleur Cyan en fond
+            } else {  //Sinon
+                if (tuile.getEtat() == EtatTuile.submergee) {  //Vérifie si l'état de la tuile correspond à submergé
+                    boutons.get(tuile).setBackground(Color.blue);  //Mets la couleur Bleue en fond
+                } else {  //Sinon
+                    if (tuile.getEtat() == EtatTuile.normal) {  //Vérifie si l'état de la tuile correspond a normal
+                        boutons.get(tuile).setBackground(Color.orange);  //mets la couleur Orange en fond
+                    }
+                }
+            }
+        }
+    }*/
     //Getteur
     public Grille getGrille() {
         return grille;
@@ -893,5 +413,4 @@ public class IhmGrille extends JPanel {
     public void setGrille(Grille grille) {
         this.grille = grille;
     }
-
 }
