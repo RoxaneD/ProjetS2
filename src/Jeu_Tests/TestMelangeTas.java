@@ -7,7 +7,6 @@ package Jeu_Tests;
 
 import Cartes.CarteAventurier;
 import Cartes.CarteInondation;
-import Cartes.CarteTresor;
 import Cartes.CarteTresors;
 import ElementsJeu.Grille;
 import Enumerations.Couleur;

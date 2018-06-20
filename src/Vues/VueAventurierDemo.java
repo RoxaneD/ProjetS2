@@ -2,7 +2,6 @@
 package Vues;
 //import de tout les package aventurier, les cartes, la grille les enumerations
 import Cartes.CarteAventurier;
-import Cartes.CarteTresor;
 import Cartes.CarteTresors;
 import Controle.Action;
 import Controle.Observateur;
