@@ -344,24 +344,7 @@ public class IhmGrille extends JPanel {
                     boutons.get(tuile).setBorder(null);
                     
                 }
-            }
-            /*if (tuile.getEmplacementAventurier() != null) {
-                boutons.get(tuile).setBackground(Color.red);
-            
-                pionRouge = new ImageContainerCalques(imgFolder + "pionRouge.png", 0, 0, 25, 25);
-            
-                boutons.get(tuile).add(pionRouge);
-                pionRouge.paintComponent(g);
-                boutons.get(tuile).paintComponents(g);
-            }
-            /*else if(tuile.getNom() == NomTuile.Heliport){
-                pionBleu = new ImageContainerCalques(imgFolder + "pionBleu.png", boutons.get(tuile).getWidth(), boutons.get(tuile).getHeight(), 25,25 );
-                pionBleu.paintComponent(g);
-                boutons.get(tuile).add(pionBleu);
-                
-               
-            }*/
-
+            }            
             i++;
         }
         
