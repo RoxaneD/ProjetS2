@@ -33,15 +33,15 @@ public class DemoCalques extends JLayeredPane {
         // Remarque : les positions et les tailles sont en dur !
         // Dans l'idéal, il faudrait recevoir la taille de la fenêtre et 
         // faire quelque chose de proportionnel.
-        fond  = new ImageContainerCalques(imgFolder+"jardin.jpeg", 0, 0, 450, 300);
+        fond  = new ImageContainerCalques(imgFolder+"Niveau.png", 0, 0, 450, 300);
         this.add(fond, -2000);
         
         // Instanciation d'une image pour la statue
-        statue = new ImageContainerCalques(imgFolder+"statue.png", 200, 170, 40, 80);
+        statue = new ImageContainerCalques(imgFolder+"stick.png", 200, 170, 40, 80);
         this.add(statue, -1000);
 
         // Instanciation d'une image pour le dragon
-        dragon = new ImageContainerCalques(imgFolder+"dragon.png", 250, 3, 200, 200);
+        dragon = new ImageContainerCalques(imgFolder+"sable.png", 250, 3, 200, 200);
         this.add(dragon, 0);
 
         // Repaint : déclenche la méthode paintComponent
