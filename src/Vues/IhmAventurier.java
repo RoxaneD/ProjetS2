@@ -676,11 +676,12 @@ public class IhmAventurier extends JPanel implements Observe {
         
         
         // pour une ihm complete
-        /**
+        
         window.add(ihm);
-        window.setSize(700, 550);
+        System.out.println(window.size().width);
+        window.setSize(700, 510);
         ihm.afficherIhmComplete();
         window.setVisible(true);
-        **/ 
+        
     }
 }
