@@ -5,6 +5,9 @@
  */
 package Jeu_Tests;
 
+import Aventuriers.Aventurier;
+import Aventuriers.Pilote;
+import Aventuriers.Plongeur;
 import Cartes.CarteAventurier;
 import Cartes.CarteTresors;
 import ElementsJeu.Grille;
@@ -16,41 +19,34 @@ import Enumerations.NomTresor;
 import Enumerations.NomTuile;
 import Util.Utils;
 import Vues.IhmPlateauDeJeu;
-import Vues.Plateau;
 import Vues.VueAventurierDemo;
 import Vues.VueGrilleDemo;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
  * @author paradisc
  */
-public class TestIhmPrincipale {
-
-    /**
-     * @param args the command line arguments
-     */
-    private static IhmPlateauDeJeu ihm;
+public class TestIhmPlateauDeJeu {
 
     public static void main(String[] args) {
         // TODO code application logic here
         
-        Grille grilleDeJeu = new Grille();
-        VueGrilleDemo vueGrille = new VueGrilleDemo(grilleDeJeu);
-        
-         CarteAventurier carte = new CarteAventurier(NomAventurier.explorateur, Couleur.bleu);
-        VueAventurierDemo vueJoueur1 = new VueAventurierDemo("Aventurier 1", carte, Utils.Pion.BLEU.getCouleur());
-        ArrayList<VueAventurierDemo> ensembleVueAventurier = new ArrayList<>();
-        ensembleVueAventurier.add(vueJoueur1);
-        CarteTresors carteT = new CarteTresors( NomTresor.Pierre);
-        vueJoueur1.addCarteTresors(carteT);
+        Grille grille = new Grille();
+        CarteAventurier carte1 = new CarteAventurier(NomAventurier.plongeur, Couleur.noir);
+        CarteAventurier carte2 = new CarteAventurier(NomAventurier.plongeur, Couleur.noir);
 
-        //vueGrille.getWindow().setVisible(false);
-        // vueJoueur1.getWindow().setVisible(false);
+        Plongeur aventurier1 = new Plongeur("Marie", carte1);
+        Pilote aventurier2 = new Pilote("Roxane", carte2);
 
-        ihm = new IhmPlateauDeJeu(ensembleVueAventurier, vueGrille);
-        ihm.getWindow().setVisible(true);
+        HashMap<String, Aventurier> aventuriers = new HashMap<>();
+        aventuriers.put(aventurier1.getNomJoueur(), aventurier1);
+        aventuriers.put(aventurier2.getNomJoueur(), aventurier2);
+
+        IhmPlateauDeJeu ihm = new IhmPlateauDeJeu(aventuriers, grille);
+        ihm.afficherIhm();
 
         /*  while (plateau.getControleur().isTermine() == false) {
             for (VueAventurierDemo vueAventurierTest : vuesAventuriers) {
