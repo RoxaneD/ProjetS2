@@ -71,35 +71,13 @@ public class IhmAventurier extends JPanel implements Observe {
     private JPanel panelCartesVisibles = new JPanel(new BorderLayout());     // dans panelVisible
     private JPanel carteAventurier = new JPanel();         // dans panelVisible
     private JPanel panelCartesJoueur = new JPanel();       // dans panelVisible            
-    private JPanel actions = new JPanel(new GridLayout(9, 1)); // dans panelInvisible
+    private JPanel actions = new JPanel(new GridLayout(13, 1)); // dans panelInvisible
     private JPanel panelCartesTirages = new JPanel();      // dans panelInvisible
 
     private Image imageCarteAventurier;
     private Image imageV1;
 
     private Image imageIV1;
-
-    private ArrayList<JButton> cartesVisibles = new ArrayList<>();
-    private JButton visible1 = new JButton();
-    private JButton visible2 = new JButton();
-    private JButton visible3 = new JButton();
-    private JButton visible4 = new JButton();
-    private JButton visible5 = new JButton();
-    private JButton visible6 = new JButton();
-    private JButton visible7 = new JButton();
-    private JButton visible8 = new JButton();
-    private JButton visible9 = new JButton();
-
-    private ArrayList<JButton> cartesTirages = new ArrayList<>();
-    private JButton tirage1 = new JButton();
-    private JButton tirage2 = new JButton();
-    private JButton tirage3 = new JButton();
-    private JButton tirage4 = new JButton();
-    private JButton tirage5 = new JButton();
-    private JButton tirage6 = new JButton();
-    private JButton tirage7 = new JButton();
-    private JButton tirage8 = new JButton();
-    private JButton tirage9 = new JButton();
 
     private JButton deplacer = new JButton("Déplacer");               // dans actionsPion
     private JButton assecher = new JButton("Assècher");               // dans actionsPion
@@ -164,15 +142,20 @@ public class IhmAventurier extends JPanel implements Observe {
         // pour le panel invisible
         panelInvisible.add(panelCartesTirages, BorderLayout.WEST);
 
+        actions.add(terminer);
+        actions.add(new JLabel(""));
+        actions.add(new JLabel(""));
+        actions.add(new JLabel(""));
+        actions.add(new JLabel(""));
+        actions.add(new JLabel(""));
+        actions.add(new JLabel(""));
         actions.add(defausser);
         actions.add(utiliser);
         actions.add(donner);
-        actions.add(new JLabel(""));
         actions.add(deplacer);
         actions.add(assecher);
         actions.add(recupererTresor);
-        actions.add(new JLabel(""));
-        actions.add(terminer);
+        
 
         defausser.addActionListener(new ActionListener() {
             @Override
@@ -307,7 +290,7 @@ public class IhmAventurier extends JPanel implements Observe {
                     for (Integer a : pos) {
                         if (a < 9) { // pour les cartes du tasJoueur
                             if (a + 1 == taille1) { // alors -> dernière carte
-                                if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (160 + ((432 / taille1) * a) + 100))) {
+                                if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * a) + 100))) {
                                     if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
                                         Action action = new Action(TypesActions.donCarte, aventurier.getTasJoueur().getCarte(a + 1));
                                         notifierObservateur(action);
@@ -316,7 +299,7 @@ public class IhmAventurier extends JPanel implements Observe {
                                 }
                             } else { // les autres cartes
                                 if (taille1 < 3) { // dans ce cas il y a un espace entre les différentes cartes
-                                    if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (160 + ((432 / taille1) * a) + 100))) {
+                                    if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * a) + 100))) {
                                         if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
                                             Action action = new Action(TypesActions.donCarte, aventurier.getTasJoueur().getCarte(a + 1));
                                             notifierObservateur(action);
@@ -324,7 +307,7 @@ public class IhmAventurier extends JPanel implements Observe {
                                         }
                                     }
                                 } else {
-                                    if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (160 + ((432 / taille1) * (a + 1))))) {
+                                    if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * (a + 1))))) {
                                         if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
                                             Action action = new Action(TypesActions.donCarte, aventurier.getTasJoueur().getCarte(a + 1));
                                             notifierObservateur(action);
@@ -370,7 +353,7 @@ public class IhmAventurier extends JPanel implements Observe {
                     for (Integer a : pos) {
                         if (a < 9) { // pour les cartes du tasJoueur
                             if (a + 1 == taille1) { // alors -> dernière carte
-                                if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (160 + ((432 / taille1) * a) + 100))) {
+                                if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * a) + 100))) {
                                     if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
                                         Action action = new Action(TypesActions.defausserCarte, aventurier.getTasJoueur().getCarte(a + 1));
                                         notifierObservateur(action);
@@ -379,7 +362,7 @@ public class IhmAventurier extends JPanel implements Observe {
                                 }
                             } else { // les autres cartes
                                 if (taille1 < 3) { // dans ce cas il y a un espace entre les différentes cartes
-                                    if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (160 + ((432 / taille1) * a) + 100))) {
+                                    if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * a) + 100))) {
                                         if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
                                             Action action = new Action(TypesActions.defausserCarte, aventurier.getTasJoueur().getCarte(a + 1));
                                             notifierObservateur(action);
@@ -387,7 +370,7 @@ public class IhmAventurier extends JPanel implements Observe {
                                         }
                                     }
                                 } else {
-                                    if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (160 + ((432 / taille1) * (a + 1))))) {
+                                    if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * (a + 1))))) {
                                         if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
                                             Action action = new Action(TypesActions.defausserCarte, aventurier.getTasJoueur().getCarte(a + 1));
                                             notifierObservateur(action);
@@ -630,7 +613,7 @@ public class IhmAventurier extends JPanel implements Observe {
         a.getTasTirage().add(carte7);
 
         IhmAventurier ihm = new IhmAventurier(a);
-        ihm.setChoix("utiliser");
+        ihm.setChoix("defausser");
         ihm.pos.add(0);
         ihm.pos.add(1);
         ihm.pos.add(2);
