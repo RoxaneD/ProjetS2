@@ -91,7 +91,7 @@ public class IhmTasDeCarte extends JPanel implements Observe {
 
     public static void main(String[] args) {
         JFrame window = new JFrame();
-        window.setSize(443, 175);
+        window.setSize(493, 175);
 
         window.setLayout(new BorderLayout());
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
