@@ -589,10 +589,22 @@ public class Controleur implements Observateur {
 
             // pour afficher la liste des joueurs à qui on peut donner une carte trésor
         } else if (action.getType() == TypesActions.demandeDonCarte) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
+            for(Aventurier av : aventuriers.values()){
+                if( getAventurier().getTuile() == av.getTuile() && getAventurier() != av){
+                    for(IhmAventurier ihm : getIhmAventurier()){
+                       if(ihm.getAventurier() == av){
+                           ihm.setPeutDonner(true);
+                           ihm.repaint();
+                       }
+                    }
+                    System.out.println(av.getNomJoueur());
+                }
+            }
             System.out.println("demandeDonCarte");
 
             // pour donner une carte trésor à un joueur
         } else if (action.getType() == TypesActions.donCarte) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
+            
             System.out.println("donCarte");
 
             // pour recevoir la liste des cartes qu'on peut défausser
