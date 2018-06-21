@@ -14,6 +14,8 @@ import Cartes.CarteTresors;
 import Controle.Action;
 import Controle.Observateur;
 import Controle.TypesActions;
+import Demo.ImageContainerCalques;
+import ElementsJeu.Tuile;
 import Enumerations.Couleur;
 import Enumerations.NomAventurier;
 import Enumerations.NomTresor;
@@ -32,6 +34,7 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -59,6 +62,8 @@ public class IhmAventurier extends JPanel implements Observe {
 
     // attributs internes
     private boolean complete = false;
+    private boolean afficheCarteJoueur = false;
+    private boolean afficheCarteTirage = false;
     private Aventurier aventurier;
     private String choix; // est mit à jour après un clic sur un bouton d'actions de cartes
     private ArrayList<Integer> pos = new ArrayList<>(); // arrayList retourné par le controleur qui contient les positions des cartes pouvant etre utilisées/donnés/défaussés
@@ -76,6 +81,7 @@ public class IhmAventurier extends JPanel implements Observe {
 
     private Image imageCarteAventurier;
     private Image imageV1;
+    private Image iconTarget;
 
     private Image imageIV1;
 
@@ -86,6 +92,9 @@ public class IhmAventurier extends JPanel implements Observe {
     private JButton defausser = new JButton("Defausser");              // dans actionsCartes
     private JButton utiliser = new JButton("Utiliser");               // dans actionsCartes
     private JButton donner = new JButton("           Donner           ");                 // dans actionsCartes
+
+    private ArrayList<Integer> cartesTresoraAfficher = new ArrayList<>();
+    private ArrayList<Carte> cartesTirageAffiche = new ArrayList<>();
 
     // constructeur
     public IhmAventurier(Aventurier a) {
@@ -155,7 +164,6 @@ public class IhmAventurier extends JPanel implements Observe {
         actions.add(deplacer);
         actions.add(assecher);
         actions.add(recupererTresor);
-        
 
         defausser.addActionListener(new ActionListener() {
             @Override
@@ -463,10 +471,18 @@ public class IhmAventurier extends JPanel implements Observe {
         for (CarteTresors c : aventurier.getTasJoueur().getCartes()) {
             try {
                 this.imageV1 = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/Carte" + c.getNom().toString() + ".png"));
+                this.iconTarget = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/iconTarget.png"));
             } catch (IOException ex) {
                 System.err.println("Erreur de lecture de" + "/src/Image/Carte" + c.getNom().toString() + ".png");
             }
             g.drawImage(imageV1, 110 + ((432 / taille) * i1), titre.getHeight() + 5, carteAventurier.getWidth(), carteAventurier.getHeight(), null, panelCartesVisibles);
+            if (afficheCarteJoueur) {
+                for (Integer pos : cartesTresoraAfficher) {
+                    if (aventurier.getTasJoueur().getCartes().indexOf(c) == pos) {
+                        g.drawImage(iconTarget, 110 + ((432 / taille) * i1), titre.getHeight() + 5, 25, 25, null, panelCartesVisibles);
+                    }
+                }
+            }
 
             i1 += 1;
         }
@@ -492,6 +508,13 @@ public class IhmAventurier extends JPanel implements Observe {
             }
 
             g.drawImage(imageIV1, ((400 / taille) * i2), titre.getHeight() + 160, carteAventurier.getWidth(), carteAventurier.getHeight(), null, panelCartesTirages);
+            if (afficheCarteTirage) {
+                for (Carte cAffiche : cartesTirageAffiche) {
+                    if (c == (cAffiche)) {
+                        g.drawImage(iconTarget, ((400 / taille) * i2), titre.getHeight() + 160, 25, 25, null, panelCartesTirages);
+                    }
+                }
+            }
 
             i2 += 1;
         }
@@ -517,6 +540,7 @@ public class IhmAventurier extends JPanel implements Observe {
             terminer.setVisible(false);
 
         }
+
     }
 
     // setteurs
@@ -544,7 +568,16 @@ public class IhmAventurier extends JPanel implements Observe {
         repaint();
     }
 
-    public void afficherCarte() {
+    public void afficherCarteJoueur(ArrayList<Integer> pos) {
+        afficheCarteJoueur = true;
+        cartesTresoraAfficher = pos;
+        repaint();
+
+    }
+    public void afficherCarteTirage(ArrayList<Carte> carte) {
+        afficheCarteTirage = true;
+        cartesTirageAffiche = carte;
+        repaint();
 
     }
 
@@ -634,6 +667,14 @@ public class IhmAventurier extends JPanel implements Observe {
         ihm.pos.add(16);
         ihm.pos.add(17);
 
+        ArrayList<Integer> cartes = new ArrayList<>();
+        cartes.add(1);
+        cartes.add(6);
+        
+        ArrayList<Carte> cartesTirages = new ArrayList<>();
+        cartesTirages.add(carte1);
+        cartesTirages.add(carteTresor10);
+
         // pour une ihm réduite
         /**
          * window.add(ihm); ihm.afficherIhmReduite(); ihm.repaint();
@@ -648,6 +689,8 @@ public class IhmAventurier extends JPanel implements Observe {
         p.setSize(700, 500);
         p.add(ihm, BorderLayout.CENTER);
         ihm.afficherIhmComplete();
+        ihm.afficherCarteJoueur(cartes);
+        ihm.afficherCarteTirage(cartesTirages);
         window.add(p);
         System.out.println(p.getSize().width);
         System.out.println(p.getSize().height);
