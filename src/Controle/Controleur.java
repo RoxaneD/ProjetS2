@@ -20,6 +20,7 @@ import ElementsJeu.Tuile;
 import Enumerations.EtatTuile;
 import Enumerations.NomAventurier;
 import Enumerations.NomTresor;
+import Enumerations.NomTuile;
 import Tas.DefausseInondations;
 import Tas.DefausseTresors;
 import Tas.TasAventuriers;
@@ -382,6 +383,8 @@ public class Controleur implements Observateur {
         return debutPartie;
     }
     
+    
+    
     // autres méthodes
 
     @Override
@@ -396,21 +399,27 @@ public class Controleur implements Observateur {
                 CarteAventurier c = tasAventuriers.getPremiereCarte();
                 if (c.getNom() == NomAventurier.explorateur) {
                     Explorateur av = new Explorateur(s, c);
+                    av.addTuile(getGrille().getTuile(NomTuile.LaPorteDeCuivre));
                     aventuriers.put(s, av);
                 } else if (c.getNom() == NomAventurier.pilote) {
                     Pilote av = new Pilote(s, c);
+                    av.addTuile(getGrille().getTuile(NomTuile.Heliport));
                     aventuriers.put(s, av);
                 } else if (c.getNom() == NomAventurier.navigateur) {
                     Navigateur av = new Navigateur(s, c);
+                    av.addTuile(getGrille().getTuile(NomTuile.LaPortedOr));
                     aventuriers.put(s, av);
                 } else if (c.getNom() == NomAventurier.plongeur) {
                     Plongeur av = new Plongeur(s, c);
+                    av.addTuile(getGrille().getTuile(NomTuile.LaPorteDeFer));
                     aventuriers.put(s, av);
                 } else if (c.getNom() == NomAventurier.ingenieur) {
                     Ingenieur av = new Ingenieur(s, c);
+                    av.addTuile(getGrille().getTuile(NomTuile.LaPorteDeBronze));
                     aventuriers.put(s, av);
                 } else {
                     Messager av = new Messager(s, c);
+                    av.addTuile(getGrille().getTuile(NomTuile.LaPortedArgent));
                     aventuriers.put(s, av);
                 }
             }
@@ -525,7 +534,7 @@ public class Controleur implements Observateur {
             // pour terminer son tour
         } else if (action.getType() == TypesActions.terminerTour) { // PAS BESOIN DE MODIFIER
             System.out.println("terminerTour");
-            this.setNombreActions(3);// Met le nombre d'action a 3 pour que le tour ce finisse
+            this.setNombreActions(3);// Met le nombre d'action à 3 pour que le tour se finisse
             this.setActionEffectue(true);//Met le booléen action effectuée à vrai
             // pour recupérer un trésor
         } else if (action.getType() == TypesActions.recupererTresor) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM

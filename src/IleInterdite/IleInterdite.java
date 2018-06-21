@@ -10,6 +10,7 @@ import static Util.Utils.afficherInformation;
 import Vues.IhmMenuPrincipal;
 import Vues.IhmReglesDuJeu;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class IleInterdite {
 
@@ -49,19 +50,67 @@ public class IleInterdite {
                     } else {
                         controleur.setNombreActions(0);
                     }
+                    
+                    controleur.getIhmAventurierActuelle().getAssecher().setEnabled(false);
+                    controleur.getIhmAventurierActuelle().getDeplacer().setEnabled(false);
+                    controleur.getIhmAventurierActuelle().getTerminer().setEnabled(false);
+                    controleur.getIhmAventurierActuelle().getRecupererTresor().setEnabled(false);
+                    controleur.getIhmAventurierActuelle().getDefausser().setEnabled(false);
+                    controleur.getIhmAventurierActuelle().getDonner().setEnabled(false);
+                    controleur.getIhmAventurierActuelle().getUtiliser().setEnabled(false);
+                    for (CarteTresors ct : controleur.getAventurier().getTasJoueur().getCartes()) {
+                        if (ct.getNom() == NomTresor.Helicoptere || ct.getNom() == NomTresor.SacsDeSable) {
+                            controleur.getIhmAventurierActuelle().getUtiliser().setEnabled(true);
+                        } else {
+                            controleur.getIhmAventurierActuelle().getUtiliser().setEnabled(false);
+                        }
+                    }
 
                     while (controleur.getNombreActions() < 3) {
+                        System.out.println(" "); // sinon ça ne fonctionne pas
                         controleur.getIhmAventurierActuelle().getAssecher().setEnabled(true);
-                        controleur.getIhmAventurierActuelle().getDefausser().setEnabled(true);
-                        controleur.getIhmAventurierActuelle().getUtiliser().setEnabled(true);
                         controleur.getIhmAventurierActuelle().getDeplacer().setEnabled(true);
-                        controleur.getIhmAventurierActuelle().getDonner().setEnabled(true);
-                        controleur.getIhmAventurierActuelle().getRecupererTresor().setEnabled(true);
                         controleur.getIhmAventurierActuelle().getTerminer().setEnabled(true);
+                        controleur.getIhmAventurierActuelle().getRecupererTresor().setEnabled(false);
+                        if (controleur.getAventurier().getTasJoueur().getCartes().size() == 0) {
+                            controleur.getIhmAventurierActuelle().getDefausser().setEnabled(false);
+                            controleur.getIhmAventurierActuelle().getDonner().setEnabled(false);
+                        } else {
+                            controleur.getIhmAventurierActuelle().getDefausser().setEnabled(true);
+                            controleur.getIhmAventurierActuelle().getDonner().setEnabled(true);
+                        }
+                        if (controleur.getAventurier().getTuile().getEmplacementTresor() != null) {
+                            NomTresor n = controleur.getAventurier().getTuile().getEmplacementTresor().getNom();
+                            ArrayList<CarteTresors> carteAExaminer = new ArrayList<>();
+                            for (CarteTresors ct : controleur.getAventurier().getTasJoueur().getCartes()) {
+                                if (ct.getNom() == n) {
+                                    carteAExaminer.add(ct);
+                                }
+                            }
+                            if (carteAExaminer.size() > 3) {
+                                controleur.getIhmAventurierActuelle().getRecupererTresor().setEnabled(true);
+                            }
+                        }
+                    }
+
+                    controleur.getIhmAventurierActuelle().getAssecher().setEnabled(false);
+                    controleur.getIhmAventurierActuelle().getDeplacer().setEnabled(false);
+                    controleur.getIhmAventurierActuelle().getTerminer().setEnabled(false);
+                    controleur.getIhmAventurierActuelle().getRecupererTresor().setEnabled(false);
+                    controleur.getIhmAventurierActuelle().getDefausser().setEnabled(false);
+                    controleur.getIhmAventurierActuelle().getDonner().setEnabled(false);
+                    for (CarteTresors ct : controleur.getAventurier().getTasJoueur().getCartes()) {
+                        if (ct.getNom() == NomTresor.Helicoptere || ct.getNom() == NomTresor.SacsDeSable) {
+                            controleur.getIhmAventurierActuelle().getUtiliser().setEnabled(true);
+                        } else {
+                            controleur.getIhmAventurierActuelle().getUtiliser().setEnabled(false);
+                        }
                     }
 
                     // tirage de 2 cartes trésors (automatiquement)
                     //      activer les boutons utiliser, defausser (desactiver le reste)
+                    System.out.println(controleur.getTasTresor().getCartesTresors().size());
+
                     CarteTresors carte1 = controleur.getTasTresor().getPremiereCarte();
                     CarteTresors carte2 = controleur.getTasTresor().getPremiereCarte();
                     ArrayList<CarteTresors> c = new ArrayList<>();
@@ -69,12 +118,19 @@ public class IleInterdite {
                     c.add(carte2);
 
                     for (CarteTresors carte : c) {
+                        if (controleur.getTasTresor().getCartesTresors().size()==0){
+                            Collections.shuffle(controleur.getDefausseTresor().getCartesTresors());
+                            for (CarteTresors ci : controleur.getDefausseTresor().getCartesTresors()){
+                                controleur.getTasTresor().addCarte(ci);
+                            }
+                        }
                         if (carte.getNom() == NomTresor.MonteeDesEaux) {
-                            controleur.getAventurier().getTasTirage().add(carte);
+                            controleur.getIhmAventurierActuelle().getAventurier().getTasTirage().add(carte);
                         } else {
-                            controleur.getAventurier().getTasJoueur().addCarte(carte);
+                            controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().addCarte(carte);
                         }
                     }
+                    controleur.getIhmPlateauDeJeu().mettreAJour();
 
                     while (controleur.getAventurier().getTasTirage().size() != 0) {
                         controleur.getIhmAventurierActuelle().getAssecher().setEnabled(false);
@@ -86,14 +142,35 @@ public class IleInterdite {
                         controleur.getIhmAventurierActuelle().getTerminer().setEnabled(false);
                     }
 
+                    controleur.getIhmAventurierActuelle().getAssecher().setEnabled(false);
+                    controleur.getIhmAventurierActuelle().getDeplacer().setEnabled(false);
+                    controleur.getIhmAventurierActuelle().getTerminer().setEnabled(false);
+                    controleur.getIhmAventurierActuelle().getRecupererTresor().setEnabled(false);
+                    controleur.getIhmAventurierActuelle().getDefausser().setEnabled(false);
+                    controleur.getIhmAventurierActuelle().getDonner().setEnabled(false);
+                    for (CarteTresors ct : controleur.getAventurier().getTasJoueur().getCartes()) {
+                        if (ct.getNom() == NomTresor.Helicoptere || ct.getNom() == NomTresor.SacsDeSable) {
+                            controleur.getIhmAventurierActuelle().getUtiliser().setEnabled(true);
+                        } else {
+                            controleur.getIhmAventurierActuelle().getUtiliser().setEnabled(false);
+                        }
+                    }
+
                     // tirage des cartes inondations (automatiquement)
                     //      activer utiliser (désactiver le reste)
                     int i = 0;
                     while (i < controleur.getNiveau()) {
+                        if (controleur.getTasInondation().getCartesInondations().size()==0){
+                            Collections.shuffle(controleur.getDefausseInondation().getCartesInondation());
+                            for (CarteInondation ci : controleur.getDefausseInondation().getCartesInondation()){
+                                controleur.getTasInondation().addCarte(ci);
+                            }
+                        }
                         CarteInondation carteI = controleur.getTasInondation().getPremiereCarte();
                         controleur.getAventurier().getTasTirage().add(carteI);
+                        i+=1;
                     }
-                    
+
                     while (controleur.getAventurier().getTasTirage().size() != 0) {
                         controleur.getIhmAventurierActuelle().getAssecher().setEnabled(false);
                         controleur.getIhmAventurierActuelle().getDefausser().setEnabled(true);
