@@ -553,7 +553,6 @@ public class IhmAventurier extends JPanel implements Observe {
 
                     }
                 }
-                afficheCarteTirage = false;
             }
 
             i1 += 1;
@@ -614,7 +613,6 @@ public class IhmAventurier extends JPanel implements Observe {
                         }
                     }
                 }
-                afficheCarteTirage = false;
             }
 
             i2 += 1;
