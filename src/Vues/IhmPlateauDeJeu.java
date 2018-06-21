@@ -83,10 +83,14 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         ihmTasDeCarte = new IhmTasDeCarte();
         ihmTasDeCarte.setSize(443, 175);
         ihmTasDeCarte.afficherIhm();
-        System.out.println(ihmTasDeCarte.getSize().width);
 
-        setIhmAventurierActuelle(ihmAventuriers.get(0));
-        ihmGrille = new IhmGrille(grille);
+        ihmAventurier = ihmAventuriers.get(0);
+        
+        ArrayList<Aventurier> avens = new ArrayList<Aventurier>();
+        for (Aventurier a : aventuriers.values()){
+            avens.add(a);
+        }
+        ihmGrille = new IhmGrille(grille,avens);
         ihmGrille.setVisible(true);
 
         this.setSize(dimension.width, dimension.height);
@@ -99,10 +103,27 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
     }
 
     // setteurs
-    public void setIhmAventurierActuelle(IhmAventurier ihmAventurier) {
-        this.ihmAventurier = ihmAventurier;
+    public void setIhmAventurierActuelle() {
+        // mettre l'ihm donné en parametre en tant qu'ihm principal
+        this.ihmAventurier = ihmAventuriers.get(1);
+        // mettre les ihm restantes à la suite
+        ArrayList<IhmAventurier> a = new ArrayList<IhmAventurier>();
+        
+        a.add(ihmAventurier);
+        int i = 0;
+        while (i<nombreJoueurs-2){
+            a.add(ihmAventuriers.get(i+2));
+            i+=1;
+        }
+        a.add(ihmAventuriers.get(0));
+        
+        // on remet à jour ihmAventuriers
+        ihmAventuriers = new ArrayList<>();
+        for (IhmAventurier ih : a){
+            ihmAventuriers.add(ih);
+        }
     }
-
+    
     // getteurs
     public JFrame getWindow() {
         return window;
@@ -323,7 +344,6 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         eauEtCartes.add(ihmNiveauEau);
         ihmNiveauEau.setSize(431, 276);
         eauEtCartes.add(ihmTasDeCarte);
-        System.out.println(eauEtCartes.getSize().height);
         ihmTasDeCarte.setSize(443, 175);
         panelGauche.add(eauEtCartes, BorderLayout.CENTER);
 
@@ -422,6 +442,7 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
 
         ihm.afficherIhm();
         ihm.mettreAJour();
+        
+        System.out.println(ihm.getIhmAventurierActuelle().getCarteAventurier().getNom());
     }
-
 }

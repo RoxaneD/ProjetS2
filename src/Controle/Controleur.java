@@ -9,6 +9,7 @@ import Aventuriers.Messager;
 import Aventuriers.Navigateur;
 import Aventuriers.Pilote;
 import Aventuriers.Plongeur;
+import Cartes.Carte;
 import Cartes.CarteInondation;
 import Cartes.CarteAventurier;
 import Cartes.CarteTresors;
@@ -41,7 +42,7 @@ public class Controleur implements Observateur {
     //          ihm 
     private static IhmMenuPrincipal ihmMenuPrincipal;
     private static IhmReglesDuJeu ihmReglesDuJeu;
-    private IhmPlateauDeJeu ihmPlateauDeJeu;
+    private static IhmPlateauDeJeu ihmPlateauDeJeu;
 
     //          autres attributs
     private ArrayList<String> joueurs = new ArrayList<String>(); // contient tous les nom de joueurs
@@ -236,6 +237,14 @@ public class Controleur implements Observateur {
         return aventuriers;
     }
 
+    public ArrayList<Aventurier> getArrayAventuriers() {
+        ArrayList<Aventurier> a = new ArrayList<Aventurier>();
+        for (Aventurier av : getAventuriers().values()) {
+            a.add(av);
+        }
+        return a;
+    }
+
     //Méthode qui renvoie le HashMap vues aventurier
     public ArrayList<IhmAventurier> getIhmAventurier() {
         return ihmPlateauDeJeu.getIhmAventuriers();
@@ -299,7 +308,7 @@ public class Controleur implements Observateur {
 
     //Méthode qui renvoie le nom du joueur
     public String getNomJoueur() {
-        return getIhmAventurierActuelle().getNomAventurier();
+        return getIhmAventurierActuelle().getNomJoueur();
     }
 
     //Méthode qui renvoie la carte de l'aventurier
@@ -363,11 +372,18 @@ public class Controleur implements Observateur {
     public static IhmReglesDuJeu getIhmReglesDuJeu() {
         return ihmReglesDuJeu;
     }
+    
+    public static IhmPlateauDeJeu getIhmPlateauDeJeu(){
+        return ihmPlateauDeJeu;
+    }
 
     // autres méthodes
+    public void updateIhmPlateauDeJeu() {
+    }
+
     @Override
     public void traiterAction(Action action) {
-        // pour ajouter un joueur
+        // pour commencer une partie
         if (action.getType() == TypesActions.commencerPartie) {
             for (String s : action.getJoueurs()) {
                 joueurs.add(s);
@@ -394,17 +410,16 @@ public class Controleur implements Observateur {
                     aventuriers.put(s, av);
                 }
                 // fermer IHM_Menu
-                ihmMenuPrincipal.cacherIhm();               
+                ihmMenuPrincipal.cacherIhm();
             }
-            
+            // ouvrir ihm principale
             this.getNiveauEau().setSemiNiveau(action.getNiveau());
-             // ouvrir ihm principale
-                ihmPlateauDeJeu = new IhmPlateauDeJeu(aventuriers,this.getGrille(),getNiveauEau());
-                ihmPlateauDeJeu.getIhmGrille().addObservateur(this);
-                for (IhmAventurier ihm : ihmPlateauDeJeu.getIhmAventuriers()){
-                    ihm.addObservateur(this);
-                }
-                ihmPlateauDeJeu.afficherIhm();
+            ihmPlateauDeJeu = new IhmPlateauDeJeu(aventuriers, this.getGrille(), getNiveauEau());
+            ihmPlateauDeJeu.getIhmGrille().addObservateur(this);
+            for (IhmAventurier ihm : ihmPlateauDeJeu.getIhmAventuriers()) {
+                ihm.addObservateur(this);
+            }
+            ihmPlateauDeJeu.afficherIhm();
 
             // pour demander l'affiche des tuiles possibles (pour se déplacer)
         } else if (action.getType() == TypesActions.demandeDeplacement) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
@@ -506,15 +521,13 @@ public class Controleur implements Observateur {
 
             // pour afficher les cartes qu'on peut utiliser (de ses propres cartes)
         } else if (action.getType() == TypesActions.demandeUtilisationCarte) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
+            ArrayList<Carte> cartesPos = new ArrayList<Carte>();
             for (CarteTresors c : tasJoueurs.get(action.getNom()).getCartes()) {
                 if (c.getNom() == NomTresor.Helicoptere || c.getNom() == NomTresor.MonteeDesEaux || c.getNom() == NomTresor.SacsDeSable) {
                     // ihm2.afficherCarte();
                 }
             }
-
-            // pour afficher les cartes qu'on peut utiliser
-        } else if (action.getType() == TypesActions.demandeUtilisationCarte) {
-
+            
             // pour utiliser une carte
         } else if (action.getType() == TypesActions.utiliserCarte) { // BESOIN DE MODIFIER EN FONCTION DE L'IHM
             // pour une carte hélicoptère

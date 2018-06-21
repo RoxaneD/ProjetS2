@@ -416,6 +416,7 @@ public class IhmMenuPrincipal extends JPanel implements Observe {
 
     public void cacherIhm() {
         window.setVisible(false);
+        this.setVisible(false);
     }
 
     public static void main(String[] args) {
