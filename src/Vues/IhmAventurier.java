@@ -64,6 +64,25 @@ public class IhmAventurier extends JPanel implements Observe {
     private boolean complete = false;
     private boolean afficheCarteJoueur = false;
     private boolean afficheCarteTirage = false;
+    private boolean active0 = false;
+    private boolean active1 = false;
+    private boolean active2 = false;
+    private boolean active3 = false;
+    private boolean active4 = false;
+    private boolean active5 = false;
+    private boolean active6 = false;
+    private boolean active7 = false;
+    private boolean active8 = false;
+    private boolean active9 = false;
+    private boolean active10 = false;
+    private boolean active11 = false;
+    private boolean active12 = false;
+    private boolean active13 = false;
+    private boolean active14 = false;
+    private boolean active15 = false;
+    private boolean active16 = false;
+    private boolean active17 = false;
+    private ArrayList<Boolean> actives = new ArrayList<>();
     private Aventurier aventurier;
     private String choix; // est mit à jour après un clic sur un bouton d'actions de cartes
     private ArrayList<Integer> pos = new ArrayList<>(); // arrayList retourné par le controleur qui contient les positions des cartes pouvant etre utilisées/donnés/défaussés
@@ -94,7 +113,7 @@ public class IhmAventurier extends JPanel implements Observe {
     private JButton donner = new JButton("           Donner           ");                 // dans actionsCartes
 
     private ArrayList<Integer> cartesTresoraAfficher = new ArrayList<>();
-    private ArrayList<Carte> cartesTirageAffiche = new ArrayList<>();
+    private ArrayList<Integer> cartesTirageAffiche = new ArrayList<>();
 
     // constructeur
     public IhmAventurier(Aventurier a) {
@@ -165,7 +184,6 @@ public class IhmAventurier extends JPanel implements Observe {
         actions.add(assecher);
         actions.add(recupererTresor);
 
-
         defausser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -234,187 +252,209 @@ public class IhmAventurier extends JPanel implements Observe {
                 int taille2 = a.getTasTirage().size();
                 if (choix == "utiliser") {
                     for (Integer a : pos) {
-                        if (a < 9) { // pour les cartes du tasJoueur
-                            if (a + 1 == taille1) { // alors -> dernière carte
-                                if ((e.getX() > 110 + ((432 / taille1) * a)) && (e.getX() < (110 + ((432 / taille1) * a) + 100))) {
-                                    if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
-                                        Action action = new Action(TypesActions.utiliserCarte, aventurier.getTasJoueur().getCarte(a + 1));
-                                        notifierObservateur(action);
-                                        System.out.println("utiliser - dernière carte du tasJoueur");
-                                    }
-                                }
-                            } else { // les autres cartes
-                                if (taille1 < 3) { // dans ce cas il y a un espace entre les différentes cartes
-                                    if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * a) + 100))) {
+                        if (a == 0 && active0 || a == 1 && active1 || a == 2 && active2 || a == 3 && active3 || a == 4 && active4 || a == 5 && active5 || a == 6 && active6 || a == 7 && active7 || a == 8 && active8
+                                || a == 9 && active9 || a == 10 && active10 || a == 11 && active11 || a == 12 && active12 || a == 13 && active13 || a == 14 && active14 || a == 15 && active15 || a == 16 && active16 || a == 17 && active17) {
+                            if (a < 9) { // pour les cartes du tasJoueur
+                                if (a + 1 == taille1) { // alors -> dernière carte
+                                    if ((e.getX() > 110 + ((432 / taille1) * a)) && (e.getX() < (110 + ((432 / taille1) * a) + 100))) {
                                         if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
                                             Action action = new Action(TypesActions.utiliserCarte, aventurier.getTasJoueur().getCarte(a + 1));
                                             notifierObservateur(action);
-                                            System.out.println("utiliser - carte n°" + (a + 1) + " du tasJoueur");
+                                            System.out.println("utiliser - dernière carte du tasJoueur");
                                         }
                                     }
-                                } else {
-                                    if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * (a + 1))))) {
-                                        if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
-                                            Action action = new Action(TypesActions.utiliserCarte, aventurier.getTasJoueur().getCarte(a + 1));
-                                            notifierObservateur(action);
-                                            System.out.println("utiliser - carte n°" + (a + 1) + " du tasJoueur");
+                                } else { // les autres cartes
+
+                                    if (taille1 < 3) { // dans ce cas il y a un espace entre les différentes cartes
+                                        if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * a) + 100))) {
+                                            if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
+                                                Action action = new Action(TypesActions.utiliserCarte, aventurier.getTasJoueur().getCarte(a + 1));
+                                                notifierObservateur(action);
+                                                System.out.println("utiliser - carte n°" + (a + 1) + " du tasJoueur");
+                                            }
+                                        }
+                                    } else {
+                                        if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * (a + 1))))) {
+                                            if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
+                                                Action action = new Action(TypesActions.utiliserCarte, aventurier.getTasJoueur().getCarte(a + 1));
+                                                notifierObservateur(action);
+                                                System.out.println("utiliser - carte n°" + (a + 1) + " du tasJoueur");
+                                            }
                                         }
                                     }
+
                                 }
 
-                            }
-                        } else { // pour les cartes tirages
-                            if (a + 1 - 9 == taille2) { // alors -> dernière carte
-                                if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 100))) {
-                                    if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
-                                        Action action = new Action(TypesActions.utiliserCarte, aventurier.getTasTirage().get(a - 9));
-                                        notifierObservateur(action);
-                                        System.out.println("utiliser - dernière carte du tasTirage");
+                            } else { // pour les cartes tirages
 
-                                    }
-                                }
-                            } else { // les autres cartes
-                                if (taille2 < 3) {
+                                if (a + 1 - 9 == taille2) { // alors -> dernière carte
                                     if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 100))) {
                                         if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
                                             Action action = new Action(TypesActions.utiliserCarte, aventurier.getTasTirage().get(a - 9));
                                             notifierObservateur(action);
-                                            System.out.println("utiliser - carte n°" + (a - 8) + " du tasTirage");
+                                            System.out.println("utiliser - dernière carte du tasTirage");
+
                                         }
                                     }
-                                } else {
-                                    if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < ((400 / taille2) * (a - 8)))) {
-                                        if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
-                                            Action action = new Action(TypesActions.utiliserCarte, aventurier.getTasTirage().get(a - 9));
-                                            notifierObservateur(action);
-                                            System.out.println("utiliser - carte n°" + (a - 8) + " du tasTirage");
+                                } else { // les autres cartes
+                                    if (taille2 < 3) {
+                                        if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 100))) {
+                                            if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
+                                                Action action = new Action(TypesActions.utiliserCarte, aventurier.getTasTirage().get(a - 9));
+                                                notifierObservateur(action);
+                                                System.out.println("utiliser - carte n°" + (a - 8) + " du tasTirage");
+                                            }
+                                        }
+                                    } else {
+                                        if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < ((400 / taille2) * (a - 8)))) {
+                                            if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
+                                                Action action = new Action(TypesActions.utiliserCarte, aventurier.getTasTirage().get(a - 9));
+                                                notifierObservateur(action);
+                                                System.out.println("utiliser - carte n°" + (a - 8) + " du tasTirage");
 
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
+
                     }
                 } else if (choix == "donner") {
                     for (Integer a : pos) {
-                        if (a < 9) { // pour les cartes du tasJoueur
-                            if (a + 1 == taille1) { // alors -> dernière carte
-                                if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * a) + 100))) {
-                                    if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
-                                        Action action = new Action(TypesActions.donCarte, aventurier.getTasJoueur().getCarte(a + 1));
-                                        notifierObservateur(action);
-                                        System.out.println("donner - dernière carte du tasJoueur");
-                                    }
-                                }
-                            } else { // les autres cartes
-                                if (taille1 < 3) { // dans ce cas il y a un espace entre les différentes cartes
+                        if (a == 0 && active0 || a == 1 && active1 || a == 2 && active2 || a == 3 && active3 || a == 4 && active4 || a == 5 && active5 || a == 6 && active6 || a == 7 && active7 || a == 8 && active8
+                                || a == 9 && active9 || a == 10 && active10 || a == 11 && active11 || a == 12 && active12 || a == 13 && active13 || a == 14 && active14 || a == 15 && active15 || a == 16 && active16 || a == 17 && active17) {
+                            if (a < 9) { // pour les cartes du tasJoueur
+
+                                if (a + 1 == taille1) { // alors -> dernière carte
                                     if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * a) + 100))) {
                                         if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
                                             Action action = new Action(TypesActions.donCarte, aventurier.getTasJoueur().getCarte(a + 1));
                                             notifierObservateur(action);
-                                            System.out.println("donner - carte n°" + (a + 1) + " du tasJoueur");
+                                            System.out.println("donner - dernière carte du tasJoueur");
                                         }
                                     }
-                                } else {
-                                    if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * (a + 1))))) {
-                                        if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
-                                            Action action = new Action(TypesActions.donCarte, aventurier.getTasJoueur().getCarte(a + 1));
-                                            notifierObservateur(action);
-                                            System.out.println("donner - carte n°" + (a + 1) + " du tasJoueur");
+                                } else { // les autres cartes
+                                    if (taille1 < 3) { // dans ce cas il y a un espace entre les différentes cartes
+                                        if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * a) + 100))) {
+                                            if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
+                                                Action action = new Action(TypesActions.donCarte, aventurier.getTasJoueur().getCarte(a + 1));
+                                                notifierObservateur(action);
+                                                System.out.println("donner - carte n°" + (a + 1) + " du tasJoueur");
+                                            }
+                                        }
+                                    } else {
+                                        if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * (a + 1))))) {
+                                            if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
+                                                Action action = new Action(TypesActions.donCarte, aventurier.getTasJoueur().getCarte(a + 1));
+                                                notifierObservateur(action);
+                                                System.out.println("donner - carte n°" + (a + 1) + " du tasJoueur");
+                                            }
                                         }
                                     }
+
+                                }
+                                for (boolean b : actives) {
+
                                 }
 
-                            }
-                        } else { // pour les cartes tirages
-                            if (a + 1 - 9 == taille2) { // alors -> dernière carte
-                                if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 100))) {
-                                    if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
-                                        Action action = new Action(TypesActions.donCarte, aventurier.getTasTirage().get(a - 9));
-                                        notifierObservateur(action);
-                                        System.out.println("donner - dernière carte du tasTirage");
+                            } else { // pour les cartes tirages
 
-                                    }
-                                }
-                            } else { // les autres cartes
-                                if (taille2 < 3) {
+                                if (a + 1 - 9 == taille2) { // alors -> dernière carte
                                     if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 100))) {
                                         if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
                                             Action action = new Action(TypesActions.donCarte, aventurier.getTasTirage().get(a - 9));
                                             notifierObservateur(action);
-                                            System.out.println("donner - carte n°" + (a - 8) + " du tasTirage");
-                                        }
-                                    }
-                                } else {
-                                    if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < ((400 / taille2) * (a - 8)))) {
-                                        if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
-                                            Action action = new Action(TypesActions.donCarte, aventurier.getTasTirage().get(a - 9));
-                                            notifierObservateur(action);
-                                            System.out.println("donner - carte n°" + (a - 8) + " du tasTirage");
+                                            System.out.println("donner - dernière carte du tasTirage");
 
                                         }
                                     }
+                                } else { // les autres cartes
+                                    if (taille2 < 3) {
+                                        if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 100))) {
+                                            if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
+                                                Action action = new Action(TypesActions.donCarte, aventurier.getTasTirage().get(a - 9));
+                                                notifierObservateur(action);
+                                                System.out.println("donner - carte n°" + (a - 8) + " du tasTirage");
+                                            }
+                                        }
+                                    } else {
+                                        if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < ((400 / taille2) * (a - 8)))) {
+                                            if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
+                                                Action action = new Action(TypesActions.donCarte, aventurier.getTasTirage().get(a - 9));
+                                                notifierObservateur(action);
+                                                System.out.println("donner - carte n°" + (a - 8) + " du tasTirage");
+
+                                            }
+                                        }
+                                    }
                                 }
+
                             }
                         }
+
                     }
                 } else if (choix == "defausser") {
                     for (Integer a : pos) {
-                        if (a < 9) { // pour les cartes du tasJoueur
-                            if (a + 1 == taille1) { // alors -> dernière carte
-                                if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * a) + 100))) {
-                                    if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
-                                        Action action = new Action(TypesActions.defausserCarte, aventurier.getTasJoueur().getCarte(a + 1));
-                                        notifierObservateur(action);
-                                        System.out.println("defausser - dernière carte du tasJoueur");
-                                    }
-                                }
-                            } else { // les autres cartes
-                                if (taille1 < 3) { // dans ce cas il y a un espace entre les différentes cartes
+                        if (a == 0 && active0 || a == 1 && active1 || a == 2 && active2 || a == 3 && active3 || a == 4 && active4 || a == 5 && active5 || a == 6 && active6 || a == 7 && active7 || a == 8 && active8
+                                || a == 9 && active9 || a == 10 && active10 || a == 11 && active11 || a == 12 && active12 || a == 13 && active13 || a == 14 && active14 || a == 15 && active15 || a == 16 && active16 || a == 17 && active17) {
+                            if (a < 9) { // pour les cartes du tasJoueur
+                                if (a + 1 == taille1) { // alors -> dernière carte
                                     if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * a) + 100))) {
                                         if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
                                             Action action = new Action(TypesActions.defausserCarte, aventurier.getTasJoueur().getCarte(a + 1));
                                             notifierObservateur(action);
-                                            System.out.println("defausser - carte n°" + (a + 1) + " du tasJoueur");
+                                            System.out.println("defausser - dernière carte du tasJoueur");
                                         }
                                     }
-                                } else {
-                                    if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * (a + 1))))) {
-                                        if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
-                                            Action action = new Action(TypesActions.defausserCarte, aventurier.getTasJoueur().getCarte(a + 1));
-                                            notifierObservateur(action);
-                                            System.out.println("defausser - carte n°" + (a + 1) + " du tasJoueur");
+                                } else { // les autres cartes
+                                    if (taille1 < 3) { // dans ce cas il y a un espace entre les différentes cartes
+                                        if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * a) + 100))) {
+                                            if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
+                                                Action action = new Action(TypesActions.defausserCarte, aventurier.getTasJoueur().getCarte(a + 1));
+                                                notifierObservateur(action);
+                                                System.out.println("defausser - carte n°" + (a + 1) + " du tasJoueur");
+                                            }
+                                        }
+                                    } else {
+                                        if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * (a + 1))))) {
+                                            if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
+                                                Action action = new Action(TypesActions.defausserCarte, aventurier.getTasJoueur().getCarte(a + 1));
+                                                notifierObservateur(action);
+                                                System.out.println("defausser - carte n°" + (a + 1) + " du tasJoueur");
+                                            }
                                         }
                                     }
+
                                 }
 
-                            }
-                        } else { // pour les cartes tirages
-                            if (a + 1 - 9 == taille2) { // alors -> dernière carte
-                                if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 100))) {
-                                    if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
-                                        Action action = new Action(TypesActions.defausserCarte, aventurier.getTasTirage().get(a - 9));
-                                        notifierObservateur(action);
-                                        System.out.println("defausser - dernière carte du tasTirage");
-
-                                    }
-                                }
-                            } else { // les autres cartes
-                                if (taille2 < 3) {
+                            } else { // pour les cartes tirages
+                                if (a + 1 - 9 == taille2) { // alors -> dernière carte
                                     if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 100))) {
                                         if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
                                             Action action = new Action(TypesActions.defausserCarte, aventurier.getTasTirage().get(a - 9));
                                             notifierObservateur(action);
-                                            System.out.println("defausser - carte n°" + (a - 8) + " du tasTirage");
+                                            System.out.println("defausser - dernière carte du tasTirage");
+
                                         }
                                     }
-                                } else {
-                                    if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < ((400 / taille2) * (a - 8)))) {
-                                        if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
-                                            Action action = new Action(TypesActions.defausserCarte, aventurier.getTasTirage().get(a - 9));
-                                            notifierObservateur(action);
-                                            System.out.println("defausser - carte n°" + (a - 8) + " du tasTirage");
+                                } else { // les autres cartes
+                                    if (taille2 < 3) {
+                                        if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 100))) {
+                                            if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
+                                                Action action = new Action(TypesActions.defausserCarte, aventurier.getTasTirage().get(a - 9));
+                                                notifierObservateur(action);
+                                                System.out.println("defausser - carte n°" + (a - 8) + " du tasTirage");
+                                            }
+                                        }
+                                    } else {
+                                        if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < ((400 / taille2) * (a - 8)))) {
+                                            if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
+                                                Action action = new Action(TypesActions.defausserCarte, aventurier.getTasTirage().get(a - 9));
+                                                notifierObservateur(action);
+                                                System.out.println("defausser - carte n°" + (a - 8) + " du tasTirage");
 
+                                            }
                                         }
                                     }
                                 }
@@ -422,6 +462,7 @@ public class IhmAventurier extends JPanel implements Observe {
                         }
                     }
                 }
+                
             }
 
             @Override
@@ -444,8 +485,8 @@ public class IhmAventurier extends JPanel implements Observe {
 
     }
 
-    
     @Override
+
     public void paintComponent(Graphics g) {
         // BORDURES :D
         Border noir = BorderFactory.createLineBorder(Color.black, 1);
@@ -479,10 +520,40 @@ public class IhmAventurier extends JPanel implements Observe {
             g.drawImage(imageV1, 110 + ((432 / taille) * i1), titre.getHeight() + 5, carteAventurier.getWidth(), carteAventurier.getHeight(), null, panelCartesVisibles);
             if (afficheCarteJoueur) {
                 for (Integer pos : cartesTresoraAfficher) {
-                    if (aventurier.getTasJoueur().getCartes().indexOf(c) == pos) {
+                    if (aventurier.getTasJoueur().getCartes().indexOf(c) == pos - 1) {
                         g.drawImage(iconTarget, 110 + ((432 / taille) * i1), titre.getHeight() + 5, 25, 25, null, panelCartesVisibles);
+                        if (pos - 1 == 0) {
+                            active0 = true;
+                            actives.add(active0);
+                        } else if (pos - 1 == 1) {
+                            active1 = true;
+                            actives.add(active1);
+                        } else if (pos - 1 == 2) {
+                            active2 = true;
+                            actives.add(active2);
+                        } else if (pos - 1 == 3) {
+                            active3 = true;
+                            actives.add(active3);
+                        } else if (pos - 1 == 4) {
+                            active4 = true;
+                            actives.add(active4);
+                        } else if (pos - 1 == 5) {
+                            active5 = true;
+                            actives.add(active5);
+                        } else if (pos - 1 == 6) {
+                            active6 = true;
+                            actives.add(active6);
+                        } else if (pos - 1 == 7) {
+                            active7 = true;
+                            actives.add(active7);
+                        } else if (pos - 1 == 8) {
+                            active8 = true;
+                            actives.add(active8);
+                        }
+
                     }
                 }
+                afficheCarteTirage = false;
             }
 
             i1 += 1;
@@ -510,11 +581,40 @@ public class IhmAventurier extends JPanel implements Observe {
 
             g.drawImage(imageIV1, ((400 / taille) * i2), titre.getHeight() + 160, carteAventurier.getWidth(), carteAventurier.getHeight(), null, panelCartesTirages);
             if (afficheCarteTirage) {
-                for (Carte cAffiche : cartesTirageAffiche) {
-                    if (c == (cAffiche)) {
+                for (Integer pos : cartesTirageAffiche) {
+                    if (aventurier.getTasTirage().indexOf(c) == pos - 1) {
                         g.drawImage(iconTarget, ((400 / taille) * i2), titre.getHeight() + 160, 25, 25, null, panelCartesTirages);
+                        if (pos - 1 == 0) {
+                            active9 = true;
+                            actives.add(active9);
+                        } else if (pos - 1 == 1) {
+                            active10 = true;
+                            actives.add(active10);
+                        } else if (pos - 1 == 2) {
+                            active11 = true;
+                            actives.add(active11);
+                        } else if (pos - 1 == 3) {
+                            active12 = true;
+                            actives.add(active12);
+                        } else if (pos - 1 == 4) {
+                            active13 = true;
+                            actives.add(active13);
+                        } else if (pos - 1 == 5) {
+                            active14 = true;
+                            actives.add(active14);
+                        } else if (pos - 1 == 6) {
+                            active15 = true;
+                            actives.add(active15);
+                        } else if (pos - 1 == 7) {
+                            active16 = true;
+                            actives.add(active16);
+                        } else if (pos - 1 == 8) {
+                            active17 = true;
+                            actives.add(active17);
+                        }
                     }
                 }
+                afficheCarteTirage = false;
             }
 
             i2 += 1;
@@ -575,9 +675,10 @@ public class IhmAventurier extends JPanel implements Observe {
         repaint();
 
     }
-    public void afficherCarteTirage(ArrayList<Carte> carte) {
+
+    public void afficherCarteTirage(ArrayList<Integer> pos) {
         afficheCarteTirage = true;
-        cartesTirageAffiche = carte;
+        cartesTirageAffiche = pos;
         repaint();
 
     }
@@ -621,10 +722,10 @@ public class IhmAventurier extends JPanel implements Observe {
         a.getTasJoueur().addCarte(carteTresor3);
         a.getTasJoueur().addCarte(carteTresor4);
         a.getTasJoueur().addCarte(carteTresor5);
-        a.getTasJoueur().addCarte(carteTresor1);
-        a.getTasJoueur().addCarte(carteTresor2);
-        a.getTasJoueur().addCarte(carteTresor3);
-        a.getTasJoueur().addCarte(carteTresor4);
+        a.getTasJoueur().addCarte(carteTresor6);
+        a.getTasJoueur().addCarte(carteTresor7);
+        a.getTasJoueur().addCarte(carteTresor8);
+        a.getTasJoueur().addCarte(carteTresor9);
 
         CarteTresors carteTresor10 = new CarteTresors(NomTresor.MonteeDesEaux);
         CarteTresors carteTresor11 = new CarteTresors(NomTresor.MonteeDesEaux);
@@ -669,12 +770,12 @@ public class IhmAventurier extends JPanel implements Observe {
         ihm.pos.add(17);
 
         ArrayList<Integer> cartes = new ArrayList<>();
-        cartes.add(1);
-        cartes.add(6);
-        
-        ArrayList<Carte> cartesTirages = new ArrayList<>();
-        cartesTirages.add(carte1);
-        cartesTirages.add(carteTresor10);
+        cartes.add(5);
+        cartes.add(7);
+
+        ArrayList<Integer> cartesTirages = new ArrayList<>();
+        cartesTirages.add(1);
+        cartesTirages.add(2);
 
         // pour une ihm réduite
         /**
