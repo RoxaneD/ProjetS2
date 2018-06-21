@@ -435,7 +435,37 @@ public class IhmAventurier extends JPanel implements Observe {
 
     }
 
+    // setteurs
+    public void setChoix(String choix) {
+        this.choix = choix;
+    }
+
+    // getteurs
+    public String getNomJoueur() {
+        return aventurier.getNomJoueur();
+    }
+
+    public CarteAventurier getCarteAventurier() {
+        return aventurier.getCarteAventurier();
+    }
+    
+    
+
     // autres méthodes
+    public void afficherIhmComplete() {
+        complete = true;
+        repaint();
+    }
+
+    public void afficherIhmReduite() {
+        complete = false;
+        repaint();
+    }
+
+    public void afficherCarte() {
+
+    }
+    
     @Override
     public void paintComponent(Graphics g) {
         // BORDURES :D
@@ -517,35 +547,6 @@ public class IhmAventurier extends JPanel implements Observe {
             terminer.setVisible(false);
 
         }
-    }
-
-    // setteurs
-    public void setChoix(String choix) {
-        this.choix = choix;
-    }
-
-    // getteurs
-    public String getNomAventurier() {
-        return aventurier.getNomJoueur();
-    }
-
-    public CarteAventurier getCarteAventurier() {
-        return aventurier.getCarteAventurier();
-    }
-
-    // autres méthodes
-    public void afficherIhmComplete() {
-        complete = true;
-        repaint();
-    }
-
-    public void afficherIhmReduite() {
-        complete = false;
-        repaint();
-    }
-
-    public void afficherCarte() {
-
     }
 
     @Override
