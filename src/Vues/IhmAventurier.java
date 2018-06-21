@@ -165,7 +165,6 @@ public class IhmAventurier extends JPanel implements Observe {
         actions.add(assecher);
         actions.add(recupererTresor);
 
-
         defausser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -444,7 +443,89 @@ public class IhmAventurier extends JPanel implements Observe {
 
     }
 
+    // setteurs
+    public void setChoix(String choix) {
+        this.choix = choix;
+    }
+
+    // getteurs
+    public String getNomJoueur() {
+        return aventurier.getNomJoueur();
+    }
+
+    public CarteAventurier getCarteAventurier() {
+        return aventurier.getCarteAventurier();
+    }
     
+    public Aventurier getAventurier(){
+        return aventurier;
+    }
+
+    public JButton getDeplacer() {
+        return deplacer;
+    }
+
+    public JButton getAssecher() {
+        return assecher;
+    }
+
+    public JButton getTerminer() {
+        return terminer;
+    }
+
+    public JButton getRecupererTresor() {
+        return recupererTresor;
+    }
+
+    public JButton getDefausser() {
+        return defausser;
+    }
+
+    public JButton getUtiliser() {
+        return utiliser;
+    }
+
+    public JButton getDonner() {
+        return donner;
+    }
+
+    // autres méthodes
+    public void afficherIhmComplete() {
+        complete = true;
+        repaint();
+    }
+
+    public void afficherIhmReduite() {
+        complete = false;
+        repaint();
+    }
+
+    public void afficherCarteJoueur(ArrayList<Integer> pos) {
+        afficheCarteJoueur = true;
+        cartesTresoraAfficher = pos;
+        repaint();
+
+    }
+
+    public void afficherCarteTirage(ArrayList<Carte> carte) {
+        afficheCarteTirage = true;
+        cartesTirageAffiche = carte;
+        repaint();
+
+    }
+
+    @Override
+    public void addObservateur(Observateur o) {
+        this.observateur = o;
+    }
+
+    @Override
+    public void notifierObservateur(Action action) {
+        if (observateur != null) {
+            observateur.traiterAction(action);
+        }
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         // BORDURES :D
@@ -539,59 +620,20 @@ public class IhmAventurier extends JPanel implements Observe {
             assecher.setVisible(false);
             recupererTresor.setVisible(false);
             terminer.setVisible(false);
-
+        } else {
+            panelInvisible.setVisible(true);
+            panelCartesTirages.setVisible(true);
+            actions.setOpaque(true);
+            actions.setVisible(true);
+            defausser.setVisible(true);
+            utiliser.setVisible(true);
+            donner.setVisible(true);
+            deplacer.setVisible(true);
+            assecher.setVisible(true);
+            recupererTresor.setVisible(true);
+            terminer.setVisible(true);
         }
 
-    }
-
-    // setteurs
-    public void setChoix(String choix) {
-        this.choix = choix;
-    }
-
-    // getteurs
-    public String getNomAventurier() {
-        return aventurier.getNomJoueur();
-    }
-
-    public CarteAventurier getCarteAventurier() {
-        return aventurier.getCarteAventurier();
-    }
-
-    // autres méthodes
-    public void afficherIhmComplete() {
-        complete = true;
-        repaint();
-    }
-
-    public void afficherIhmReduite() {
-        complete = false;
-        repaint();
-    }
-
-    public void afficherCarteJoueur(ArrayList<Integer> pos) {
-        afficheCarteJoueur = true;
-        cartesTresoraAfficher = pos;
-        repaint();
-
-    }
-    public void afficherCarteTirage(ArrayList<Carte> carte) {
-        afficheCarteTirage = true;
-        cartesTirageAffiche = carte;
-        repaint();
-
-    }
-
-    @Override
-    public void addObservateur(Observateur o) {
-        this.observateur = o;
-    }
-
-    @Override
-    public void notifierObservateur(Action action) {
-        if (observateur != null) {
-            observateur.traiterAction(action);
-        }
     }
 
     // main (test)
@@ -671,7 +713,7 @@ public class IhmAventurier extends JPanel implements Observe {
         ArrayList<Integer> cartes = new ArrayList<>();
         cartes.add(1);
         cartes.add(6);
-        
+
         ArrayList<Carte> cartesTirages = new ArrayList<>();
         cartesTirages.add(carte1);
         cartesTirages.add(carteTresor10);
