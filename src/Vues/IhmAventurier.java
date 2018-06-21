@@ -513,7 +513,6 @@ public class IhmAventurier extends JPanel implements Observe {
     public JButton getDonner() {
         return donner;
     }
-    
 
     @Override
 
@@ -536,17 +535,17 @@ public class IhmAventurier extends JPanel implements Observe {
 
         carteAventurier.setSize(100, 140); // 150,210
         g.drawImage(imageCarteAventurier, 0, titre.getHeight() + 10, carteAventurier.getWidth(), carteAventurier.getHeight(), null, carteAventurier);
-        if(peutDonner){
+        if (peutDonner) {
             g.setColor(Color.red);
-            g.drawRect( 0, titre.getHeight() + 10, carteAventurier.getWidth(), carteAventurier.getHeight());
+            g.drawRect(0, titre.getHeight() + 10, carteAventurier.getWidth(), carteAventurier.getHeight());
             //------------------------------------------------A mettre les bonne valeur pour endre cliquable----------
-            if ((e.getX() > 110 + ((432 / taille1) * a)) && (e.getX() < (110 + ((432 / taille1) * a) + 100))) {
-                                        if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
-                                            Action action = new Action(TypesActions.utiliserCarte, aventurier.getTasJoueur().getCarte(a + 1));
-                                            notifierObservateur(action);
-                                            System.out.println("utiliser - dernière carte du tasJoueur");
-                                        }
-                                    }
+            /**if ((e.getX() > 110 + ((432 / taille1) * a)) && (e.getX() < (110 + ((432 / taille1) * a) + 100))) {
+                if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
+                    Action action = new Action(TypesActions.utiliserCarte, aventurier.getTasJoueur().getCarte(a + 1));
+                    notifierObservateur(action);
+                    System.out.println("utiliser - dernière carte du tasJoueur");
+                }
+            }**/
         }
 
         int taille = aventurier.getTasJoueur().getCartes().size();
@@ -703,7 +702,6 @@ public class IhmAventurier extends JPanel implements Observe {
     public void setPeutDonner(boolean peutDonner) {
         this.peutDonner = peutDonner;
     }
-    
 
     // getteurs
     public String getNomJoueur() {
