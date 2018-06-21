@@ -10,6 +10,7 @@ import Controle.Action;
 import Controle.Observateur;
 import ElementsJeu.Grille;
 import ElementsJeu.NiveauEau;
+import ElementsJeu.Tresor;
 import Enumerations.Couleur;
 import Enumerations.NomAventurier;
 import Enumerations.NomTresor;
@@ -90,7 +91,19 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         for (Aventurier a : aventuriers.values()){
             avens.add(a);
         }
-        ihmGrille = new IhmGrille(grille,avens);
+        
+        Tresor tresor1 = new Tresor(NomTresor.Calice);
+        Tresor tresor2 = new Tresor(NomTresor.Cristal);
+        Tresor tresor3 = new Tresor(NomTresor.Pierre);
+        Tresor tresor4 = new Tresor(NomTresor.Zephyr);
+        
+        ArrayList<Tresor> tr = new ArrayList<Tresor>();
+        tr.add(tresor1);
+        tr.add(tresor2);
+        tr.add(tresor3);
+        tr.add(tresor4);
+        
+        ihmGrille = new IhmGrille(grille,avens,tr);
         ihmGrille.setVisible(true);
 
         this.setSize(dimension.width, dimension.height);
@@ -104,7 +117,7 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
 
     // setteurs
     public void setIhmAventurierActuelle() {
-        // mettre l'ihm donné en parametre en tant qu'ihm principal
+        // mettre l'attribut ihmAventurier à jour
         this.ihmAventurier = ihmAventuriers.get(1);
         // mettre les ihm restantes à la suite
         ArrayList<IhmAventurier> a = new ArrayList<IhmAventurier>();
@@ -117,11 +130,14 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         }
         a.add(ihmAventuriers.get(0));
         
-        // on remet à jour ihmAventuriers
+        // mettre l'attribut ihmAventuriers à jour
         ihmAventuriers = new ArrayList<>();
         for (IhmAventurier ih : a){
             ihmAventuriers.add(ih);
         }
+        
+        // mettre visuellement les ihms à jour
+        mettreAJour();
     }
     
     // getteurs

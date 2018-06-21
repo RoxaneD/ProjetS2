@@ -169,6 +169,10 @@ public class IhmGrille extends JPanel implements Observe {
         listBouton.add(bouton64);
         listBouton.add(bouton65);
         listBouton.add(bouton66);
+        
+        for (JButton b : listBouton){
+            b.setEnabled(false);
+        }
 
         JLabel label1 = new JLabel();
         JLabel label2 = new JLabel();
@@ -271,7 +275,6 @@ public class IhmGrille extends JPanel implements Observe {
 
         for (Tresor t : this.tresors) {
             if (t.getEtat() == EtatTresor.pasRecupere && t.getNom() == NomTresor.Calice) {
-                System.out.println("Calice");
                 try {
                     this.image = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/calice.png"));
                 } catch (IOException ex) {
@@ -279,29 +282,26 @@ public class IhmGrille extends JPanel implements Observe {
                 }
                 g.drawImage(image, 10, 10, 90, 120, null, this);
             } else if (t.getEtat() == EtatTresor.pasRecupere && t.getNom() == NomTresor.Zephyr) {
-                System.out.println("Zephyr");
                 try {
                     this.image = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/zephyr.png"));
                 } catch (IOException ex) {
                     System.err.println("Erreur de lecture de zephyr.png");
                 }
-                g.drawImage(image, 10, 640, 90, 120, null, this);
+                g.drawImage(image, 10, 620, 90, 120, null, this);
             } else if (t.getEtat() == EtatTresor.pasRecupere && t.getNom() == NomTresor.Cristal) {
-                System.out.println("Cristal");
                 try {
                     this.image = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/cristal.png"));
                 } catch (IOException ex) {
                     System.err.println("Erreur de lecture de cristal.png");
                 }
-                g.drawImage(image, 690, 10, 90, 120, null, this);
+                g.drawImage(image, 780, 10, 90, 120, null, this);
             } else if (t.getEtat() == EtatTresor.pasRecupere && t.getNom() == NomTresor.Pierre) {
-                System.out.println("Pierre");
                 try {
                     this.image = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/pierre.png"));
                 } catch (IOException ex) {
                     System.err.println("Erreur de lecture de pierre.png");
                 }
-                g.drawImage(image, 690, 640, 90, 120, null, this);
+                g.drawImage(image, 780, 620, 90, 120, null, this);
             }
         }
 

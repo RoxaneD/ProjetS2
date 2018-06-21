@@ -184,7 +184,6 @@ public class IhmAventurier extends JPanel implements Observe {
         actions.add(assecher);
         actions.add(recupererTresor);
 
-
         defausser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -486,7 +485,6 @@ public class IhmAventurier extends JPanel implements Observe {
 
     }
 
-    
     @Override
 
     public void paintComponent(Graphics g) {
@@ -641,7 +639,18 @@ public class IhmAventurier extends JPanel implements Observe {
             assecher.setVisible(false);
             recupererTresor.setVisible(false);
             terminer.setVisible(false);
-
+        } else {
+            panelInvisible.setVisible(true);
+            panelCartesTirages.setVisible(true);
+            actions.setOpaque(true);
+            actions.setVisible(true);
+            defausser.setVisible(true);
+            utiliser.setVisible(true);
+            donner.setVisible(true);
+            deplacer.setVisible(true);
+            assecher.setVisible(true);
+            recupererTresor.setVisible(true);
+            terminer.setVisible(true);
         }
 
     }
