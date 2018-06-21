@@ -247,7 +247,7 @@ public class IhmGrille extends JPanel implements Observe {
         listLabel.add(label34);
         listLabel.add(label35);
         listLabel.add(label36);
-        repaint();
+        repaint(); // ne marche pas à cause de ça
     }
 
     public ArrayList<Aventurier> getAventuriers() {
@@ -270,6 +270,7 @@ public class IhmGrille extends JPanel implements Observe {
 
     @Override
     public void paintComponent(Graphics g) {
+        // on recommence
         int i = 0;
         int j = 0;
 
@@ -443,45 +444,26 @@ public class IhmGrille extends JPanel implements Observe {
                 initialise = true;
             }
         } else {
+            for (Tuile tuile : tuiles){
+                tuileInexistante.remove(listLabel.get(j));
+                this.remove(listLabel.get(j));
+                j++;
+                boutons.remove(listBouton.get(i));
+                this.remove(listBouton.get(i));
+                i++;
+            }
+            
+            i = 0;
+            j = 0;
+            
             for (Tuile tuile : tuiles) {
                 if (tuile.getEtat() == EtatTuile.inexistante) {
-                    if (tuileInexistante.get(tuile) == null) {
                         tuileInexistante.put(tuile, listLabel.get(j));
                         this.add(listLabel.get(j));
                         j++;
-                    }
 
                 } else if (tuile.getEtat() == EtatTuile.normal) {
                     imageTuile = new ImageContainerCalques(imgFolder + tuile.getNom().toString() + ".png", 0, 0, 100, 110);
-                    if (boutons.put(tuile, listBouton.get(i)) == null) {
-
-                        boutons.put(tuile, listBouton.get(i));
-                        for (Aventurier a : aventuriers) {
-                            if (a.getTuile() == tuile) {
-                                if (a.getCarteAventurier().getNom() == NomAventurier.explorateur) {
-                                    pionVert = new ImageContainerCalques(imgFolder + "pionVert.png", 0, 0, 30, 30);
-                                    boutons.get(tuile).add(pionVert);
-                                } else if (a.getCarteAventurier().getNom() == NomAventurier.ingenieur) {
-                                    pionRouge = new ImageContainerCalques(imgFolder + "pionRouge.png", 0, 70, 30, 30);
-                                    boutons.get(tuile).add(pionRouge);
-                                } else if (a.getCarteAventurier().getNom() == NomAventurier.messager) {
-                                    pionGris = new ImageContainerCalques(imgFolder + "pionGris.png", 70, 0, 30, 30);
-                                    boutons.get(tuile).add(pionGris);
-                                } else if (a.getCarteAventurier().getNom() == NomAventurier.navigateur) {
-                                    pionJaune = new ImageContainerCalques(imgFolder + "pionJaune.png", 70, 70, 30, 30);
-                                    boutons.get(tuile).add(pionJaune);
-                                } else if (a.getCarteAventurier().getNom() == NomAventurier.pilote) {
-                                    pionBleu = new ImageContainerCalques(imgFolder + "pionBleu.png", 0, 35, 30, 30);
-                                    boutons.get(tuile).add(pionBleu);
-                                } else if (a.getCarteAventurier().getNom() == NomAventurier.plongeur) {
-                                    pionNoir = new ImageContainerCalques(imgFolder + "pionNoir.png", 70, 35, 30, 30);
-                                    boutons.get(tuile).add(pionNoir);
-                                }
-                            }
-                            boutons.get(tuile).add(imageTuile);
-                            this.add(boutons.get(tuile));
-                        }
-                    } else {
                         boutons.get(tuile).remove(imageTuile);
                         for (Aventurier a : aventuriers) {
                             if (a.getTuile() == tuile) {
@@ -507,38 +489,8 @@ public class IhmGrille extends JPanel implements Observe {
                             }
                             this.add(boutons.get(tuile));
                         }
-                    }
                 } else if (tuile.getEtat() == EtatTuile.inondee) {
                     imageTuile = new ImageContainerCalques(imgFolder + tuile.getNom().toString() + "_Inonde.png", 0, 0, 100, 110);
-                    if (boutons.put(tuile, listBouton.get(i)) == null) {
-
-                        boutons.put(tuile, listBouton.get(i));
-                        for (Aventurier a : aventuriers) {
-                            if (a.getTuile() == tuile) {
-                                if (a.getCarteAventurier().getNom() == NomAventurier.explorateur) {
-                                    pionVert = new ImageContainerCalques(imgFolder + "pionVert.png", 0, 0, 30, 30);
-                                    boutons.get(tuile).add(pionVert);
-                                } else if (a.getCarteAventurier().getNom() == NomAventurier.ingenieur) {
-                                    pionRouge = new ImageContainerCalques(imgFolder + "pionRouge.png", 0, 70, 30, 30);
-                                    boutons.get(tuile).add(pionRouge);
-                                } else if (a.getCarteAventurier().getNom() == NomAventurier.messager) {
-                                    pionGris = new ImageContainerCalques(imgFolder + "pionGris.png", 70, 0, 30, 30);
-                                    boutons.get(tuile).add(pionGris);
-                                } else if (a.getCarteAventurier().getNom() == NomAventurier.navigateur) {
-                                    pionJaune = new ImageContainerCalques(imgFolder + "pionJaune.png", 70, 70, 30, 30);
-                                    boutons.get(tuile).add(pionJaune);
-                                } else if (a.getCarteAventurier().getNom() == NomAventurier.pilote) {
-                                    pionBleu = new ImageContainerCalques(imgFolder + "pionBleu.png", 0, 35, 30, 30);
-                                    boutons.get(tuile).add(pionBleu);
-                                } else if (a.getCarteAventurier().getNom() == NomAventurier.plongeur) {
-                                    pionNoir = new ImageContainerCalques(imgFolder + "pionNoir.png", 70, 35, 30, 30);
-                                    boutons.get(tuile).add(pionNoir);
-                                }
-                            }
-                            boutons.get(tuile).add(imageTuile);
-                            this.add(boutons.get(tuile));
-                        }
-                    } else {
                         boutons.get(tuile).remove(imageTuile);
                         for (Aventurier a : aventuriers) {
                             if (a.getTuile() == tuile) {
@@ -563,23 +515,21 @@ public class IhmGrille extends JPanel implements Observe {
                                 }
                             }
                             this.add(boutons.get(tuile));
-                        }
                     }
 
                 } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    if (boutons.get(tuile) == null) {
+                    //if (boutons.get(tuile) == null) {
                         boutons.put(tuile, listBouton.get(i));
                         boutons.get(tuile).setOpaque(true);
                         boutons.get(tuile).setEnabled(false);
                         boutons.get(tuile).setBorder(null);
                         this.add(listBouton.get(i));
-                    } else {
+                    } else {//
                         boutons.get(tuile).setOpaque(true);
                         boutons.get(tuile).setEnabled(false);
                         boutons.get(tuile).setBorder(null);
 
                     }
-                }
                 i++;
             }
         }
