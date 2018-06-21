@@ -17,9 +17,12 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import ElementsJeu.Grille;
+import ElementsJeu.Tresor;
 import ElementsJeu.Tuile;
+import Enumerations.EtatTresor;
 import Enumerations.EtatTuile;
 import Enumerations.NomAventurier;
+import Enumerations.NomTresor;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -44,8 +47,10 @@ public class IhmGrille extends JPanel implements Observe {
     private ArrayList<Tuile> tuiles;
     private HashMap<Tuile, JButton> boutons = new HashMap<>();
     private HashMap<Tuile, JLabel> tuileInexistante = new HashMap<>();
+    private ArrayList<Tresor> tresors = new ArrayList<>();
     private String imgFolder = System.getProperty("user.dir") + "/src/Image/";
     private ArrayList<Aventurier> aventuriers;
+    private Image image;
     private ImageContainerCalques imageTuile;
     private ImageContainerCalques pionBleu;
     private ImageContainerCalques pionVert;
@@ -65,7 +70,7 @@ public class IhmGrille extends JPanel implements Observe {
 
     private boolean initialise = false;
 
-    public IhmGrille(Grille grille, ArrayList<Aventurier> aventuriers) {
+    public IhmGrille(Grille grille, ArrayList<Aventurier> aventuriers, ArrayList<Tresor> tresors) {
         for (Aventurier a : aventuriers) {
             if (a.getCarteAventurier().getNom() == NomAventurier.explorateur) {
                 vert = 1;
@@ -81,6 +86,8 @@ public class IhmGrille extends JPanel implements Observe {
                 bleu = 1;
             }
         }
+
+        setTresors(tresors);
 
         setAventuriers(aventuriers);
 
@@ -250,10 +257,53 @@ public class IhmGrille extends JPanel implements Observe {
         }
     }
 
+    public void setTresors(ArrayList<Tresor> tresors) {
+        this.tresors = new ArrayList<Tresor>();
+        for (Tresor t : tresors) {
+            this.tresors.add(t);
+        }
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         int i = 0;
         int j = 0;
+
+        for (Tresor t : this.tresors) {
+            if (t.getEtat() == EtatTresor.pasRecupere && t.getNom() == NomTresor.Calice) {
+                System.out.println("Calice");
+                try {
+                    this.image = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/calice.png"));
+                } catch (IOException ex) {
+                    System.err.println("Erreur de lecture de calice.png");
+                }
+                g.drawImage(image, 10, 10, 90, 120, null, this);
+            } else if (t.getEtat() == EtatTresor.pasRecupere && t.getNom() == NomTresor.Zephyr) {
+                System.out.println("Zephyr");
+                try {
+                    this.image = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/zephyr.png"));
+                } catch (IOException ex) {
+                    System.err.println("Erreur de lecture de zephyr.png");
+                }
+                g.drawImage(image, 10, 640, 90, 120, null, this);
+            } else if (t.getEtat() == EtatTresor.pasRecupere && t.getNom() == NomTresor.Cristal) {
+                System.out.println("Cristal");
+                try {
+                    this.image = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/cristal.png"));
+                } catch (IOException ex) {
+                    System.err.println("Erreur de lecture de cristal.png");
+                }
+                g.drawImage(image, 690, 10, 90, 120, null, this);
+            } else if (t.getEtat() == EtatTresor.pasRecupere && t.getNom() == NomTresor.Pierre) {
+                System.out.println("Pierre");
+                try {
+                    this.image = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/pierre.png"));
+                } catch (IOException ex) {
+                    System.err.println("Erreur de lecture de pierre.png");
+                }
+                g.drawImage(image, 690, 640, 90, 120, null, this);
+            }
+        }
 
         if (!initialise) {
             for (Tuile tuile : tuiles) {
