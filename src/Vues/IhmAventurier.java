@@ -184,6 +184,7 @@ public class IhmAventurier extends JPanel implements Observe {
         actions.add(assecher);
         actions.add(recupererTresor);
 
+
         defausser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -485,6 +486,7 @@ public class IhmAventurier extends JPanel implements Observe {
 
     }
 
+    
     @Override
 
     public void paintComponent(Graphics g) {
