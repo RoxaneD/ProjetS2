@@ -4,6 +4,7 @@ import Aventuriers.Aventurier;
 import Aventuriers.Plongeur;
 import Controle.Action;
 import Controle.Observateur;
+import Controle.TypesActions;
 import Demo.ImageContainerCalques;
 import ElementsJeu.Grille;
 import ElementsJeu.Tuile;
@@ -533,6 +534,20 @@ public class IhmGrille extends JPanel implements Observe {
                 i++;
             }
         }
+        for (Tuile t : boutons.keySet()) {
+            boutons.get(t).addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (boutons.get(t).getBackground() == Color.RED) {
+                        Action a = new Action(TypesActions.deplacement, t);
+                        notifierObservateur(a);
+                    } else if (boutons.get(t).getBackground() == Color.MAGENTA) {
+                        Action a = new Action(TypesActions.assechement, t);
+                        notifierObservateur(a);
+                    }
+                }
+            });
+        }
     }
 
     public void afficherTuilesPossiblesDeplacement(ArrayList<Tuile> t2) {
@@ -561,15 +576,13 @@ public class IhmGrille extends JPanel implements Observe {
         int i = 0;
         int j = 0;
         for (Tuile tuile : tuiles) {
-
             if (tuile.getEtat() != EtatTuile.inexistante) {  //Vérifie si l'état de la tuile est différent d'inexistant
                 if (boutons.put(tuile, listBouton.get(i)) == null) {
                     boutons.put(tuile, listBouton.get(i));
                     this.add(boutons.get(tuile));
                 }
                 boutons.get(tuile).setEnabled(false);  //rend la tuile inactives
-                //boutons.get(tuile).setBackground(Color.white);  //Mert la couleur Blanche en fond dans la tuile
-
+                boutons.get(tuile).setBackground(Color.white);  //Mert la couleur Blanche en fond dans la tuile
             } else {
                 if (tuileInexistante.get(tuile) == null) {
                     tuileInexistante.put(tuile, listLabel.get(j));
@@ -577,13 +590,10 @@ public class IhmGrille extends JPanel implements Observe {
                     j++;
                 }
             }
-
             if (tuile.getEtat() == EtatTuile.submergee) {  //Vérifie si l'état de la tuile correspond à submergé
                 if (boutons.get(tuile) == null) {
                     boutons.put(tuile, listBouton.get(i));
-
                 }
-
             }
             i++;
         }

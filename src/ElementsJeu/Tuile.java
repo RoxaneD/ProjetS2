@@ -140,7 +140,7 @@ public class Tuile {
     // autres
     public void removeAventurier(Aventurier aventurier) {
         int i = 0;  //Initialise la variable int à 0
-        while (aventuriers.get(i) != aventurier) {  //Boucle tant que aventuriers.get(i) est différent d'aventurier
+        while (aventuriers.get(i).getCarteAventurier().getNom() != aventurier.getCarteAventurier().getNom()) {  //Boucle tant que aventuriers.get(i) est différent d'aventurier
             i += 1;  //Itération
         }
         if (i < aventuriers.size()) {  //Vérifie que i est inférieur à la taille de l'ArrayList aventuriers

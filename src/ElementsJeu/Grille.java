@@ -247,4 +247,11 @@ public class Grille {
             tuiles.remove(i); //Supprime la tuile à l'indice i dans tuiles
         }
     }
+    
+    public void mettreAjourGrille(ArrayList<Tuile> a){
+        this.tuiles = new ArrayList<Tuile>();
+        for (Tuile t : a){
+            tuiles.add(t);
+        }
+    }
 }
