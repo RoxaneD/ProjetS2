@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,7 +28,7 @@ public class IhmMenuPrincipal extends JPanel implements Observe {
 
     // variable
     private Observateur observateur;
-    
+
     // variables internes
     private int nombreJoueurs = 2; // représente le nombre de joueurs
     private boolean presse = false;
@@ -58,6 +59,8 @@ public class IhmMenuPrincipal extends JPanel implements Observe {
     private JButton supp4 = new JButton("X");
     private JButton supp5 = new JButton("X");
     private JButton supp6 = new JButton("X");
+
+    private JComboBox diff;
 
     // constructeurs
     public IhmMenuPrincipal() {
@@ -90,11 +93,18 @@ public class IhmMenuPrincipal extends JPanel implements Observe {
         titre.add(jl);
         titre.setOpaque(false);
         JPanel espace3 = new JPanel();
-        JPanel espace4 = new JPanel();
+        JPanel espace4 = new JPanel(new BorderLayout());
+        JPanel espace = new JPanel(new BorderLayout());
         espace3.setOpaque(false);
         espace4.setOpaque(false);
+        espace.setOpaque(false);
         panelTitre.add(espace3, BorderLayout.NORTH);
         panelTitre.add(titre, BorderLayout.CENTER);
+        espace.add(new JLabel("Difficulté : "), BorderLayout.WEST);
+        String[] a = {"Novice", "Normal", "Elite", "Légendaire"};
+        diff = new JComboBox(a);
+        espace.add(diff, BorderLayout.EAST);
+        espace4.add(espace, BorderLayout.WEST);
         panelTitre.add(espace4, BorderLayout.SOUTH);
         panelTitre.setOpaque(false);
         this.add(panelTitre, BorderLayout.NORTH);
@@ -279,7 +289,18 @@ public class IhmMenuPrincipal extends JPanel implements Observe {
                     nomJoueurs.add(getNomJoueurs().get(i - 1));
                     i += 1;
                 }
-                Action a = new Action(TypesActions.commencerPartie, nomJoueurs);
+                int niveau;
+                if (diff.getSelectedItem().toString() == "Novice") {
+                    niveau = 1;
+                } else if (diff.getSelectedItem().toString() == "Normal") {
+                    niveau = 2;
+                } else if (diff.getSelectedItem().toString() == "Elite") {
+                    niveau = 3;
+                } else {
+                    niveau = 4;
+                }
+
+                Action a = new Action(TypesActions.commencerPartie, nomJoueurs, niveau);
                 notifierObservateur(a);
             }
         });
@@ -297,7 +318,6 @@ public class IhmMenuPrincipal extends JPanel implements Observe {
     }
 
     // setteurs
-
     public void setCommencer(JButton commencer) {
         this.commencer = commencer;
     }
