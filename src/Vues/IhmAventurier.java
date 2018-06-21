@@ -809,4 +809,8 @@ public class IhmAventurier extends JPanel implements Observe {
         window.setVisible(true);
 
     }
+
+    public Object getAssecher() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
