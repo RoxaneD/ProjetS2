@@ -462,7 +462,7 @@ public class IhmAventurier extends JPanel implements Observe {
                         }
                     }
                 }
-                
+
             }
 
             @Override
@@ -483,6 +483,34 @@ public class IhmAventurier extends JPanel implements Observe {
 
         });
 
+    }
+
+    public JButton getDeplacer() {
+        return deplacer;
+    }
+
+    public JButton getAssecher() {
+        return assecher;
+    }
+
+    public JButton getTerminer() {
+        return terminer;
+    }
+
+    public JButton getRecupererTresor() {
+        return recupererTresor;
+    }
+
+    public JButton getDefausser() {
+        return defausser;
+    }
+
+    public JButton getUtiliser() {
+        return utiliser;
+    }
+
+    public JButton getDonner() {
+        return donner;
     }
 
     @Override
@@ -659,12 +687,16 @@ public class IhmAventurier extends JPanel implements Observe {
     }
 
     // getteurs
-    public String getNomAventurier() {
+    public String getNomJoueur() {
         return aventurier.getNomJoueur();
     }
 
     public CarteAventurier getCarteAventurier() {
         return aventurier.getCarteAventurier();
+    }
+
+    public Aventurier getAventurier() {
+        return aventurier;
     }
 
     // autres méthodes

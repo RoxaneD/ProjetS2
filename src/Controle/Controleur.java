@@ -383,6 +383,8 @@ public class Controleur implements Observateur {
         return debutPartie;
     }
     
+    
+    
     // autres méthodes
 
     @Override
