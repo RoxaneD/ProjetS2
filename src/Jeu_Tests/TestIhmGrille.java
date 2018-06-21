@@ -60,7 +60,7 @@ public class TestIhmGrille {
         Tresor tresor2 = new Tresor(NomTresor.Cristal);
         Tresor tresor3 = new Tresor(NomTresor.Pierre);
         Tresor tresor4 = new Tresor(NomTresor.Zephyr);
-        
+
         ArrayList<Tresor> tr = new ArrayList<Tresor>();
         tr.add(tresor1);
         tr.add(tresor2);

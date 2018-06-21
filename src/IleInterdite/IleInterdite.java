@@ -50,7 +50,7 @@ public class IleInterdite {
                     } else {
                         controleur.setNombreActions(0);
                     }
-                    
+
                     controleur.getIhmAventurierActuelle().getAssecher().setEnabled(false);
                     controleur.getIhmAventurierActuelle().getDeplacer().setEnabled(false);
                     controleur.getIhmAventurierActuelle().getTerminer().setEnabled(false);
@@ -118,9 +118,9 @@ public class IleInterdite {
                     c.add(carte2);
 
                     for (CarteTresors carte : c) {
-                        if (controleur.getTasTresor().getCartesTresors().size()==0){
+                        if (controleur.getTasTresor().getCartesTresors().size() == 0) {
                             Collections.shuffle(controleur.getDefausseTresor().getCartesTresors());
-                            for (CarteTresors ci : controleur.getDefausseTresor().getCartesTresors()){
+                            for (CarteTresors ci : controleur.getDefausseTresor().getCartesTresors()) {
                                 controleur.getTasTresor().addCarte(ci);
                             }
                         }
@@ -160,15 +160,15 @@ public class IleInterdite {
                     //      activer utiliser (désactiver le reste)
                     int i = 0;
                     while (i < controleur.getNiveau()) {
-                        if (controleur.getTasInondation().getCartesInondations().size()==0){
+                        if (controleur.getTasInondation().getCartesInondations().size() == 0) {
                             Collections.shuffle(controleur.getDefausseInondation().getCartesInondation());
-                            for (CarteInondation ci : controleur.getDefausseInondation().getCartesInondation()){
+                            for (CarteInondation ci : controleur.getDefausseInondation().getCartesInondation()) {
                                 controleur.getTasInondation().addCarte(ci);
                             }
                         }
                         CarteInondation carteI = controleur.getTasInondation().getPremiereCarte();
                         controleur.getAventurier().getTasTirage().add(carteI);
-                        i+=1;
+                        i += 1;
                     }
 
                     while (controleur.getAventurier().getTasTirage().size() != 0) {
