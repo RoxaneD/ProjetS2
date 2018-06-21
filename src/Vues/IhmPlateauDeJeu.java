@@ -10,6 +10,7 @@ import Controle.Action;
 import Controle.Observateur;
 import ElementsJeu.Grille;
 import ElementsJeu.NiveauEau;
+import ElementsJeu.Tresor;
 import Enumerations.Couleur;
 import Enumerations.NomAventurier;
 import Enumerations.NomTresor;
@@ -83,10 +84,26 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         ihmTasDeCarte = new IhmTasDeCarte();
         ihmTasDeCarte.setSize(443, 175);
         ihmTasDeCarte.afficherIhm();
-        System.out.println(ihmTasDeCarte.getSize().width);
 
-        setIhmAventurierActuelle(ihmAventuriers.get(0));
-        ihmGrille = new IhmGrille(grille);
+        ihmAventurier = ihmAventuriers.get(0);
+        
+        ArrayList<Aventurier> avens = new ArrayList<Aventurier>();
+        for (Aventurier a : aventuriers.values()){
+            avens.add(a);
+        }
+        
+        Tresor tresor1 = new Tresor(NomTresor.Calice);
+        Tresor tresor2 = new Tresor(NomTresor.Cristal);
+        Tresor tresor3 = new Tresor(NomTresor.Pierre);
+        Tresor tresor4 = new Tresor(NomTresor.Zephyr);
+        
+        ArrayList<Tresor> tr = new ArrayList<Tresor>();
+        tr.add(tresor1);
+        tr.add(tresor2);
+        tr.add(tresor3);
+        tr.add(tresor4);
+        
+        ihmGrille = new IhmGrille(grille,avens,tr);
         ihmGrille.setVisible(true);
 
         this.setSize(dimension.width, dimension.height);
@@ -99,10 +116,30 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
     }
 
     // setteurs
-    public void setIhmAventurierActuelle(IhmAventurier ihmAventurier) {
-        this.ihmAventurier = ihmAventurier;
+    public void setIhmAventurierActuelle() {
+        // mettre l'attribut ihmAventurier à jour
+        this.ihmAventurier = ihmAventuriers.get(1);
+        // mettre les ihm restantes à la suite
+        ArrayList<IhmAventurier> a = new ArrayList<IhmAventurier>();
+        
+        a.add(ihmAventurier);
+        int i = 0;
+        while (i<nombreJoueurs-2){
+            a.add(ihmAventuriers.get(i+2));
+            i+=1;
+        }
+        a.add(ihmAventuriers.get(0));
+        
+        // mettre l'attribut ihmAventuriers à jour
+        ihmAventuriers = new ArrayList<>();
+        for (IhmAventurier ih : a){
+            ihmAventuriers.add(ih);
+        }
+        
+        // mettre visuellement les ihms à jour
+        mettreAJour();
     }
-
+    
     // getteurs
     public JFrame getWindow() {
         return window;
@@ -323,7 +360,6 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         eauEtCartes.add(ihmNiveauEau);
         ihmNiveauEau.setSize(431, 276);
         eauEtCartes.add(ihmTasDeCarte);
-        System.out.println(eauEtCartes.getSize().height);
         ihmTasDeCarte.setSize(443, 175);
         panelGauche.add(eauEtCartes, BorderLayout.CENTER);
 
@@ -422,6 +458,7 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
 
         ihm.afficherIhm();
         ihm.mettreAJour();
+        
+        System.out.println(ihm.getIhmAventurierActuelle().getCarteAventurier().getNom());
     }
-
 }
