@@ -394,7 +394,7 @@ public class Controleur implements Observateur {
     @Override
     public void traiterAction(Action action) {
         // pour commencer une partie
-        if (action.getType() == TypesActions.commencerPartie) { // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        if (action.getType() == TypesActions.commencerPartie) { // OK ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("commencerPartie");
             for (String s : action.getJoueurs()) {
                 joueurs.add(s);
@@ -442,7 +442,7 @@ public class Controleur implements Observateur {
                 ihmMenuPrincipal.cacherIhm();
 
             // pour demander l'affiche des tuiles possibles (pour se déplacer)
-        } else if (action.getType() == TypesActions.demandeDeplacement) { // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType() == TypesActions.demandeDeplacement) { // OK -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("demandeDeplacement");
             //Si le nombre d'action n'est pas de 2 et que l'aventurier n'est pas l'ingenieur et que sont pouvoir est a faux alors
             if (!(getNombreActions() == 2 && getAventurier().getCarteAventurier().getNom() == NomAventurier.ingenieur && isPouvoirIngenieur())) {
@@ -457,7 +457,7 @@ public class Controleur implements Observateur {
             }
 
             // pour demander l'affiche des tuiles possibles (à assécher)
-        } else if (action.getType() == TypesActions.demandeAssechement) { // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType() == TypesActions.demandeAssechement) { // OK -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("demandeAssechement");
             Aventurier aventurier = getAventurier();//l'aventurier prend la valeur de l'aventurier qui fait l'action
             ArrayList<Tuile> tuilesPossibles = new ArrayList<>();// Collection des tuiles possible
@@ -468,7 +468,7 @@ public class Controleur implements Observateur {
             getIhmGrille().revenirGrilleDepart();
             getIhmGrille().afficherTuilesPossiblesAssechement(tuilesPossibles);
             // pour se déplacer sur une tuile
-        } else if (action.getType() == TypesActions.deplacement) { // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType() == TypesActions.deplacement) { // A FAIRE -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("deplacement");
             //si le pouvoir du pilote est à faux et que cette aventurier est le pilote alors
             if (!pouvoirPilote && getAventurier().getCarteAventurier().getNom() == NomAventurier.pilote) {
@@ -525,7 +525,7 @@ public class Controleur implements Observateur {
             }
 
             // pour assécher une tuile
-        } else if (action.getType() == TypesActions.assechement) { // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType() == TypesActions.assechement) { // A FAIRE --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("assecher");
             // on met à jour la grille
             getGrille().getTuile(action.getTuile().getPosX(), action.getTuile().getPosY()).assecher();
@@ -541,16 +541,16 @@ public class Controleur implements Observateur {
             this.setActionEffectue(true);
 
             // pour terminer son tour
-        } else if (action.getType() == TypesActions.terminerTour) { // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType() == TypesActions.terminerTour) { // OK -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("terminerTour");
             this.setNombreActions(3);// Met le nombre d'action à 3 pour que le tour se finisse
             this.setActionEffectue(true);//Met le booléen action effectuée à vrai
             // pour recupérer un trésor
-        } else if (action.getType() == TypesActions.recupererTresor) { // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType() == TypesActions.recupererTresor) { // A FAIRE -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("recupererTresor");
 
             // pour afficher les cartes qu'on peut utiliser (de ses propres cartes)
-        } else if (action.getType() == TypesActions.demandeUtilisationCarte) { // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType() == TypesActions.demandeUtilisationCarte) { // A FAIRE -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("demandeUtilisationCarte");
             ArrayList<Carte> cartesPos = new ArrayList<Carte>();
             for (CarteTresors c : tasJoueurs.get(action.getNom()).getCartes()) {
@@ -560,7 +560,7 @@ public class Controleur implements Observateur {
             }
             
             // pour utiliser une carte
-        } else if (action.getType() == TypesActions.utiliserCarte) { // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType() == TypesActions.utiliserCarte) { // A FAIRE -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("utiliserCarte");
             // pour une carte hélicoptère
             if (action.getCarteT().getNom() == NomTresor.Helicoptere) {
@@ -597,7 +597,7 @@ public class Controleur implements Observateur {
             }
 
             // pour afficher la liste des joueurs à qui on peut donner une carte trésor
-        } else if (action.getType() == TypesActions.demandeDonCarte) { // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType() == TypesActions.demandeDonCarte) { // A FAIRE -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             for(Aventurier av : aventuriers.values()){
                 if( getAventurier().getTuile() == av.getTuile() && getAventurier() != av){
                     for(IhmAventurier ihm : getIhmAventurier()){
@@ -612,23 +612,23 @@ public class Controleur implements Observateur {
             System.out.println("demandeDonCarte");
 
             // pour donner une carte trésor à un joueur
-        } else if (action.getType() == TypesActions.donCarte) { // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType() == TypesActions.donCarte) { // A FAIRE-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("donCarte");
 
             // pour recevoir la liste des cartes qu'on peut défausser
-        } else if (action.getType() == TypesActions.demandeDefausseCarte) { // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType() == TypesActions.demandeDefausseCarte) { // A FAIRE----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("demandeDefausseCarte");
 
             // pour se défausse d'une carte
-        } else if (action.getType() == TypesActions.defausserCarte) { // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType() == TypesActions.defausserCarte) { // A FAIRE ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("defausserCarte");
             // pour afficher les règles du jeu
-        } else if (action.getType() == TypesActions.reglesJeu) { // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType() == TypesActions.reglesJeu) { // OK ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("reglesJeu");
             ihmReglesDuJeu.afficherIhm();
 
             // pour fermer les règles du jeu
-        } else if (action.getType() == TypesActions.fermerReglesJeu) { // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType() == TypesActions.fermerReglesJeu) { // OK ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("fermerReglesJeu");
             ihmReglesDuJeu.cacherIhm();
         }
