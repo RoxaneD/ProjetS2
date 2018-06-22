@@ -451,6 +451,10 @@ public class IhmGrille extends JPanel implements Observe {
 
     public void afficherTuileActuelle(Tuile t) {
         boutons.get(t).setBackground(Color.black);  //Rend la tuile Noir
+        boutons.get(t).setEnabled(true);
+        boutons.get(t).setOpaque(true);
+        
+        
     }
 
     public void revenirGrilleDepart() {
