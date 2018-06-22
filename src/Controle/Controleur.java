@@ -522,7 +522,7 @@ public class Controleur implements Observateur {
                         getIhmAventurierActuelle().getAventurier().addTuile(t);
                     }
                 }
-                
+
                 getIhmGrille().setGrille(getGrille());
                 getIhmGrille().revenirGrilleDepart();
                 getIhmPlateauDeJeu().mettreAJour();
@@ -566,16 +566,16 @@ public class Controleur implements Observateur {
             ArrayList<Integer> cartesPos = new ArrayList<>();
             Integer i = 0;
             for (CarteTresors c : ihmPlateauDeJeu.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
-             
+
                 if (c.getNom() == NomTresor.Helicoptere || c.getNom() == NomTresor.MonteeDesEaux || c.getNom() == NomTresor.SacsDeSable) {
                     System.out.println("demandeUtilisationCarte action");
-                    System.out.println("taille du i "+i);
-                    System.out.println("Nom de la carte "+c.getNom());
-                    System.out.println("Nom de la carte par ihm "+ihmPlateauDeJeu.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().get(i).getNom());
-                    
+                    System.out.println("taille du i := " + i);
+                    System.out.println("Nom de la carte " + c.getNom());
+                    System.out.println("Nom de la carte par ihm " + ihmPlateauDeJeu.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().get(i).getNom());
+
                     if (c.getNom() == ihmPlateauDeJeu.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().get(i).getNom()) {
                         cartesPos.add(i);
-                        System.out.println("i == "+i);
+                        System.out.println("i == " + i);
                     }
 
                 }
@@ -591,7 +591,9 @@ public class Controleur implements Observateur {
             System.out.println("utiliserCarte");
             // pour une carte hélicoptère
             if (action.getCarteT().getNom() == NomTresor.Helicoptere) {
-
+                for(Aventurier a :ihmPlateauDeJeu.getIhmGrille().getAventuriers()){
+                    ihmPlateauDeJeu.getIhmGrille().afficherTuileActuelle(a.getTuile());
+                }
                 // pour une carte montée des eaux
             } else if (action.getCarteT().getNom() == NomTresor.MonteeDesEaux) {
                 // on augmente le semi niveau de 1
@@ -620,6 +622,7 @@ public class Controleur implements Observateur {
                         tuilesPos.add(t);
                     }
                 }
+                ihmPlateauDeJeu.getIhmGrille().afficherTuilesPossiblesAssechement(tuilesPos);
                 // ihm2.afficherTuile(ArrayList<Tuile>);
             }
 
