@@ -1,22 +1,15 @@
 package Vues;
 
 import Aventuriers.Aventurier;
-import Aventuriers.Plongeur;
 import Controle.Action;
 import Controle.Observateur;
 import Controle.TypesActions;
 import Demo.ImageContainerCalques;
-import ElementsJeu.Grille;
-import ElementsJeu.Tuile;
-import Enumerations.NomTuile;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 import ElementsJeu.Grille;
 import ElementsJeu.Tresor;
 import ElementsJeu.Tuile;
@@ -30,11 +23,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 public class IhmGrille extends JPanel implements Observe {
 
@@ -248,7 +239,7 @@ public class IhmGrille extends JPanel implements Observe {
         listLabel.add(label34);
         listLabel.add(label35);
         listLabel.add(label36);
-        repaint(); // ne marche pas à cause de ça
+        repaint();
     }
 
     public ArrayList<Aventurier> getAventuriers() {
@@ -307,164 +298,46 @@ public class IhmGrille extends JPanel implements Observe {
             }
         }
 
-        if (!initialise) {
-            for (Tuile tuile : tuiles) {
-
-                if (tuile.getEtat() == EtatTuile.inexistante) {
-                    if (tuileInexistante.get(tuile) == null) {
-                        tuileInexistante.put(tuile, listLabel.get(j));
-                        this.add(listLabel.get(j));
-                        j++;
-                    }
-
-                } else if (tuile.getEtat() == EtatTuile.normal) {
-                    imageTuile = new ImageContainerCalques(imgFolder + tuile.getNom().toString() + ".png", 0, 0, 100, 110);
-                    if (boutons.get(tuile) == null) {
-                        boutons.put(tuile, listBouton.get(i));
-                        if (tuile.getEmplacementAventurier() != null) {
-                            if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.explorateur) && vert == 1) {
-                                pionVert = new ImageContainerCalques(imgFolder + "pionVert.png", 0, 0, 30, 30);
-                                boutons.get(tuile).add(pionVert);
-                            } else if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.ingenieur) && rouge == 1) {
-                                pionRouge = new ImageContainerCalques(imgFolder + "pionRouge.png", 0, 70, 30, 30);
-                                boutons.get(tuile).add(pionRouge);
-                            } else if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.messager) && gris == 1) {
-                                pionGris = new ImageContainerCalques(imgFolder + "pionGris.png", 70, 0, 30, 30);
-                                boutons.get(tuile).add(pionGris);
-                            } else if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.navigateur) && jaune == 1) {
-                                pionJaune = new ImageContainerCalques(imgFolder + "pionJaune.png", 70, 70, 30, 30);
-                                boutons.get(tuile).add(pionJaune);
-                            } else if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.pilote) && bleu == 1) {
-                                pionBleu = new ImageContainerCalques(imgFolder + "pionBleu.png", 0, 35, 30, 30);
-                                boutons.get(tuile).add(pionBleu);
-                            } else if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.plongeur) && noir == 1) {
-                                pionNoir = new ImageContainerCalques(imgFolder + "pionNoir.png", 70, 35, 30, 30);
-                                boutons.get(tuile).add(pionNoir);
-                            }
-                        }
-                        boutons.get(tuile).add(imageTuile);
-                        this.add(boutons.get(tuile));
-                    } else {
-
-                        boutons.get(tuile).remove(imageTuile);
-                        if (tuile.getEmplacementAventurier() != null) {
-                            if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.explorateur) && vert == 1) {
-                                pionVert = new ImageContainerCalques(imgFolder + "pionVert.png", 0, 0, 30, 30);
-                                boutons.get(tuile).add(pionVert);
-                            } else if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.ingenieur) && rouge == 1) {
-                                pionRouge = new ImageContainerCalques(imgFolder + "pionRouge.png", 0, 70, 30, 30);
-                                boutons.get(tuile).add(pionRouge);
-                            } else if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.messager) && gris == 1) {
-                                pionGris = new ImageContainerCalques(imgFolder + "pionGris.png", 70, 0, 30, 30);
-                                boutons.get(tuile).add(pionGris);
-                            } else if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.navigateur) && jaune == 1) {
-                                pionJaune = new ImageContainerCalques(imgFolder + "pionJaune.png", 70, 70, 30, 30);
-                                boutons.get(tuile).add(pionJaune);
-                            } else if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.pilote) && bleu == 1) {
-                                pionBleu = new ImageContainerCalques(imgFolder + "pionBleu.png", 0, 35, 30, 30);
-                                boutons.get(tuile).add(pionBleu);
-                            } else if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.plongeur) && noir == 1) {
-                                pionNoir = new ImageContainerCalques(imgFolder + "pionNoir.png", 35, 0, 30, 30);
-                                boutons.get(tuile).add(pionNoir);
-                            }
-                        }
-
-                        boutons.get(tuile).add(imageTuile);
-
-                    }
-
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    imageTuile = new ImageContainerCalques(imgFolder + tuile.getNom().toString() + "_Inonde.png", 0, 0, 100, 110);
-                    if (boutons.put(tuile, listBouton.get(i)) == null) {
-                        boutons.put(tuile, listBouton.get(i));
-                        if (tuile.getEmplacementAventurier() != null) {
-                            if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.explorateur) && vert == 1) {
-                                pionVert = new ImageContainerCalques(imgFolder + "pionVert.png", 0, 0, 30, 30);
-                                boutons.get(tuile).add(pionVert);
-                            } else if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.ingenieur) && rouge == 1) {
-                                pionRouge = new ImageContainerCalques(imgFolder + "pionRouge.png", 0, 70, 30, 30);
-                                boutons.get(tuile).add(pionRouge);
-                            } else if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.messager) && gris == 1) {
-                                pionGris = new ImageContainerCalques(imgFolder + "pionGris.png", 70, 0, 30, 30);
-                                boutons.get(tuile).add(pionGris);
-                            } else if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.navigateur) && jaune == 1) {
-                                pionJaune = new ImageContainerCalques(imgFolder + "pionJaune.png", 70, 70, 30, 30);
-                                boutons.get(tuile).add(pionJaune);
-                            } else if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.pilote) && bleu == 1) {
-                                pionBleu = new ImageContainerCalques(imgFolder + "pionBleu.png", 0, 35, 30, 30);
-                                boutons.get(tuile).add(pionBleu);
-                            } else if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.plongeur) && noir == 1) {
-                                pionNoir = new ImageContainerCalques(imgFolder + "pionNoir.png", 35, 0, 30, 30);
-                                boutons.get(tuile).add(pionNoir);
-                            }
-                        }
-                        boutons.get(tuile).add(imageTuile);
-                        this.add(boutons.get(tuile));
-                    } else {
-                        boutons.get(tuile).remove(imageTuile);
-                        if (tuile.getEmplacementAventurier() != null) {
-                            if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.explorateur) && vert == 1) {
-                                pionVert = new ImageContainerCalques(imgFolder + "pionVert.png", 0, 0, 30, 30);
-                                boutons.get(tuile).add(pionVert);
-                            } else if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.ingenieur) && rouge == 1) {
-                                pionRouge = new ImageContainerCalques(imgFolder + "pionRouge.png", 0, 70, 30, 30);
-                                boutons.get(tuile).add(pionRouge);
-                            } else if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.messager) && gris == 1) {
-                                pionGris = new ImageContainerCalques(imgFolder + "pionGris.png", 70, 0, 30, 30);
-                                boutons.get(tuile).add(pionGris);
-                            } else if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.navigateur) && jaune == 1) {
-                                pionJaune = new ImageContainerCalques(imgFolder + "pionJaune.png", 70, 70, 30, 30);
-                                boutons.get(tuile).add(pionJaune);
-                            } else if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.pilote) && bleu == 1) {
-                                pionBleu = new ImageContainerCalques(imgFolder + "pionBleu.png", 0, 35, 30, 30);
-                                boutons.get(tuile).add(pionBleu);
-                            } else if ((tuile.getEmplacementAventurier().getNom() == NomAventurier.plongeur) && noir == 1) {
-                                pionNoir = new ImageContainerCalques(imgFolder + "pionNoir.png", 35, 0, 30, 30);
-                                boutons.get(tuile).add(pionNoir);
-                            }
-                        }
-                        boutons.get(tuile).add(imageTuile);
-
-                    }
-
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    if (boutons.get(tuile) == null) {
-                        boutons.put(tuile, listBouton.get(i));
-                        boutons.get(tuile).setOpaque(true);
-                        boutons.get(tuile).setEnabled(false);
-                        boutons.get(tuile).setBorder(null);
-                        this.add(listBouton.get(i));
-                    } else {
-                        boutons.get(tuile).setOpaque(true);
-                        boutons.get(tuile).setEnabled(false);
-                        boutons.get(tuile).setBorder(null);
-
-                    }
-                }
-                i++;
-                initialise = true;
-            }
-        } else {
-            for (Tuile tuile : tuiles) {
-                tuileInexistante.remove(listLabel.get(j));
-                this.remove(listLabel.get(j));
-                j++;
-                boutons.remove(listBouton.get(i));
-                this.remove(listBouton.get(i));
-                i++;
-            }
-
-            i = 0;
-            j = 0;
-
-            for (Tuile tuile : tuiles) {
-                if (tuile.getEtat() == EtatTuile.inexistante) {
+        for (Tuile tuile : tuiles) {
+            if (tuile.getEtat() == EtatTuile.inexistante) {
+                if (tuileInexistante.get(tuile) == null) {
                     tuileInexistante.put(tuile, listLabel.get(j));
                     this.add(listLabel.get(j));
                     j++;
+                }
 
-                } else if (tuile.getEtat() == EtatTuile.normal) {
-                    imageTuile = new ImageContainerCalques(imgFolder + tuile.getNom().toString() + ".png", 0, 0, 100, 110);
+            } else if (tuile.getEtat() == EtatTuile.normal) {
+                imageTuile = new ImageContainerCalques(imgFolder + tuile.getNom().toString() + ".png", 0, 0, 100, 110);
+                if (boutons.get(tuile) == null) {
+                    boutons.put(tuile, listBouton.get(i));
+                    for (Aventurier a : aventuriers) {
+                        if (a.getTuile() == tuile) {
+                            if (a.getCarteAventurier().getNom() == NomAventurier.explorateur) {
+                                pionVert = new ImageContainerCalques(imgFolder + "pionVert.png", 0, 0, 30, 30);
+                                boutons.get(tuile).add(pionVert);
+                            } else if (a.getCarteAventurier().getNom() == NomAventurier.ingenieur) {
+                                pionRouge = new ImageContainerCalques(imgFolder + "pionRouge.png", 0, 70, 30, 30);
+                                boutons.get(tuile).add(pionRouge);
+                            } else if (a.getCarteAventurier().getNom() == NomAventurier.messager) {
+                                pionGris = new ImageContainerCalques(imgFolder + "pionGris.png", 70, 0, 30, 30);
+                                boutons.get(tuile).add(pionGris);
+                            } else if (a.getCarteAventurier().getNom() == NomAventurier.navigateur) {
+                                pionJaune = new ImageContainerCalques(imgFolder + "pionJaune.png", 70, 70, 30, 30);
+                                boutons.get(tuile).add(pionJaune);
+                            } else if (a.getCarteAventurier().getNom() == NomAventurier.pilote) {
+                                pionBleu = new ImageContainerCalques(imgFolder + "pionBleu.png", 0, 35, 30, 30);
+                                boutons.get(tuile).add(pionBleu);
+                            } else if (a.getCarteAventurier().getNom() == NomAventurier.plongeur) {
+                                pionNoir = new ImageContainerCalques(imgFolder + "pionNoir.png", 70, 35, 30, 30);
+                                boutons.get(tuile).add(pionNoir);
+                            }
+                        }
+                        boutons.get(tuile).add(imageTuile);
+                        this.add(boutons.get(tuile));
+                    }
+
+                } else {
+
                     boutons.get(tuile).remove(imageTuile);
                     for (Aventurier a : aventuriers) {
                         if (a.getTuile() == tuile) {
@@ -488,10 +361,40 @@ public class IhmGrille extends JPanel implements Observe {
                                 boutons.get(tuile).add(pionNoir);
                             }
                         }
-                        this.add(boutons.get(tuile));
+                        boutons.get(tuile).add(imageTuile);
                     }
-                } else if (tuile.getEtat() == EtatTuile.inondee) {
-                    imageTuile = new ImageContainerCalques(imgFolder + tuile.getNom().toString() + "_Inonde.png", 0, 0, 100, 110);
+
+                }
+            } else if (tuile.getEtat() == EtatTuile.inondee) {
+                imageTuile = new ImageContainerCalques(imgFolder + tuile.getNom().toString() + "_Inonde.png", 0, 0, 100, 110);
+                if (boutons.put(tuile, listBouton.get(i)) == null) {
+                    boutons.put(tuile, listBouton.get(i));
+                    for (Aventurier a : aventuriers) {
+                        if (a.getTuile() == tuile) {
+                            if (a.getCarteAventurier().getNom() == NomAventurier.explorateur) {
+                                pionVert = new ImageContainerCalques(imgFolder + "pionVert.png", 0, 0, 30, 30);
+                                boutons.get(tuile).add(pionVert);
+                            } else if (a.getCarteAventurier().getNom() == NomAventurier.ingenieur) {
+                                pionRouge = new ImageContainerCalques(imgFolder + "pionRouge.png", 0, 70, 30, 30);
+                                boutons.get(tuile).add(pionRouge);
+                            } else if (a.getCarteAventurier().getNom() == NomAventurier.messager) {
+                                pionGris = new ImageContainerCalques(imgFolder + "pionGris.png", 70, 0, 30, 30);
+                                boutons.get(tuile).add(pionGris);
+                            } else if (a.getCarteAventurier().getNom() == NomAventurier.navigateur) {
+                                pionJaune = new ImageContainerCalques(imgFolder + "pionJaune.png", 70, 70, 30, 30);
+                                boutons.get(tuile).add(pionJaune);
+                            } else if (a.getCarteAventurier().getNom() == NomAventurier.pilote) {
+                                pionBleu = new ImageContainerCalques(imgFolder + "pionBleu.png", 0, 35, 30, 30);
+                                boutons.get(tuile).add(pionBleu);
+                            } else if (a.getCarteAventurier().getNom() == NomAventurier.plongeur) {
+                                pionNoir = new ImageContainerCalques(imgFolder + "pionNoir.png", 70, 35, 30, 30);
+                                boutons.get(tuile).add(pionNoir);
+                            }
+                        }
+                        boutons.get(tuile).add(imageTuile);
+                    }
+                    this.add(boutons.get(tuile));
+                } else {
                     boutons.get(tuile).remove(imageTuile);
                     for (Aventurier a : aventuriers) {
                         if (a.getTuile() == tuile) {
@@ -515,25 +418,25 @@ public class IhmGrille extends JPanel implements Observe {
                                 boutons.get(tuile).add(pionNoir);
                             }
                         }
-                        this.add(boutons.get(tuile));
+                        boutons.get(tuile).add(imageTuile);
                     }
-
-                } else if (tuile.getEtat() == EtatTuile.submergee) {
-                    //if (boutons.get(tuile) == null) {
+                }
+            } else if (tuile.getEtat() == EtatTuile.submergee) {
+                if (boutons.get(tuile) == null) {
                     boutons.put(tuile, listBouton.get(i));
                     boutons.get(tuile).setOpaque(true);
                     boutons.get(tuile).setEnabled(false);
                     boutons.get(tuile).setBorder(null);
                     this.add(listBouton.get(i));
-                } else {//
+                } else {
                     boutons.get(tuile).setOpaque(true);
                     boutons.get(tuile).setEnabled(false);
                     boutons.get(tuile).setBorder(null);
-
                 }
-                i++;
             }
+            i++;
         }
+
         for (Tuile t : boutons.keySet()) {
             boutons.get(t).addActionListener(new ActionListener() {
                 @Override
