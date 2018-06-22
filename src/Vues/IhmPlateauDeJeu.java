@@ -11,6 +11,7 @@ import Controle.Observateur;
 import ElementsJeu.Grille;
 import ElementsJeu.NiveauEau;
 import ElementsJeu.Tresor;
+import ElementsJeu.Tuile;
 import Enumerations.Couleur;
 import Enumerations.NomAventurier;
 import Enumerations.NomTresor;
@@ -79,6 +80,19 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
             ihmAventuriers.add(ihm);
 
         }
+
+        // on ajoute les pions sur les tuiles de la grille
+        for (Tuile t : grille.getTuiles()) {
+            for (Aventurier a : aventuriers.values()) {
+                System.out.println("BOUH");
+                if (t.getEmplacementAventurier() == a.getCarteAventurier()) {
+                    t.addAventurier(a);
+                    a.addTuile(t);
+                }
+            }
+        }
+
+        // reste des instantiations
         ihmNiveauEau = new IhmNiveauDeau(niveauEau);
         ihmNiveauEau.afficherIhm();
         ihmTasDeCarte = new IhmTasDeCarte();
@@ -86,24 +100,24 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         ihmTasDeCarte.afficherIhm();
 
         ihmAventurier = ihmAventuriers.get(0);
-        
+
         ArrayList<Aventurier> avens = new ArrayList<Aventurier>();
-        for (Aventurier a : aventuriers.values()){
+        for (Aventurier a : aventuriers.values()) {
             avens.add(a);
         }
-        
+
         Tresor tresor1 = new Tresor(NomTresor.Calice);
         Tresor tresor2 = new Tresor(NomTresor.Cristal);
         Tresor tresor3 = new Tresor(NomTresor.Pierre);
         Tresor tresor4 = new Tresor(NomTresor.Zephyr);
-        
+
         ArrayList<Tresor> tr = new ArrayList<Tresor>();
         tr.add(tresor1);
         tr.add(tresor2);
         tr.add(tresor3);
         tr.add(tresor4);
-        
-        ihmGrille = new IhmGrille(grille,avens,tr);
+
+        ihmGrille = new IhmGrille(grille, avens, tr);
         ihmGrille.setVisible(true);
 
         this.setSize(dimension.width, dimension.height);
@@ -121,25 +135,25 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         this.ihmAventurier = ihmAventuriers.get(1);
         // mettre les ihm restantes à la suite
         ArrayList<IhmAventurier> a = new ArrayList<IhmAventurier>();
-        
+
         a.add(ihmAventurier);
         int i = 0;
-        while (i<nombreJoueurs-2){
-            a.add(ihmAventuriers.get(i+2));
-            i+=1;
+        while (i < nombreJoueurs - 2) {
+            a.add(ihmAventuriers.get(i + 2));
+            i += 1;
         }
         a.add(ihmAventuriers.get(0));
-        
+
         // mettre l'attribut ihmAventuriers à jour
         ihmAventuriers = new ArrayList<>();
-        for (IhmAventurier ih : a){
+        for (IhmAventurier ih : a) {
             ihmAventuriers.add(ih);
         }
-        
+
         // mettre visuellement les ihms à jour
         mettreAJour();
     }
-    
+
     // getteurs
     public JFrame getWindow() {
         return window;
@@ -445,7 +459,7 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         aventuriers.put(aventurier4.getNomJoueur(), aventurier4);
         aventuriers.put(aventurier5.getNomJoueur(), aventurier5);
         aventuriers.put(aventurier6.getNomJoueur(), aventurier6);
-        
+
         NiveauEau niveauEau = new NiveauEau();
 
         CarteTresors carteTresor15 = new CarteTresors(NomTresor.Cristal);
@@ -458,7 +472,7 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
 
         ihm.afficherIhm();
         ihm.mettreAJour();
-        
+
         System.out.println(ihm.getIhmAventurierActuelle().getCarteAventurier().getNom());
     }
 }

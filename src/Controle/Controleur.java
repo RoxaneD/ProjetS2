@@ -471,11 +471,11 @@ public class Controleur implements Observateur {
         } else if (action.getType() == TypesActions.deplacement) { // A FAIRE -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("deplacement");
             //si le pouvoir du pilote est à faux et que cette aventurier est le pilote alors
-            if (!pouvoirPilote && getAventurier().getCarteAventurier().getNom() == NomAventurier.pilote) {
+            if (!pouvoirPilote && getIhmAventurierActuelle().getAventurier().getCarteAventurier().getNom() == NomAventurier.pilote) {
                 Pilote pilote2 = (Pilote) getAventurier();//pilote2 est objet de la classe pilote
                 pilote2.setPouvoir(true);// on initialise sont pouvoir à vrai
                 ///pour les tuiles adjacentes a la tuile où ce trouve l'aventurier
-                for (Tuile tuile2 : getAventurier().getTuile().getGrille().getTuilesAdjacentes(getAventurier().getTuile())) {
+                for (Tuile tuile2 : getIhmAventurierActuelle().getAventurier().getTuile().getGrille().getTuilesAdjacentes(getAventurier().getTuile())) {
                     if (action.getTuile() == tuile2) {// Si la tuile où l'action s'effectue est egale a une des tuiles adjacente
                         pilote2.setPouvoir(false);//alors on passe le pouvoir du pilote2 à faux
                     }
@@ -486,7 +486,7 @@ public class Controleur implements Observateur {
             }
 
             //Si le pouvoir de l'ingenieur est a vrai et que l'aventurier est l'ingenieur
-            if (pouvoirIngenieur && getAventurier().getCarteAventurier().getNom() == NomAventurier.ingenieur) {
+            if (pouvoirIngenieur && getIhmAventurierActuelle().getAventurier().getCarteAventurier().getNom() == NomAventurier.ingenieur) {
                 setPouvoirIngenieur(false);//on passe le pouvoir a faux
                 this.setNombreActions(getNombreActions() + 1);//Et on augmente le nombre d'action de 1
             }
@@ -503,18 +503,18 @@ public class Controleur implements Observateur {
                 getGrille().getTuiles().get(i).removeAventurier(getIhmAventurierActuelle().getAventurier());
                 // on retire de la tuile initiale l'aventurier
                 // on retire de l'aventurier sa tuile initiale
-                this.getAventurier().removeTuile();
-                this.getAventurier().addTuile(action.getTuile());
+                this.getIhmAventurierActuelle().getAventurier().removeTuile();
+                this.getIhmAventurierActuelle().getAventurier().addTuile(action.getTuile());
                 // on rajoute à la nouvelle tuile l'aventurier
-                action.getTuile().addAventurier(getAventurier());
+                action.getTuile().addAventurier(getIhmAventurierActuelle().getAventurier());
 
                 i = 0;
-                while (getGrille().getTuiles().get(i) != getAventurier().getTuile()) {
+                while (getGrille().getTuiles().get(i) != getIhmAventurierActuelle().getAventurier().getTuile()) {
                     i += 1;
                 }
-                getGrille().getTuiles().get(i).addAventurier(getAventurier());
+                getGrille().getTuiles().get(i).addAventurier(getIhmAventurierActuelle().getAventurier());
                 // on met à jour la liste des tuiles de la Grille
-                getGrille().getTuile(getAventurier().getTuile().getPosX(), getAventurier().getTuile().getPosY()).addAventurier(getAventurier());
+                getGrille().getTuile(getIhmAventurierActuelle().getAventurier().getTuile().getPosX(), getIhmAventurierActuelle().getAventurier().getTuile().getPosY()).addAventurier(getIhmAventurierActuelle().getAventurier());
 
                 // on met à jour la vueGrille, et on la réinitialise
                 getIhmGrille().setTuiles(getGrille().getTuiles());
@@ -633,5 +633,4 @@ public class Controleur implements Observateur {
             ihmReglesDuJeu.cacherIhm();
         }
     }
-
 }

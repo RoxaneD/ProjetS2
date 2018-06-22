@@ -140,6 +140,7 @@ public class Tuile {
     // autres
     public void removeAventurier(Aventurier aventurier) {
         int i = 0;  //Initialise la variable int à 0
+        System.out.println(aventurier.getTuile().getNom());
         while (aventuriers.get(i).getCarteAventurier().getNom() != aventurier.getCarteAventurier().getNom()) {  //Boucle tant que aventuriers.get(i) est différent d'aventurier
             i += 1;  //Itération
         }

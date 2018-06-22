@@ -109,27 +109,37 @@ public class IleInterdite {
 
                     // tirage de 2 cartes trésors (automatiquement)
                     //      activer les boutons utiliser, defausser (desactiver le reste)
-                    System.out.println(controleur.getTasTresor().getCartesTresors().size());
-
+                    
+                    // on remet la défausse dans le tas si le tas est vide
+                    if (controleur.getTasTresor().getCartesTresors().size() == 0) {
+                        Collections.shuffle(controleur.getDefausseTresor().getCartesTresors());
+                        for (CarteTresors ci : controleur.getDefausseTresor().getCartesTresors()) {
+                            controleur.getTasTresor().addCarte(ci);
+                        }
+                    }
                     CarteTresors carte1 = controleur.getTasTresor().getPremiereCarte();
+                    
+                    // on remet la défausse dans le tas si le tas est vide
+                    if (controleur.getTasTresor().getCartesTresors().size() == 0) {
+                        Collections.shuffle(controleur.getDefausseTresor().getCartesTresors());
+                        for (CarteTresors ci : controleur.getDefausseTresor().getCartesTresors()) {
+                            controleur.getTasTresor().addCarte(ci);
+                        }
+                    }
                     CarteTresors carte2 = controleur.getTasTresor().getPremiereCarte();
+                    
                     ArrayList<CarteTresors> c = new ArrayList<>();
                     c.add(carte1);
                     c.add(carte2);
 
                     for (CarteTresors carte : c) {
-                        if (controleur.getTasTresor().getCartesTresors().size() == 0) {
-                            Collections.shuffle(controleur.getDefausseTresor().getCartesTresors());
-                            for (CarteTresors ci : controleur.getDefausseTresor().getCartesTresors()) {
-                                controleur.getTasTresor().addCarte(ci);
-                            }
-                        }
                         if (carte.getNom() == NomTresor.MonteeDesEaux) {
                             controleur.getIhmAventurierActuelle().getAventurier().getTasTirage().add(carte);
                         } else {
                             controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().addCarte(carte);
                         }
                     }
+                    
                     controleur.getIhmPlateauDeJeu().mettreAJour();
 
                     while (controleur.getAventurier().getTasTirage().size() != 0) {
@@ -167,11 +177,13 @@ public class IleInterdite {
                             }
                         }
                         CarteInondation carteI = controleur.getTasInondation().getPremiereCarte();
-                        controleur.getAventurier().getTasTirage().add(carteI);
+                        controleur.getIhmAventurierActuelle().getAventurier().getTasTirage().add(carteI);
                         i += 1;
                     }
+                    
+                    controleur.getIhmPlateauDeJeu().mettreAJour();
 
-                    while (controleur.getAventurier().getTasTirage().size() != 0) {
+                    while (controleur.getIhmAventurierActuelle().getAventurier().getTasTirage().size() != 0) {
                         controleur.getIhmAventurierActuelle().getAssecher().setEnabled(false);
                         controleur.getIhmAventurierActuelle().getDefausser().setEnabled(true);
                         controleur.getIhmAventurierActuelle().getUtiliser().setEnabled(true);
