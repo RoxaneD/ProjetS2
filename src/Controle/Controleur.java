@@ -374,23 +374,20 @@ public class Controleur implements Observateur {
     public IhmReglesDuJeu getIhmReglesDuJeu() {
         return ihmReglesDuJeu;
     }
-    
-    public IhmPlateauDeJeu getIhmPlateauDeJeu(){
+
+    public IhmPlateauDeJeu getIhmPlateauDeJeu() {
         return ihmPlateauDeJeu;
     }
 
     public boolean isDebutPartie() {
         return debutPartie;
     }
-    
-    public void mettreAjourGrille(){
+
+    public void mettreAjourGrille() {
         this.getGrille().mettreAjourGrille(this.getIhmGrille().getTuiles());
     }
-    
-    
-    
-    // autres méthodes
 
+    // autres méthodes
     @Override
     public void traiterAction(Action action) {
         // pour commencer une partie
@@ -435,11 +432,11 @@ public class Controleur implements Observateur {
                 ihm.addObservateur(this);
             }
             ihmPlateauDeJeu.afficherIhm();
-            
+
             debutPartie = true;
-            
+
             // fermer IHM_Menu
-                ihmMenuPrincipal.cacherIhm();
+            ihmMenuPrincipal.cacherIhm();
 
             // pour demander l'affiche des tuiles possibles (pour se déplacer)
         } else if (action.getType() == TypesActions.demandeDeplacement) { // OK -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -490,9 +487,9 @@ public class Controleur implements Observateur {
                 setPouvoirIngenieur(false);//on passe le pouvoir a faux
                 this.setNombreActions(getNombreActions() + 1);//Et on augmente le nombre d'action de 1
             }
-            
+
             this.mettreAjourGrille();
-            
+
             //Si le nombre d'action est different de 3
             if (getNombreActions() != 3) {
                 int i = 0;
@@ -552,13 +549,29 @@ public class Controleur implements Observateur {
             // pour afficher les cartes qu'on peut utiliser (de ses propres cartes)
         } else if (action.getType() == TypesActions.demandeUtilisationCarte) { // A FAIRE -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("demandeUtilisationCarte");
-            ArrayList<Carte> cartesPos = new ArrayList<Carte>();
-            for (CarteTresors c : tasJoueurs.get(action.getNom()).getCartes()) {
+            ArrayList<Integer> cartesPos = new ArrayList<>();
+            Integer i = 0;
+            for (CarteTresors c : ihmPlateauDeJeu.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
+             
                 if (c.getNom() == NomTresor.Helicoptere || c.getNom() == NomTresor.MonteeDesEaux || c.getNom() == NomTresor.SacsDeSable) {
-                    // ihm2.afficherCarte();
+                    System.out.println("demandeUtilisationCarte action");
+                    System.out.println("taille du i "+i);
+                    System.out.println("Nom de la carte "+c.getNom());
+                    System.out.println("Nom de la carte par ihm "+ihmPlateauDeJeu.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().get(i).getNom());
+                    
+                    if (c.getNom() == ihmPlateauDeJeu.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().get(i).getNom()) {
+                        cartesPos.add(i);
+                        System.out.println("i == "+i);
+                    }
+
                 }
+                i++;
             }
-            
+            if (!cartesPos.isEmpty()) {
+                ihmPlateauDeJeu.getIhmAventurierActuelle().setChoix("utiliser");
+                ihmPlateauDeJeu.getIhmAventurierActuelle().afficherCarteJoueur(cartesPos);
+            }
+
             // pour utiliser une carte
         } else if (action.getType() == TypesActions.utiliserCarte) { // A FAIRE -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("utiliserCarte");
@@ -598,13 +611,13 @@ public class Controleur implements Observateur {
 
             // pour afficher la liste des joueurs à qui on peut donner une carte trésor
         } else if (action.getType() == TypesActions.demandeDonCarte) { // A FAIRE -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            for(Aventurier av : aventuriers.values()){
-                if( getAventurier().getTuile() == av.getTuile() && getAventurier() != av){
-                    for(IhmAventurier ihm : getIhmAventurier()){
-                       if(ihm.getAventurier() == av){
-                           ihm.setPeutDonner(true);
-                           ihm.repaint();
-                       }
+            for (Aventurier av : aventuriers.values()) {
+                if (getAventurier().getTuile() == av.getTuile() && getAventurier() != av) {
+                    for (IhmAventurier ihm : getIhmAventurier()) {
+                        if (ihm.getAventurier() == av) {
+                            ihm.setPeutDonner(true);
+                            ihm.repaint();
+                        }
                     }
                     System.out.println(av.getNomJoueur());
                 }
