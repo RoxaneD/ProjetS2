@@ -522,17 +522,11 @@ public class Controleur implements Observateur {
                         getIhmAventurierActuelle().getAventurier().addTuile(t);
                     }
                 }
-
-                // on met à jour la liste des tuiles de la Grille
-                getGrille().getTuile(getIhmAventurierActuelle().getAventurier().getTuile().getPosX(), getIhmAventurierActuelle().getAventurier().getTuile().getPosY()).addAventurier(getIhmAventurierActuelle().getAventurier());
-                getIhmGrille().getGrille().getTuile(getIhmAventurierActuelle().getAventurier().getTuile().getPosX(), getIhmAventurierActuelle().getAventurier().getTuile().getPosY()).addAventurier(getIhmAventurierActuelle().getAventurier());
-
+                
                 getIhmGrille().setGrille(getGrille());
                 getIhmGrille().revenirGrilleDepart();
                 getIhmPlateauDeJeu().mettreAJour();
                 getIhmPlateauDeJeu().getIhmGrille().repaint();
-                getIhmGrille().repaint();
-                
 
                 setNombreActions(getNombreActions() + 1);
                 System.out.println(getNombreActions());
