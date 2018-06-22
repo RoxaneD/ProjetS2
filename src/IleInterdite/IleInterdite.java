@@ -3,6 +3,8 @@ package IleInterdite;
 import Cartes.CarteInondation;
 import Cartes.CarteTresors;
 import Controle.Controleur;
+import ElementsJeu.Tuile;
+import Enumerations.EtatTuile;
 import Enumerations.NomAventurier;
 import Enumerations.NomTresor;
 import static Util.Utils.afficherInformation;
@@ -24,10 +26,17 @@ public class IleInterdite {
         System.out.println(controleur.isDebutPartie());
         controleur.getIhmMenuPrincipal().afficherIhm();
 
+        for (Tuile t : controleur.getGrille().getTuiles()) {
+            if (t.getEtat() != EtatTuile.inexistante) {
+                t.setEtat(EtatTuile.inondee);
+            }
+        }
+
         while (!controleur.isTermine()) {
             System.out.println(" "); // pour que ça fonctionne
             if (controleur.isDebutPartie()) {
                 while (!controleur.isTermine()) {
+
                     // vérifier qu'il n'y a pas plus de 5 cartes dans le tas joueur
                     //      sinon activer défausser (et desactiver le reste)
                     while (controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().size() > 5) {
