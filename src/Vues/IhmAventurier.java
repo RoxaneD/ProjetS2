@@ -62,6 +62,8 @@ public class IhmAventurier extends JPanel implements Observe {
     private boolean afficheCarteJoueur = false;
     private boolean afficheCarteTirage = false;
     private boolean peutDonner = false;
+    private boolean helicoptere = false;
+    private boolean choisi = false;
     private boolean active0 = false;
     private boolean active1 = false;
     private boolean active2 = false;
@@ -110,7 +112,7 @@ public class IhmAventurier extends JPanel implements Observe {
     private JButton utiliser = new JButton("Utiliser");               // dans actionsCartes
     private JButton donner = new JButton("           Donner           ");                 // dans actionsCartes
 
-    //private ArrayList<Integer> cartesTresoraAfficher = new ArrayList<>();
+    private ArrayList<Integer> cartesTresoraAfficher = new ArrayList<>();
     private ArrayList<Integer> cartesTirageAffiche = new ArrayList<>();
 
     // constructeur
@@ -181,6 +183,26 @@ public class IhmAventurier extends JPanel implements Observe {
         actions.add(deplacer);
         actions.add(assecher);
         actions.add(recupererTresor);
+
+        pos.add(0);
+        pos.add(1);
+        pos.add(2);
+        pos.add(3);
+        pos.add(4);
+        pos.add(5);
+        pos.add(6);
+        pos.add(7);
+        pos.add(8);
+
+        pos.add(9);
+        pos.add(10);
+        pos.add(11);
+        pos.add(12);
+        pos.add(13);
+        pos.add(14);
+        pos.add(15);
+        pos.add(16);
+        pos.add(17);
 
         defausser.addActionListener(new ActionListener() {
             @Override
@@ -254,8 +276,8 @@ public class IhmAventurier extends JPanel implements Observe {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int taille1 = aventurier.getTasJoueur().getCartes().size();
-                int taille2 = aventurier.getTasTirage().size();            
-                if (choix == "utiliser") {              
+                int taille2 = aventurier.getTasTirage().size();
+                if (choix == "utiliser") {
                     for (Integer a : pos) {
                         if (a == 0 && active0 || a == 1 && active1 || a == 2 && active2 || a == 3 && active3 || a == 4 && active4 || a == 5 && active5 || a == 6 && active6 || a == 7 && active7 || a == 8 && active8
                                 || a == 9 && active9 || a == 10 && active10 || a == 11 && active11 || a == 12 && active12 || a == 13 && active13 || a == 14 && active14 || a == 15 && active15 || a == 16 && active16 || a == 17 && active17) {
@@ -469,8 +491,7 @@ public class IhmAventurier extends JPanel implements Observe {
                             }
                         }
                     }
-                }
-
+                }              
             }
 
             @Override
@@ -555,7 +576,7 @@ public class IhmAventurier extends JPanel implements Observe {
              * notifierObservateur(action); System.out.println("utiliser -
              * dernière carte du tasJoueur"); } }*
              */
-        }
+        } 
 
         int taille = aventurier.getTasJoueur().getCartes().size();
         panelCartesVisibles.setLayout(new GridLayout(1, taille));
@@ -568,10 +589,11 @@ public class IhmAventurier extends JPanel implements Observe {
                 System.err.println("Erreur de lecture de" + "/src/Image/Carte" + c.getNom().toString() + ".png");
             }
             g.drawImage(imageV1, 110 + ((432 / taille) * i1), titre.getHeight() + 5, carteAventurier.getWidth(), carteAventurier.getHeight(), null, panelCartesVisibles);
-            if (afficheCarteJoueur) {              
-                for (Integer pos : pos) {
-                    System.out.println("Position := "+ pos);
+            if (afficheCarteJoueur) {
+                for (Integer pos : cartesTresoraAfficher) {
+
                     if (aventurier.getTasJoueur().getCartes().indexOf(c) == pos) {
+
                         g.drawImage(iconTarget, 110 + ((432 / taille) * i1), titre.getHeight() + 5, 25, 25, null, panelCartesVisibles);
                         if (pos == 0) {
                             active0 = true;
@@ -713,6 +735,16 @@ public class IhmAventurier extends JPanel implements Observe {
         this.peutDonner = peutDonner;
     }
 
+    public void setHelicoptere(boolean helicoptere) {
+        this.helicoptere = helicoptere;
+    }
+
+    public void setChoisi(boolean choisi) {
+        this.choisi = choisi;
+    }
+    
+    
+
     // getteurs
     public String getNomJoueur() {
         return aventurier.getNomJoueur();
@@ -739,9 +771,7 @@ public class IhmAventurier extends JPanel implements Observe {
 
     public void afficherCarteJoueur(ArrayList<Integer> pos) {
         afficheCarteJoueur = true;
-        for(Integer i : pos){
-            this.pos.add(i);
-        }
+        cartesTresoraAfficher = pos;
         repaint();
 
     }
@@ -840,8 +870,8 @@ public class IhmAventurier extends JPanel implements Observe {
         ihm.pos.add(17);
 
         ArrayList<Integer> cartes = new ArrayList<>();
-        cartes.add(5);
-        cartes.add(7);
+        cartes.add(0);
+        cartes.add(1);
 
         ArrayList<Integer> cartesTirages = new ArrayList<>();
         cartesTirages.add(1);
