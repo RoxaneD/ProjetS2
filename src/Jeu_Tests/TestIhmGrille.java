@@ -49,7 +49,7 @@ public class TestIhmGrille {
 
         Plongeur aventurier1 = new Plongeur("Marie", carte1);
         aventurier1.addTuile(grille.getTuile(3, 3));
-        aventurier1.addTuile(grille.getTuile(4, 3));
+        
         Pilote aventurier2 = new Pilote("Roxane", carte2);
 
         ArrayList<Aventurier> a = new ArrayList<>();
@@ -80,7 +80,7 @@ public class TestIhmGrille {
 
         window.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
-
+        aventurier1.addTuile(grille.getTuile(5, 3));
+        aventurier1.addTuile(grille.getTuile(3, 3));
     }
-
 }
