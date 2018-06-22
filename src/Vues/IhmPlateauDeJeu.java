@@ -83,15 +83,16 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
 
         // on ajoute les pions sur les tuiles de la grille
         for (Tuile t : grille.getTuiles()) {
-            for (Aventurier a : aventuriers.values()) {
-                System.out.println("BOUH");
-                if (t.getEmplacementAventurier() == a.getCarteAventurier()) {
-                    t.addAventurier(a);
-                    a.addTuile(t);
+            for (IhmAventurier ia : ihmAventuriers) {
+                if (t.getEmplacementAventurier() != null) {
+                    if (t.getEmplacementAventurier().getNom() == ia.getAventurier().getCarteAventurier().getNom()) {
+                        t.addAventurier(ia.getAventurier());
+                        ia.getAventurier().addTuile(t);
+                    }
                 }
             }
         }
-
+        
         // reste des instantiations
         ihmNiveauEau = new IhmNiveauDeau(niveauEau);
         ihmNiveauEau.afficherIhm();
@@ -120,6 +121,18 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         ihmGrille = new IhmGrille(grille, avens, tr);
         ihmGrille.setVisible(true);
 
+        // on ajoute les pions sur les tuiles de l'ihm grille
+        for (Tuile t : ihmGrille.getTuiles()) {
+            for (IhmAventurier ia : ihmAventuriers) {
+                if (t.getEmplacementAventurier() != null) {
+                    if (t.getEmplacementAventurier().getNom() == ia.getAventurier().getCarteAventurier().getNom()) {
+                        t.addAventurier(ia.getAventurier());
+                        ia.getAventurier().addTuile(t);
+                    }
+                }
+            }
+        }
+        
         this.setSize(dimension.width, dimension.height);
         window.setSize(dimension.width, dimension.height);
 

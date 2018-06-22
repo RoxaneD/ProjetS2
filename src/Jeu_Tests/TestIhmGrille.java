@@ -6,7 +6,6 @@
 package Jeu_Tests;
 
 import Aventuriers.Aventurier;
-import Aventuriers.Explorateur;
 import Aventuriers.Pilote;
 import Aventuriers.Plongeur;
 import Cartes.CarteAventurier;
@@ -18,7 +17,6 @@ import Enumerations.EtatTuile;
 import Enumerations.NomAventurier;
 import Enumerations.NomTresor;
 import Vues.IhmGrille;
-import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
@@ -50,6 +48,8 @@ public class TestIhmGrille {
         CarteAventurier carte2 = new CarteAventurier(NomAventurier.pilote, Couleur.bleu);
 
         Plongeur aventurier1 = new Plongeur("Marie", carte1);
+        aventurier1.addTuile(grille.getTuile(3, 3));
+        aventurier1.addTuile(grille.getTuile(4, 3));
         Pilote aventurier2 = new Pilote("Roxane", carte2);
 
         ArrayList<Aventurier> a = new ArrayList<>();
@@ -72,12 +72,14 @@ public class TestIhmGrille {
         grille.getTuile(2, 2).setEtat(EtatTuile.submergee);
         ihm.afficherTuilesPossiblesAssechement(tuiles);
         ihm.afficherTuileActuelle(grille.getTuile(3, 2));
+        
 
         window.add(ihm);
         window.setSize(800, 800);
         window.setVisible(true);
 
         window.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
 
     }
 
