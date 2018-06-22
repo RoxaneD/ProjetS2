@@ -613,7 +613,6 @@ public class Controleur implements Observateur {
 
             // pour donner une carte trésor à un joueur
         } else if (action.getType() == TypesActions.donCarte) { // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            
             System.out.println("donCarte");
 
             // pour recevoir la liste des cartes qu'on peut défausser
