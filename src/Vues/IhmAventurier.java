@@ -95,6 +95,8 @@ public class IhmAventurier extends JPanel implements Observe {
     private JPanel panelCartesJoueur = new JPanel();       // dans panelVisible            
     private JPanel actions = new JPanel(new GridLayout(13, 1)); // dans panelInvisible
     private JPanel panelCartesTirages = new JPanel();      // dans panelInvisible
+    
+    private JLabel labelTitre;
 
     private Image imageCarteAventurier;
     private Image imageV1;
@@ -146,7 +148,7 @@ public class IhmAventurier extends JPanel implements Observe {
 
         // pour le panel visible
         //      partie supérieure
-        JLabel labelTitre = new JLabel(a.getNomJoueur() + " : " + a.getCarteAventurier().getNom().toString());
+        this.labelTitre = new JLabel(a.getNomJoueur() + " : " + a.getTuile().getNom());
         titre.add(labelTitre);
         panelVisible.add(titre, BorderLayout.NORTH);
 
@@ -665,7 +667,6 @@ public class IhmAventurier extends JPanel implements Observe {
                     }
                 }
             }
-
             i2 += 1;
         }
 
@@ -712,6 +713,14 @@ public class IhmAventurier extends JPanel implements Observe {
     public void setPeutDonner(boolean peutDonner) {
         this.peutDonner = peutDonner;
     }
+
+    public void setLabelTitre(String s) {
+        this.labelTitre.removeAll();
+        this.labelTitre.setText(s);
+    }
+    
+    
+    
 
     // getteurs
     public String getNomJoueur() {
@@ -838,6 +847,8 @@ public class IhmAventurier extends JPanel implements Observe {
         ihm.pos.add(15);
         ihm.pos.add(16);
         ihm.pos.add(17);
+        
+        
 
         ArrayList<Integer> cartes = new ArrayList<>();
         cartes.add(5);

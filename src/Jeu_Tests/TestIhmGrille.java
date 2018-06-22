@@ -51,7 +51,7 @@ public class TestIhmGrille {
         aventurier1.addTuile(grille.getTuile(3, 3));
         
         Pilote aventurier2 = new Pilote("Roxane", carte2);
-
+        aventurier2.addTuile(grille.getTuile(4,2));
         ArrayList<Aventurier> a = new ArrayList<>();
         a.add(aventurier1);
         a.add(aventurier2);
@@ -81,6 +81,9 @@ public class TestIhmGrille {
         window.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         aventurier1.addTuile(grille.getTuile(5, 3));
+
+        
         aventurier1.addTuile(grille.getTuile(3, 3));
+        ihm.repaint();
     }
 }

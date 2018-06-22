@@ -76,9 +76,26 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         nombreJoueurs = aventuriers.size();
 
         for (Aventurier a : aventuriers.values()) {
+            for (Tuile t : grille.getTuiles()) {
+                if (t.getEmplacementAventurier() != null) {
+                    if (t.getEmplacementAventurier().getNom() == NomAventurier.explorateur && a.getCarteAventurier().getNom() == NomAventurier.explorateur) {
+                        a.addTuile(t);
+                    } else if (t.getEmplacementAventurier().getNom() == NomAventurier.messager && a.getCarteAventurier().getNom() == NomAventurier.messager) {
+                        a.addTuile(t);
+                    }else if (t.getEmplacementAventurier().getNom() == NomAventurier.pilote && a.getCarteAventurier().getNom() == NomAventurier.pilote) {
+                        a.addTuile(t);
+                    }else if (t.getEmplacementAventurier().getNom() == NomAventurier.plongeur && a.getCarteAventurier().getNom() == NomAventurier.plongeur) {
+                        a.addTuile(t);
+                    }else if (t.getEmplacementAventurier().getNom() == NomAventurier.ingenieur && a.getCarteAventurier().getNom() == NomAventurier.ingenieur) {
+                        a.addTuile(t);
+                    }else if (t.getEmplacementAventurier().getNom() == NomAventurier.navigateur && a.getCarteAventurier().getNom() == NomAventurier.navigateur) {
+                        a.addTuile(t);
+                    }
+                }
+            }
+
             IhmAventurier ihm = new IhmAventurier(a);
             ihmAventuriers.add(ihm);
-
         }
 
         // on ajoute les pions sur les tuiles de la grille
@@ -92,7 +109,7 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
                 }
             }
         }
-        
+
         // reste des instantiations
         ihmNiveauEau = new IhmNiveauDeau(niveauEau);
         ihmNiveauEau.afficherIhm();
@@ -132,7 +149,7 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
                 }
             }
         }
-        
+
         this.setSize(dimension.width, dimension.height);
         window.setSize(dimension.width, dimension.height);
 
@@ -141,8 +158,8 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
 
         mettreAJour();
     }
-
     // setteurs
+
     public void setIhmAventurierActuelle() {
         // mettre l'attribut ihmAventurier à jour
         this.ihmAventurier = ihmAventuriers.get(1);

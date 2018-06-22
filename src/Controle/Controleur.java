@@ -33,6 +33,7 @@ import Vues.IhmGrille;
 import Vues.IhmMenuPrincipal;
 import Vues.IhmPlateauDeJeu;
 import Vues.IhmReglesDuJeu;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -465,7 +466,7 @@ public class Controleur implements Observateur {
             getIhmGrille().revenirGrilleDepart();
             getIhmGrille().afficherTuilesPossiblesAssechement(tuilesPossibles);
             // pour se déplacer sur une tuile
-        } else if (action.getType() == TypesActions.deplacement) { // A FAIRE -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType() == TypesActions.deplacement) { // OK -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("deplacement");
             //si le pouvoir du pilote est à faux et que cette aventurier est le pilote alors
             if (!pouvoirPilote && getIhmAventurierActuelle().getAventurier().getCarteAventurier().getNom() == NomAventurier.pilote) {
@@ -492,7 +493,7 @@ public class Controleur implements Observateur {
             this.mettreAjourGrille();
 
             //Si le nombre d'action est different de 3
-            if (getNombreActions() != 3) {
+            if (getNombreActions() < 3) {
                 int i = 0;
                 //tant que la tuile est differente de celle de l'aventurier
                 while (getGrille().getTuiles().get(i) != getAventurier().getTuile()) {
@@ -500,8 +501,17 @@ public class Controleur implements Observateur {
                 }
 
                 // on retire de la tuile initiale l'aventurier
+                for (Tuile t : getIhmGrille().getTuiles()) {
+                    for (Aventurier aventu : getIhmGrille().getAventuriers()) {
+                        if (aventu.getCarteAventurier().getNom() == getIhmAventurierActuelle().getAventurier().getCarteAventurier().getNom()) {
+                            if (getIhmAventurierActuelle().getAventurier().getTuile().getNom() == t.getNom()) {
+                                t.removeAventurier(aventu);
+                            }
+                        }
+                    }
+                }
+
                 getGrille().getTuiles().get(i).removeAventurier(getIhmAventurierActuelle().getAventurier());
-                getIhmGrille().getTuiles().get(i).removeAventurier(getIhmAventurierActuelle().getAventurier());
 
                 // on retire de l'aventurier sa tuile initiale
                 getAventurier().removeTuile();
@@ -522,16 +532,25 @@ public class Controleur implements Observateur {
                         getIhmAventurierActuelle().getAventurier().addTuile(t);
                     }
                 }
+
+                for (Aventurier a : getIhmGrille().getAventuriers()) {
+                    if (a.getCarteAventurier().getNom() == getIhmAventurierActuelle().getAventurier().getCarteAventurier().getNom()) {
+                        a.addTuile(action.getTuile());
+                    }
+                }
+
+                getIhmAventurierActuelle().repaint();
+                getIhmAventurierActuelle().setSize(new Dimension(getIhmAventurierActuelle().getSize().width,getIhmAventurierActuelle().getSize().height+30));
+                getIhmAventurierActuelle().setSize(new Dimension(getIhmAventurierActuelle().getSize().width,getIhmAventurierActuelle().getSize().height));
+                getIhmAventurierActuelle().setLabelTitre(getIhmAventurierActuelle().getNomJoueur()+" : "+getIhmAventurierActuelle().getAventurier().getTuile().getNom());
+                getIhmAventurierActuelle().repaint();
                 
-                getIhmGrille().setGrille(getGrille());
-                getIhmGrille().revenirGrilleDepart();
-                getIhmPlateauDeJeu().mettreAJour();
+                getIhmPlateauDeJeu().getIhmGrille().setGrille(getGrille());
+                getIhmPlateauDeJeu().getIhmGrille().revenirGrilleDepart();
                 getIhmPlateauDeJeu().getIhmGrille().repaint();
 
-                setNombreActions(getNombreActions() + 1);
-                System.out.println(getNombreActions());
+                this.setNombreActions(getNombreActions() + 1);
                 this.setActionEffectue(true);
-
             }
             // pour assécher une tuile
         } else if (action.getType() == TypesActions.assechement) { // A FAIRE --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -566,16 +585,16 @@ public class Controleur implements Observateur {
             ArrayList<Integer> cartesPos = new ArrayList<>();
             Integer i = 0;
             for (CarteTresors c : ihmPlateauDeJeu.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
-             
+
                 if (c.getNom() == NomTresor.Helicoptere || c.getNom() == NomTresor.MonteeDesEaux || c.getNom() == NomTresor.SacsDeSable) {
                     System.out.println("demandeUtilisationCarte action");
-                    System.out.println("taille du i "+i);
-                    System.out.println("Nom de la carte "+c.getNom());
-                    System.out.println("Nom de la carte par ihm "+ihmPlateauDeJeu.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().get(i).getNom());
-                    
+                    System.out.println("taille du i " + i);
+                    System.out.println("Nom de la carte " + c.getNom());
+                    System.out.println("Nom de la carte par ihm " + ihmPlateauDeJeu.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().get(i).getNom());
+
                     if (c.getNom() == ihmPlateauDeJeu.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().get(i).getNom()) {
                         cartesPos.add(i);
-                        System.out.println("i == "+i);
+                        System.out.println("i == " + i);
                     }
 
                 }

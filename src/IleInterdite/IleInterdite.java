@@ -28,6 +28,7 @@ public class IleInterdite {
             System.out.println(" "); // pour que ça fonctionne
             if (controleur.isDebutPartie()) {
                 while (!controleur.isTermine()) {
+                    
                     // vérifier qu'il n'y a pas plus de 5 cartes dans le tas joueur
                     //      sinon activer défausser (et desactiver le reste)
                     while (controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().size() > 5) {
