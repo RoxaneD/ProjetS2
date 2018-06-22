@@ -475,7 +475,8 @@ public class Controleur implements Observateur {
                 Pilote pilote2 = (Pilote) getAventurier();//pilote2 est objet de la classe pilote
                 pilote2.setPouvoir(true);// on initialise sont pouvoir à vrai
                 ///pour les tuiles adjacentes a la tuile où ce trouve l'aventurier
-                for (Tuile tuile2 : getIhmAventurierActuelle().getAventurier().getTuile().getGrille().getTuilesAdjacentes(getAventurier().getTuile())) {
+                System.out.println(getIhmAventurierActuelle().getAventurier().getTuile().getNom());
+                for (Tuile tuile2 : getGrille().getTuilesAdjacentes(getIhmAventurierActuelle().getAventurier().getTuile())) {
                     if (action.getTuile() == tuile2) {// Si la tuile où l'action s'effectue est egale a une des tuiles adjacente
                         pilote2.setPouvoir(false);//alors on passe le pouvoir du pilote2 à faux
                     }
@@ -500,21 +501,41 @@ public class Controleur implements Observateur {
                 while (getGrille().getTuiles().get(i) != getAventurier().getTuile()) {
                     i += 1;//on change de tuile
                 }
-                getGrille().getTuiles().get(i).removeAventurier(getIhmAventurierActuelle().getAventurier());
+                
                 // on retire de la tuile initiale l'aventurier
+                getGrille().getTuiles().get(i).removeAventurier(getIhmAventurierActuelle().getAventurier());
+                getIhmGrille().getTuiles().get(i).removeAventurier(getIhmAventurierActuelle().getAventurier());
+                
                 // on retire de l'aventurier sa tuile initiale
-                this.getIhmAventurierActuelle().getAventurier().removeTuile();
-                this.getIhmAventurierActuelle().getAventurier().addTuile(action.getTuile());
-                // on rajoute à la nouvelle tuile l'aventurier
-                action.getTuile().addAventurier(getIhmAventurierActuelle().getAventurier());
+                getAventurier().removeTuile();
+                getIhmAventurierActuelle().getAventurier().removeTuile();
+                
+                // on rajoute l'aventurier à la nouvelle tuile ET la tuile à l'aventurier (grille)
+                for (Tuile t : getGrille().getTuiles()){
+                    if (action.getTuile().getNom()==t.getNom()){
+                        t.addAventurier(getIhmAventurierActuelle().getAventurier());
+                        getAventurier().addTuile(t);
+                    }
+                }
 
+                // on rajoute l'aventurier à la nouvelle tuile ET la tuile à l'aventurier (ihmGrille)
+                for (Tuile t : getIhmGrille().getTuiles()){
+                    if (action.getTuile().getNom()==t.getNom()){
+                        t.addAventurier(getIhmAventurierActuelle().getAventurier());
+                        getIhmAventurierActuelle().getAventurier().addTuile(t);
+                    }
+                }
+                
                 i = 0;
                 while (getGrille().getTuiles().get(i) != getIhmAventurierActuelle().getAventurier().getTuile()) {
                     i += 1;
                 }
                 getGrille().getTuiles().get(i).addAventurier(getIhmAventurierActuelle().getAventurier());
+                getIhmGrille().getTuiles().get(i).addAventurier(getIhmAventurierActuelle().getAventurier());
+                
                 // on met à jour la liste des tuiles de la Grille
                 getGrille().getTuile(getIhmAventurierActuelle().getAventurier().getTuile().getPosX(), getIhmAventurierActuelle().getAventurier().getTuile().getPosY()).addAventurier(getIhmAventurierActuelle().getAventurier());
+                getIhmGrille().getGrille().getTuile(getIhmAventurierActuelle().getAventurier().getTuile().getPosX(), getIhmAventurierActuelle().getAventurier().getTuile().getPosY()).addAventurier(getIhmAventurierActuelle().getAventurier());
 
                 // on met à jour la vueGrille, et on la réinitialise
                 getIhmGrille().setTuiles(getGrille().getTuiles());
@@ -522,6 +543,10 @@ public class Controleur implements Observateur {
 
                 setNombreActions(getNombreActions() + 1);
                 this.setActionEffectue(true);
+                
+                getIhmPlateauDeJeu().mettreAJour();
+                getIhmPlateauDeJeu().getIhmGrille().repaint();
+                        
             }
 
             // pour assécher une tuile
@@ -545,6 +570,8 @@ public class Controleur implements Observateur {
             System.out.println("terminerTour");
             this.setNombreActions(3);// Met le nombre d'action à 3 pour que le tour se finisse
             this.setActionEffectue(true);//Met le booléen action effectuée à vrai
+            getIhmGrille().revenirGrilleDepart();
+            
             // pour recupérer un trésor
         } else if (action.getType() == TypesActions.recupererTresor) { // A FAIRE -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("recupererTresor");

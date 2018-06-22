@@ -79,7 +79,7 @@ public class IleInterdite {
                             controleur.getIhmAventurierActuelle().getDefausser().setEnabled(true);
                             controleur.getIhmAventurierActuelle().getDonner().setEnabled(true);
                         }
-                        if (controleur.getAventurier().getTuile().getEmplacementTresor() != null) {
+                        if (controleur.getIhmAventurierActuelle().getAventurier().getTuile().getEmplacementTresor() != null) {
                             NomTresor n = controleur.getAventurier().getTuile().getEmplacementTresor().getNom();
                             ArrayList<CarteTresors> carteAExaminer = new ArrayList<>();
                             for (CarteTresors ct : controleur.getAventurier().getTasJoueur().getCartes()) {
