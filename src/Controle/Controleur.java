@@ -555,10 +555,15 @@ public class Controleur implements Observateur {
             // pour assécher une tuile
         } else if (action.getType() == TypesActions.assechement) { // A FAIRE --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("assecher");
+            // pour le modele
             // on met à jour la grille
             getGrille().getTuile(action.getTuile().getPosX(), action.getTuile().getPosY()).assecher();
-            // on met à jour la vueGrille, et on la réinitialise
-            getIhmGrille().revenirGrilleDepart();
+            
+            // pour l'ihm
+            getIhmPlateauDeJeu().getIhmGrille().setGrille(getGrille());
+            getIhmPlateauDeJeu().getIhmGrille().revenirGrilleDepart();
+            getIhmPlateauDeJeu().getIhmGrille().repaint();
+            
             //Si l'aventurier n'est pas l'ingenieur ou que le pouvoir ingenieur est à vrai
             if (getAventurier().getCarteAventurier().getNom() != NomAventurier.ingenieur || isPouvoirIngenieur()) {
                 setNombreActions(getNombreActions() + 1);//on augmente le nombre d'action de 1
