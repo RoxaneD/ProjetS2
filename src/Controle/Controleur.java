@@ -545,7 +545,7 @@ public class Controleur implements Observateur {
                 this.setActionEffectue(true);
             }
             // pour assécher une tuile
-        } else if (action.getType() == TypesActions.assechement) { // A FAIRE --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType() == TypesActions.assechement) { // OK --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("assecher");
             // pour le modele
             // on met à jour la grille
@@ -654,8 +654,6 @@ public class Controleur implements Observateur {
                     }
                     // pour une carte montée des eaux
                 } else if (carteTresors.getNom() == NomTresor.MonteeDesEaux) {
-                    // on augmente le semi niveau de 1
-                    niveauEau.monterNiveau();
                     // on remet la defausse inondation au dessus du tas de cartes inondation
                     ArrayList<CarteInondation> ci = new ArrayList<>();
                     ci = defausseInondation.recupererCartes();
@@ -666,6 +664,7 @@ public class Controleur implements Observateur {
                     // on défausse cette carte dans la defausse tresors
                     defausseTresor.addCarte(carteTresors);
                     getIhmPlateauDeJeu().getNiveauEau().monterNiveau();
+                    getIhmPlateauDeJeu().repaint();
                     // pour une carte sac de sable
                 } else if (carteTresors.getNom() == NomTresor.SacsDeSable) {
                     ArrayList<Tuile> tuilesPos = new ArrayList<>();
