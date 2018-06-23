@@ -614,8 +614,20 @@ public class Controleur implements Observateur {
             // pour utiliser une carte
         } else if (action.getType() == TypesActions.utiliserCarte) { // A FAIRE -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("utiliserCarte");
+            boolean carteRetire = false;
             if (action.getCarte().getDescription() == "inondation") {
                 CarteInondation carteInondation = (CarteInondation) (action.getCarte());
+                int i = 0;
+                while (!carteRetire) {
+                    if (getIhmAventurierActuelle().getAventurier().getTasTirage().get(i).getDescription() == "inondation") {
+                        CarteInondation carteI = (CarteInondation) (getIhmAventurierActuelle().getAventurier().getTasTirage().get(i));
+                        if (carteInondation.getNom() == carteI.getNom()) {
+                            getIhmAventurierActuelle().getAventurier().getTasTirage().remove(i);
+                            carteRetire = true;
+                        }
+                    }
+                    i += 1;
+                }
             } else {
                 CarteTresors carteTresors = (CarteTresors) (action.getCarte());
                 // pour une carte hélicoptère
@@ -654,7 +666,29 @@ public class Controleur implements Observateur {
                     ihmPlateauDeJeu.getIhmGrille().afficherTuilesPossiblesAssechement(tuilesPos);
                     // ihm2.afficherTuile(ArrayList<Tuile>);
                 }
+                int i = 0;
+                for (CarteTresors c : getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
+                    if (!carteRetire) {
+                        if (c.getNom() == carteTresors.getNom()) {
+                            getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().remove(i);
+                        }
+                    }
+                    i += 1;
+                }
+                i = 0;
+                for (Carte c : getIhmAventurierActuelle().getAventurier().getTasTirage()) {
+                    if (!carteRetire) {
+                        if (c.getDescription() != "inondation") {
+                            CarteTresors cartte = (CarteTresors) (c);
+                            if (cartte.getNom() == carteTresors.getNom()) {
+                                getIhmAventurierActuelle().getAventurier().getTasTirage().remove(i);
+                            }
+                        }
+                    }
+                    i += 1;
+                }
             }
+            ihmPlateauDeJeu.getIhmAventurierActuelle().repaint();
 
             // pour afficher la liste des joueurs à qui on peut donner une carte trésor
         } else if (action.getType() == TypesActions.demandeDonCarte) { // A FAIRE -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
