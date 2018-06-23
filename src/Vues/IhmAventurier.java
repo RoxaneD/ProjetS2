@@ -97,7 +97,7 @@ public class IhmAventurier extends JPanel implements Observe {
     private JPanel panelCartesJoueur = new JPanel();       // dans panelVisible            
     private JPanel actions = new JPanel(new GridLayout(13, 1)); // dans panelInvisible
     private JPanel panelCartesTirages = new JPanel();      // dans panelInvisible
-    
+
     private JLabel labelTitre;
 
     private Image imageCarteAventurier;
@@ -283,7 +283,7 @@ public class IhmAventurier extends JPanel implements Observe {
                     for (Integer a : pos) {
                         if (a == 0 && active0 || a == 1 && active1 || a == 2 && active2 || a == 3 && active3 || a == 4 && active4 || a == 5 && active5 || a == 6 && active6 || a == 7 && active7 || a == 8 && active8
                                 || a == 9 && active9 || a == 10 && active10 || a == 11 && active11 || a == 12 && active12 || a == 13 && active13 || a == 14 && active14 || a == 15 && active15 || a == 16 && active16 || a == 17 && active17) {
-                            if (a < 9) { // pour les cartes du tasJoueur
+                            if (a < 9 && taille1 != 0) { // pour les cartes du tasJoueur
                                 if (a + 1 == taille1) { // alors -> dernière carte
                                     if ((e.getX() > 110 + ((432 / taille1) * a)) && (e.getX() < (110 + ((432 / taille1) * a) + 100))) {
                                         if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
@@ -317,7 +317,7 @@ public class IhmAventurier extends JPanel implements Observe {
 
                                 }
 
-                            } else { // pour les cartes tirages
+                            } else if (a >= 9 && taille2 != 0) { // pour les cartes tirages
 
                                 if (a + 1 - 9 == taille2) { // alors -> dernière carte
                                     if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 100))) {
@@ -359,7 +359,7 @@ public class IhmAventurier extends JPanel implements Observe {
                     for (Integer a : pos) {
                         if (a == 0 && active0 || a == 1 && active1 || a == 2 && active2 || a == 3 && active3 || a == 4 && active4 || a == 5 && active5 || a == 6 && active6 || a == 7 && active7 || a == 8 && active8
                                 || a == 9 && active9 || a == 10 && active10 || a == 11 && active11 || a == 12 && active12 || a == 13 && active13 || a == 14 && active14 || a == 15 && active15 || a == 16 && active16 || a == 17 && active17) {
-                            if (a < 9) { // pour les cartes du tasJoueur
+                            if (a < 9 && taille1 != 0) { // pour les cartes du tasJoueur
 
                                 if (a + 1 == taille1) { // alors -> dernière carte
                                     if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * a) + 100))) {
@@ -390,7 +390,7 @@ public class IhmAventurier extends JPanel implements Observe {
 
                                 }
 
-                            } else { // pour les cartes tirages
+                            } else if (a >= 9 && taille2 != 0) { // pour les cartes tirages
 
                                 if (a + 1 - 9 == taille2) { // alors -> dernière carte
                                     if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 100))) {
@@ -430,7 +430,7 @@ public class IhmAventurier extends JPanel implements Observe {
                     for (Integer a : pos) {
                         if (a == 0 && active0 || a == 1 && active1 || a == 2 && active2 || a == 3 && active3 || a == 4 && active4 || a == 5 && active5 || a == 6 && active6 || a == 7 && active7 || a == 8 && active8
                                 || a == 9 && active9 || a == 10 && active10 || a == 11 && active11 || a == 12 && active12 || a == 13 && active13 || a == 14 && active14 || a == 15 && active15 || a == 16 && active16 || a == 17 && active17) {
-                            if (a < 9) { // pour les cartes du tasJoueur
+                            if (a < 9 && taille1 != 0) { // pour les cartes du tasJoueur
                                 if (a + 1 == taille1) { // alors -> dernière carte
                                     if ((e.getX() > (110 + ((432 / taille1) * a))) && (e.getX() < (110 + ((432 / taille1) * a) + 100))) {
                                         if ((e.getY() > (titre.getHeight() + 5)) && (e.getY() < (titre.getHeight() + 145))) {
@@ -460,7 +460,7 @@ public class IhmAventurier extends JPanel implements Observe {
 
                                 }
 
-                            } else { // pour les cartes tirages
+                            } else if (a >= 9 && taille2 != 0) { // pour les cartes tirages
                                 if (a + 1 - 9 == taille2) { // alors -> dernière carte
                                     if ((e.getX() > ((400 / taille2) * (a - 9))) && (e.getX() < (((400 / taille2) * (a - 9)) + 100))) {
                                         if ((e.getY() > (titre.getHeight() + 160)) && (e.getY() < (titre.getHeight() + 300))) {
@@ -493,7 +493,7 @@ public class IhmAventurier extends JPanel implements Observe {
                             }
                         }
                     }
-                }              
+                }
             }
 
             @Override
@@ -578,7 +578,7 @@ public class IhmAventurier extends JPanel implements Observe {
              * notifierObservateur(action); System.out.println("utiliser -
              * dernière carte du tasJoueur"); } }*
              */
-        } 
+        }
 
         int taille = aventurier.getTasJoueur().getCartes().size();
         panelCartesVisibles.setLayout(new GridLayout(1, taille));
@@ -739,9 +739,6 @@ public class IhmAventurier extends JPanel implements Observe {
         this.labelTitre.removeAll();
         this.labelTitre.setText(s);
     }
-    
-    
-    
 
     public void setHelicoptere(boolean helicoptere) {
         this.helicoptere = helicoptere;
@@ -750,8 +747,6 @@ public class IhmAventurier extends JPanel implements Observe {
     public void setChoisi(boolean choisi) {
         this.choisi = choisi;
     }
-    
-    
 
     // getteurs
     public String getNomJoueur() {
@@ -874,8 +869,6 @@ public class IhmAventurier extends JPanel implements Observe {
         ihm.pos.add(15);
         ihm.pos.add(16);
         ihm.pos.add(17);
-        
-        
 
         ArrayList<Integer> cartes = new ArrayList<>();
         cartes.add(0);

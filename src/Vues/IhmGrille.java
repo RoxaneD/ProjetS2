@@ -238,6 +238,7 @@ public class IhmGrille extends JPanel implements Observe {
         // on recommence
         int i = 0;
         int j = 0;
+        this.tuiles = grille.getTuiles();
 
         // pour les trésors
         for (Tresor t : this.tresors) {
@@ -273,7 +274,7 @@ public class IhmGrille extends JPanel implements Observe {
         }
 
         // pour les tuiles et les pions
-        for (Tuile tuile : grille.getTuiles()) {
+        for (Tuile tuile : tuiles) {
             if (tuile.getEtat() == EtatTuile.inexistante) {
                 if (tuileInexistante.get(tuile) == null) {
                     tuileInexistante.put(tuile, listLabel.get(j));
@@ -339,6 +340,7 @@ public class IhmGrille extends JPanel implements Observe {
             boutons.get(tuile).setOpaque(true);
             boutons.get(tuile).setEnabled(true);  //Rend les tuils actives
         }
+        repaint();
     }
 
     public void afficherTuilesPossiblesAssechement(ArrayList<Tuile> t2) {
@@ -348,6 +350,7 @@ public class IhmGrille extends JPanel implements Observe {
             boutons.get(tuile).setOpaque(true);
             boutons.get(tuile).setEnabled(true);  //Rend les tuiles actives
         }
+        repaint();
     }
 
     public void afficherTuileActuelle(Tuile t) {
