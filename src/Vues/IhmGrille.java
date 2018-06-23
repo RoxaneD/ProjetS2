@@ -23,6 +23,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -37,7 +39,7 @@ public class IhmGrille extends JPanel implements Observe {
 
     private Grille grille;
     private ArrayList<Tuile> tuiles;
-    private HashMap<Tuile, JButton> boutons = new HashMap<>();
+    private HashMap<Tuile, JButtonImage> boutons = new HashMap<>();
     private HashMap<Tuile, JLabel> tuileInexistante = new HashMap<>();
     private ArrayList<Tresor> tresors = new ArrayList<>();
     private String imgFolder = System.getProperty("user.dir") + "/src/Image/";
@@ -45,7 +47,7 @@ public class IhmGrille extends JPanel implements Observe {
     private Image image;
     private ImageContainerCalques imageTuile;
 
-    private ArrayList<JButton> listBouton = new ArrayList<>();
+    private ArrayList<JButtonImage> listBouton = new ArrayList<>();
     private ArrayList<JLabel> listLabel = new ArrayList<>();
 
     private boolean initialise = false;
@@ -61,42 +63,42 @@ public class IhmGrille extends JPanel implements Observe {
         this.tuiles = grille.getTuiles();
         this.setLayout(new GridLayout(6, 6, 5, 5));
 
-        JButton bouton11 = new JButton();
-        JButton bouton12 = new JButton();
-        JButton bouton13 = new JButton();
-        JButton bouton14 = new JButton();
-        JButton bouton15 = new JButton();
-        JButton bouton16 = new JButton();
-        JButton bouton21 = new JButton();
-        JButton bouton22 = new JButton();
-        JButton bouton23 = new JButton();
-        JButton bouton24 = new JButton();
-        JButton bouton25 = new JButton();
-        JButton bouton26 = new JButton();
-        JButton bouton31 = new JButton();
-        JButton bouton32 = new JButton();
-        JButton bouton33 = new JButton();
-        JButton bouton34 = new JButton();
-        JButton bouton35 = new JButton();
-        JButton bouton36 = new JButton();
-        JButton bouton41 = new JButton();
-        JButton bouton42 = new JButton();
-        JButton bouton43 = new JButton();
-        JButton bouton44 = new JButton();
-        JButton bouton45 = new JButton();
-        JButton bouton46 = new JButton();
-        JButton bouton51 = new JButton();
-        JButton bouton52 = new JButton();
-        JButton bouton53 = new JButton();
-        JButton bouton54 = new JButton();
-        JButton bouton55 = new JButton();
-        JButton bouton56 = new JButton();
-        JButton bouton61 = new JButton();
-        JButton bouton62 = new JButton();
-        JButton bouton63 = new JButton();
-        JButton bouton64 = new JButton();
-        JButton bouton65 = new JButton();
-        JButton bouton66 = new JButton();
+        JButtonImage bouton11 = new JButtonImage();
+        JButtonImage bouton12 = new JButtonImage();
+        JButtonImage bouton13 = new JButtonImage();
+        JButtonImage bouton14 = new JButtonImage();
+        JButtonImage bouton15 = new JButtonImage();
+        JButtonImage bouton16 = new JButtonImage();
+        JButtonImage bouton21 = new JButtonImage();
+        JButtonImage bouton22 = new JButtonImage();
+        JButtonImage bouton23 = new JButtonImage();
+        JButtonImage bouton24 = new JButtonImage();
+        JButtonImage bouton25 = new JButtonImage();
+        JButtonImage bouton26 = new JButtonImage();
+        JButtonImage bouton31 = new JButtonImage();
+        JButtonImage bouton32 = new JButtonImage();
+        JButtonImage bouton33 = new JButtonImage();
+        JButtonImage bouton34 = new JButtonImage();
+        JButtonImage bouton35 = new JButtonImage();
+        JButtonImage bouton36 = new JButtonImage();
+        JButtonImage bouton41 = new JButtonImage();
+        JButtonImage bouton42 = new JButtonImage();
+        JButtonImage bouton43 = new JButtonImage();
+        JButtonImage bouton44 = new JButtonImage();
+        JButtonImage bouton45 = new JButtonImage();
+        JButtonImage bouton46 = new JButtonImage();
+        JButtonImage bouton51 = new JButtonImage();
+        JButtonImage bouton52 = new JButtonImage();
+        JButtonImage bouton53 = new JButtonImage();
+        JButtonImage bouton54 = new JButtonImage();
+        JButtonImage bouton55 = new JButtonImage();
+        JButtonImage bouton56 = new JButtonImage();
+        JButtonImage bouton61 = new JButtonImage();
+        JButtonImage bouton62 = new JButtonImage();
+        JButtonImage bouton63 = new JButtonImage();
+        JButtonImage bouton64 = new JButtonImage();
+        JButtonImage bouton65 = new JButtonImage();
+        JButtonImage bouton66 = new JButtonImage();
 
         listBouton.add(bouton11);
         listBouton.add(bouton12);
@@ -282,24 +284,34 @@ public class IhmGrille extends JPanel implements Observe {
                     j++;
                 }
             } else if (tuile.getEtat() == EtatTuile.normal) {
-                imageTuile = new ImageContainerCalques(imgFolder + tuile.getNom().toString() + ".png", 0, 0, 100, 110);
+                try {
+                    this.image = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/" + tuile.getNom().toString() + ".png"));
+                } catch (IOException ex) {
+                    System.err.println("Erreur de lecture de "+tuile.getNom().toString()+".png");
+                }
                 if (boutons.get(tuile) == null) {
                     boutons.put(tuile, listBouton.get(i));
-                    boutons.get(tuile).add(imageTuile);
+                    boutons.get(tuile).setImage(image);
+                    boutons.get(tuile).repaint();
                     this.add(boutons.get(tuile));
                 } else {
-                    boutons.get(tuile).remove(imageTuile);
-                    boutons.get(tuile).add(imageTuile);
+                    boutons.get(tuile).setImage(image);
+                    boutons.get(tuile).repaint();
                 }
             } else if (tuile.getEtat() == EtatTuile.inondee) {
-                imageTuile = new ImageContainerCalques(imgFolder + tuile.getNom().toString() + "_Inonde.png", 0, 0, 100, 110);
+                try {
+                    this.image = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/" + tuile.getNom().toString() + "_Inonde.png"));
+                } catch (IOException ex) {
+                    System.err.println("Erreur de lecture de"+tuile.getNom().toString()+"_Inonde.png");
+                }
                 if (boutons.put(tuile, listBouton.get(i)) == null) {
                     boutons.put(tuile, listBouton.get(i));
-                    boutons.get(tuile).add(imageTuile);
+                    boutons.get(tuile).setImage(image);
+                    boutons.get(tuile).repaint();
                     this.add(boutons.get(tuile));
                 } else {
-                    boutons.get(tuile).remove(imageTuile);
-                    boutons.get(tuile).add(imageTuile);
+                    boutons.get(tuile).setImage(image);
+                    boutons.get(tuile).repaint();
                 }
             } else if (tuile.getEtat() == EtatTuile.submergee) {
                 if (boutons.get(tuile) == null) {
@@ -356,7 +368,7 @@ public class IhmGrille extends JPanel implements Observe {
     public void afficherTuileActuelle(Tuile t) {
         boutons.get(t).setBackground(Color.black);  //Rend la tuile Noir
         boutons.get(t).setEnabled(true);
-        boutons.get(t).setOpaque(true);        
+        boutons.get(t).setOpaque(true);
     }
 
     public void revenirGrilleDepart() {
@@ -395,7 +407,7 @@ public class IhmGrille extends JPanel implements Observe {
         return tuiles;
     }
 
-    public HashMap<Tuile, JButton> getBoutons() {
+    public HashMap<Tuile, JButtonImage> getBoutons() {
         return boutons;
     }
 
@@ -403,7 +415,7 @@ public class IhmGrille extends JPanel implements Observe {
         return tuileInexistante;
     }
 
-    public ArrayList<JButton> getListBouton() {
+    public ArrayList<JButtonImage> getListBouton() {
         return listBouton;
     }
 
@@ -424,7 +436,7 @@ public class IhmGrille extends JPanel implements Observe {
         this.tuiles = tuiles;
     }
 
-    public void setBoutons(HashMap<Tuile, JButton> boutons) {
+    public void setBoutons(HashMap<Tuile, JButtonImage> boutons) {
         this.boutons = boutons;
     }
 
@@ -432,7 +444,7 @@ public class IhmGrille extends JPanel implements Observe {
         this.tuileInexistante = tuileInexistante;
     }
 
-    public void setListBouton(ArrayList<JButton> listBouton) {
+    public void setListBouton(ArrayList<JButtonImage> listBouton) {
         this.listBouton = listBouton;
     }
 
