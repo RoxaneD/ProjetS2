@@ -111,6 +111,7 @@ public class IleInterdite {
                             }
                         }
                     }
+                    controleur.setNombreActions(0);
 
                     controleur.getIhmAventurierActuelle().getAssecher().setEnabled(false);
                     controleur.getIhmAventurierActuelle().getDeplacer().setEnabled(false);
@@ -212,11 +213,31 @@ public class IleInterdite {
                         controleur.getIhmAventurierActuelle().getTerminer().setEnabled(false);
                     }
 
+                    ArrayList<CarteTresors> car = new ArrayList<>();
                     if (controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().size() != 0) {
-                        ArrayList<CarteTresors> ac = new ArrayList<CarteTresors>();
-                        for (CarteTresors car : controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
-                            if (car.getNom() == NomTresor.Helicoptere || car.getNom() == NomTresor.SacsDeSable) {
+                        car = new ArrayList<CarteTresors>();
+                        for (CarteTresors ca : controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
+                            if (ca.getNom() == NomTresor.Helicoptere || ca.getNom() == NomTresor.SacsDeSable) {
+                                car.add(ca);
+                            }
+                        }
+                    }
 
+                    while (controleur.getNombreActions() != 3 && car.size() != 0) {
+                        System.out.print(" ");
+                        controleur.getIhmAventurierActuelle().getAssecher().setEnabled(false);
+                        controleur.getIhmAventurierActuelle().getDefausser().setEnabled(true);
+                        controleur.getIhmAventurierActuelle().getUtiliser().setEnabled(true);
+                        controleur.getIhmAventurierActuelle().getDeplacer().setEnabled(false);
+                        controleur.getIhmAventurierActuelle().getDonner().setEnabled(false);
+                        controleur.getIhmAventurierActuelle().getRecupererTresor().setEnabled(false);
+                        controleur.getIhmAventurierActuelle().getTerminer().setEnabled(true);
+                        if (controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().size() != 0) {
+                            car = new ArrayList<CarteTresors>();
+                            for (CarteTresors ca : controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
+                                if (ca.getNom() == NomTresor.Helicoptere || ca.getNom() == NomTresor.SacsDeSable) {
+                                    car.add(ca);
+                                }
                             }
                         }
                     }
