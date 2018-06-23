@@ -2,12 +2,15 @@ package IleInterdite;
 
 import Cartes.CarteInondation;
 import Cartes.CarteTresors;
+import Controle.Action;
 import Controle.Controleur;
+import Controle.TypesActions;
 import ElementsJeu.Tuile;
 import Enumerations.EtatTuile;
 import Enumerations.NomAventurier;
 import Enumerations.NomTresor;
 import static Util.Utils.afficherInformation;
+import Vues.IhmAventurier;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -29,6 +32,33 @@ public class IleInterdite {
         while (!controleur.isTermine()) {
             System.out.print(" "); // pour que ça fonctionne
             if (controleur.isDebutPartie()) {
+                for (IhmAventurier ia : controleur.getIhmPlateauDeJeu().getIhmAventuriers()) {
+                    CarteTresors carte1 = controleur.getTasTresor().getPremiereCarte();
+                    CarteTresors carte2 = controleur.getTasTresor().getPremiereCarte();
+                    while (carte1.getNom() == NomTresor.MonteeDesEaux) {
+                        controleur.getTasTresor().addCarte(carte1);
+                        Collections.shuffle(controleur.getTasTresor().getCartesTresors());
+                        carte1 = controleur.getTasTresor().getPremiereCarte();
+                    }
+                    while (carte2.getNom() == NomTresor.MonteeDesEaux) {
+                        controleur.getTasTresor().addCarte(carte2);
+                        Collections.shuffle(controleur.getTasTresor().getCartesTresors());
+                        carte2 = controleur.getTasTresor().getPremiereCarte();
+                    }
+                    ia.getAventurier().getTasJoueur().addCarte(carte1);
+                    ia.getAventurier().getTasJoueur().addCarte(carte2);
+                }
+
+                CarteInondation ci1;
+                int i = 0;
+                while (i < 6) {
+                    ci1 = controleur.getTasInondation().getPremiereCarte();
+                    controleur.getIhmAventurierActuelle().getAventurier().getTasTirage().add(ci1);
+                    Action a = new Action(TypesActions.utiliserCarte, ci1);
+                    controleur.traiterAction(a);
+                    i += 1;
+                }
+
                 while (!controleur.isTermine()) {
 
                     // vérifier qu'il n'y a pas plus de 5 cartes dans le tas joueur
@@ -130,7 +160,7 @@ public class IleInterdite {
 
                     controleur.getIhmPlateauDeJeu().mettreAJour();
 
-                    while (controleur.getAventurier().getTasTirage().size() != 0) {
+                    while (controleur.getIhmAventurierActuelle().getAventurier().getTasTirage().size() != 0) {
                         controleur.getIhmAventurierActuelle().getAssecher().setEnabled(false);
                         controleur.getIhmAventurierActuelle().getDefausser().setEnabled(true);
                         controleur.getIhmAventurierActuelle().getUtiliser().setEnabled(true);
@@ -156,7 +186,7 @@ public class IleInterdite {
 
                     // tirage des cartes inondations (automatiquement)
                     //      activer utiliser (désactiver le reste)
-                    int i = 0;
+                    i = 0;
                     while (i < controleur.getNiveau()) {
                         if (controleur.getTasInondation().getCartesInondations().size() == 0) {
                             Collections.shuffle(controleur.getDefausseInondation().getCartesInondation());
@@ -180,6 +210,15 @@ public class IleInterdite {
                         controleur.getIhmAventurierActuelle().getDonner().setEnabled(false);
                         controleur.getIhmAventurierActuelle().getRecupererTresor().setEnabled(false);
                         controleur.getIhmAventurierActuelle().getTerminer().setEnabled(false);
+                    }
+
+                    if (controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().size() != 0) {
+                        ArrayList<CarteTresors> ac = new ArrayList<CarteTresors>();
+                        for (CarteTresors car : controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
+                            if (car.getNom() == NomTresor.Helicoptere || car.getNom() == NomTresor.SacsDeSable) {
+
+                            }
+                        }
                     }
 
                     // passage au joueur suivant
