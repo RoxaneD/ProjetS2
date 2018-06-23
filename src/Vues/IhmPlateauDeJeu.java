@@ -36,6 +36,7 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
     // attributs internes
     private Observateur observateur;
     private int nombreJoueurs;
+    private NiveauEau niveau;
 
     // ihms
     private ArrayList<IhmAventurier> ihmAventuriers = new ArrayList<>();
@@ -74,6 +75,7 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
 
         // instantiations des ihms
         nombreJoueurs = aventuriers.size();
+        setNiveau(niveauEau);
 
         for (Aventurier a : aventuriers.values()) {
             for (Tuile t : grille.getTuiles()) {
@@ -183,6 +185,10 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         // mettre visuellement les ihms à jour
         mettreAJour();
     }
+    
+    public void setNiveau(NiveauEau niveau){
+        this.niveau = niveau;
+    }
 
     // getteurs
     public JFrame getWindow() {
@@ -207,6 +213,10 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
 
     public IhmTasDeCarte getIhmTasDeCarte() {
         return ihmTasDeCarte;
+    }
+    
+    public NiveauEau getNiveauEau(){
+        return this.niveau;
     }
 
     // autre méthodes
@@ -401,6 +411,7 @@ public class IhmPlateauDeJeu extends JPanel implements Observe {
         ihmGrille.setPreferredSize(new Dimension((int) (dimension.width * 0.525), (int) (dimension.height * 0.7125)));
 
         panelGauche.add(ihmGrille, BorderLayout.NORTH);
+        ihmNiveauEau.setNiveauEau(getNiveauEau());
         eauEtCartes.add(ihmNiveauEau);
         ihmNiveauEau.setSize(431, 276);
         eauEtCartes.add(ihmTasDeCarte);

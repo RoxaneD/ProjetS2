@@ -662,13 +662,7 @@ public class Controleur implements Observateur {
                     }
                     // on défausse cette carte dans la defausse tresors
                     defausseTresor.addCarte(carteTresors);
-                    int i = 0;
-                    for (CarteTresors c : tasJoueurs.get(action.getNom()).getCartes()) {
-                        if (c == action.getCarte()) {
-                            tasJoueurs.get(action.getNom()).getCartes().remove(i);
-                        }
-                        i += 1;
-                    }
+                    getIhmPlateauDeJeu().getNiveauEau().monterNiveau();
                     // pour une carte sac de sable
                 } else if (carteTresors.getNom() == NomTresor.SacsDeSable) {
                     ArrayList<Tuile> tuilesPos = new ArrayList<>();
@@ -681,25 +675,38 @@ public class Controleur implements Observateur {
                     // ihm2.afficherTuile(ArrayList<Tuile>);
                 }
                 int i = 0;
+                int aRetirer = -1;
                 for (CarteTresors c : getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
                     if (!carteRetire) {
                         if (c.getNom() == carteTresors.getNom()) {
-                            getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().remove(i);
+                            aRetirer = i;
+                            carteRetire = true;
                         }
                     }
                     i += 1;
                 }
+                
+                if (aRetirer!=-1){
+                    getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().remove(aRetirer);
+                }
+                
                 i = 0;
+                aRetirer = -1;
                 for (Carte c : getIhmAventurierActuelle().getAventurier().getTasTirage()) {
                     if (!carteRetire) {
                         if (c.getDescription() != "inondation") {
                             CarteTresors cartte = (CarteTresors) (c);
                             if (cartte.getNom() == carteTresors.getNom()) {
-                                getIhmAventurierActuelle().getAventurier().getTasTirage().remove(i);
+                                aRetirer = i;
+                                carteRetire = true;
                             }
                         }
                     }
                     i += 1;
+                }
+                
+                if (aRetirer!=-1){
+                    getIhmAventurierActuelle().getAventurier().getTasTirage().remove(aRetirer);
                 }
             }
             getIhmPlateauDeJeu().mettreAJour();
