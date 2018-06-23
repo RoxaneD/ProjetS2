@@ -239,7 +239,7 @@ public class Controleur implements Observateur {
     public HashMap<String, Aventurier> getAventuriers() {
         return aventuriers;
     }
-
+    
     public ArrayList<Aventurier> getArrayAventuriers() {
         ArrayList<Aventurier> a = new ArrayList<Aventurier>();
         for (Aventurier av : getAventuriers().values()) {
@@ -358,11 +358,11 @@ public class Controleur implements Observateur {
     public boolean isPouvoirIngenieur() {
         return pouvoirIngenieur;
     }
-
+    
     public ArrayList<String> getJoueurs() {
         return joueurs;
     }
-
+    
     public HashMap<String, TasJoueur> getTasJoueurs() {
         return tasJoueurs;
     }
@@ -371,19 +371,19 @@ public class Controleur implements Observateur {
     public IhmMenuPrincipal getIhmMenuPrincipal() {
         return ihmMenuPrincipal;
     }
-
+    
     public IhmReglesDuJeu getIhmReglesDuJeu() {
         return ihmReglesDuJeu;
     }
-
+    
     public IhmPlateauDeJeu getIhmPlateauDeJeu() {
         return ihmPlateauDeJeu;
     }
-
+    
     public boolean isDebutPartie() {
         return debutPartie;
     }
-
+    
     public void mettreAjourGrille() {
         this.getGrille().mettreAjourGrille(this.getIhmGrille().getTuiles());
     }
@@ -433,7 +433,7 @@ public class Controleur implements Observateur {
                 ihm.addObservateur(this);
             }
             ihmPlateauDeJeu.afficherIhm();
-
+            
             debutPartie = true;
 
             // fermer IHM_Menu
@@ -489,7 +489,7 @@ public class Controleur implements Observateur {
                 setPouvoirIngenieur(false);//on passe le pouvoir a faux
                 this.setNombreActions(getNombreActions() + 1);//Et on augmente le nombre d'action de 1
             }
-
+            
             this.mettreAjourGrille();
 
             //Si le nombre d'action est different de 3
@@ -510,7 +510,7 @@ public class Controleur implements Observateur {
                         }
                     }
                 }
-
+                
                 getGrille().getTuiles().get(i).removeAventurier(getIhmAventurierActuelle().getAventurier());
 
                 // on retire de l'aventurier sa tuile initiale
@@ -532,12 +532,12 @@ public class Controleur implements Observateur {
                         getIhmAventurierActuelle().getAventurier().addTuile(t);
                     }
                 }
-
+                
                 getIhmGrille().setGrille(getGrille());
                 getIhmGrille().revenirGrilleDepart();
                 getIhmPlateauDeJeu().mettreAJour();
                 getIhmPlateauDeJeu().getIhmGrille().repaint();
-
+                
                 this.setNombreActions(getNombreActions() + 1);
                 this.setActionEffectue(true);
             }
@@ -580,13 +580,13 @@ public class Controleur implements Observateur {
             ArrayList<Integer> cartesPosTirage = new ArrayList<>();
             Integer i = 0;
             for (CarteTresors c : ihmPlateauDeJeu.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
-
+                
                 if (c.getNom() == NomTresor.Helicoptere || c.getNom() == NomTresor.SacsDeSable) {
                     System.out.println("demandeUtilisationCarte action");
                     System.out.println("taille du i := " + i);
                     System.out.println("Nom de la carte " + c.getNom());
                     System.out.println("Nom de la carte par ihm " + ihmPlateauDeJeu.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().get(i).getNom());
-
+                    
                     if (c.getNom() == ihmPlateauDeJeu.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().get(i).getNom()) {
                         cartesPosJoueur.add(i);
                         System.out.println("i == " + i);
@@ -594,14 +594,14 @@ public class Controleur implements Observateur {
                 }
                 i++;
             }
-
+            
             i = 1;
             for (Carte c : ihmPlateauDeJeu.getIhmAventurierActuelle().getAventurier().getTasTirage()) {
                 cartesPosTirage.add(i);
                 System.out.println("i == " + i);
                 i++;
             }
-
+            
             if (!cartesPosJoueur.isEmpty()) {
                 ihmPlateauDeJeu.getIhmAventurierActuelle().setChoix("utiliser");
                 ihmPlateauDeJeu.getIhmAventurierActuelle().afficherCarteJoueur(cartesPosJoueur);
@@ -618,6 +618,19 @@ public class Controleur implements Observateur {
             if (action.getCarte().getDescription() == "inondation") {
                 CarteInondation carteInondation = (CarteInondation) (action.getCarte());
                 int i = 0;
+                
+                for (Tuile t : getGrille().getTuiles()) {
+                    if (t.getNom() == carteInondation.getNom()) {
+                        if (t.getEtat() == EtatTuile.normal) {
+                            t.setEtat(EtatTuile.inondee);
+                        } else if (t.getEtat() == EtatTuile.inondee) {
+                            t.setEtat(EtatTuile.inexistante);
+                        }
+                    }
+                }
+                getIhmGrille().setGrille(getGrille());
+                getIhmGrille().repaint();
+                
                 while (!carteRetire) {
                     if (getIhmAventurierActuelle().getAventurier().getTasTirage().get(i).getDescription() == "inondation") {
                         CarteInondation carteI = (CarteInondation) (getIhmAventurierActuelle().getAventurier().getTasTirage().get(i));
@@ -632,6 +645,7 @@ public class Controleur implements Observateur {
                 CarteTresors carteTresors = (CarteTresors) (action.getCarte());
                 // pour une carte hélicoptère
                 if (carteTresors.getNom() == NomTresor.Helicoptere) {
+                    // pas traité
                     for (Aventurier a : ihmPlateauDeJeu.getIhmGrille().getAventuriers()) {
                         ihmPlateauDeJeu.getIhmGrille().afficherTuileActuelle(a.getTuile());
                     }
