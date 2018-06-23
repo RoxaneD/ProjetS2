@@ -26,12 +26,6 @@ public class IleInterdite {
         System.out.println(controleur.isDebutPartie());
         controleur.getIhmMenuPrincipal().afficherIhm();
 
-        for (Tuile t : controleur.getGrille().getTuiles()) {
-            if (t.getEtat() != EtatTuile.inexistante) {
-                t.setEtat(EtatTuile.inondee);
-            }
-        }
-
         while (!controleur.isTermine()) {
             System.out.println(" "); // pour que ça fonctionne
             if (controleur.isDebutPartie()) {
