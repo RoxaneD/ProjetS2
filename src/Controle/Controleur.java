@@ -577,22 +577,15 @@ public class Controleur implements Observateur {
             System.out.println("recupererTresor");
 
             // pour afficher les cartes qu'on peut utiliser (de ses propres cartes)
-        } else if (action.getType() == TypesActions.demandeUtilisationCarte) { // A FAIRE -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType() == TypesActions.demandeUtilisationCarte) { // OK -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("demandeUtilisationCarte");
             ArrayList<Integer> cartesPosJoueur = new ArrayList<>();
             ArrayList<Integer> cartesPosTirage = new ArrayList<>();
             Integer i = 0;
             for (CarteTresors c : ihmPlateauDeJeu.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
-
                 if (c.getNom() == NomTresor.Helicoptere || c.getNom() == NomTresor.SacsDeSable) {
-                    System.out.println("demandeUtilisationCarte action");
-                    System.out.println("taille du i := " + i);
-                    System.out.println("Nom de la carte " + c.getNom());
-                    System.out.println("Nom de la carte par ihm " + ihmPlateauDeJeu.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().get(i).getNom());
-
                     if (c.getNom() == ihmPlateauDeJeu.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().get(i).getNom()) {
                         cartesPosJoueur.add(i);
-                        System.out.println("i == " + i);
                     }
                 }
                 i++;
@@ -615,7 +608,7 @@ public class Controleur implements Observateur {
             }
 
             // pour utiliser une carte
-        } else if (action.getType() == TypesActions.utiliserCarte) { // A FAIRE -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType() == TypesActions.utiliserCarte) { // A COMPLETER -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("utiliserCarte");
             boolean carteRetire = false;
             if (action.getCarte().getDescription() == "inondation") {
@@ -638,7 +631,8 @@ public class Controleur implements Observateur {
                     if (getIhmAventurierActuelle().getAventurier().getTasTirage().get(i).getDescription() == "inondation") {
                         CarteInondation carteI = (CarteInondation) (getIhmAventurierActuelle().getAventurier().getTasTirage().get(i));
                         if (carteInondation.getNom() == carteI.getNom()) {
-                            getIhmAventurierActuelle().getAventurier().getTasTirage().remove(i);
+                            Action a = new Action(TypesActions.defausserCarte, getIhmAventurierActuelle().getAventurier().getTasTirage().get(i));
+                            traiterAction(a);
                             carteRetire = true;
                         }
                     }
@@ -689,7 +683,8 @@ public class Controleur implements Observateur {
                 }
 
                 if (aRetirer != -1) {
-                    getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().remove(aRetirer);
+                    Action a = new Action(TypesActions.defausserCarte, getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().get(aRetirer));
+                    traiterAction(a);
                 }
 
                 i = 0;
@@ -708,7 +703,8 @@ public class Controleur implements Observateur {
                 }
 
                 if (aRetirer != -1) {
-                    getIhmAventurierActuelle().getAventurier().getTasTirage().remove(aRetirer);
+                    Action a = new Action(TypesActions.defausserCarte, getIhmAventurierActuelle().getAventurier().getTasTirage().get(aRetirer));
+                    traiterAction(a);
                 }
             }
             getIhmPlateauDeJeu().mettreAJour();
@@ -734,12 +730,61 @@ public class Controleur implements Observateur {
             System.out.println("donCarte");
 
             // pour recevoir la liste des cartes qu'on peut défausser
-        } else if (action.getType() == TypesActions.demandeDefausseCarte) { // A FAIRE----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType() == TypesActions.demandeDefausseCarte) { // OK ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("demandeDefausseCarte");
+            ihmPlateauDeJeu.getIhmAventurierActuelle().setChoix("defausser");
+            ArrayList<Integer> cartesPosJoueur = new ArrayList<>();
+            Integer i = 0;
+            for (Carte c : getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
+                cartesPosJoueur.add(i);
+                i += 1;
+            }
+            getIhmAventurierActuelle().afficherCarteJoueur(cartesPosJoueur);
 
             // pour se défausse d'une carte
-        } else if (action.getType() == TypesActions.defausserCarte) { // A FAIRE ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType() == TypesActions.defausserCarte) { // OK ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("defausserCarte");
+            if (action.getCarte().getDescription() == "inondation") {
+                CarteInondation ci = (CarteInondation) (action.getCarte());
+                int i = 0;
+                int aRetirer = -1;
+                boolean carteRetire = false;
+                for (Carte c : getIhmAventurierActuelle().getAventurier().getTasTirage()) {
+                    if (c.getDescription() == "inondation") {
+                        CarteInondation carteComparer = (CarteInondation) (c);
+                        if (!carteRetire && ci.getNom() == carteComparer.getNom()) {
+                            aRetirer = i;
+                            carteRetire = true;
+                        }
+                    }
+                    i += 1;
+                }
+                if (aRetirer != -1) {
+                    getIhmAventurierActuelle().getAventurier().getTasTirage().remove(aRetirer);
+                }
+                this.getDefausseInondation().addCarte(ci);
+                this.getIhmPlateauDeJeu().getIhmTasDeCarte().setCi(ci);
+            } else {
+                CarteTresors ct = (CarteTresors) (action.getCarte());
+                int i = 0;
+                int aRetirer = -1;
+                boolean carteRetire = false;
+                for (CarteTresors c : getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
+                    if (!carteRetire && c.getNom() == ct.getNom()) {
+                        aRetirer = i;
+                    }
+                    i += 1;
+                }
+                if (aRetirer != -1) {
+                    getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().remove(aRetirer);
+                }
+                this.getDefausseTresor().addCarte(ct);
+                this.getIhmPlateauDeJeu().getIhmTasDeCarte().setCt(ct);
+            }
+            getIhmPlateauDeJeu().mettreAJour();
+            ihmPlateauDeJeu.getIhmAventurierActuelle().repaint();
+            getIhmPlateauDeJeu().getIhmTasDeCarte().repaint();
+
             // pour afficher les règles du jeu
         } else if (action.getType() == TypesActions.reglesJeu) { // OK ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("reglesJeu");
