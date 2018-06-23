@@ -547,12 +547,12 @@ public class Controleur implements Observateur {
             // pour le modele
             // on met à jour la grille
             getGrille().getTuile(action.getTuile().getPosX(), action.getTuile().getPosY()).assecher();
-            
+
             // pour l'ihm
             getIhmPlateauDeJeu().getIhmGrille().setGrille(getGrille());
             getIhmPlateauDeJeu().getIhmGrille().revenirGrilleDepart();
             getIhmPlateauDeJeu().getIhmGrille().repaint();
-            
+
             //Si l'aventurier n'est pas l'ingenieur ou que le pouvoir ingenieur est à vrai
             if (getAventurier().getCarteAventurier().getNom() != NomAventurier.ingenieur || isPouvoirIngenieur()) {
                 setNombreActions(getNombreActions() + 1);//on augmente le nombre d'action de 1
@@ -576,68 +576,84 @@ public class Controleur implements Observateur {
             // pour afficher les cartes qu'on peut utiliser (de ses propres cartes)
         } else if (action.getType() == TypesActions.demandeUtilisationCarte) { // A FAIRE -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("demandeUtilisationCarte");
-            ArrayList<Integer> cartesPos = new ArrayList<>();
+            ArrayList<Integer> cartesPosJoueur = new ArrayList<>();
+            ArrayList<Integer> cartesPosTirage = new ArrayList<>();
             Integer i = 0;
             for (CarteTresors c : ihmPlateauDeJeu.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
 
-                if (c.getNom() == NomTresor.Helicoptere || c.getNom() == NomTresor.MonteeDesEaux || c.getNom() == NomTresor.SacsDeSable) {
+                if (c.getNom() == NomTresor.Helicoptere || c.getNom() == NomTresor.SacsDeSable) {
                     System.out.println("demandeUtilisationCarte action");
                     System.out.println("taille du i := " + i);
-                    System.out.println("taille du i " + i);
                     System.out.println("Nom de la carte " + c.getNom());
                     System.out.println("Nom de la carte par ihm " + ihmPlateauDeJeu.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().get(i).getNom());
 
                     if (c.getNom() == ihmPlateauDeJeu.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().get(i).getNom()) {
-                        cartesPos.add(i);
+                        cartesPosJoueur.add(i);
                         System.out.println("i == " + i);
                     }
-
                 }
                 i++;
             }
-            if (!cartesPos.isEmpty()) {
+
+            i = 1;
+            for (Carte c : ihmPlateauDeJeu.getIhmAventurierActuelle().getAventurier().getTasTirage()) {
+                cartesPosTirage.add(i);
+                System.out.println("i == " + i);
+                i++;
+            }
+
+            if (!cartesPosJoueur.isEmpty()) {
                 ihmPlateauDeJeu.getIhmAventurierActuelle().setChoix("utiliser");
-                ihmPlateauDeJeu.getIhmAventurierActuelle().afficherCarteJoueur(cartesPos);
+                ihmPlateauDeJeu.getIhmAventurierActuelle().afficherCarteJoueur(cartesPosJoueur);
+            }
+            if (!cartesPosTirage.isEmpty()) {
+                ihmPlateauDeJeu.getIhmAventurierActuelle().setChoix("utiliser");
+                ihmPlateauDeJeu.getIhmAventurierActuelle().afficherCarteTirage(cartesPosTirage);
             }
 
             // pour utiliser une carte
         } else if (action.getType() == TypesActions.utiliserCarte) { // A FAIRE -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("utiliserCarte");
-            // pour une carte hélicoptère
-            if (action.getCarteT().getNom() == NomTresor.Helicoptere) {
-                for(Aventurier a :ihmPlateauDeJeu.getIhmGrille().getAventuriers()){
-                    ihmPlateauDeJeu.getIhmGrille().afficherTuileActuelle(a.getTuile());
-                }
-                // pour une carte montée des eaux
-            } else if (action.getCarteT().getNom() == NomTresor.MonteeDesEaux) {
-                // on augmente le semi niveau de 1
-                niveauEau.monterNiveau();
-                // on remet la defausse inondation au dessus du tas de cartes inondation
-                ArrayList<CarteInondation> ci = new ArrayList<>();
-                ci = defausseInondation.recupererCartes();
-                Collections.shuffle(ci);
-                for (CarteInondation c : ci) {
-                    tasInondation.addCarte(c);
-                }
-                // on défausse cette carte dans la defausse tresors
-                defausseTresor.addCarte(action.getCarteT());
-                int i = 0;
-                for (CarteTresors c : tasJoueurs.get(action.getNom()).getCartes()) {
-                    if (c == action.getCarteT()) {
-                        tasJoueurs.get(action.getNom()).getCartes().remove(i);
+            if (action.getCarte().getDescription() == "inondation") {
+                CarteInondation carteInondation = (CarteInondation) (action.getCarte());
+            } else {
+                CarteTresors carteTresors = (CarteTresors) (action.getCarte());
+                // pour une carte hélicoptère
+                if (carteTresors.getNom() == NomTresor.Helicoptere) {
+                    for (Aventurier a : ihmPlateauDeJeu.getIhmGrille().getAventuriers()) {
+                        ihmPlateauDeJeu.getIhmGrille().afficherTuileActuelle(a.getTuile());
                     }
-                    i += 1;
-                }
-                // pour une carte sac de sable
-            } else if (action.getCarteT().getNom() == NomTresor.SacsDeSable) {
-                ArrayList<Tuile> tuilesPos = new ArrayList<>();
-                for (Tuile t : grille.getTuiles()) {
-                    if (t.getEtat() == EtatTuile.inondee) {
-                        tuilesPos.add(t);
+                    // pour une carte montée des eaux
+                } else if (carteTresors.getNom() == NomTresor.MonteeDesEaux) {
+                    // on augmente le semi niveau de 1
+                    niveauEau.monterNiveau();
+                    // on remet la defausse inondation au dessus du tas de cartes inondation
+                    ArrayList<CarteInondation> ci = new ArrayList<>();
+                    ci = defausseInondation.recupererCartes();
+                    Collections.shuffle(ci);
+                    for (CarteInondation c : ci) {
+                        tasInondation.addCarte(c);
                     }
+                    // on défausse cette carte dans la defausse tresors
+                    defausseTresor.addCarte(carteTresors);
+                    int i = 0;
+                    for (CarteTresors c : tasJoueurs.get(action.getNom()).getCartes()) {
+                        if (c == action.getCarte()) {
+                            tasJoueurs.get(action.getNom()).getCartes().remove(i);
+                        }
+                        i += 1;
+                    }
+                    // pour une carte sac de sable
+                } else if (carteTresors.getNom() == NomTresor.SacsDeSable) {
+                    ArrayList<Tuile> tuilesPos = new ArrayList<>();
+                    for (Tuile t : grille.getTuiles()) {
+                        if (t.getEtat() == EtatTuile.inondee) {
+                            tuilesPos.add(t);
+                        }
+                    }
+                    ihmPlateauDeJeu.getIhmGrille().afficherTuilesPossiblesAssechement(tuilesPos);
+                    // ihm2.afficherTuile(ArrayList<Tuile>);
                 }
-                ihmPlateauDeJeu.getIhmGrille().afficherTuilesPossiblesAssechement(tuilesPos);
-                // ihm2.afficherTuile(ArrayList<Tuile>);
             }
 
             // pour afficher la liste des joueurs à qui on peut donner une carte trésor

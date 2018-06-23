@@ -625,7 +625,6 @@ public class IhmAventurier extends JPanel implements Observe {
                             active8 = true;
                             actives.add(active8);
                         }
-
                     }
                 }
             }
@@ -782,14 +781,12 @@ public class IhmAventurier extends JPanel implements Observe {
         afficheCarteJoueur = true;
         cartesTresoraAfficher = pos;
         repaint();
-
     }
 
     public void afficherCarteTirage(ArrayList<Integer> pos) {
         afficheCarteTirage = true;
         cartesTirageAffiche = pos;
         repaint();
-
     }
 
     @Override

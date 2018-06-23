@@ -13,8 +13,7 @@ public class Action {
     private TypesActions type;//Types d'action
     private Tuile tuile;//Tuile où s'effectue l'action
     private String nom;
-    private CarteTresors carteT;
-    private CarteInondation carteI;
+    private Carte carte;
     private ArrayList<String> joueurs = new ArrayList<>();
     private int niveau;
 
@@ -37,7 +36,7 @@ public class Action {
 
     public Action(TypesActions type, Carte carte) {
         setType(type);
-        setCarteTirage(carte);
+        setCarte(carte);
     }
 
     public Action(TypesActions type, ArrayList<String> joueurs, int i) { // pour commencer une partie
@@ -62,15 +61,11 @@ public class Action {
         this.tuile = tuile;
     }
 
-    public void setCarteT(CarteTresors carteT) {
-        this.carteT = carteT;
-    }
-
-    public void setCarteTirage(Carte carte) {
+    public void setCarte(Carte carte) {
         if (carte.getDescription() == "inondation") {
-            this.carteI = (CarteInondation) (carte);
+            this.carte = (CarteInondation) (carte);
         } else {
-            this.carteT = (CarteTresors) (carte);
+            this.carte = (CarteTresors) (carte);
         }
     }
 
@@ -97,8 +92,8 @@ public class Action {
         return nom;
     }
 
-    public CarteTresors getCarteT() {
-        return carteT;
+    public Carte getCarte() {
+        return carte;
     }
 
     public ArrayList<String> getJoueurs() {
