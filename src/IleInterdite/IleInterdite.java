@@ -27,7 +27,7 @@ public class IleInterdite {
         controleur.getIhmMenuPrincipal().afficherIhm();
 
         while (!controleur.isTermine()) {
-            System.out.println(" "); // pour que ça fonctionne
+            System.out.print(" "); // pour que ça fonctionne
             if (controleur.isDebutPartie()) {
                 while (!controleur.isTermine()) {
 
@@ -65,7 +65,7 @@ public class IleInterdite {
                     }
 
                     while (controleur.getNombreActions() < 3) {
-                        System.out.println(" "); // sinon ça ne fonctionne pas
+                        System.out.print(" "); // sinon ça ne fonctionne pas
                         if (controleur.getIhmAventurierActuelle().getAventurier().getTuile() != null) {
                             if (controleur.getIhmAventurierActuelle().getAventurier().getTuile().getEmplacementTresor() != null) {
                                 NomTresor n = controleur.getAventurier().getTuile().getEmplacementTresor().getNom();
@@ -172,6 +172,7 @@ public class IleInterdite {
                     controleur.getIhmPlateauDeJeu().mettreAJour();
 
                     while (controleur.getIhmAventurierActuelle().getAventurier().getTasTirage().size() != 0) {
+                        System.out.print(" ");
                         controleur.getIhmAventurierActuelle().getAssecher().setEnabled(false);
                         controleur.getIhmAventurierActuelle().getDefausser().setEnabled(true);
                         controleur.getIhmAventurierActuelle().getUtiliser().setEnabled(true);

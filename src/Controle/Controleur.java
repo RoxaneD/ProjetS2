@@ -688,6 +688,7 @@ public class Controleur implements Observateur {
                     i += 1;
                 }
             }
+            getIhmPlateauDeJeu().mettreAJour();
             ihmPlateauDeJeu.getIhmAventurierActuelle().repaint();
 
             // pour afficher la liste des joueurs à qui on peut donner une carte trésor
