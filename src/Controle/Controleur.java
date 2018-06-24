@@ -17,6 +17,7 @@ import ElementsJeu.Grille;
 import ElementsJeu.NiveauEau;
 import ElementsJeu.Tresor;
 import ElementsJeu.Tuile;
+import Enumerations.EtatTresor;
 import Enumerations.EtatTuile;
 import Enumerations.NomAventurier;
 import Enumerations.NomTresor;
@@ -575,6 +576,21 @@ public class Controleur implements Observateur {
             // pour recupérer un trésor
         } else if (action.getType() == TypesActions.recupererTresor) { // A FAIRE -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("recupererTresor");
+            Tresor t = getIhmAventurierActuelle().getAventurier().getTuile().getEmplacementTresor();
+            int i = 0;
+            for (CarteTresors c : getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
+                if (c.getNom() == t.getNom() && i < 4) {
+                    Action a = new Action(TypesActions.defausserCarte, c);
+                    i += 1;
+                }
+            }
+            for (Tresor tr : getIhmPlateauDeJeu().getIhmGrille().getTresors()) {
+                if (tr.getNom() == t.getNom()) {
+                    tr.setEtat(EtatTresor.recupere);
+                }
+            }
+            this.setNombreActions(getNombreActions() + 1);
+            this.setActionEffectue(true);
 
             // pour afficher les cartes qu'on peut utiliser (de ses propres cartes)
         } else if (action.getType() == TypesActions.demandeUtilisationCarte) { // OK -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -772,12 +788,29 @@ public class Controleur implements Observateur {
                 for (CarteTresors c : getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
                     if (!carteRetire && c.getNom() == ct.getNom()) {
                         aRetirer = i;
+                        carteRetire = true;
                     }
                     i += 1;
                 }
                 if (aRetirer != -1) {
                     getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().remove(aRetirer);
                 }
+
+                i = 0;
+                aRetirer = -1;
+                for (Carte c : getIhmAventurierActuelle().getAventurier().getTasTirage()) {
+                    if (c.getDescription() != "inondation") {
+                        CarteTresors car = (CarteTresors) (c);
+                        if (!carteRetire && car.getNom() == ct.getNom()) {
+                            aRetirer = i;
+                        }
+                    }
+                    i += 1;
+                }
+                if (aRetirer != -1 && !carteRetire) {
+                    getIhmAventurierActuelle().getAventurier().getTasTirage().remove(aRetirer);
+                }
+
                 this.getDefausseTresor().addCarte(ct);
                 this.getIhmPlateauDeJeu().getIhmTasDeCarte().setCt(ct);
             }

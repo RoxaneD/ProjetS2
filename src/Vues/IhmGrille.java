@@ -283,11 +283,13 @@ public class IhmGrille extends JPanel implements Observe {
                     this.add(listLabel.get(j));
                     j++;
                 }
+                boutons.get(tuile).setOpaque(false);
+                boutons.get(tuile).setVisible(false);
             } else if (tuile.getEtat() == EtatTuile.normal) {
                 try {
                     this.image = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/" + tuile.getNom().toString() + ".png"));
                 } catch (IOException ex) {
-                    System.err.println("Erreur de lecture de "+tuile.getNom().toString()+".png");
+                    System.err.println("Erreur de lecture de " + tuile.getNom().toString() + ".png");
                 }
                 if (boutons.get(tuile) == null) {
                     boutons.put(tuile, listBouton.get(i));
@@ -302,7 +304,7 @@ public class IhmGrille extends JPanel implements Observe {
                 try {
                     this.image = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/" + tuile.getNom().toString() + "_Inonde.png"));
                 } catch (IOException ex) {
-                    System.err.println("Erreur de lecture de"+tuile.getNom().toString()+"_Inonde.png");
+                    System.err.println("Erreur de lecture de" + tuile.getNom().toString() + "_Inonde.png");
                 }
                 if (boutons.put(tuile, listBouton.get(i)) == null) {
                     boutons.put(tuile, listBouton.get(i));
@@ -421,6 +423,10 @@ public class IhmGrille extends JPanel implements Observe {
 
     public ArrayList<JLabel> getListLabel() {
         return listLabel;
+    }
+
+    public ArrayList<Tresor> getTresors() {
+        return tresors;
     }
 
     //Setteur

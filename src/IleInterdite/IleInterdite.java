@@ -32,6 +32,7 @@ public class IleInterdite {
         while (!controleur.isTermine()) {
             System.out.print(" "); // pour que ça fonctionne
             if (controleur.isDebutPartie()) {
+                // on donne deux cartes par joueurs (exceptés le cartes montées des eaux)
                 for (IhmAventurier ia : controleur.getIhmPlateauDeJeu().getIhmAventuriers()) {
                     CarteTresors carte1 = controleur.getTasTresor().getPremiereCarte();
                     CarteTresors carte2 = controleur.getTasTresor().getPremiereCarte();
@@ -49,6 +50,7 @@ public class IleInterdite {
                     ia.getAventurier().getTasJoueur().addCarte(carte2);
                 }
 
+                // on utilise les 6 premières cartes inondations qu'on place dans la défausse
                 CarteInondation ci1;
                 int i = 0;
                 while (i < 6) {
@@ -59,6 +61,7 @@ public class IleInterdite {
                     i += 1;
                 }
 
+                // tour de jeu
                 while (!controleur.isTermine()) {
 
                     // vérifier qu'il n'y a pas plus de 5 cartes dans le tas joueur
