@@ -653,6 +653,82 @@ public class Controleur implements Observateur {
                             t.setEtat(EtatTuile.inondee);
                         } else if (t.getEtat() == EtatTuile.inondee) {
                             t.setEtat(EtatTuile.submergee);
+                            if (carteInondation.getNom() == NomTuile.LeTempleDeLaLune) {
+                                if (getGrille().getTuile(NomTuile.LeTempleDuSoleil).getEtat() == EtatTuile.submergee) {
+                                    for (Tresor tt : getIhmGrille().getTresors()) {
+                                        if (tt.getNom() == NomTresor.Pierre && tt.getEtat() == EtatTresor.pasRecupere) {
+                                            Action a = new Action(TypesActions.perdrePartie);
+                                            traiterAction(a);
+                                        }
+                                    }
+                                }
+                            } else if (carteInondation.getNom() == NomTuile.LeTempleDuSoleil) {
+                                if (getGrille().getTuile(NomTuile.LeTempleDeLaLune).getEtat() == EtatTuile.submergee) {
+                                    for (Tresor tt : getIhmGrille().getTresors()) {
+                                        if (tt.getNom() == NomTresor.Pierre && tt.getEtat() == EtatTresor.pasRecupere) {
+                                            Action a = new Action(TypesActions.perdrePartie);
+                                            traiterAction(a);
+                                        }
+                                    }
+                                }
+                            } else if (carteInondation.getNom() == NomTuile.LeJardinDesMurmures) {
+                                if (getGrille().getTuile(NomTuile.LeJardinDesHurlements).getEtat() == EtatTuile.submergee) {
+                                    for (Tresor tt : getIhmGrille().getTresors()) {
+                                        if (tt.getNom() == NomTresor.Zephyr && tt.getEtat() == EtatTresor.pasRecupere) {
+                                            Action a = new Action(TypesActions.perdrePartie);
+                                            traiterAction(a);
+                                        }
+                                    }
+                                }
+                            } else if (carteInondation.getNom() == NomTuile.LeJardinDesHurlements) {
+                                if (getGrille().getTuile(NomTuile.LeJardinDesMurmures).getEtat() == EtatTuile.submergee) {
+                                    for (Tresor tt : getIhmGrille().getTresors()) {
+                                        if (tt.getNom() == NomTresor.Zephyr && tt.getEtat() == EtatTresor.pasRecupere) {
+                                            Action a = new Action(TypesActions.perdrePartie);
+                                            traiterAction(a);
+                                        }
+                                    }
+                                }
+                            } else if (carteInondation.getNom() == NomTuile.LaCaverneDuBrasier) {
+                                if (getGrille().getTuile(NomTuile.LaCaverneDesOmbres).getEtat() == EtatTuile.submergee) {
+                                    for (Tresor tt : getIhmGrille().getTresors()) {
+                                        if (tt.getNom() == NomTresor.Cristal && tt.getEtat() == EtatTresor.pasRecupere) {
+                                            Action a = new Action(TypesActions.perdrePartie);
+                                            traiterAction(a);
+                                        }
+                                    }
+                                }
+                            } else if (carteInondation.getNom() == NomTuile.LaCaverneDesOmbres) {
+                                if (getGrille().getTuile(NomTuile.LaCaverneDuBrasier).getEtat() == EtatTuile.submergee) {
+                                    for (Tresor tt : getIhmGrille().getTresors()) {
+                                        if (tt.getNom() == NomTresor.Cristal && tt.getEtat() == EtatTresor.pasRecupere) {
+                                            Action a = new Action(TypesActions.perdrePartie);
+                                            traiterAction(a);
+                                        }
+                                    }
+                                }
+                            } else if (carteInondation.getNom() == NomTuile.LePalaisDesMarees) {
+                                if (getGrille().getTuile(NomTuile.LePalaisDeCorail).getEtat() == EtatTuile.submergee) {
+                                    for (Tresor tt : getIhmGrille().getTresors()) {
+                                        if (tt.getNom() == NomTresor.Calice && tt.getEtat() == EtatTresor.pasRecupere) {
+                                            Action a = new Action(TypesActions.perdrePartie);
+                                            traiterAction(a);
+                                        }
+                                    }
+                                }
+                            } else if (carteInondation.getNom() == NomTuile.LePalaisDeCorail) {
+                                if (getGrille().getTuile(NomTuile.LePalaisDesMarees).getEtat() == EtatTuile.submergee) {
+                                    for (Tresor tt : getIhmGrille().getTresors()) {
+                                        if (tt.getNom() == NomTresor.Calice && tt.getEtat() == EtatTresor.pasRecupere) {
+                                            Action a = new Action(TypesActions.perdrePartie);
+                                            traiterAction(a);
+                                        }
+                                    }
+                                }
+                            } else if (carteInondation.getNom() == NomTuile.Heliport) {
+                                Action a = new Action(TypesActions.perdrePartie);
+                                traiterAction(a);
+                            }
                         }
                     }
                 }
@@ -670,13 +746,24 @@ public class Controleur implements Observateur {
                     }
                     i += 1;
                 }
+
             } else {
                 CarteTresors carteTresors = (CarteTresors) (action.getCarte());
                 // pour une carte hélicoptère
                 if (carteTresors.getNom() == NomTresor.Helicoptere) {
-                    // pas traité
-                    for (Aventurier a : ihmPlateauDeJeu.getIhmGrille().getAventuriers()) {
-                        ihmPlateauDeJeu.getIhmGrille().afficherTuileActuelle(a.getTuile());
+                    if (getIhmAventurierActuelle().getAventurier().getTuile().getNom() == NomTuile.Heliport) {
+                        if (getIhmGrille().getAventuriers().size() == aventuriers.size()) {
+                            boolean impossible = true;
+                            for (Tresor t : getIhmGrille().getTresors()) {
+                                if (t.getEtat() == EtatTresor.pasRecupere) {
+                                    impossible = false;
+                                }
+                            }
+                            if (!impossible) {
+                                Action a = new Action(TypesActions.gagnerPartie);
+                                traiterAction(a);
+                            }
+                        }
                     }
                     // pour une carte montée des eaux
                 } else if (carteTresors.getNom() == NomTresor.MonteeDesEaux) {
@@ -689,6 +776,11 @@ public class Controleur implements Observateur {
                     }
                     getIhmPlateauDeJeu().getNiveauEau().monterNiveau();
                     getIhmPlateauDeJeu().getIhmNiveauEau().repaint();
+
+                    if (getIhmPlateauDeJeu().getNiveauEau().getSemiNiveau() == 10) {
+                        Action a = new Action(TypesActions.perdrePartie);
+                        traiterAction(a);
+                    }
 
                     // pour une carte sac de sable
                 } else if (carteTresors.getNom() == NomTresor.SacsDeSable) {
@@ -742,7 +834,8 @@ public class Controleur implements Observateur {
             ihmPlateauDeJeu.getIhmAventurierActuelle().repaint();
 
             // pour afficher la liste des joueurs à qui on peut donner une carte trésor
-        } else if (action.getType() == TypesActions.demandeDonCarte) { // A FAIRE -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType()
+                == TypesActions.demandeDonCarte) { // A FAIRE -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             for (Aventurier av : aventuriers.values()) {
                 if (getAventurier().getTuile() == av.getTuile() && getAventurier() != av) {
                     for (IhmAventurier ihm : getIhmAventurier()) {
@@ -757,11 +850,13 @@ public class Controleur implements Observateur {
             System.out.println("demandeDonCarte");
 
             // pour donner une carte trésor à un joueur
-        } else if (action.getType() == TypesActions.donCarte) { // A FAIRE-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType()
+                == TypesActions.donCarte) { // A FAIRE-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("donCarte");
 
             // pour recevoir la liste des cartes qu'on peut défausser
-        } else if (action.getType() == TypesActions.demandeDefausseCarte) { // OK ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType()
+                == TypesActions.demandeDefausseCarte) { // OK ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("demandeDefausseCarte");
             ihmPlateauDeJeu.getIhmAventurierActuelle().setChoix("defausser");
             ArrayList<Integer> cartesPosJoueur = new ArrayList<>();
@@ -773,7 +868,8 @@ public class Controleur implements Observateur {
             getIhmAventurierActuelle().afficherCarteJoueur(cartesPosJoueur);
 
             // pour se défausse d'une carte
-        } else if (action.getType() == TypesActions.defausserCarte) { // OK ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType()
+                == TypesActions.defausserCarte) { // OK ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("defausserCarte");
             if (action.getCarte().getDescription() == "inondation") {
                 CarteInondation ci = (CarteInondation) (action.getCarte());
@@ -834,33 +930,41 @@ public class Controleur implements Observateur {
             getIhmPlateauDeJeu().getIhmTasDeCarte().repaint();
 
             // pour afficher les règles du jeu
-        } else if (action.getType() == TypesActions.reglesJeu) { // OK ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType()
+                == TypesActions.reglesJeu) { // OK ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("reglesJeu");
             ihmReglesDuJeu.afficherIhm();
 
             // pour fermer les règles du jeu
-        } else if (action.getType() == TypesActions.fermerReglesJeu) { // OK ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType()
+                == TypesActions.fermerReglesJeu) { // OK ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("fermerReglesJeu");
             ihmReglesDuJeu.cacherIhm();
 
             // pour indiquer que la partie est gagnée
-        } else if (action.getType() == TypesActions.gagnerPartie) { //  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType()
+                == TypesActions.gagnerPartie) { //  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("gagnerPartie");
+            this.setTermine(true);
             this.ihmPlateauDeJeu.getWindow().setEnabled(false);
             this.ihmMenuDeFin = new IhmMenuDeFin("Félicitations, vous avez réussi à vous échapper !");
             ihmMenuDeFin.addObservateur(this);
             ihmMenuDeFin.getWindow().setVisible(true);
 
             // pour indiquer que la partie est perdue
-        } else if (action.getType() == TypesActions.perdrePartie) { //  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType()
+                == TypesActions.perdrePartie) { //  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("perdrePartie");
+            this.setTermine(true);
             this.ihmPlateauDeJeu.getWindow().setEnabled(false);
+            this.ihmPlateauDeJeu.getWindow().setVisible(false);
             this.ihmMenuDeFin = new IhmMenuDeFin("Dommage, vous n'avez pas réussi à vous échapper ...  ");
             ihmMenuDeFin.addObservateur(this);
             ihmMenuDeFin.getWindow().setVisible(true);
 
             // pour recommencer une partie
-        } else if (action.getType() == TypesActions.recommencer) { //  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType()
+                == TypesActions.recommencer) { //  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("recommencer");
             Action a = new Action(TypesActions.commencerPartie, joueurs, niveauDeauDepart);
             traiterAction(a);
@@ -868,7 +972,8 @@ public class Controleur implements Observateur {
             this.ihmMenuDeFin.getWindow().setVisible(false);
 
             // pour quitter le jeu
-        } else if (action.getType() == TypesActions.quitter) { //  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType()
+                == TypesActions.quitter) { //  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("quitter");
             this.ihmPlateauDeJeu.getWindow().setVisible(false);
             this.ihmMenuDeFin.getWindow().setVisible(false);
