@@ -636,7 +636,7 @@ public class Controleur implements Observateur {
                         if (t.getEtat() == EtatTuile.normal) {
                             t.setEtat(EtatTuile.inondee);
                         } else if (t.getEtat() == EtatTuile.inondee) {
-                            t.setEtat(EtatTuile.inexistante);
+                            t.setEtat(EtatTuile.submergee);
                         }
                     }
                 }

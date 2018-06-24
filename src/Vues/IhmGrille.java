@@ -283,8 +283,10 @@ public class IhmGrille extends JPanel implements Observe {
                     this.add(listLabel.get(j));
                     j++;
                 }
-                boutons.get(tuile).setOpaque(false);
-                boutons.get(tuile).setVisible(false);
+                if (boutons.get(tuile) != null) {
+                    boutons.get(tuile).setOpaque(false);
+                    boutons.get(tuile).setVisible(false);
+                }
             } else if (tuile.getEtat() == EtatTuile.normal) {
                 try {
                     this.image = ImageIO.read(new File(System.getProperty("user.dir") + "/src/Image/" + tuile.getNom().toString() + ".png"));
@@ -318,14 +320,18 @@ public class IhmGrille extends JPanel implements Observe {
             } else if (tuile.getEtat() == EtatTuile.submergee) {
                 if (boutons.get(tuile) == null) {
                     boutons.put(tuile, listBouton.get(i));
-                    boutons.get(tuile).setOpaque(true);
+                    boutons.get(tuile).setOpaque(false);
                     boutons.get(tuile).setEnabled(false);
                     boutons.get(tuile).setBorder(null);
+                    boutons.get(tuile).setVisible(false);
                     this.add(listBouton.get(i));
                 } else {
-                    boutons.get(tuile).setOpaque(true);
                     boutons.get(tuile).setEnabled(false);
+                    boutons.get(tuile).setOpaque(false);
+                    boutons.get(tuile).setVisible(false);
                     boutons.get(tuile).setBorder(null);
+                    boutons.get(tuile).setImage(null);
+                    this.add(listBouton.get(i));
                 }
             }
             i++;
