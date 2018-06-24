@@ -60,7 +60,8 @@ public class Grille {
         nomTuiles.add(NomTuile.LaTourDuGuet);
         nomTuiles.add(NomTuile.LeJardinDesMurmures);
 
-        Collections.shuffle(nomTuiles);
+        // supprimé pour la démonstration - mais permet d'obtenir une grille aléatoire
+        // Collections.shuffle(nomTuiles);
 
         tuiles.add(new Tuile(this, 1, 1));
         tuiles.add(new Tuile(this, 2, 1));

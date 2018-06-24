@@ -1,5 +1,6 @@
 package IleInterdite;
 
+import Aventuriers.Aventurier;
 import Cartes.CarteInondation;
 import Cartes.CarteTresors;
 import Controle.Action;
