@@ -574,16 +574,24 @@ public class Controleur implements Observateur {
             getIhmGrille().revenirGrilleDepart();
 
             // pour recupérer un trésor
-        } else if (action.getType() == TypesActions.recupererTresor) { // A FAIRE -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType() == TypesActions.recupererTresor) { // OK -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("recupererTresor");
             Tresor t = getIhmAventurierActuelle().getAventurier().getTuile().getEmplacementTresor();
             int i = 0;
+            ArrayList<Integer> cartesAretirer = new ArrayList<>();
             for (CarteTresors c : getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
                 if (c.getNom() == t.getNom() && i < 4) {
-                    Action a = new Action(TypesActions.defausserCarte, c);
+                    cartesAretirer.add(i);
                     i += 1;
                 }
             }
+            i = 0;
+            for (Integer in : cartesAretirer){
+                Action a = new Action(TypesActions.defausserCarte, getIhmAventurierActuelle().getAventurier().getTasJoueur().getCarte(in+1-i));
+                traiterAction(a);
+                i+=1;
+            }
+            
             for (Tresor tr : getIhmPlateauDeJeu().getIhmGrille().getTresors()) {
                 if (tr.getNom() == t.getNom()) {
                     tr.setEtat(EtatTresor.recupere);
