@@ -6,7 +6,9 @@ import Cartes.CarteTresors;
 import Controle.Action;
 import Controle.Controleur;
 import Controle.TypesActions;
+import ElementsJeu.Tresor;
 import ElementsJeu.Tuile;
+import Enumerations.EtatTresor;
 import Enumerations.EtatTuile;
 import Enumerations.NomAventurier;
 import Enumerations.NomTresor;
@@ -33,29 +35,28 @@ public class IleInterdite {
         while (!controleur.isTermine()) {
             System.out.print(" "); // pour que ça fonctionne
             if (controleur.isDebutPartie()) {
-                
+
                 // -------------------------------------------------------------------------------------------------------------------------------------------
                 // on donne deux cartes par joueurs (exceptés le cartes montées des eaux) <- En tant normal, pour la démonstration on utilise ce qu'il y a en dessous
-                
+                /**
+                 * for (IhmAventurier ia :
+                 * controleur.getIhmPlateauDeJeu().getIhmAventuriers()) {
+                 * CarteTresors carte1 =
+                 * controleur.getTasTresor().getPremiereCarte(); CarteTresors
+                 * carte2 = controleur.getTasTresor().getPremiereCarte(); while
+                 * (carte1.getNom() == NomTresor.MonteeDesEaux) {
+                 * controleur.getTasTresor().addCarte(carte1);
+                 * Collections.shuffle(controleur.getTasTresor().getCartesTresors());
+                 * carte1 = controleur.getTasTresor().getPremiereCarte(); }
+                 * while (carte2.getNom() == NomTresor.MonteeDesEaux) {
+                 * controleur.getTasTresor().addCarte(carte2);
+                 * Collections.shuffle(controleur.getTasTresor().getCartesTresors());
+                 * carte2 = controleur.getTasTresor().getPremiereCarte(); }
+                 * ia.getAventurier().getTasJoueur().addCarte(carte1);
+                 * ia.getAventurier().getTasJoueur().addCarte(carte2); }
+                 */
+                // pour la démo ! Remplace ce qu'il y a au dessus -----(récupérer des trésors + gagner)----------------------------------------------------------------------------------------
                 for (IhmAventurier ia : controleur.getIhmPlateauDeJeu().getIhmAventuriers()) {
-                    CarteTresors carte1 = controleur.getTasTresor().getPremiereCarte();
-                    CarteTresors carte2 = controleur.getTasTresor().getPremiereCarte();
-                    while (carte1.getNom() == NomTresor.MonteeDesEaux) {
-                        controleur.getTasTresor().addCarte(carte1);
-                        Collections.shuffle(controleur.getTasTresor().getCartesTresors());
-                        carte1 = controleur.getTasTresor().getPremiereCarte();
-                    }
-                    while (carte2.getNom() == NomTresor.MonteeDesEaux) {
-                        controleur.getTasTresor().addCarte(carte2);
-                        Collections.shuffle(controleur.getTasTresor().getCartesTresors());
-                        carte2 = controleur.getTasTresor().getPremiereCarte();
-                    }
-                    ia.getAventurier().getTasJoueur().addCarte(carte1);
-                    ia.getAventurier().getTasJoueur().addCarte(carte2);
-                }
-                
-                // pour la démo ! Remplace ce qu'il y a au dessus ---------------------------------------------------------------------------------------------
-                /**for (IhmAventurier ia : controleur.getIhmPlateauDeJeu().getIhmAventuriers()) {
                     CarteTresors carte1 = null;
                     CarteTresors carte2 = null;
                     CarteTresors carte3 = null;
@@ -73,7 +74,7 @@ public class IleInterdite {
                             }
                         }
                     } else if (ia.getAventurier().getCarteAventurier().getNom() == NomAventurier.messager) {
-                         for (CarteTresors c : controleur.getTasTresor().getCartesTresors()) {
+                        for (CarteTresors c : controleur.getTasTresor().getCartesTresors()) {
                             if (carte1 == null && c.getNom() == NomTresor.Pierre) {
                                 carte1 = c;
                             } else if (carte2 == null && c.getNom() == NomTresor.Pierre) {
@@ -85,7 +86,7 @@ public class IleInterdite {
                             }
                         }
                     } else if (ia.getAventurier().getCarteAventurier().getNom() == NomAventurier.navigateur) {
-                         for (CarteTresors c : controleur.getTasTresor().getCartesTresors()) {
+                        for (CarteTresors c : controleur.getTasTresor().getCartesTresors()) {
                             if (carte1 == null && c.getNom() == NomTresor.Zephyr) {
                                 carte1 = c;
                             } else if (carte2 == null && c.getNom() == NomTresor.Zephyr) {
@@ -97,7 +98,7 @@ public class IleInterdite {
                             }
                         }
                     } else if (ia.getAventurier().getCarteAventurier().getNom() == NomAventurier.plongeur) {
-                         for (CarteTresors c : controleur.getTasTresor().getCartesTresors()) {
+                        for (CarteTresors c : controleur.getTasTresor().getCartesTresors()) {
                             if (carte1 == null && c.getNom() == NomTresor.Cristal) {
                                 carte1 = c;
                             } else if (carte2 == null && c.getNom() == NomTresor.Cristal) {
@@ -109,7 +110,7 @@ public class IleInterdite {
                             }
                         }
                     } else if (ia.getAventurier().getCarteAventurier().getNom() == NomAventurier.pilote) {
-                         for (CarteTresors c : controleur.getTasTresor().getCartesTresors()) {
+                        for (CarteTresors c : controleur.getTasTresor().getCartesTresors()) {
                             if (carte1 == null && c.getNom() == NomTresor.Calice) {
                                 carte1 = c;
                             } else if (carte2 == null && c.getNom() == NomTresor.Calice) {
@@ -121,7 +122,7 @@ public class IleInterdite {
                             }
                         }
                     } else {
-                         for (CarteTresors c : controleur.getTasTresor().getCartesTresors()) {
+                        for (CarteTresors c : controleur.getTasTresor().getCartesTresors()) {
                             if (carte1 == null && c.getNom() == NomTresor.Calice) {
                                 carte1 = c;
                             } else if (carte2 == null && c.getNom() == NomTresor.Calice) {
@@ -138,11 +139,8 @@ public class IleInterdite {
                     ia.getAventurier().getTasJoueur().addCarte(carte3);
                     ia.getAventurier().getTasJoueur().addCarte(carte4);
                 }
-                **/
+
                 // -------------------------------------------------------------------------------------------------------------------------------------------
-                
-                
-                
                 // on utilise les 6 premières cartes inondations qu'on place dans la défausse
                 CarteInondation ci1;
                 int i = 0;
@@ -194,15 +192,21 @@ public class IleInterdite {
                         System.out.print(" "); // sinon ça ne fonctionne pas
                         if (controleur.getIhmAventurierActuelle().getAventurier().getTuile() != null) {
                             if (controleur.getIhmAventurierActuelle().getAventurier().getTuile().getEmplacementTresor() != null) {
-                                NomTresor n = controleur.getIhmAventurierActuelle().getAventurier().getTuile().getEmplacementTresor().getNom();
-                                ArrayList<CarteTresors> carteAExaminer = new ArrayList<>();
-                                for (CarteTresors ct : controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
-                                    if (ct.getNom() == n) {
-                                        carteAExaminer.add(ct);
+                                for (Tresor t : controleur.getIhmPlateauDeJeu().getIhmGrille().getTresors()) {
+                                    if (t.getNom() == controleur.getIhmAventurierActuelle().getAventurier().getTuile().getEmplacementTresor().getNom()) {
+                                        if (t.getEtat() != EtatTresor.recupere) {
+                                            NomTresor n = controleur.getIhmAventurierActuelle().getAventurier().getTuile().getEmplacementTresor().getNom();
+                                            ArrayList<CarteTresors> carteAExaminer = new ArrayList<>();
+                                            for (CarteTresors ct : controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
+                                                if (ct.getNom() == n) {
+                                                    carteAExaminer.add(ct);
+                                                }
+                                            }
+                                            if (carteAExaminer.size() > 3) {
+                                                controleur.getIhmAventurierActuelle().getRecupererTresor().setEnabled(true);
+                                            }
+                                        }
                                     }
-                                }
-                                if (carteAExaminer.size() > 3) {
-                                    controleur.getIhmAventurierActuelle().getRecupererTresor().setEnabled(true);
                                 }
                             }
                         }
@@ -338,7 +342,26 @@ public class IleInterdite {
                             }
                         }
                     }
-                    
+
+                    while (controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().size() > 5) {
+                        System.out.print(" ");
+                        controleur.getIhmAventurierActuelle().getAssecher().setEnabled(false);
+                        controleur.getIhmAventurierActuelle().getDefausser().setEnabled(true);
+                        controleur.getIhmAventurierActuelle().getUtiliser().setEnabled(true);
+                        controleur.getIhmAventurierActuelle().getDeplacer().setEnabled(false);
+                        controleur.getIhmAventurierActuelle().getDonner().setEnabled(false);
+                        controleur.getIhmAventurierActuelle().getRecupererTresor().setEnabled(false);
+                        controleur.getIhmAventurierActuelle().getTerminer().setEnabled(false);
+                        if (controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().size() != 0) {
+                            car = new ArrayList<CarteTresors>();
+                            for (CarteTresors ca : controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
+                                if (ca.getNom() == NomTresor.Helicoptere || ca.getNom() == NomTresor.SacsDeSable) {
+                                    car.add(ca);
+                                }
+                            }
+                        }
+                    }
+
                     while (controleur.getNombreActions() != 3 && controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().size() != 0) {
                         System.out.print(" ");
                         controleur.getIhmAventurierActuelle().getAssecher().setEnabled(false);
