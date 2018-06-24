@@ -108,6 +108,7 @@ public class Controleur implements Observateur {
         ihmReglesDuJeu = new IhmReglesDuJeu();
         ihmReglesDuJeu.addObservateur(this);
         // plateau de jeu
+
         // fait dans traiterAction(commencer)
     }
 
@@ -847,12 +848,16 @@ public class Controleur implements Observateur {
             System.out.println("gagnerPartie");
             this.ihmPlateauDeJeu.getWindow().setEnabled(false);
             this.ihmMenuDeFin = new IhmMenuDeFin("Félicitations, vous avez réussi à vous échapper !");
+            ihmMenuDeFin.addObservateur(this);
+            ihmMenuDeFin.getWindow().setVisible(true);
 
             // pour indiquer que la partie est perdue
         } else if (action.getType() == TypesActions.perdrePartie) { //  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("perdrePartie");
             this.ihmPlateauDeJeu.getWindow().setEnabled(false);
             this.ihmMenuDeFin = new IhmMenuDeFin("Dommage, vous n'avez pas réussi à vous échapper ...  ");
+            ihmMenuDeFin.addObservateur(this);
+            ihmMenuDeFin.getWindow().setVisible(true);
 
             // pour recommencer une partie
         } else if (action.getType() == TypesActions.recommencer) { //  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
