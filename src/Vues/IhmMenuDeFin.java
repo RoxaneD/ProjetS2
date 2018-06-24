@@ -77,7 +77,8 @@ public class IhmMenuDeFin implements Observe{
         menu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                Action a = new Action(TypesActions.revenirMenu);
+                notifierObservateur(a);
             }
         });
 

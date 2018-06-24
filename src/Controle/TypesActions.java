@@ -35,5 +35,6 @@ public enum TypesActions {
     
     //autre
     recommencer,
+    revenirMenu,
     quitter
 }

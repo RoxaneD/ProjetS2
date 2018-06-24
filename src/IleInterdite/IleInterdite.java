@@ -38,84 +38,139 @@ public class IleInterdite {
 
                 // -------------------------------------------------------------------------------------------------------------------------------------------
                 // on donne deux cartes par joueurs (exceptés le cartes montées des eaux) <- En tant normal, pour la démonstration on utilise ce qu'il y a en dessous
-                for (IhmAventurier ia
-                        : controleur.getIhmPlateauDeJeu().getIhmAventuriers()) {
-                    CarteTresors carte1
-                            = controleur.getTasTresor().getPremiereCarte();
-                    CarteTresors carte2 = controleur.getTasTresor().getPremiereCarte();
-                    while (carte1.getNom() == NomTresor.MonteeDesEaux) {
-                        controleur.getTasTresor().addCarte(carte1);
-                        Collections.shuffle(controleur.getTasTresor().getCartesTresors());
-                        carte1 = controleur.getTasTresor().getPremiereCarte();
-                    }
-                    while (carte2.getNom() == NomTresor.MonteeDesEaux) {
-                        controleur.getTasTresor().addCarte(carte2);
-                        Collections.shuffle(controleur.getTasTresor().getCartesTresors());
-                        carte2 = controleur.getTasTresor().getPremiereCarte();
-                    }
-                    ia.getAventurier().getTasJoueur().addCarte(carte1);
-                    ia.getAventurier().getTasJoueur().addCarte(carte2);
-                }
-
-                // pour la démo ! Remplace ce qu'il y a au dessus -----(récupérer des trésors + gagner)----------------------------------------------------------------------------------------
                 /**
                  * for (IhmAventurier ia :
                  * controleur.getIhmPlateauDeJeu().getIhmAventuriers()) {
-                 * CarteTresors carte1 = null; CarteTresors carte2 = null;
-                 * CarteTresors carte3 = null; CarteTresors carte4 = null; if
-                 * (ia.getAventurier().getCarteAventurier().getNom() ==
-                 * NomAventurier.explorateur) { for (CarteTresors c :
-                 * controleur.getTasTresor().getCartesTresors()) { if (carte1 ==
-                 * null && c.getNom() == NomTresor.Calice) { carte1 = c; } else
-                 * if (carte2 == null && c.getNom() == NomTresor.Calice) {
-                 * carte2 = c; } else if (carte3 == null && c.getNom() ==
-                 * NomTresor.Calice) { carte3 = c; } else if (carte4 == null &&
-                 * c.getNom() == NomTresor.Calice) { carte4 = c; } } } else if
-                 * (ia.getAventurier().getCarteAventurier().getNom() ==
-                 * NomAventurier.messager) { for (CarteTresors c :
-                 * controleur.getTasTresor().getCartesTresors()) { if (carte1 ==
-                 * null && c.getNom() == NomTresor.Pierre) { carte1 = c; } else
-                 * if (carte2 == null && c.getNom() == NomTresor.Pierre) {
-                 * carte2 = c; } else if (carte3 == null && c.getNom() ==
-                 * NomTresor.Pierre) { carte3 = c; } else if (carte4 == null &&
-                 * c.getNom() == NomTresor.Pierre) { carte4 = c; } } } else if
-                 * (ia.getAventurier().getCarteAventurier().getNom() ==
-                 * NomAventurier.navigateur) { for (CarteTresors c :
-                 * controleur.getTasTresor().getCartesTresors()) { if (carte1 ==
-                 * null && c.getNom() == NomTresor.Zephyr) { carte1 = c; } else
-                 * if (carte2 == null && c.getNom() == NomTresor.Zephyr) {
-                 * carte2 = c; } else if (carte3 == null && c.getNom() ==
-                 * NomTresor.Zephyr) { carte3 = c; } else if (carte4 == null &&
-                 * c.getNom() == NomTresor.Zephyr) { carte4 = c; } } } else if
-                 * (ia.getAventurier().getCarteAventurier().getNom() ==
-                 * NomAventurier.plongeur) { for (CarteTresors c :
-                 * controleur.getTasTresor().getCartesTresors()) { if (carte1 ==
-                 * null && c.getNom() == NomTresor.Cristal) { carte1 = c; } else
-                 * if (carte2 == null && c.getNom() == NomTresor.Cristal) {
-                 * carte2 = c; } else if (carte3 == null && c.getNom() ==
-                 * NomTresor.Cristal) { carte3 = c; } else if (carte4 == null &&
-                 * c.getNom() == NomTresor.Cristal) { carte4 = c; } } } else if
-                 * (ia.getAventurier().getCarteAventurier().getNom() ==
-                 * NomAventurier.pilote) { for (CarteTresors c :
-                 * controleur.getTasTresor().getCartesTresors()) { if (carte1 ==
-                 * null && c.getNom() == NomTresor.Calice) { carte1 = c; } else
-                 * if (carte2 == null && c.getNom() == NomTresor.Calice) {
-                 * carte2 = c; } else if (carte3 == null && c.getNom() ==
-                 * NomTresor.Calice) { carte3 = c; } else if (carte4 == null &&
-                 * c.getNom() == NomTresor.Calice) { carte4 = c; } } } else {
-                 * for (CarteTresors c :
-                 * controleur.getTasTresor().getCartesTresors()) { if (carte1 ==
-                 * null && c.getNom() == NomTresor.Calice) { carte1 = c; } else
-                 * if (carte2 == null && c.getNom() == NomTresor.Calice) {
-                 * carte2 = c; } else if (carte3 == null && c.getNom() ==
-                 * NomTresor.Calice) { carte3 = c; } else if (carte4 == null &&
-                 * c.getNom() == NomTresor.Calice) { carte4 = c; } } }
+                 * CarteTresors carte1 =
+                 * controleur.getTasTresor().getPremiereCarte(); CarteTresors
+                 * carte2 = controleur.getTasTresor().getPremiereCarte(); while
+                 * (carte1.getNom() == NomTresor.MonteeDesEaux) {
+                 * controleur.getTasTresor().addCarte(carte1);
+                 * Collections.shuffle(controleur.getTasTresor().getCartesTresors());
+                 * carte1 = controleur.getTasTresor().getPremiereCarte(); }
+                 * while (carte2.getNom() == NomTresor.MonteeDesEaux) {
+                 * controleur.getTasTresor().addCarte(carte2);
+                 * Collections.shuffle(controleur.getTasTresor().getCartesTresors());
+                 * carte2 = controleur.getTasTresor().getPremiereCarte(); }
                  * ia.getAventurier().getTasJoueur().addCarte(carte1);
-                 * ia.getAventurier().getTasJoueur().addCarte(carte2);
-                 * ia.getAventurier().getTasJoueur().addCarte(carte3);
-                 * ia.getAventurier().getTasJoueur().addCarte(carte4); }
-                 *
+                 * ia.getAventurier().getTasJoueur().addCarte(carte2); }
+                *
                  */
+                // pour la démo ! Remplace ce qu'il y a au dessus -----(récupérer des trésors + gagner)----------------------------------------------------------------------------------------
+                for (IhmAventurier ia
+                        : controleur.getIhmPlateauDeJeu().getIhmAventuriers()) {
+                    CarteTresors carte1 = null;
+                    CarteTresors carte2 = null;
+                    CarteTresors carte3 = null;
+                    CarteTresors carte4 = null;
+                    if (ia.getAventurier().getCarteAventurier().getNom()
+                            == NomAventurier.explorateur) {
+                        for (CarteTresors c
+                                : controleur.getTasTresor().getCartesTresors()) {
+                            if (carte1
+                                    == null && c.getNom() == NomTresor.Calice) {
+                                carte1 = c;
+                            } else if (carte2 == null && c.getNom() == NomTresor.Calice) {
+                                carte2 = c;
+                            } else if (carte3 == null && c.getNom()
+                                    == NomTresor.Calice) {
+                                carte3 = c;
+                            } else if (carte4 == null
+                                    && c.getNom() == NomTresor.Calice) {
+                                carte4 = c;
+                            }
+                        }
+                    } else if (ia.getAventurier().getCarteAventurier().getNom()
+                            == NomAventurier.messager) {
+                        for (CarteTresors c
+                                : controleur.getTasTresor().getCartesTresors()) {
+                            if (carte1
+                                    == null && c.getNom() == NomTresor.Pierre) {
+                                carte1 = c;
+                            } else if (carte2 == null && c.getNom() == NomTresor.Pierre) {
+                                carte2 = c;
+                            } else if (carte3 == null && c.getNom()
+                                    == NomTresor.Pierre) {
+                                carte3 = c;
+                            } else if (carte4 == null
+                                    && c.getNom() == NomTresor.Pierre) {
+                                carte4 = c;
+                            }
+                        }
+                    } else if (ia.getAventurier().getCarteAventurier().getNom()
+                            == NomAventurier.navigateur) {
+                        for (CarteTresors c
+                                : controleur.getTasTresor().getCartesTresors()) {
+                            if (carte1
+                                    == null && c.getNom() == NomTresor.Zephyr) {
+                                carte1 = c;
+                            } else if (carte2 == null && c.getNom() == NomTresor.Zephyr) {
+                                carte2 = c;
+                            } else if (carte3 == null && c.getNom()
+                                    == NomTresor.Zephyr) {
+                                carte3 = c;
+                            } else if (carte4 == null
+                                    && c.getNom() == NomTresor.Zephyr) {
+                                carte4 = c;
+                            }
+                        }
+                    } else if (ia.getAventurier().getCarteAventurier().getNom()
+                            == NomAventurier.plongeur) {
+                        for (CarteTresors c
+                                : controleur.getTasTresor().getCartesTresors()) {
+                            if (carte1
+                                    == null && c.getNom() == NomTresor.Cristal) {
+                                carte1 = c;
+                            } else if (carte2 == null && c.getNom() == NomTresor.Cristal) {
+                                carte2 = c;
+                            } else if (carte3 == null && c.getNom()
+                                    == NomTresor.Cristal) {
+                                carte3 = c;
+                            } else if (carte4 == null
+                                    && c.getNom() == NomTresor.Cristal) {
+                                carte4 = c;
+                            }
+                        }
+                    } else if (ia.getAventurier().getCarteAventurier().getNom()
+                            == NomAventurier.pilote) {
+                        for (CarteTresors c
+                                : controleur.getTasTresor().getCartesTresors()) {
+                            if (carte1
+                                    == null && c.getNom() == NomTresor.Calice) {
+                                carte1 = c;
+                            } else if (carte2 == null && c.getNom() == NomTresor.Calice) {
+                                carte2 = c;
+                            } else if (carte3 == null && c.getNom()
+                                    == NomTresor.Calice) {
+                                carte3 = c;
+                            } else if (carte4 == null
+                                    && c.getNom() == NomTresor.Calice) {
+                                carte4 = c;
+                            }
+                        }
+                    } else {
+                        for (CarteTresors c
+                                : controleur.getTasTresor().getCartesTresors()) {
+                            if (carte1
+                                    == null && c.getNom() == NomTresor.Calice) {
+                                carte1 = c;
+                            } else if (carte2 == null && c.getNom() == NomTresor.Calice) {
+                                carte2 = c;
+                            } else if (carte3 == null && c.getNom()
+                                    == NomTresor.Calice) {
+                                carte3 = c;
+                            } else if (carte4 == null
+                                    && c.getNom() == NomTresor.Calice) {
+                                carte4 = c;
+                            }
+                        }
+                    }
+                    ia.getAventurier().getTasJoueur().addCarte(carte1);
+                    ia.getAventurier().getTasJoueur().addCarte(carte2);
+                    ia.getAventurier().getTasJoueur().addCarte(carte3);
+                    ia.getAventurier().getTasJoueur().addCarte(carte4);
+                }
+
                 // -------------------------------------------------------------------------------------------------------------------------------------------
                 // on utilise les 6 premières cartes inondations qu'on place dans la défausse
                 CarteInondation ci1;
@@ -367,7 +422,6 @@ public class IleInterdite {
                             }
                         }
                     }
-
                     // passage au joueur suivant
                     if (!controleur.isTermine()) {
                         controleur.getIhmPlateauDeJeu().setIhmAventurierActuelle();
@@ -375,5 +429,6 @@ public class IleInterdite {
                 }
             }
         }
+
     }
 }
