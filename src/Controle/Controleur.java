@@ -470,7 +470,7 @@ public class Controleur implements Observateur {
             getIhmGrille().repaint();
 
             // pour se déplacer sur une tuile
-        } else if (action.getType() == TypesActions.deplacement) { // OK -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType() == TypesActions.deplacement) { // OK --(peut-être rajouter les pions sur la grille)-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("deplacement");
             //si le pouvoir du pilote est à faux et que cette aventurier est le pilote alors
             if (!pouvoirPilote && getIhmAventurierActuelle().getAventurier().getCarteAventurier().getNom() == NomAventurier.pilote) {
@@ -632,7 +632,7 @@ public class Controleur implements Observateur {
             }
 
             // pour utiliser une carte
-        } else if (action.getType() == TypesActions.utiliserCarte) { // A COMPLETER -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        } else if (action.getType() == TypesActions.utiliserCarte) { // A COMPLETER -----(hélicoptère)--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("utiliserCarte");
             boolean carteRetire = false;
             if (action.getCarte().getDescription() == "inondation") {
