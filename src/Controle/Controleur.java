@@ -31,6 +31,7 @@ import Tas.TasPoubelle;
 import Tas.TasTresors;
 import Vues.IhmAventurier;
 import Vues.IhmGrille;
+import Vues.IhmMenuDeFin;
 import Vues.IhmMenuPrincipal;
 import Vues.IhmPlateauDeJeu;
 import Vues.IhmReglesDuJeu;
@@ -46,6 +47,7 @@ public class Controleur implements Observateur {
     private IhmMenuPrincipal ihmMenuPrincipal;
     private IhmReglesDuJeu ihmReglesDuJeu;
     private IhmPlateauDeJeu ihmPlateauDeJeu;
+    private IhmMenuDeFin ihmMenuDeFin;
 
     //          autres attributs
     private ArrayList<String> joueurs = new ArrayList<String>(); // contient tous les nom de joueurs
@@ -63,6 +65,10 @@ public class Controleur implements Observateur {
     private TasTresors tasTresor;
     private DefausseInondations defausseInondation;
     private TasInondations tasInondation;
+
+    // éléments de début (sauvegarde)
+    private int niveauDeauDepart;
+
     //          compteurs - boolean
     private boolean termine; // termine : la partie est finie | !termine : la partie n'est pas finie 
     private int nombreActions;
@@ -427,6 +433,7 @@ public class Controleur implements Observateur {
                 }
             }
             // ouvrir ihm principale
+            niveauDeauDepart = action.getNiveau();
             this.getNiveauEau().setSemiNiveau(action.getNiveau());
             ihmPlateauDeJeu = new IhmPlateauDeJeu(aventuriers, this.getGrille(), getNiveauEau());
             ihmPlateauDeJeu.getIhmGrille().addObservateur(this);
@@ -586,12 +593,12 @@ public class Controleur implements Observateur {
                 }
             }
             i = 0;
-            for (Integer in : cartesAretirer){
-                Action a = new Action(TypesActions.defausserCarte, getIhmAventurierActuelle().getAventurier().getTasJoueur().getCarte(in+1-i));
+            for (Integer in : cartesAretirer) {
+                Action a = new Action(TypesActions.defausserCarte, getIhmAventurierActuelle().getAventurier().getTasJoueur().getCarte(in + 1 - i));
                 traiterAction(a);
-                i+=1;
+                i += 1;
             }
-            
+
             for (Tresor tr : getIhmPlateauDeJeu().getIhmGrille().getTresors()) {
                 if (tr.getNom() == t.getNom()) {
                     tr.setEtat(EtatTresor.recupere);
@@ -681,7 +688,7 @@ public class Controleur implements Observateur {
                     }
                     getIhmPlateauDeJeu().getNiveauEau().monterNiveau();
                     getIhmPlateauDeJeu().getIhmNiveauEau().repaint();
-                    
+
                     // pour une carte sac de sable
                 } else if (carteTresors.getNom() == NomTresor.SacsDeSable) {
                     ArrayList<Tuile> tuilesPos = new ArrayList<>();
@@ -834,6 +841,32 @@ public class Controleur implements Observateur {
         } else if (action.getType() == TypesActions.fermerReglesJeu) { // OK ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             System.out.println("fermerReglesJeu");
             ihmReglesDuJeu.cacherIhm();
+
+            // pour indiquer que la partie est gagnée
+        } else if (action.getType() == TypesActions.gagnerPartie) { //  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            System.out.println("gagnerPartie");
+            this.ihmPlateauDeJeu.getWindow().setEnabled(false);
+            this.ihmMenuDeFin = new IhmMenuDeFin("Félicitations, vous avez réussi à vous échapper !");
+
+            // pour indiquer que la partie est perdue
+        } else if (action.getType() == TypesActions.perdrePartie) { //  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            System.out.println("perdrePartie");
+            this.ihmPlateauDeJeu.getWindow().setEnabled(false);
+            this.ihmMenuDeFin = new IhmMenuDeFin("Dommage, vous n'avez pas réussi à vous échapper ...  ");
+
+            // pour recommencer une partie
+        } else if (action.getType() == TypesActions.recommencer) { //  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            System.out.println("recommencer");
+            Action a = new Action(TypesActions.commencerPartie, joueurs, niveauDeauDepart);
+            traiterAction(a);
+            this.ihmPlateauDeJeu.getWindow().setVisible(false);
+            this.ihmMenuDeFin.getWindow().setVisible(false);
+
+            // pour quitter le jeu
+        } else if (action.getType() == TypesActions.quitter) { //  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            System.out.println("quitter");
+            this.ihmPlateauDeJeu.getWindow().setVisible(false);
+            this.ihmMenuDeFin.getWindow().setVisible(false);
         }
     }
 }

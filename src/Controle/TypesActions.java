@@ -27,5 +27,13 @@ public enum TypesActions {
 
     // toujours
     reglesJeu, // PAS traité
-    fermerReglesJeu
+    fermerReglesJeu,
+    
+    //
+    gagnerPartie,
+    perdrePartie,
+    
+    //autre
+    recommencer,
+    quitter
 }
