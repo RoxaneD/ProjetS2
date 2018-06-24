@@ -14,6 +14,7 @@ import ElementsJeu.Tresor;
 import ElementsJeu.Tuile;
 import Enumerations.EtatTresor;
 import Enumerations.EtatTuile;
+import Enumerations.NomAventurier;
 import Enumerations.NomTresor;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -272,6 +273,7 @@ public class IhmGrille extends JPanel implements Observe {
 
         // pour les tuiles et les pions
         for (Tuile tuile : tuiles) {
+            // tuiles
             if (tuile.getEtat() == EtatTuile.inexistante) {
                 if (tuileInexistante.get(tuile) == null) {
                     tuileInexistante.put(tuile, listLabel.get(j));

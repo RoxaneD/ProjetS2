@@ -16,6 +16,7 @@ import Enumerations.Couleur;
 import Enumerations.EtatTuile;
 import Enumerations.NomAventurier;
 import Enumerations.NomTresor;
+import Enumerations.NomTuile;
 import static Util.Utils.afficherInformation;
 import Vues.IhmAventurier;
 import Vues.IhmPlateauDeJeu;
@@ -51,7 +52,7 @@ public class GagnerTresor {
         av1.getTasJoueur().addCarte(carteTresor1);
         av1.getTasJoueur().addCarte(carteTresor1);
         
-        av1.addTuile(grille.getTuile(5, 2));
+        av1.addTuile(grille.getTuile(NomTuile.LeTempleDuSoleil));
         
         HashMap<String, Aventurier> aventuriers = new HashMap<>();
         aventuriers.put("Marie",av1);
