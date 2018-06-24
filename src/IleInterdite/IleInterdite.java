@@ -338,6 +338,25 @@ public class IleInterdite {
                             }
                         }
                     }
+                    
+                    while (controleur.getNombreActions() != 3 && controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().size() != 0) {
+                        System.out.print(" ");
+                        controleur.getIhmAventurierActuelle().getAssecher().setEnabled(false);
+                        controleur.getIhmAventurierActuelle().getDefausser().setEnabled(true);
+                        controleur.getIhmAventurierActuelle().getUtiliser().setEnabled(false);
+                        controleur.getIhmAventurierActuelle().getDeplacer().setEnabled(false);
+                        controleur.getIhmAventurierActuelle().getDonner().setEnabled(false);
+                        controleur.getIhmAventurierActuelle().getRecupererTresor().setEnabled(false);
+                        controleur.getIhmAventurierActuelle().getTerminer().setEnabled(true);
+                        if (controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().size() != 0) {
+                            car = new ArrayList<CarteTresors>();
+                            for (CarteTresors ca : controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
+                                if (ca.getNom() == NomTresor.Helicoptere || ca.getNom() == NomTresor.SacsDeSable) {
+                                    car.add(ca);
+                                }
+                            }
+                        }
+                    }
 
                     // passage au joueur suivant
                     controleur.getIhmPlateauDeJeu().setIhmAventurierActuelle();
