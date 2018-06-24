@@ -318,26 +318,22 @@ public class IhmGrille extends JPanel implements Observe {
                     boutons.get(tuile).repaint();
                 }
             } else if (tuile.getEtat() == EtatTuile.submergee) {
-                if (boutons.get(tuile) == null) {
+                if (boutons.put(tuile, listBouton.get(i)) == null) {
                     boutons.put(tuile, listBouton.get(i));
-                    boutons.get(tuile).setOpaque(false);
-                    boutons.get(tuile).setEnabled(false);
-                    boutons.get(tuile).setBorder(null);
-                    boutons.get(tuile).setVisible(false);
-                    this.add(listBouton.get(i));
-                } else {
-                    boutons.get(tuile).setEnabled(false);
-                    boutons.get(tuile).setOpaque(false);
-                    boutons.get(tuile).setVisible(false);
-                    boutons.get(tuile).setBorder(null);
                     boutons.get(tuile).setImage(null);
-                    this.add(listBouton.get(i));
+                    boutons.get(tuile).repaint();
+                    this.add(boutons.get(tuile));
+                } else {
+                    boutons.get(tuile).setImage(null);
+                    boutons.get(tuile).repaint();
                 }
             }
+
             i++;
         }
 
-        for (Tuile t : boutons.keySet()) {
+        for (Tuile t
+                : boutons.keySet()) {
             boutons.get(t).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {

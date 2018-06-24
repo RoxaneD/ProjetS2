@@ -89,7 +89,7 @@ public class IleInterdite {
                     controleur.getIhmAventurierActuelle().getTerminer().setEnabled(true);
                     controleur.getIhmAventurierActuelle().getRecupererTresor().setEnabled(false);
                     controleur.getIhmAventurierActuelle().getUtiliser().setEnabled(false);
-                    if (controleur.getAventurier().getTasJoueur().getCartes().size() == 0) {
+                    if (controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes().size() == 0) {
                         controleur.getIhmAventurierActuelle().getDefausser().setEnabled(false);
                         controleur.getIhmAventurierActuelle().getDonner().setEnabled(false);
                     } else {
@@ -101,9 +101,9 @@ public class IleInterdite {
                         System.out.print(" "); // sinon ça ne fonctionne pas
                         if (controleur.getIhmAventurierActuelle().getAventurier().getTuile() != null) {
                             if (controleur.getIhmAventurierActuelle().getAventurier().getTuile().getEmplacementTresor() != null) {
-                                NomTresor n = controleur.getAventurier().getTuile().getEmplacementTresor().getNom();
+                                NomTresor n = controleur.getIhmAventurierActuelle().getAventurier().getTuile().getEmplacementTresor().getNom();
                                 ArrayList<CarteTresors> carteAExaminer = new ArrayList<>();
-                                for (CarteTresors ct : controleur.getAventurier().getTasJoueur().getCartes()) {
+                                for (CarteTresors ct : controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
                                     if (ct.getNom() == n) {
                                         carteAExaminer.add(ct);
                                     }
@@ -122,7 +122,7 @@ public class IleInterdite {
                     controleur.getIhmAventurierActuelle().getRecupererTresor().setEnabled(false);
                     controleur.getIhmAventurierActuelle().getDefausser().setEnabled(false);
                     controleur.getIhmAventurierActuelle().getDonner().setEnabled(false);
-                    for (CarteTresors ct : controleur.getAventurier().getTasJoueur().getCartes()) {
+                    for (CarteTresors ct : controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
                         if (ct.getNom() == NomTresor.Helicoptere || ct.getNom() == NomTresor.SacsDeSable) {
                             controleur.getIhmAventurierActuelle().getUtiliser().setEnabled(true);
                         } else {
@@ -165,6 +165,7 @@ public class IleInterdite {
                     controleur.getIhmPlateauDeJeu().mettreAJour();
 
                     while (controleur.getIhmAventurierActuelle().getAventurier().getTasTirage().size() != 0) {
+                        System.out.print(" "); // sinon ne marche pas
                         controleur.getIhmAventurierActuelle().getAssecher().setEnabled(false);
                         controleur.getIhmAventurierActuelle().getDefausser().setEnabled(true);
                         controleur.getIhmAventurierActuelle().getUtiliser().setEnabled(true);
@@ -176,11 +177,11 @@ public class IleInterdite {
 
                     controleur.getIhmAventurierActuelle().getAssecher().setEnabled(false);
                     controleur.getIhmAventurierActuelle().getDeplacer().setEnabled(false);
-                    controleur.getIhmAventurierActuelle().getTerminer().setEnabled(false);
+                    controleur.getIhmAventurierActuelle().getTerminer().setEnabled(true);
                     controleur.getIhmAventurierActuelle().getRecupererTresor().setEnabled(false);
                     controleur.getIhmAventurierActuelle().getDefausser().setEnabled(false);
                     controleur.getIhmAventurierActuelle().getDonner().setEnabled(false);
-                    for (CarteTresors ct : controleur.getAventurier().getTasJoueur().getCartes()) {
+                    for (CarteTresors ct : controleur.getIhmAventurierActuelle().getAventurier().getTasJoueur().getCartes()) {
                         if (ct.getNom() == NomTresor.Helicoptere || ct.getNom() == NomTresor.SacsDeSable) {
                             controleur.getIhmAventurierActuelle().getUtiliser().setEnabled(true);
                         } else {

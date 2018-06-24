@@ -671,10 +671,9 @@ public class Controleur implements Observateur {
                     for (CarteInondation c : ci) {
                         tasInondation.addCarte(c);
                     }
-                    // on défausse cette carte dans la defausse tresors
-                    defausseTresor.addCarte(carteTresors);
                     getIhmPlateauDeJeu().getNiveauEau().monterNiveau();
-                    getIhmPlateauDeJeu().repaint();
+                    getIhmPlateauDeJeu().getIhmNiveauEau().repaint();
+                    
                     // pour une carte sac de sable
                 } else if (carteTresors.getNom() == NomTresor.SacsDeSable) {
                     ArrayList<Tuile> tuilesPos = new ArrayList<>();
